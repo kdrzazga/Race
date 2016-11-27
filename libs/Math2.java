@@ -62,4 +62,17 @@ public class Math2 {
 
         return new Point(centerX, centerY);
     }
+    public static double inclinationAngle(LineSection section) {
+	/* angles:
+                0 deg
+                |
+        90 deg--o---    -90 deg
+                |\ -135 deg
+                180 deg       
+        */
+        double ySpan = section.p1.y - section.p2.y;
+        double xSpan = section.p1.x - section.p2.x;
+        return Math.atan2(xSpan, ySpan);
+    }
+
 }
