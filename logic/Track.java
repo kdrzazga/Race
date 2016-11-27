@@ -2,20 +2,16 @@ package logic;
 
 import java.awt.Point;
 import java.awt.Polygon;
+import libs.Math2;
 
 public class Track {
 
     public Polygon innerBound;
     public Polygon outerBound;
-    
-    public Point innerBoundCenter;
-    public Point outerBoundCenter;
 
     public Track() {
         this.innerBound = new Polygon();
         this.outerBound = new Polygon();
-        this.innerBoundCenter = new Point();
-        this.outerBoundCenter = new Point();
     }
 
     public boolean pointWithinTrack(Point point) {
@@ -39,5 +35,15 @@ public class Track {
         return rectangularTrack;
     }
     
-
+    public Point getTrackCentre()
+    {        
+        Point outerBoundCenter = Math2.computeCenterOfPolygon(outerBound);
+        Point innerBoundCenter = Math2.computeCenterOfPolygon(innerBound);
+        
+        Math2.LineSection section;
+        section = new Math2.LineSection(innerBoundCenter, outerBoundCenter);
+        
+        return section.getCenter();
+    }
+    
 }
