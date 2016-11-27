@@ -7,10 +7,15 @@ public class Track {
 
     public Polygon innerBound;
     public Polygon outerBound;
+    
+    public Point innerBoundCenter;
+    public Point outerBoundCenter;
 
     public Track() {
         this.innerBound = new Polygon();
         this.outerBound = new Polygon();
+        this.innerBoundCenter = new Point();
+        this.outerBoundCenter = new Point();
     }
 
     public boolean pointWithinTrack(Point point) {
@@ -33,4 +38,6 @@ public class Track {
         
         return rectangularTrack;
     }
+    
+
 }
