@@ -9,9 +9,18 @@ public class Track {
     public Polygon innerBound;
     public Polygon outerBound;
 
-    public Track() {
+    private static Track instance = null;
+
+    private Track() {
         this.innerBound = new Polygon();
         this.outerBound = new Polygon();
+    }
+
+    public static Track getInstance() {
+        if (instance == null) {
+            instance = new Track();
+        }
+        return instance;
     }
 
     public boolean pointWithinTrack(Point point) {
@@ -31,19 +40,18 @@ public class Track {
         rectangularTrack.innerBound.addPoint(250, 100);
         rectangularTrack.innerBound.addPoint(250, 150);
         rectangularTrack.innerBound.addPoint(100, 150);
-        
+
         return rectangularTrack;
     }
-    
-    public Point getTrackCentre()
-    {        
+
+    public Point getTrackCentre() {
         Point outerBoundCenter = Math2.computeCenterOfPolygon(outerBound);
         Point innerBoundCenter = Math2.computeCenterOfPolygon(innerBound);
-        
+
         Math2.LineSection section;
         section = new Math2.LineSection(innerBoundCenter, outerBoundCenter);
-        
+
         return section.getCenter();
     }
-    
+
 }

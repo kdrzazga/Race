@@ -34,7 +34,7 @@ public class VelocityVector {
 
     public void accelerate(int accelerateValue) {
         if (this.value + accelerateValue > V_MAX) {
-            this.value = V_MAX;
+            this.value = V_MAX; 
         } else if (this.value + accelerateValue < V_MIN) {
             this.value = V_MIN;
         } else {

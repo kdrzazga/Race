@@ -14,8 +14,8 @@ public class BoardTrackVehicleTest {
     VelocityVector v;
 
     public BoardTrackVehicleTest() {
-        this.board = new Board();
-        this.track = new Track();
+        this.board = Board.getInstance();
+        this.track = Track.getInstance();
         this.vehicle = new Vehicle();
 
         v = new VelocityVector(2, Math.PI / 2);

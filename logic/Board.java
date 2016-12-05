@@ -9,9 +9,18 @@ public class Board {
     public Track track;
     public ArrayList<Vehicle> vehicles;
 
-    public Board() {
-        this.track = new Track();
+    private static Board instance = null;
+
+    private Board() {
+        this.track = Track.getInstance();
         this.vehicles = new ArrayList<>();
+    }
+
+    public static Board getInstance() {
+        if (instance == null) {
+            instance = new Board();
+        }
+        return instance;
     }
 
     public void moveVehicle(int vehicleId) {
@@ -24,6 +33,11 @@ public class Board {
         }
     }
 
+    public Point getVehiclePosition(int vehicleId) {
+        Vehicle vehicle = this.vehicles.get(vehicleId);
+        return vehicle.v.position;
+    }
+
     private Point findNewPosition(Vehicle vehicle) {
         double moveX, moveY, factorX, factorY;
         double cos = Math.cos(vehicle.v.angle);
@@ -33,10 +47,8 @@ public class Board {
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
 
-        //System.out.print(moveX + "," + moveY + " ");
         int newPositionX = (int) (vehicle.v.position.x + moveX);
         int newPositionY = (int) (vehicle.v.position.y + moveY);
-        //System.out.print(newPositionX + "," + newPositionY + " ");
 
         return new Point(newPositionX, newPositionY);
     }

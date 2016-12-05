@@ -1,20 +1,24 @@
 package logic;
 
-import java.util.ArrayList;
-
 public class Game {
-    
-    
-    Board board;
-    
-    public void findWinner()
-    {
-        
+
+    private static Game instance = null;
+
+    public Board board;
+
+    public static Game getInstance() {
+        if (instance == null) {
+            instance = new Game();
+        }
+        return instance;
     }
-    
-    public void start()
-    {
-        
+
+    public void findWinner() {
+
     }
-    
+
+    public void start() {
+
+    }
+
 }
