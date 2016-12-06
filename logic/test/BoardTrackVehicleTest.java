@@ -48,6 +48,7 @@ public class BoardTrackVehicleTest {
             board.vehicles.get(0).v.position = new Point(75, 75);
             board.vehicles.get(0).v.angle = angle;
             board.moveVehicle(0);
+            System.out.println(board.vehicles.get(0).v.position.x + "," + board.vehicles.get(0).v.position.y);
         }
     }
 
@@ -90,7 +91,7 @@ public class BoardTrackVehicleTest {
     public static void main(String[] args) {
         BoardTrackVehicleTest test = new BoardTrackVehicleTest();
         test.zigZagDrive();
-        //test.halfRotation();
+        test.halfRotation();
 
     }
 
