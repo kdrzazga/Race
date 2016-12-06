@@ -1,5 +1,6 @@
 package libs.test;
 
+import static libs.Assert.assertion;
 import libs.Math2;
 import libs.Math2.LineSection;
 
@@ -7,7 +8,7 @@ public class Math2Test {
 
     public static void testInclinationAngle(LineSection section, double expectedAngle) {
         double angle = Math2.inclinationAngle(section);
-        assert Math2.round(angle, 2) == expectedAngle;
+        assertion(Math2.round(angle, 2) == expectedAngle, "testInclinationAngle");
     }
 
     public static void testInclinationAngle2() {
@@ -30,6 +31,7 @@ public class Math2Test {
         testInclinationAngle(new LineSection(0, 0, 0, -2), 0); //0 deg
         testInclinationAngle(new LineSection(0, 0, 2, 0), -1.57); //-90 deg
         testInclinationAngle(new LineSection(0, 0, -2, 0), 1.57); //90 deg
+        System.out.println("No assertionion returned exception - all tests in " + Math2Test.class.getName() + " passed");
     }
 
 }

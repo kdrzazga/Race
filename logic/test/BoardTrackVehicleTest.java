@@ -1,6 +1,7 @@
 package logic.test;
 
 import java.awt.Point;
+import static libs.Assert.assertion;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
@@ -36,55 +37,63 @@ public class BoardTrackVehicleTest {
         board.vehicles.add(veh2);
         board.moveVehicle(0);
 
-        assert veh2.v.position.x == expectedPos.x;
-        assert veh2.v.position.y == expectedPos.y;
+        assertion (veh2.v.position.x == expectedPos.x, "moveVehicleTest");
+        assertion (veh2.v.position.y == expectedPos.y, "moveVehicleTest");
     }
 
-    public void fullRotation() {
+    public void halfRotation() {
         board.vehicles.get(0).v.value = 15;
 
-        for (double angle = 0; angle < 2 * Math.PI; angle += 0.01) {
+        for (double angle = 0; angle < Math.PI; angle += 0.01) {
             board.vehicles.get(0).v.position = new Point(75, 75);
             board.vehicles.get(0).v.angle = angle;
             board.moveVehicle(0);
-            System.out.println(board.vehicles.get(0).v.position.x + " " + board.vehicles.get(0).v.position.y);
         }
     }
 
     public void zigZagDrive() {
-        //change velocity vector
+        Point expectedPositions[] = new Point[3];
+
+        expectedPositions[0] = new Point(123, 99);
+        expectedPositions[1] = new Point(233, 82);
+        expectedPositions[2] = new Point(327, 81);
+
+        //change velocity vector so that the vehicle travles a zig zag route
         for (int i = 0; i < 3; i++) {
             board.vehicles.get(0).v.angle = Math.PI / 7;
             board.vehicles.get(0).v.value = 3;
-            moveVehicleTest2();
-            System.out.println("--------");
+            moveVehicle31times();
+
+            assertion(board.getVehiclePosition(0).x == expectedPositions[i].x, "zigZagDrive");
+            assertion( board.getVehiclePosition(0).y == expectedPositions[i].y, "zigZagDrive");
+
             board.vehicles.get(0).v.angle = -Math.PI / 7;
-            moveVehicleTest2();
-            System.out.println("+++++++");
+            moveVehicle31times();
         }
+        
+        System.out.println("No assertionion returned exception - zigZagDrive test passed");
     }
 
-    private void moveVehicleTest2() {
+    private void moveVehicle31times() {
 
         int ITERATIONS = 31;
 
         for (int i = 0; i < ITERATIONS; i++) {
 
             board.moveVehicle(0);
-            System.out.println("Vehicle at" + v.position.x + ", " + v.position.y + " is on the track " + track.pointWithinTrack(v.position));
+            
+            //all the time vehicle should be on the track
+            assertion (track.pointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
         }
     }
 
     public static void main(String[] args) {
         BoardTrackVehicleTest test = new BoardTrackVehicleTest();
-        //test.moveVehicleTest2();
-        //test.zigZagDrive();
-        test.fullRotation();
+        test.zigZagDrive();
+        //test.halfRotation();
 
-        /*test.moveVehicleTest(0.0, new Point(60, 60), new Point(60, 62));        
-        test.moveVehicleTest(Math.PI, new Point(63, 63), new Point(63, 61));
-        test.moveVehicleTest(3*Math.PI/2, new Point(70, 60), new Point(70, 62));
-        test.moveVehicleTest(3*Math.PI/4, new Point(70, 60), new Point(68, 61));*/
     }
 
+    
+    
 }
