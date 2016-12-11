@@ -2,6 +2,7 @@ package logic;
 
 import java.awt.Point;
 import java.awt.Polygon;
+import libs.Math2.Circle;
 import libs.Math2;
 
 public class Track {
@@ -9,18 +10,9 @@ public class Track {
     public Polygon innerBound;
     public Polygon outerBound;
 
-    private static Track instance = null;
-
-    private Track() {
+    public Track() {
         this.innerBound = new Polygon();
         this.outerBound = new Polygon();
-    }
-
-    public static Track getInstance() {
-        if (instance == null) {
-            instance = new Track();
-        }
-        return instance;
     }
 
     public boolean pointWithinTrack(Point point) {
@@ -42,6 +34,26 @@ public class Track {
         rectangularTrack.innerBound.addPoint(100, 150);
 
         return rectangularTrack;
+    }
+
+    /*
+    creates a donut track bounded by rectangle(50,50, 550,550)
+     */
+    public static Track create_50_50__550_550_DonutTrack() {
+
+        Track donutTrack = new Track();
+        Point donutCenter = new Point(300, 300);
+        int outerBoundRadius = 250;
+        int innerBoundRadius = 100;
+        int numberOfPoints = 360;
+
+        Circle innerBound = new Circle(donutCenter, innerBoundRadius, numberOfPoints);
+        Circle outerBound = new Circle(donutCenter, outerBoundRadius, numberOfPoints);
+
+        donutTrack.innerBound = innerBound.getPoints();
+        donutTrack.outerBound = outerBound.getPoints();
+
+        return donutTrack;
     }
 
     public Point getTrackCentre() {

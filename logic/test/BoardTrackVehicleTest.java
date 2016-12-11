@@ -15,8 +15,8 @@ public class BoardTrackVehicleTest {
     VelocityVector v;
 
     public BoardTrackVehicleTest() {
-        this.board = Board.getInstance();
-        this.track = Track.getInstance();
+        this.board = new Board();
+        this.track = new Track();
         this.vehicle = new Vehicle();
 
         v = new VelocityVector(2, Math.PI / 2);
@@ -66,7 +66,7 @@ public class BoardTrackVehicleTest {
             moveVehicle31times();
 
             assertion(board.getVehiclePosition(0).x == expectedPositions[i].x, "zigZagDrive");
-            assertion( board.getVehiclePosition(0).y == expectedPositions[i].y, "zigZagDrive");
+            assertion(board.getVehiclePosition(0).y == expectedPositions[i].y, "zigZagDrive");
 
             board.vehicles.get(0).v.angle = -Math.PI / 7;
             moveVehicle31times();
@@ -87,14 +87,17 @@ public class BoardTrackVehicleTest {
             assertion (track.pointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
         }
     }
+    
+    private void updateVehicleTravelledWayAngleTest()
+    {
+        
+    }
 
     public static void main(String[] args) {
         BoardTrackVehicleTest test = new BoardTrackVehicleTest();
         test.zigZagDrive();
-        test.halfRotation();
+        //test.halfRotation(); -> TODO: to be moved to graphical tsts
 
     }
 
-    
-    
 }

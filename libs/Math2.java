@@ -66,6 +66,44 @@ public class Math2 {
         }
     }
 
+    public static class Circle {
+
+        private final int numberOfPoints;
+        private final Polygon points;
+        private Point center;
+        private double radius;
+
+        public Circle(Point center, double radius, int numberOfPoints) {
+            this.numberOfPoints = numberOfPoints;
+            this.center = center;
+            this.points = new Polygon();
+            int roundingPrecision = 2;
+
+            for (double angle = 0; angle < 2 * Math.PI; angle += 2 * Math.PI / numberOfPoints) {
+                int x = center.x + (int) round(radius * Math.cos(angle), roundingPrecision);
+                int y = center.y + (int) round(radius * Math.sin(angle), roundingPrecision);
+                points.addPoint(x, y);
+            }
+        }
+    
+        public int getNumberOfPoints()
+        {
+            return this.numberOfPoints;
+        }
+
+        public Polygon getPoints() {
+            return points;
+        }
+
+        public Point getCenter() {
+            return center;
+        }
+
+        public double getRadius() {
+            return radius;
+        }
+    }
+
     public static double round(double value, int places) {
         if (places < 0) {
             throw new IllegalArgumentException();

@@ -1,7 +1,9 @@
 package libs.test;
 
+import java.awt.Point;
 import static libs.Assert.assertion;
 import libs.Math2;
+import libs.Math2.Circle;
 import libs.Math2.LineSection;
 
 public class Math2Test {
@@ -21,7 +23,7 @@ public class Math2Test {
             System.out.println(x + ", " + y);
         }
     }
-
+    
     public static void main(String[] args) {
         //testInclinationAngle(new LineSection(10, 10, 20, 20), -2.36);//135 deg
         testInclinationAngle(new LineSection(20, 20, 10, 10), 0.79);// 45 deg
