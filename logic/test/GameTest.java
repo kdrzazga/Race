@@ -5,6 +5,10 @@
  */
 package logic.test;
 
+import java.awt.Graphics;
+import logic.Board;
+import logic.Track;
+
 /**
  *
  * @author Krzysztof
@@ -29,6 +33,7 @@ public class GameTest extends javax.swing.JFrame {
 
         boardPanel = new javax.swing.JPanel();
         btnDrawBoard = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 600));
@@ -46,10 +51,17 @@ public class GameTest extends javax.swing.JFrame {
             .addGap(0, 469, Short.MAX_VALUE)
         );
 
-        btnDrawBoard.setText("Draw Board");
+        btnDrawBoard.setText("Draw Donut Track");
         btnDrawBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDrawBoardActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Draw Rect Track");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -58,8 +70,12 @@ public class GameTest extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDrawBoard)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDrawBoard))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -68,17 +84,37 @@ public class GameTest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(boardPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(30, 30, 30)
                 .addComponent(btnDrawBoard)
+                .addGap(38, 38, 38)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void drawTrack(Track track)
+    {
+        Graphics boardG = this.boardPanel.getGraphics();
+        
+        boardG.drawPolygon(track.innerBound);
+        boardG.drawPolygon(track.outerBound);
+    }
+    
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        // TODO add your handling code here:
+        Board board = new Board();
+        board.track = Track.create_50_50__550_550_DonutTrack();
+        
+        drawTrack(board.track);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Board board = new Board();
+        board.track = Track.create_50_50__350_250_RectangularTrack();
+        drawTrack(board.track);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,5 +154,6 @@ public class GameTest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JButton btnDrawBoard;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
