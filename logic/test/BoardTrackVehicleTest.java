@@ -17,7 +17,7 @@ public class BoardTrackVehicleTest {
     public BoardTrackVehicleTest() {
         this.board = new Board();
         this.track = new Track();
-        this.vehicle = new Vehicle();
+        this.vehicle = new Vehicle(0);
 
         v = new VelocityVector(2, Math.PI / 2);
         v.position = new Point(75, 75);
@@ -31,7 +31,7 @@ public class BoardTrackVehicleTest {
     public void moveVehicleTest(double angle, Point inputPos, Point expectedPos) {
         VelocityVector v2 = new VelocityVector(2, angle);
         v2.position = inputPos;
-        Vehicle veh2 = new Vehicle();
+        Vehicle veh2 = new Vehicle(1);
         veh2.v = v2;
         board.vehicles.clear();
         board.vehicles.add(veh2);

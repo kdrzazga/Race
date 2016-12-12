@@ -2,13 +2,15 @@ package presentation;
 
 import logic.Board;
 import logic.Track;
+import logic.Vehicle;
 
 /*
-uses JFrame
- */
-public class Draw2dStrategy implements IGraphicalOutput {
+uses OpenGL
+*/
+public class Draw3d implements IGraphicalOutput{
 
-    public Draw2dStrategy() {
+    public Draw3d()
+    {
         throw new RuntimeException("Not implemented yet");
     }
 
@@ -19,6 +21,11 @@ public class Draw2dStrategy implements IGraphicalOutput {
 
     @Override
     public void drawTrack(Track track) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void drawVehicle(Vehicle vehicle) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
