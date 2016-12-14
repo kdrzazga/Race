@@ -2,7 +2,11 @@ package logic;
 
 public class Game {
 
-   public Board board;
+    public Game() {
+        this.board = new Board();
+    }
+
+    public Board board;
 
     public void findWinner() {
 
