@@ -6,11 +6,11 @@ import presentation.Draw2d;
 
 public class MainGameScreen extends javax.swing.JFrame {
 
-    private final Game2DTest introFrame;
+    private final GameTest introFrame;
     private final Draw2d draw2d;
     private final Game game;
 
-    public MainGameScreen(Game2DTest introFrame, Game game) {
+    public MainGameScreen(GameTest introFrame, Game game) {
 
         this.introFrame = introFrame;
         introFrame.setVisible(false);

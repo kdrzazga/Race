@@ -3,13 +3,13 @@ package presentation.test;
 import logic.Game;
 import logic.Track;
 
-public class Game2DTest extends javax.swing.JFrame {
+public class GameTest extends javax.swing.JFrame {
 
     private MainGameScreen gameScreen;
     private static final String RECT_TRACK = "Rectangular";
     private static final String CIRCULAR_TRACK = "Circular";
 
-    public Game2DTest() {
+    public GameTest() {
         initComponents();
         initComponents2();
     }
@@ -138,19 +138,20 @@ public class Game2DTest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game2DTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game2DTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game2DTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game2DTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Game2DTest().setVisible(true);
+            new GameTest().setVisible(true);
         });
     }
 
