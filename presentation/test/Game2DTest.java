@@ -116,9 +116,11 @@ public class Game2DTest extends javax.swing.JFrame {
             game.board.track = Track.create_50_50__550_550_DonutTrack();
         }
 
-        gameScreen = new MainGameScreen(this, game);
-        gameScreen.setVisible(true);
-
+        String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
+        if (selectedGraphics.equals("2D")) {
+            gameScreen = new MainGameScreen(this, game);
+            gameScreen.setVisible(true);
+        }
 
     }//GEN-LAST:event_btnStartActionPerformed
 
