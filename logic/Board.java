@@ -2,20 +2,29 @@ package logic;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import libs.Math2;
+import libs.math2.General;
+import libs.math2.LineSection;
 
 public class Board {
 
     public Track track;
     public ArrayList<Vehicle> vehicles;
 
-    private static Board instance = null;
-
     public Board() {
         this.track = new Track();
         this.vehicles = new ArrayList<>();
     }
 
+    public Board(int numberOfVehicles) {
+        this.track = new Track();
+        this.vehicles = new ArrayList<>();
+        
+        for(int i = 0; i < numberOfVehicles; i++)
+        {
+            vehicles.add(new Vehicle(i));
+        }
+    }
+    
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         Point oldPosition = vehicle.v.position;
@@ -30,11 +39,12 @@ public class Board {
     
     private void updateVehicleTravelledWayAngle(Vehicle vehicle, Point oldPosition, Point newPosition, Point trackCenter)
     {
-         Math2.LineSection lsWithOldPos = new Math2.LineSection(trackCenter, oldPosition);
-         Math2.LineSection lsWithNewPos = new Math2.LineSection(trackCenter, newPosition);
+         LineSection lsWithOldPos;
+         lsWithOldPos = new LineSection(trackCenter, oldPosition);
+         LineSection lsWithNewPos = new LineSection(trackCenter, newPosition);
          
-         double angleWithOldPos = Math2.inclinationAngle(lsWithOldPos);
-         double angleWithNewPos = Math2.inclinationAngle(lsWithNewPos);
+         double angleWithOldPos = General.inclinationAngle(lsWithOldPos);
+         double angleWithNewPos = General.inclinationAngle(lsWithNewPos);
          
          vehicle.travelledWayAngle += angleWithNewPos - angleWithOldPos;
     }
@@ -48,8 +58,8 @@ public class Board {
         double moveX, moveY, factorX, factorY;
         double cos = Math.cos(vehicle.v.angle);
         double sin = Math.sin(vehicle.v.angle);
-        factorX = Math2.round(cos, 4);
-        factorY = Math2.round(sin, 4);
+        factorX = General.round(cos, 4);
+        factorY = General.round(sin, 4);
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
 

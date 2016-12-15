@@ -2,8 +2,7 @@ package logic;
 
 import java.awt.Point;
 import java.awt.Polygon;
-import libs.Math2.Circle;
-import libs.Math2;
+import libs.math2.*;
 
 public class Track {
 
@@ -57,13 +56,20 @@ public class Track {
     }
 
     public Point getTrackCentre() {
-        Point outerBoundCenter = Math2.computeCenterOfPolygon(outerBound);
-        Point innerBoundCenter = Math2.computeCenterOfPolygon(innerBound);
+        Point outerBoundCenter = General.computeCenterOfPolygon(outerBound);
+        Point innerBoundCenter = General.computeCenterOfPolygon(innerBound);
 
-        Math2.LineSection section;
-        section = new Math2.LineSection(innerBoundCenter, outerBoundCenter);
+        LineSection section;
+        section = new LineSection(innerBoundCenter, outerBoundCenter);
 
         return section.getCenter();
     }
 
+    public LineSection getStartLine()
+    {
+        int X = getTrackCentre().x;
+        int Y = getTrackCentre().y;
+        
+        return new LineSection(X, Y + 10, X, Y + 100);
+    }
 }

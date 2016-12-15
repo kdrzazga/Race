@@ -2,7 +2,7 @@ package libs.test;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import libs.Math2;
+import libs.math2.Circle;
 
 public class GraphicalTests extends javax.swing.JFrame {
 
@@ -68,7 +68,7 @@ public class GraphicalTests extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         Point center = new Point(100, 100);
-        Math2.Circle circle = new Math2.Circle(center, 100, 100);
+        Circle circle = new Circle(center, 100, 100);
 
         Graphics g = this.jPanel1.getGraphics();
         g.drawPolygon(circle.getPoints());

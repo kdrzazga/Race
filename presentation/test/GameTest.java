@@ -8,8 +8,11 @@ public class GameTest extends javax.swing.JFrame {
     private MainGameScreen gameScreen;
     private static final String RECT_TRACK = "Rectangular";
     private static final String CIRCULAR_TRACK = "Circular";
-
+    
+    
     public GameTest() {
+        
+        
         initComponents();
         initComponents2();
     }
@@ -23,6 +26,8 @@ public class GameTest extends javax.swing.JFrame {
         cbTrack = new javax.swing.JComboBox<>();
         lblGraphics = new javax.swing.JLabel();
         cbGraphics = new javax.swing.JComboBox<>();
+        lblPlayers = new javax.swing.JLabel();
+        cbPlayers = new javax.swing.JComboBox<>();
         btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,18 +40,24 @@ public class GameTest extends javax.swing.JFrame {
 
         cbGraphics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2D", "3D (not implemented)" }));
 
+        lblPlayers.setText("Players");
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addComponent(lblPlayers)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                         .addComponent(lblGraphics)
                         .addGap(18, 18, 18)
                         .addComponent(cbGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlMainLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                         .addComponent(lblTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbTrack, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -59,11 +70,15 @@ public class GameTest extends javax.swing.JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTrack)
                     .addComponent(cbTrack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGraphics))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblGraphics)
+                    .addComponent(cbGraphics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlayers))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         btnStart.setText("Start");
@@ -83,7 +98,7 @@ public class GameTest extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
+                        .addGap(110, 110, 110)
                         .addComponent(btnStart)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -92,9 +107,9 @@ public class GameTest extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnStart)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -102,11 +117,19 @@ public class GameTest extends javax.swing.JFrame {
 
     private void initComponents2() {
         cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{RECT_TRACK, CIRCULAR_TRACK}));
+        
+        for (int i = 1; i < Game.MAX_VEHICLES; i++)
+        {
+            cbPlayers.addItem(Integer.toString(i));
+        }
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-
-        Game game = new Game();
-
+       
+        String vehCount = this.cbPlayers.getSelectedItem().toString();
+        int numberOfVehicles = new Integer(vehCount);        
+        
+        Game game = new Game(numberOfVehicles);
+        
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
         if (selectedTrack.equals(RECT_TRACK)) {
@@ -158,8 +181,10 @@ public class GameTest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbGraphics;
+    private javax.swing.JComboBox<String> cbPlayers;
     private javax.swing.JComboBox<String> cbTrack;
     private javax.swing.JLabel lblGraphics;
+    private javax.swing.JLabel lblPlayers;
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables

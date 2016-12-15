@@ -18,7 +18,8 @@ public class MainGameScreen extends javax.swing.JFrame {
         initComponents2();
 
         this.game = game;
-        this.draw2d = new Draw2d(this.jPanel1.getGraphics());
+        this.draw2d = new Draw2d(this.pnlBoard.getGraphics());
+        Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }
 
@@ -27,7 +28,7 @@ public class MainGameScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlInfo = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlBoard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -49,17 +50,17 @@ public class MainGameScreen extends javax.swing.JFrame {
             .addGap(0, 552, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlBoard.setBackground(new java.awt.Color(204, 255, 204));
+        pnlBoard.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlBoardLayout = new javax.swing.GroupLayout(pnlBoard);
+        pnlBoard.setLayout(pnlBoardLayout);
+        pnlBoardLayout.setHorizontalGroup(
+            pnlBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 568, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlBoardLayout.setVerticalGroup(
+            pnlBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -70,19 +71,18 @@ public class MainGameScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void draw() {
-
         draw2d.drawTrack(game.board.track);
     }
 
@@ -92,7 +92,7 @@ public class MainGameScreen extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnlBoard;
     private javax.swing.JPanel pnlInfo;
     // End of variables declaration//GEN-END:variables
 

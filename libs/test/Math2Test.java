@@ -1,16 +1,14 @@
 package libs.test;
 
-import java.awt.Point;
 import static libs.Assert.assertion;
-import libs.Math2;
-import libs.Math2.Circle;
-import libs.Math2.LineSection;
+import libs.math2.General;
+import libs.math2.LineSection;
 
 public class Math2Test {
 
     public static void testInclinationAngle(LineSection section, double expectedAngle) {
-        double angle = Math2.inclinationAngle(section);
-        assertion(Math2.round(angle, 2) == expectedAngle, "testInclinationAngle");
+        double angle = General.inclinationAngle(section);
+        assertion(General.round(angle, 2) == expectedAngle, "testInclinationAngle");
     }
 
     public static void testInclinationAngle2() {
