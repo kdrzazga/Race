@@ -1,17 +1,16 @@
 package logic;
 
 import java.awt.Point;
-import java.awt.Polygon;
 import libs.math2.*;
 
 public class Track {
 
-    public Polygon innerBound;
-    public Polygon outerBound;
+    public PolygonAG innerBound;
+    public PolygonAG outerBound;
 
     public Track() {
-        this.innerBound = new Polygon();
-        this.outerBound = new Polygon();
+        this.innerBound = new PolygonAG();
+        this.outerBound = new PolygonAG();
     }
 
     public boolean pointWithinTrack(Point point) {

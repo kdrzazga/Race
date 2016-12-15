@@ -5,12 +5,12 @@ import java.awt.Point;
     public class Line {
 
         //y = Ax + B
-        public double A;
-        public double B;
+        public float A;
+        public float B;
         public int verticalX;
         public boolean isVertical;
 
-        public Line(double A, double B) {
+        public Line(float A, float B) {
             this.A = A;
             this.B = B;
             isVertical = false;
@@ -33,4 +33,14 @@ import java.awt.Point;
             }
         }
 
+        public Point2D findIntersection(Line line)
+        {
+            if (this.A == line.A)
+                return null;
+            
+            float x = (line.B - this.B) / (this.A - line.A);
+            float y = this.A * x + this.B;
+            
+            return new Point2D(x, y);
+        }
     }

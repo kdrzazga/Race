@@ -1,19 +1,18 @@
 package libs.math2;
 
 import java.awt.Point;
-import java.awt.Polygon;
 
     public class Circle {
 
         private final int numberOfPoints;
-        private final Polygon points;
+        private final PolygonAG points;
         private final Point center;
         private double radius;
 
         public Circle(Point center, double radius, int numberOfPoints) {
             this.numberOfPoints = numberOfPoints;
             this.center = center;
-            this.points = new Polygon();
+            this.points = new PolygonAG();
             int roundingPrecision = 2;
 
             for (double angle = 0; angle < 2 * Math.PI; angle += 2 * Math.PI / numberOfPoints) {
@@ -28,7 +27,7 @@ import java.awt.Polygon;
             return this.numberOfPoints;
         }
 
-        public Polygon getPoints() {
+        public PolygonAG getPoints() {
             return points;
         }
 
