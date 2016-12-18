@@ -30,14 +30,13 @@ public class PolygonAG{
         
         int i;
         
-        for(i = 0; i < this.points.size() - 1; i++)
+        for(i = 0; i < this.points.size() - 2; i++)
         {
             if (this.points.get(i).x < line.verticalX && this.points.get(i+1).x > line.verticalX)
                 break;
         }
         
-        return new LineSection(this.points.get(i), this.points.get(i + 1));
-          
+        return new LineSection(this.points.get(i), this.points.get(i + 1));          
     }
     
     public Polygon convertToPolygon()

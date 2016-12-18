@@ -15,7 +15,7 @@ import java.awt.Point;
         public LineSection(Point p1, Point p2)
         {
             this.p1 = new PointAG(p1);
-            this.p1 = new PointAG(p2);
+            this.p2 = new PointAG(p2);
         }
 
         public LineSection(PointAG p1, PointAG p2) {

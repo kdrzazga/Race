@@ -49,7 +49,7 @@ public class Draw2d implements IGraphicalOutput {
         g.drawPolygon(track.outerBound.convertToPolygon());
         g.drawPolygon(track.innerBound.convertToPolygon());
         
-        LineSection startLine = track.getRaceStartLine();
+         LineSection startLine = track.getRaceStartLine();
         
         Point p1 = startLine.p1.convertToPoint();
         Point p2 = startLine.p2.convertToPoint();
