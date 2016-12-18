@@ -58,8 +58,8 @@ public class Board {
         double moveX, moveY, factorX, factorY;
         double cos = Math.cos(vehicle.v.angle);
         double sin = Math.sin(vehicle.v.angle);
-        factorX = General.round(cos, 4);
-        factorY = General.round(sin, 4);
+        factorX = General.roundToDouble(cos, 4);
+        factorY = General.roundToDouble(sin, 4);
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
 

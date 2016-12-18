@@ -14,8 +14,8 @@ public class Track {
     }
 
     public boolean pointWithinTrack(Point point) {
-        return !this.innerBound.contains(point)
-                && this.outerBound.contains(point);
+        return !this.innerBound.convertToPolygon().contains(point)
+                && this.outerBound.convertToPolygon().contains(point);
     }
 
     public static Track create_50_50__350_250_RectangularTrack() {
@@ -40,13 +40,13 @@ public class Track {
     public static Track create_50_50__550_550_DonutTrack() {
 
         Track donutTrack = new Track();
-        Point donutCenter = new Point(300, 300);
+        PointAG donutCenter = new PointAG(300, 300);
         int outerBoundRadius = 250;
         int innerBoundRadius = 100;
         int numberOfPoints = 360;
 
-        Circle innerBound = new Circle(donutCenter, innerBoundRadius, numberOfPoints);
-        Circle outerBound = new Circle(donutCenter, outerBoundRadius, numberOfPoints);
+        CircleAG innerBound = new CircleAG(donutCenter, innerBoundRadius, numberOfPoints);
+        CircleAG outerBound = new CircleAG(donutCenter, outerBoundRadius, numberOfPoints);
 
         donutTrack.innerBound = innerBound.getPoints();
         donutTrack.outerBound = outerBound.getPoints();
@@ -55,8 +55,8 @@ public class Track {
     }
 
     public Point getTrackCentre() {
-        Point outerBoundCenter = General.computeCenterOfPolygon(outerBound);
-        Point innerBoundCenter = General.computeCenterOfPolygon(innerBound);
+        Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
+        Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());
 
         LineSection section;
         section = new LineSection(innerBoundCenter, outerBoundCenter);
@@ -64,11 +64,15 @@ public class Track {
         return section.getCenter();
     }
 
-    public LineSection getStartLine()
+    public LineSection getRaceStartLine()
     {
         int X = getTrackCentre().x;
-        int Y = getTrackCentre().y;
         
-        return new LineSection(X, Y + 10, X, Y + 100);
+        LineAG lineContainingStartLineSection = new LineAG(X);
+        
+        LineSection upperLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        LineSection lowerLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        
+        return new LineSection(upperLine.getCenter(), lowerLine.getCenter());
     }
 }

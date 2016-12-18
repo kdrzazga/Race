@@ -4,15 +4,21 @@ import java.awt.Point;
 
    public class LineSection {
 
-        Point p1;
-        Point p2;
+        public PointAG p1;
+        public PointAG p2;
 
-        public LineSection(int x1, int y1, int x2, int y2) {
-            this.p1 = new Point(x1, y1);
-            this.p2 = new Point(x2, y2);
+        public LineSection(float x1, float y1, float x2, float y2) {
+            this.p1 = new PointAG(x1, y1);
+            this.p2 = new PointAG(x2, y2);
+        }
+        
+        public LineSection(Point p1, Point p2)
+        {
+            this.p1 = new PointAG(p1);
+            this.p1 = new PointAG(p2);
         }
 
-        public LineSection(Point p1, Point p2) {
+        public LineSection(PointAG p1, PointAG p2) {
             this.p1 = p1;
             this.p2 = p2;
         }

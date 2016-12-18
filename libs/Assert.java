@@ -14,4 +14,19 @@ public class Assert {
             +" act=" + actual + " exp=" + expected);
         }
     }
+    
+    public static void assertion(double actual, double expected, String methodName) {
+        if (actual != expected) {
+            throw new RuntimeException("Assertion failed in " + methodName 
+            +" act=" + actual + " exp=" + expected);
+        }
+    }
+    
+        public static void assertion(int actual, int expected, String methodName) {
+        if (actual != expected) {
+            throw new RuntimeException("Assertion failed in " + methodName 
+            +" act=" + actual + " exp=" + expected);
+        }
+    }
+
 }

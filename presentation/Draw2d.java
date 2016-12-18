@@ -3,6 +3,7 @@ package presentation;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import libs.math2.LineSection;
 import logic.Board;
 import logic.Game;
 import logic.Track;
@@ -37,16 +38,23 @@ public class Draw2d implements IGraphicalOutput {
     public void drawBoard(Board board) {
         drawTrack(board.track);
 
-        for (Vehicle vehicle : board.vehicles) {
+        board.vehicles.forEach((vehicle) -> {
             this.drawVehicle(vehicle);
-        }
+        });
     }
 
     @Override
     public void drawTrack(Track track) {
         g.setColor(TRACK_COLOR);
-        g.drawPolygon(track.outerBound);
-        g.drawPolygon(track.innerBound);
+        g.drawPolygon(track.outerBound.convertToPolygon());
+        g.drawPolygon(track.innerBound.convertToPolygon());
+        
+        LineSection startLine = track.getRaceStartLine();
+        
+        Point p1 = startLine.p1.convertToPoint();
+        Point p2 = startLine.p2.convertToPoint();
+        
+        g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
     
     public void drawAllVehicles(Game game)

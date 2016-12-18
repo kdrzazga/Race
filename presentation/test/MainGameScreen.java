@@ -106,5 +106,5 @@ public class MainGameScreen extends javax.swing.JFrame {
             }
         });
 
-    }
+    } 
 }
