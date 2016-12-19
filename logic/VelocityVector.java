@@ -1,12 +1,12 @@
 package logic;
 
-import java.awt.Point;
+import libs.math2.PointAG;
 
 public class VelocityVector {
 
     public final static int V_MAX = 5;
     public final static int V_MIN = 1;
-    public final static double ROTATION_UNIT = Math.PI / 10;
+    public final static float ROTATION_UNIT = (float) (Math.PI / 10);
 
     public VelocityVector(int value, double angle) {
 
@@ -16,7 +16,7 @@ public class VelocityVector {
 
     public int value;
     public double angle;
-    public Point position;
+    public PointAG position;
 
     public void turnLeft()
     {

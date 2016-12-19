@@ -13,9 +13,9 @@ public class Track {
         this.outerBound = new PolygonAG();
     }
 
-    public boolean pointWithinTrack(Point point) {
-        return !this.innerBound.convertToPolygon().contains(point)
-                && this.outerBound.convertToPolygon().contains(point);
+    public boolean pointWithinTrack(PointAG point) {
+        return !this.innerBound.convertToPolygon().contains(point.convertToPoint())
+                && this.outerBound.convertToPolygon().contains(point.convertToPoint());
     }
 
     public static Track create_50_50__350_250_RectangularTrack() {
@@ -54,19 +54,19 @@ public class Track {
         return donutTrack;
     }
 
-    public Point getTrackCentre() {
+    public PointAG getTrackCentre() {
         Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
         Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());
 
-        LineSection section;
-        section = new LineSection(innerBoundCenter, outerBoundCenter);
+        LineSection sectionBetweenCenters;
+        sectionBetweenCenters = new LineSection(innerBoundCenter, outerBoundCenter);
 
-        return section.getCenter();
+        return sectionBetweenCenters.getCenter();
     }
 
     public LineSection getRaceStartLine()
     {
-        int X = getTrackCentre().x;
+        float X = getTrackCentre().x;
         
         LineAG lineContainingStartLineSection = new LineAG(X);
         
@@ -75,4 +75,14 @@ public class Track {
         
         return new LineSection(upperLine.getCenter(), lowerLine.getCenter());
     }
+    
+    public PointAG getStartPosition(int index)
+    {
+     switch(index){
+         case 0:
+             return this.getRaceStartLine().getCenter();
+             
+     }
+    }
+    
 }

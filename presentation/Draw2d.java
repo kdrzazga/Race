@@ -72,7 +72,7 @@ public class Draw2d implements IGraphicalOutput {
         Color drawingColor = VEHICLE_COLORS[vehicle.getId() % maxColorIndex];
         g.setColor(drawingColor);
 
-        Point vehiclePos = vehicle.v.position;
+        Point vehiclePos = vehicle.v.position.convertToPoint();
 
         g.drawOval(vehiclePos.x - 2, vehiclePos.y - 2, 4, 4);
     }
@@ -80,7 +80,7 @@ public class Draw2d implements IGraphicalOutput {
     private void eraseSurrounding(Vehicle vehicle) {
         g.setColor(BOARD_COLOR);
         
-        Point vehiclePos = vehicle.v.position;
+        Point vehiclePos = vehicle.v.position.convertToPoint();
         g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
     }
 

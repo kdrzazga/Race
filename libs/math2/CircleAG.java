@@ -1,5 +1,7 @@
 package libs.math2;
 
+import logic.Board;
+
     public class CircleAG {
 
         private final int numberOfPoints;
@@ -11,13 +13,12 @@ package libs.math2;
             this.numberOfPoints = numberOfPoints;
             this.center = center;
             this.points = new PolygonAG();
-            int roundingPrecision = 6;
-
+            
             for (double angle = 0; angle < 2 * Math.PI; angle += 2 * Math.PI / numberOfPoints) {                
-                float x  = center.x + radius * General.roundToFloat(Math.cos(angle), roundingPrecision);                        
-                float y =  center.y + radius * General.roundToFloat(Math.sin(angle), roundingPrecision);
+                float x  = center.x + radius * General.roundToFloat(Math.cos(angle), Board.ROUNDING_PRECISION);                        
+                float y =  center.y + radius * General.roundToFloat(Math.sin(angle), Board.ROUNDING_PRECISION);
                 
-                points.addPoint2D(x, y);
+                points.addPointAG(x, y);
             }
         }
     

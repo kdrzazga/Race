@@ -2,8 +2,10 @@ package libs.test;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
+import libs.math2.PolygonAG;
 
 public class GraphicalTests extends javax.swing.JFrame {
 
@@ -17,6 +19,7 @@ public class GraphicalTests extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        btnDrawHex = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -33,25 +36,34 @@ public class GraphicalTests extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 376, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 242, Short.MAX_VALUE)
         );
 
+        btnDrawHex.setText("Draw Hexagon");
+        btnDrawHex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDrawHexActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jButton1)
-                .addContainerGap(140, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jButton1)
+                .addGap(57, 57, 57)
+                .addComponent(btnDrawHex)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,7 +71,9 @@ public class GraphicalTests extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnDrawHex))
                 .addContainerGap())
         );
 
@@ -74,8 +88,22 @@ public class GraphicalTests extends javax.swing.JFrame {
         Graphics g = this.jPanel1.getGraphics();
         g.drawPolygon(circle.getPoints().convertToPolygon());
         Point center = circle.getCenter().convertToPoint();
-        g.drawOval(center.x - 2, center.y - 2, 4, 4);        
+        g.drawOval(center.x - 2, center.y - 2, 4, 4);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDrawHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawHexActionPerformed
+        
+        PolygonAG hexagon = new PolygonAG();
+
+        PointAG hexPoints[] = {new PointAG(100, 100), new PointAG(300, 100), new PointAG(400, 200),
+             new PointAG(300, 300), new PointAG(100, 300), new PointAG(0, 200)};
+
+        hexagon.points.addAll(Arrays.asList(hexPoints));
+        
+        Graphics g = this.jPanel1.getGraphics();
+        
+        g.drawPolygon(hexagon.convertToPolygon());
+    }//GEN-LAST:event_btnDrawHexActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,6 +141,7 @@ public class GraphicalTests extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDrawHex;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

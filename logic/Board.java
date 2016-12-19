@@ -4,11 +4,13 @@ import java.awt.Point;
 import java.util.ArrayList;
 import libs.math2.General;
 import libs.math2.LineSection;
+import libs.math2.PointAG;
 
 public class Board {
 
     public Track track;
     public ArrayList<Vehicle> vehicles;
+    public static final int ROUNDING_PRECISION = 4;
 
     public Board() {
         this.track = new Track();
@@ -27,9 +29,9 @@ public class Board {
     
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
-        Point oldPosition = vehicle.v.position;
+        PointAG oldPosition = vehicle.v.position;
         
-        Point newPosition = findNewPosition(vehicle);
+        PointAG newPosition = findNewPosition(vehicle);
 
         if (track.pointWithinTrack(newPosition)) {
             vehicle.v.position = newPosition;
@@ -37,7 +39,7 @@ public class Board {
         }
     }
     
-    private void updateVehicleTravelledWayAngle(Vehicle vehicle, Point oldPosition, Point newPosition, Point trackCenter)
+    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG oldPosition, PointAG newPosition, PointAG trackCenter)
     {
          LineSection lsWithOldPos;
          lsWithOldPos = new LineSection(trackCenter, oldPosition);
@@ -49,23 +51,26 @@ public class Board {
          vehicle.travelledWayAngle += angleWithNewPos - angleWithOldPos;
     }
 
-    public Point getVehiclePosition(int vehicleId) {
+    public PointAG getVehiclePosition(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         return vehicle.v.position;
     }
 
-    private Point findNewPosition(Vehicle vehicle) {
-        double moveX, moveY, factorX, factorY;
+    private PointAG findNewPosition(Vehicle vehicle) {
+        float moveX, moveY, factorX, factorY;
+        
         double cos = Math.cos(vehicle.v.angle);
         double sin = Math.sin(vehicle.v.angle);
-        factorX = General.roundToDouble(cos, 4);
-        factorY = General.roundToDouble(sin, 4);
+                
+        factorX = General.roundToFloat(cos, ROUNDING_PRECISION);
+        factorY = General.roundToFloat(sin, ROUNDING_PRECISION);
+        
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
 
-        int newPositionX = (int) (vehicle.v.position.x + moveX);
-        int newPositionY = (int) (vehicle.v.position.y + moveY);
+        float newPositionX = vehicle.v.position.x + moveX;
+        float newPositionY = vehicle.v.position.y + moveY;
 
-        return new Point(newPositionX, newPositionY);
+        return new PointAG(newPositionX, newPositionY);
     }
 }

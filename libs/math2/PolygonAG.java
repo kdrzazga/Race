@@ -3,6 +3,7 @@ package libs.math2;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PolygonAG{
     //AG stands for Analitycal Geometry
@@ -18,7 +19,7 @@ public class PolygonAG{
         this.points.add(new PointAG(x, y));
     }
         
-    public void addPoint2D(float x, float y)
+    public void addPointAG(float x, float y)
     {
         this.points.add(new PointAG(x, y));
     }

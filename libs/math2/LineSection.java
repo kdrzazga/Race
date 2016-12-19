@@ -27,9 +27,9 @@ import java.awt.Point;
             return Math.sqrt(Math.pow((p1.y - p2.y), 2) + Math.pow((p1.x - p2.x), 2));
         }
 
-        public Point getCenter() {
-            int centerX = Math.round((p1.x + p2.x) / 2);
-            int centerY = Math.round((p1.y + p2.y) / 2);
-            return new Point(centerX, centerY);
+        public PointAG getCenter() {
+            float centerX = (p1.x + p2.x) / 2;
+            float centerY = (p1.y + p2.y) / 2;
+            return new PointAG(centerX, centerY);
         }
     }

@@ -1,7 +1,5 @@
 package libs.math2;
 
-import java.awt.geom.Line2D;
-
 public class LineAG {
 
     //y = Ax + B
