@@ -37,7 +37,7 @@ public class Math2Test {
         PolygonAG triangle2D = new PolygonAG();
         triangle2D.addPointAG(-10.2f, -10.2f);
         triangle2D.addPointAG(10.2f, -10.2f);
-        triangle2D.addPointAG(110.0f, 24.3f);//0,24.3
+        triangle2D.addPointAG(0.0f, 24.3f);//0,24.3
 
         Point[] expectedConvertedPts = {new Point(-10, -10),
              new Point(10, -10),
