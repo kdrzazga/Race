@@ -64,25 +64,25 @@ public class Track {
         return sectionBetweenCenters.getCenter();
     }
 
-    public LineSection getRaceStartLine()
-    {
+    public LineSection getRaceStartLine() {
         float X = getTrackCentre().x;
-        
+
         LineAG lineContainingStartLineSection = new LineAG(X);
-        
+
         LineSection upperLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
         LineSection lowerLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
-        
+
         return new LineSection(upperLine.getCenter(), lowerLine.getCenter());
     }
-    
-    public PointAG getStartPosition(int index)
-    {
-     switch(index){
-         case 0:
-             return this.getRaceStartLine().getCenter();
-             
-     }
+
+    public PointAG getStartPosition(int index) {
+        switch (index) {
+            case 0:
+                return this.getRaceStartLine().getCenter();
+
+        }
+
+        throw new RuntimeException("Not implemented yet");
     }
-    
+
 }
