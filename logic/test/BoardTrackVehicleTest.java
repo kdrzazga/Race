@@ -54,35 +54,30 @@ public class BoardTrackVehicleTest {
     }
 
     public void zigZagDrive() {
+        board.vehicles.get(0).v.value = 3;
         VelocityVector v = board.vehicles.get(0).v;
         
         v.position = new PointAG(75f, 75f);
-        
-        
-        
-        PointAG expectedPositions[][] = new PointAG[3][2];
-
-        expectedPositions[0][0] = new PointAG(123.65405f, 98.43054f);
-        expectedPositions[0][1] = new PointAG(123.65405f, 98.43054f);
-        expectedPositions[1][0] = new PointAG(233, 82);
-        expectedPositions[1][1] = new PointAG(123.65405f, 98.43054f);
-        expectedPositions[2][0] = new PointAG(327, 81);
-        expectedPositions[2][1] = new PointAG(123.65405f, 98.43054f);
-        
-        board.vehicles.get(0).v.value = 3;
+                
+        PointAG expectedPositions[][] = {
+            {new PointAG(123.65405f, 98.43054f), new PointAG(207.44714f, 58.077923f)}
+            ,{new PointAG(291.24023f, 98.43054f), new PointAG(348.0033f, 71.09491f) }
+            ,{new PointAG(348.0033f, 71.09491f), new PointAG(348.0033f, 71.09491f)}
+        };
+                
         //change velocity vector so that the vehicle travles a zig zag route
         
         for (int i = 0; i < 3; i++) {
             v.angle = Math.PI / 7;
             
             moveVehicle31times();
+            assertion(board.getVehiclePosition(0).x == expectedPositions[i][0].x, "zigZagDrive index=" + i + "0 ");
+            assertion(board.getVehiclePosition(0).y == expectedPositions[i][0].y, "zigZagDrive index=" + i + "0 ");
             
-            //assertion(board.getVehiclePosition(0).x == expectedPositions[i].x, "zigZagDrive");
-            //assertion(board.getVehiclePosition(0).y == expectedPositions[i].y, "zigZagDrive");
-            
-            board.vehicles.get(0).v.angle = -Math.PI / 7;
-            moveVehicle31times();
-            
+            v.angle = -Math.PI / 7;
+            moveVehicle31times();            
+            assertion(board.getVehiclePosition(0).x == expectedPositions[i][1].x, "zigZagDrive index=" + i + "1 ");
+            assertion(board.getVehiclePosition(0).y == expectedPositions[i][1].y, "zigZagDrive index=" + i + "1 ");
         }
         
         System.out.println("No assertionion returned exception - zigZagDrive test passed");
@@ -103,7 +98,7 @@ public class BoardTrackVehicleTest {
     
     private void updateVehicleTravelledWayAngleTest()
     {
-        
+        throw new RuntimeException("Not implemented yet");
     }
 
     public static void main(String[] args) {
