@@ -1,6 +1,7 @@
 package logic;
 
 import java.awt.Point;
+import java.util.Arrays;
 import libs.math2.*;
 
 public class Track {
@@ -21,15 +22,11 @@ public class Track {
     public static Track create_50_50__350_250_RectangularTrack() {
         Track rectangularTrack = new Track();
 
-        rectangularTrack.outerBound.addPoint(50, 50);
-        rectangularTrack.outerBound.addPoint(350, 50);
-        rectangularTrack.outerBound.addPoint(350, 250);
-        rectangularTrack.outerBound.addPoint(50, 250);
-
-        rectangularTrack.innerBound.addPoint(100, 100);
-        rectangularTrack.innerBound.addPoint(250, 100);
-        rectangularTrack.innerBound.addPoint(250, 150);
-        rectangularTrack.innerBound.addPoint(100, 150);
+        PointAG outerBoundPts[] = { new PointAG(50, 50), new PointAG(350, 50), new PointAG(350, 250), new PointAG(50, 250)};
+        PointAG innerBoundPts[] = { new PointAG(100, 100), new PointAG(250, 100), new PointAG(250, 150), new PointAG(100, 150)};
+        
+        rectangularTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
+        rectangularTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
 
         return rectangularTrack;
     }

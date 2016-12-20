@@ -1,6 +1,5 @@
 package logic.test;
 
-import java.awt.Point;
 import static libs.Assert.assertion;
 import libs.math2.PointAG;
 import logic.Board;
