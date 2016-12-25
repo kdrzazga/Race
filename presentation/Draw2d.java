@@ -15,32 +15,20 @@ uses JFrame
 public class Draw2d implements IGraphicalOutput {
 
     private final Graphics g;
-    private static final Color[] VEHICLE_COLORS = new Color[7];
+    private static final Color[] VEHICLE_COLORS = {Color.RED, Color.BLUE, Color.GREEN,
+                                    Color.MAGENTA, Color.ORANGE, Color.CYAN,
+                                    new Color(162, 42, 42)};//brown
     private static final Color TRACK_COLOR = Color.BLACK;
     private static Color BOARD_COLOR = Color.LIGHT_GRAY;
 
     public Draw2d(Graphics g) {
         this.g = g;
-        initVehicleColors();
-    }
-
-    private static void initVehicleColors() {
-        VEHICLE_COLORS[0] = Color.RED;
-        VEHICLE_COLORS[1] = Color.BLUE;
-        VEHICLE_COLORS[2] = Color.GREEN;
-        VEHICLE_COLORS[3] = Color.MAGENTA;
-        VEHICLE_COLORS[4] = Color.ORANGE;
-        VEHICLE_COLORS[5] = new Color(162, 42, 42); //brown
-        VEHICLE_COLORS[6] = Color.CYAN;
     }
 
     @Override
     public void drawBoard(Board board) {
         drawTrack(board.track);
-
-        board.vehicles.forEach((vehicle) -> {
-            this.drawVehicle(vehicle);
-        });
+        drawAllVehicles(board);
     }
 
     @Override
@@ -57,9 +45,9 @@ public class Draw2d implements IGraphicalOutput {
         g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
     
-    public void drawAllVehicles(Game game)
+    public void drawAllVehicles(Board board)
     {
-        game.board.vehicles.forEach((vehicle) -> {
+        board.vehicles.forEach((vehicle) -> {
             drawVehicle(vehicle);
         });
     }
