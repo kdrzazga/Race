@@ -3,6 +3,7 @@ package presentation.test;
 import javax.swing.JFrame;
 import logic.Game;
 import presentation.Draw2d;
+import presentation.KeyboardInput;
 
 public class MainGameScreen extends javax.swing.JFrame {
 
@@ -106,5 +107,6 @@ public class MainGameScreen extends javax.swing.JFrame {
             }
         });
 
+        this.addKeyListener(new KeyboardInput(game.board));
     } 
 }

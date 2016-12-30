@@ -5,7 +5,7 @@ import libs.math2.PointAG;
 public class VelocityVector {
 
     public final static int V_MAX = 5;
-    public final static int V_MIN = 1;
+    public final static int V_MIN = 0;
     public final static float ROTATION_UNIT = (float) (Math.PI / 10);
     public final static int ACCELERATE_UNIT = 1;
 
@@ -53,5 +53,4 @@ public class VelocityVector {
         }
     }
     
-
 }
