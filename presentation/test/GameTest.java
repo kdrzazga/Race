@@ -128,16 +128,19 @@ public class GameTest extends javax.swing.JFrame {
         String vehCount = this.cbPlayers.getSelectedItem().toString();
         int numberOfVehicles = new Integer(vehCount);        
         
-        Game game = new Game(numberOfVehicles);
+        Track track;
         
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
         if (selectedTrack.equals(RECT_TRACK)) {
-            game.board.track = Track.create_50_50__350_250_RectangularTrack();
+            track = Track.create_50_50__350_250_RectangularTrack();
 
-        } else if (selectedTrack.equals(CIRCULAR_TRACK)) {
-            game.board.track = Track.create_50_50__550_550_DonutTrack();
+        } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
+        {
+            track = Track.create_50_50__550_550_DonutTrack();
         }
+        
+        Game game = new Game(numberOfVehicles, track);
 
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
         if (selectedGraphics.equals("2D")) {

@@ -1,6 +1,7 @@
 package presentation.test;
 
 import javax.swing.JFrame;
+import logic.Board;
 import logic.Game;
 import presentation.Draw2d;
 import presentation.KeyboardInput;
@@ -14,11 +15,12 @@ public class MainGameScreen extends javax.swing.JFrame {
     public MainGameScreen(GameTest introFrame, Game game) {
 
         this.introFrame = introFrame;
+        this.game = game;
+        
         introFrame.setVisible(false);
         initComponents();
         initComponents2();
-
-        this.game = game;
+        
         this.draw2d = new Draw2d(this.pnlBoard.getGraphics());
         Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
@@ -91,7 +93,6 @@ public class MainGameScreen extends javax.swing.JFrame {
         draw();
     }//GEN-LAST:event_formComponentMoved
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnlBoard;
     private javax.swing.JPanel pnlInfo;
@@ -106,7 +107,8 @@ public class MainGameScreen extends javax.swing.JFrame {
                 introFrame.setVisible(true);
             }
         });
-
-        this.addKeyListener(new KeyboardInput(game.board));
+        Board brd = game.board;
+        KeyboardInput ki = new KeyboardInput(brd);
+        this.addKeyListener(ki);
     } 
 }

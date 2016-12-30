@@ -17,13 +17,14 @@ public class Board {
         this.vehicles = new ArrayList<>();
     }
 
-    public Board(int numberOfVehicles) {
-        this.track = new Track();
+    public Board(int numberOfVehicles, Track track) {
+        this.track = track;
         this.vehicles = new ArrayList<>();
         
         for(int i = 0; i < numberOfVehicles; i++)
         {
-            vehicles.add(new Vehicle(i));
+            Vehicle veh = new Vehicle(i, 0, this.track.getStartPosition(i));
+            veh.active = true;
         }
     }
     
