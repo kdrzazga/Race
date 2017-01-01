@@ -3,6 +3,7 @@ package logic.test;
 import static libs.Assert.assertion;
 import libs.math2.PointAG;
 import logic.Board;
+import logic.Mocks;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
@@ -19,18 +20,17 @@ public class BoardTrackVehicleTest {
         this.track = new Track();
         this.vehicle = new Vehicle(0);
 
-        v = new VelocityVector(2, Math.PI / 2);
-        v.position = new PointAG(75, 75);
+        v = new VelocityVector(2, Math.PI / 2, new PointAG(75, 75));
+        
         this.vehicle.v = v;
 
-        track = Track.create_50_50__350_250_RectangularTrack();
+        track = Mocks.create_50_50__350_250_RectangularTrack();
         board.track = track;
         board.vehicles.add(vehicle);
     }
 
     public void moveVehicleTest(double angle, PointAG inputPos, PointAG expectedPos) {
-        VelocityVector v2 = new VelocityVector(2, angle);
-        v2.position = inputPos;
+        VelocityVector v2 = new VelocityVector(2, angle, inputPos);
         Vehicle veh2 = new Vehicle(1);
         veh2.v = v2;
         board.vehicles.clear();

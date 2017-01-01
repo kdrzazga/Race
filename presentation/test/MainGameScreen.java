@@ -6,21 +6,21 @@ import logic.Game;
 import presentation.Draw2d;
 import presentation.KeyboardInput;
 
-public class MainGameScreen extends javax.swing.JFrame {
+class MainGameScreen extends javax.swing.JFrame {
 
     private final GameTest introFrame;
     private final Draw2d draw2d;
-    private final Game game;
+    public final Game game;
 
     public MainGameScreen(GameTest introFrame, Game game) {
 
         this.introFrame = introFrame;
         this.game = game;
-        
+
         introFrame.setVisible(false);
         initComponents();
         initComponents2();
-        
+
         this.draw2d = new Draw2d(this.pnlBoard.getGraphics());
         Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
@@ -101,14 +101,11 @@ public class MainGameScreen extends javax.swing.JFrame {
     private void initComponents2() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                introFrame.setVisible(true);
-            }
-        });
         Board brd = game.board;
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
-    } 
+
+        this.addWindowListener(new MainGameScreenAdapter(introFrame));
+    }
+
 }

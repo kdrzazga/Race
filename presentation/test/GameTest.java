@@ -1,18 +1,16 @@
 package presentation.test;
 
+import logic.Board;
 import logic.Game;
+import logic.Mocks;
+import logic.Mocks.TrackType;
 import logic.Track;
 
 public class GameTest extends javax.swing.JFrame {
 
     private MainGameScreen gameScreen;
-    private static final String RECT_TRACK = "Rectangular";
-    private static final String CIRCULAR_TRACK = "Circular";
-    
-    
+
     public GameTest() {
-        
-        
         initComponents();
         initComponents2();
     }
@@ -116,33 +114,39 @@ public class GameTest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents2() {
-        cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{RECT_TRACK, CIRCULAR_TRACK}));
-        
-        for (int i = 1; i < Game.MAX_VEHICLES; i++)
-        {
+
+        cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
+            rectTrackType.toString(),
+            circularTrackType.toString()
+        }));
+
+        for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-       
+
         String vehCount = this.cbPlayers.getSelectedItem().toString();
-        int numberOfVehicles = new Integer(vehCount);        
-        
-        Track track;
-        
+        int numberOfVehicles = new Integer(vehCount);
+
+        Board board;
+
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
-        if (selectedTrack.equals(RECT_TRACK)) {
-            track = Track.create_50_50__350_250_RectangularTrack();
+        if (selectedTrack.equals(rectTrackType.toString())) {
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
 
         } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
         {
-            track = Track.create_50_50__550_550_DonutTrack();
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
         }
-        
-        Game game = new Game(numberOfVehicles, track);
+
+        Game game = new Game(board);
 
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
+
+        game.setGameRunning(true);
+
         if (selectedGraphics.equals("2D")) {
             gameScreen = new MainGameScreen(this, game);
             gameScreen.setVisible(true);
@@ -151,11 +155,6 @@ public class GameTest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -176,8 +175,12 @@ public class GameTest extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new GameTest().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                new GameTest().setVisible(true);
+            }
         });
     }
 
@@ -191,4 +194,6 @@ public class GameTest extends javax.swing.JFrame {
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
+    private TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
+    private TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
 }

@@ -8,7 +8,7 @@ import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
-import logic.test.Mocks;
+import logic.Mocks;
 
 public class KeyboardInputTest {
 
@@ -39,31 +39,41 @@ public class KeyboardInputTest {
         player2 = mockBoard.vehicles.get(1);
     }
 
-    private static void testForPlayer0() {
+    private static void accelerateTillMaxSpeed(Vehicle player, KeyEvent accelerate) {
+        ki.keyPressed(accelerate);
+        assertion(player.v.value, 2, "testForPlayer0");
+        ki.keyPressed(noActionKey1);
+        ki.keyPressed(accelerate);
+        assertion(player.v.value, 3, "testForPlayer0");
+        ki.keyPressed(accelerate);
+        ki.keyPressed(noActionKey3);
+        assertion(player.v.value, 4, "testForPlayer0");
+        ki.keyPressed(accelerate);
+        assertion(player.v.value, 5, "testForPlayer0");
+        ki.keyPressed(accelerate);
+        assertion(player.v.value, 5, "testForPlayer0");
+
+    }
+
+    private static void slowDownToStop(Vehicle player, KeyEvent slowDown) {
+        ki.keyPressed(slowDown);
+        ki.keyPressed(slowDown);
+        assertion(player.v.value, 3, "testForPlayer0");
+        ki.keyPressed(slowDown);
+        assertion(player.v.value, 2, "testForPlayer0");
+        ki.keyPressed(slowDown);
+        assertion(player.v.value, 1, "testForPlayer0");
+        ki.keyPressed(slowDown);
+        assertion(player.v.value, 0, "testForPlayer0");
+        ki.keyPressed(slowDown);
+        assertion(player.v.value, 0, "testForPlayer0");
+
+    }
+
+    private static void testForPlayer1() {
         init();
-
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 2, "testForPlayer0");
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 3, "testForPlayer0");
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 4, "testForPlayer0");
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 5, "testForPlayer0");
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 5, "testForPlayer0");
-
-        ki.keyPressed(player1SlowDown);
-        ki.keyPressed(player1SlowDown);
-        assertion(player1.v.value, 3, "testForPlayer0");
-        ki.keyPressed(player1SlowDown);
-        assertion(player1.v.value, 2, "testForPlayer0");
-        ki.keyPressed(player1SlowDown);
-        assertion(player1.v.value, 1, "testForPlayer0");
-        ki.keyPressed(player1SlowDown);
-        assertion(player1.v.value, 0, "testForPlayer0");
-        ki.keyPressed(player1SlowDown);
-        assertion(player1.v.value, 0, "testForPlayer0");
+        accelerateTillMaxSpeed(player1, player1Accelerate);
+        slowDownToStop(player1, player1SlowDown);
     }
 
     private static void testForBothPlayers() {
@@ -89,7 +99,7 @@ public class KeyboardInputTest {
     }
 
     public static void main(String args[]) {
-        testForPlayer0();
+        testForPlayer1();
         testForBothPlayers();
 
         System.out.println("No exception occured. All tests PASSED");
