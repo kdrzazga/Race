@@ -19,38 +19,6 @@ public class Track {
                 && this.outerBound.convertToPolygon().contains(point.convertToPoint());
     }
 
-    public static Track create_50_50__350_250_RectangularTrack() {
-        Track rectangularTrack = new Track();
-
-        PointAG outerBoundPts[] = { new PointAG(50, 50), new PointAG(350, 50), new PointAG(350, 250), new PointAG(50, 250)};
-        PointAG innerBoundPts[] = { new PointAG(100, 100), new PointAG(250, 100), new PointAG(250, 150), new PointAG(100, 150)};
-        
-        rectangularTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
-        rectangularTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
-
-        return rectangularTrack;
-    }
-
-    /*
-    creates a donut track bounded by rectangle(50,50, 550,550)
-     */
-    public static Track create_50_50__550_550_DonutTrack() {
-
-        Track donutTrack = new Track();
-        PointAG donutCenter = new PointAG(300, 300);
-        int outerBoundRadius = 250;
-        int innerBoundRadius = 100;
-        int numberOfPoints = 360;
-
-        CircleAG innerBound = new CircleAG(donutCenter, innerBoundRadius, numberOfPoints);
-        CircleAG outerBound = new CircleAG(donutCenter, outerBoundRadius, numberOfPoints);
-
-        donutTrack.innerBound = innerBound.getPoints();
-        donutTrack.outerBound = outerBound.getPoints();
-
-        return donutTrack;
-    }
-
     public PointAG getTrackCentre() {
         Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
         Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());

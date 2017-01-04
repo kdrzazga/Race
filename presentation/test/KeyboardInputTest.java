@@ -8,7 +8,7 @@ import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
-import logic.test.Mocks;
+import logic.Mocks;
 
 public class KeyboardInputTest {
 
@@ -33,7 +33,7 @@ public class KeyboardInputTest {
     private static final KeyEvent noActionKey3 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'W', 'W');
 
     private static void init() {
-        mockBoard = Mocks.createBoardWith2VehiclesOnRectTrack();
+        mockBoard = Mocks.createBoardWith2VehiclesOnTrack(Mocks.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);

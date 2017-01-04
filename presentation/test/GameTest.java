@@ -1,6 +1,7 @@
 package presentation.test;
 
 import logic.Game;
+import logic.Mocks;
 import logic.Track;
 
 public class GameTest extends javax.swing.JFrame {
@@ -133,11 +134,11 @@ public class GameTest extends javax.swing.JFrame {
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
         if (selectedTrack.equals(RECT_TRACK)) {
-            track = Track.create_50_50__350_250_RectangularTrack();
+            track = Mocks.create_50_50__350_250_RectangularTrack();
 
         } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
         {
-            track = Track.create_50_50__550_550_DonutTrack();
+            track = Mocks.create_50_50__550_550_DonutTrack();
         }
         
         Game game = new Game(numberOfVehicles, track);

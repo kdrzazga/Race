@@ -60,7 +60,6 @@ public class Mocks {
         Board result = new Board();
 
         result.track = convertTrackTypeToTrack(trackType);
-
         result.vehicles.add(createVehicle0At100_100());
         result.vehicles.add(createVehicle1At100_120());
 

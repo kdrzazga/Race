@@ -3,6 +3,7 @@ package logic.test;
 import static libs.Assert.assertion;
 import libs.math2.PointAG;
 import logic.Board;
+import logic.Mocks;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
@@ -23,7 +24,7 @@ public class BoardTrackVehicleTest {
         v.position = new PointAG(75, 75);
         this.vehicle.v = v;
 
-        track = Track.create_50_50__350_250_RectangularTrack();
+        track = Mocks.create_50_50__350_250_RectangularTrack();
         board.track = track;
         board.vehicles.add(vehicle);
     }

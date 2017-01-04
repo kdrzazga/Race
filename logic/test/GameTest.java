@@ -2,6 +2,7 @@ package logic.test;
 
 import java.awt.Graphics;
 import logic.Board;
+import logic.Mocks;
 import logic.Track;
 
 public class GameTest extends javax.swing.JFrame {
@@ -86,14 +87,14 @@ public class GameTest extends javax.swing.JFrame {
     
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
         Board board = new Board();
-        board.track = Track.create_50_50__550_550_DonutTrack();
+        board.track = Mocks.create_50_50__550_550_DonutTrack();
         
         drawTrack(board.track);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Board board = new Board();
-        board.track = Track.create_50_50__350_250_RectangularTrack();
+        board.track = Mocks.create_50_50__350_250_RectangularTrack();
         drawTrack(board.track);
         
     }//GEN-LAST:event_jButton1ActionPerformed
