@@ -13,17 +13,17 @@ public class Vehicle {
         this.travelledWayAngle = 0.0;
         this.id = id;
     }
-
+/*
     public Vehicle(int id, int speed) {
         this.travelledWayAngle = 0.0;
         this.id = id;
         this.v = new VelocityVector(speed, 0);
-    }
+    }*/
 
     public Vehicle(int id, int speed, PointAG position) {
         this.travelledWayAngle = 0.0;
         this.id = id;
-        this.v = new VelocityVector(speed, 0);
+        this.v = new VelocityVector(speed, 0, position);
     }
 
     public int getId() {

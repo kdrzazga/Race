@@ -9,10 +9,11 @@ public class VelocityVector {
     public final static float ROTATION_UNIT = (float) (Math.PI / 10);
     public final static int ACCELERATE_UNIT = 1;
 
-    public VelocityVector(int value, double angle) {
+    public VelocityVector(int value, double angle, PointAG position) {
 
         this.value = value;
         this.angle = angle;
+        this.position = position;
     }
 
     public int value;
