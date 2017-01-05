@@ -40,22 +40,24 @@ public class Track {
         return new LineSection(upperLine.getCenter(), lowerLine.getCenter());
     }
 
-    public PointAG getStartPosition(int index) {
-        switch (index) { /*TODO: Poilish code for case 1 and 2 */
-            case 0:
-                return this.getRaceStartLine().getCenter();
-            case 1:
-                LineSection halfStartLine1 = new LineSection(this.getRaceStartLine().getCenter(), this.getRaceStartLine().p1);
-                return halfStartLine1.getCenter();
-            case 2:
-                LineSection halfStartLine2 = new LineSection(this.getRaceStartLine().getCenter(), this.getRaceStartLine().p2);
-                return halfStartLine2.getCenter();
-                
-            default:
-                throw new RuntimeException("Not implemented for more vehicles");
+    public PointAG getStartPosition(int index, int maxIndex) {
+
+        LineSection startLine = this.getRaceStartLine();
+        float x, y;
+        
+        if (startLine.p1.x == startLine.p2.x) {
+            x = startLine.p1.x;
+        } else {
+            x = index * (startLine.p1.x + startLine.p2.x) / maxIndex;
         }
 
-        
+        if (startLine.p1.y == startLine.p2.y) {
+            y = startLine.p1.y;
+        } else {
+            y = index * (startLine.p1.y + startLine.p2.y) / maxIndex;
+        }
+
+        return new PointAG(x, y);
     }
 
 }

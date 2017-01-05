@@ -103,8 +103,24 @@ public class BoardTrackVehicleTest {
     public static void main(String[] args) {
         BoardTrackVehicleTest test = new BoardTrackVehicleTest();
         test.zigZagDrive();
+        givenCIRCULAR_1TrackAllVehiclesOnStartLineShouldHaveSameYCoordinate();
         //test.halfRotation(); -> TODO: to be moved to graphical tsts
 
     }
 
+    
+    public static void givenCIRCULAR_1TrackAllVehiclesOnStartLineShouldHaveSameYCoordinate()
+    {
+        int numberOfVehicles = 7;
+        Board mockBoard = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
+        
+        //
+        for (Vehicle vehicle : mockBoard.vehicles)
+        {
+            assertion(vehicle.v.position.y == mockBoard.track.getRaceStartLine().p1.y, "testGetStartPosition()");
+            assertion(vehicle.v.position.y == mockBoard.track.getRaceStartLine().p2.y, "testGetStartPosition()");
+        }
+        
+    }
+    
 }

@@ -33,33 +33,30 @@ public class Mocks {
         return result;
     }
 
-    private static Track convertTrackTypeToTrack(TrackType trackType) {
-        if (trackType.equals(TrackType.CIRCULAR_1)) {
-            return create_50_50__550_550_DonutTrack();
-        } else {
-            return create_50_50__350_250_RectangularTrack();
-        }
-    }
-
     public static Board createBoardWithNVehiclesOnTrack(int numberOfVehicles, TrackType trackType) {
         Board result = new Board();
 
-        result.track = convertTrackTypeToTrack(trackType);
+        if (trackType.equals(TrackType.CIRCULAR_1)) {
+            result.track = create_50_50__550_550_DonutTrack();
+        } else {
+            result.track = create_50_50__350_250_RectangularTrack();
+        }
 
         int initialSpeed = 0;
 
         for (int i = 0; i < numberOfVehicles; i++) {
-            PointAG vehiclePosition = result.track.getStartPosition(i);
+            PointAG vehiclePosition = result.track.getStartPosition(i, numberOfVehicles);
             result.vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition));
         }
 
         return result;
     }
 
-    public static Board createBoardWith2VehiclesOnTrack(TrackType trackType) {
+    public static Board createBoardWith2VehiclesOnRectTrack() {
         Board result = new Board();
 
-        result.track = convertTrackTypeToTrack(trackType);
+        result.track = create_50_50__350_250_RectangularTrack();
+
 
         result.vehicles.add(createVehicle0At100_100());
         result.vehicles.add(createVehicle1At100_120());

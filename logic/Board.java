@@ -23,8 +23,10 @@ public class Board {
         
         for(int i = 0; i < numberOfVehicles; i++)
         {
-            Vehicle veh = new Vehicle(i, 0, this.track.getStartPosition(i));
+            Vehicle veh = new Vehicle(i, 0, this.track.getStartPosition(i, numberOfVehicles));
             veh.active = true;
+            
+            this.vehicles.add(veh);
         }
     }
     
