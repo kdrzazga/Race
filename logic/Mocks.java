@@ -33,14 +33,18 @@ public class Mocks {
         return result;
     }
 
+    private static Track convertTrackTypeToTrack(TrackType trackType) {
+        if (trackType.equals(TrackType.CIRCULAR_1)) {
+            return create_50_50__550_550_DonutTrack();
+        } else {
+            return create_50_50__350_250_RectangularTrack();
+        }
+    }
+
     public static Board createBoardWithNVehiclesOnTrack(int numberOfVehicles, TrackType trackType) {
         Board result = new Board();
 
-        if (trackType.equals(TrackType.CIRCULAR_1)) {
-            result.track = create_50_50__550_550_DonutTrack();
-        } else {
-            result.track = create_50_50__350_250_RectangularTrack();
-        }
+        result.track = convertTrackTypeToTrack(trackType);
 
         int initialSpeed = 0;
 
@@ -52,10 +56,10 @@ public class Mocks {
         return result;
     }
 
-    public static Board createBoardWith2VehiclesOnRectTrack() {
+    public static Board createBoardWith2VehiclesOnTrack(TrackType trackType) {
         Board result = new Board();
 
-        result.track = create_50_50__350_250_RectangularTrack();
+        result.track = convertTrackTypeToTrack(trackType);
 
         result.vehicles.add(createVehicle0At100_100());
         result.vehicles.add(createVehicle1At100_120());

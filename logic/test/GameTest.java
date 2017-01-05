@@ -88,7 +88,6 @@ public class GameTest extends javax.swing.JFrame {
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
         Board board = new Board();
         board.track = Mocks.create_50_50__550_550_DonutTrack();
-
         drawTrack(board.track);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
