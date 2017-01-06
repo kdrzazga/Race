@@ -51,13 +51,13 @@ public class Track {
         if (startLine.p1.x == startLine.p2.x) {
             x = startLine.p1.x;
         } else {
-            x = mostLeftPointX + index * (startLine.p1.x + startLine.p2.x) / maxIndex;
+            x = mostLeftPointX + index * (startLine.p1.x - startLine.p2.x) / maxIndex;
         }
 
         if (startLine.p1.y == startLine.p2.y) {
             y = startLine.p1.y;
         } else {
-            y = mostLeftPointY + index * (startLine.p1.y + startLine.p2.y) / maxIndex;
+            y = mostLeftPointY + index * (startLine.p1.y - startLine.p2.y) / maxIndex;
         }
 
         return new PointAG(x, y);

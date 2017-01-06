@@ -37,9 +37,10 @@ public class BoardTrackVehicleTest {
         test.givenTrack_ShouldStartLineEqualExpected();
 
         for (int vehiclesCount = 0; vehiclesCount < 10; vehiclesCount++) {
-            test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate(vehiclesCount);
+            test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1(vehiclesCount);
         }
 
+        test.givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(10);
         //test.halfRotation(); -> TODO: to be moved to graphical tsts
     }
 
@@ -105,7 +106,7 @@ public class BoardTrackVehicleTest {
         System.out.println("givenTrackTestStartLine1 passed");
     }
 
-    public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate(int numberOfVehicles) {
+    public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1(int numberOfVehicles) {
         String methodName = "givenTrackTestStartPositions";
 
         StringBuilder testResultMessage = new StringBuilder();
@@ -118,14 +119,46 @@ public class BoardTrackVehicleTest {
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 
         for (Vehicle vehicle : testBoard.vehicles) {
-            testResultMessage.append(" ").append(vehicle.v.position).append(" ");
             assertion(vehicle.v.position.x, startLineX, methodName);
+            testResultMessage.append(" ").append(vehicle.v.position).append(" ");
+            
         }
 
         testResultMessage.append(methodName).append(" passed for ");
-        System.out.print(testResultMessage);
+        System.out.println(testResultMessage);
+        
     }
 
+        public void givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
+        String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther";
+
+        StringBuilder testResultMessage = new StringBuilder();
+        testResultMessage.append(methodName).append(" passed for ");
+        Track rectTrack = Mocks.create_50_50__350_250_RectangularTrack();
+        Board testBoard = new Board(numberOfVehicles, rectTrack);
+        
+        double distanceetweenVehicle1And2 
+                = this.getLineConnectingVehicles(testBoard.vehicles.get(0), testBoard.vehicles.get(1)).getLength();
+        
+        for (int i = 2; i < testBoard.vehicles.size() - 1; i++) {
+            double distanceBetweenNextVehicles 
+                    = getLineConnectingVehicles(testBoard.vehicles.get(i), testBoard.vehicles.get(i + 1)).getLength();
+            
+            assertion(distanceetweenVehicle1And2, distanceBetweenNextVehicles, methodName);
+            testResultMessage.append(testBoard.vehicles.get(i).v.position).append(" ");
+        }
+        
+        System.out.println(testResultMessage);
+    }
+    
+    private LineSection getLineConnectingVehicles(Vehicle vehicle1, Vehicle vehicle2)
+    {
+        PointAG vehicle1Position = vehicle1.v.position;
+        PointAG vehicle2Position = vehicle2.v.position;
+        
+        return new LineSection(vehicle1Position, vehicle2Position);        
+    }
+        
     private void moveVehicle31times() {
 
         int ITERATIONS = 31;
