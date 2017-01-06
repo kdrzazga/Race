@@ -7,14 +7,17 @@ import libs.math2.PointAG;
 public class Mocks {
 
     public enum TrackType {
-        RECTANGULAR_1, CIRCULAR_1;
+        RECTANGULAR_1, CIRCULAR_1, TEST_RECTANGULAR;
 
         @Override
         public String toString() {
-            if (this.equals(RECTANGULAR_1)) {
-                return "Rectangular track";
-            } else {
-                return "Circular track";
+            switch (this) {
+                case RECTANGULAR_1:
+                    return "Rectangular track";
+                case CIRCULAR_1:
+                    return "Circular track";
+                default:
+                    return "Test rectangular";
             }
         }
     };
@@ -42,11 +45,12 @@ public class Mocks {
             result.track = create_50_50__350_250_RectangularTrack();
         }
 
-        int initialSpeed = 0;
+        int initialSpeed = VelocityVector.V_MIN;
 
         for (int i = 0; i < numberOfVehicles; i++) {
             PointAG vehiclePosition = result.track.getStartPosition(i, numberOfVehicles);
-            result.vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition));
+            boolean active = true;
+            result.vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, active));
         }
 
         return result;
@@ -56,7 +60,6 @@ public class Mocks {
         Board result = new Board();
 
         result.track = create_50_50__350_250_RectangularTrack();
-
 
         result.vehicles.add(createVehicle0At100_100());
         result.vehicles.add(createVehicle1At100_120());
@@ -94,5 +97,17 @@ public class Mocks {
         donutTrack.outerBound = outerBound.getPoints();
 
         return donutTrack;
+    }
+
+    public static Track create_0_0__30_30_TestRectangularTrack() {
+        Track rectangularTrack = new Track();
+
+        PointAG outerBoundPts[] = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
+        PointAG innerBoundPts[] = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
+
+        rectangularTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
+        rectangularTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
+
+        return rectangularTrack;
     }
 }

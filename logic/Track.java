@@ -45,16 +45,19 @@ public class Track {
         LineSection startLine = this.getRaceStartLine();
         float x, y;
         
+        float mostLeftPointX = Math.min(startLine.p1.x, startLine.p2.x);
+        float mostLeftPointY = Math.min(startLine.p1.y, startLine.p2.y);
+        
         if (startLine.p1.x == startLine.p2.x) {
             x = startLine.p1.x;
         } else {
-            x = index * (startLine.p1.x + startLine.p2.x) / maxIndex;
+            x = mostLeftPointX + index * (startLine.p1.x + startLine.p2.x) / maxIndex;
         }
 
         if (startLine.p1.y == startLine.p2.y) {
             y = startLine.p1.y;
         } else {
-            y = index * (startLine.p1.y + startLine.p2.y) / maxIndex;
+            y = mostLeftPointY + index * (startLine.p1.y + startLine.p2.y) / maxIndex;
         }
 
         return new PointAG(x, y);

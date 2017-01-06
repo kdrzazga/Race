@@ -20,6 +20,13 @@ public class Vehicle {
         this.v = new VelocityVector(speed, 0.0, position);
     }
 
+    public Vehicle(int id, int speed, PointAG position, boolean active) {
+        this.travelledWayAngle = 0.0;
+        this.id = id;
+        this.v = new VelocityVector(speed, 0.0, position);
+        this.active = active;
+    }    
+    
     public int getId() {
         return id;
     }

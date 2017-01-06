@@ -33,29 +33,33 @@ public class KeyboardInputTest {
     private static final KeyEvent noActionKey3 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'W', 'W');
 
     private static void init() {
-        mockBoard = Mocks.createBoardWith2VehiclesOnTrack(Mocks.TrackType.RECTANGULAR_1);
+        mockBoard = Mocks.createBoardWithNVehiclesOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);
     }
 
-    private static void accelerateTillMaxSpeed(Vehicle player, KeyEvent accelerate) {
+    private static void givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(Vehicle player, KeyEvent accelerate) {
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 2, "testForPlayer0");
+        assertion(player.v.value, 1, "accelerateTillMaxSpeed");
         ki.keyPressed(noActionKey1);
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 3, "testForPlayer0");
+        assertion(player.v.value, 2, "accelerateTillMaxSpeed");
         ki.keyPressed(accelerate);
         ki.keyPressed(noActionKey3);
-        assertion(player.v.value, 4, "testForPlayer0");
+        for (int exp = 3; exp <= 5; exp++)
+        {
+        assertion(player.v.value, exp, "accelerateTillMaxSpeed");
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 5, "testForPlayer0");
+        }
+        
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 5, "testForPlayer0");
+        assertion(player.v.value, 5, "accelerateTillMaxSpeed");
 
+        System.out.println("accelerateTillMaxSpeed passed for " + player.toString());
     }
 
-    private static void slowDownToStop(Vehicle player, KeyEvent slowDown) {
+    private static void givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(Vehicle player, KeyEvent slowDown) {
         ki.keyPressed(slowDown);
         ki.keyPressed(slowDown);
         assertion(player.v.value, 3, "testForPlayer0");
@@ -67,25 +71,25 @@ public class KeyboardInputTest {
         assertion(player.v.value, 0, "testForPlayer0");
         ki.keyPressed(slowDown);
         assertion(player.v.value, 0, "testForPlayer0");
-
+        System.out.println("slowDownToStop passed for " + player.toString());
     }
 
     private static void testForPlayer1() {
         init();
-        accelerateTillMaxSpeed(player1, player1Accelerate);
-        slowDownToStop(player1, player1SlowDown);
+        givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(player1, player1Accelerate);
+        givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(player1, player1SlowDown);
     }
 
     private static void testForBothPlayers() {
         init();
 
         ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 2, "testForBothPlayers");
+        assertion(player1.v.value, 1, "testForBothPlayers");
         ki.keyPressed(player2Accelerate);
-        assertion(player2.v.value, 2, "testForBothPlayers");
+        assertion(player2.v.value, 1, "testForBothPlayers");
         ki.keyPressed(noActionKey1);
-        assertion(player1.v.value, 2, "testForBothPlayers");
-        assertion(player2.v.value, 2, "testForBothPlayers");
+        assertion(player1.v.value, 1, "testForBothPlayers");
+        assertion(player2.v.value, 1, "testForBothPlayers");
 
         for (int i = 2; i < 10; i++) {
             ki.keyPressed(noActionKey2);

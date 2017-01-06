@@ -23,4 +23,10 @@ public class PointAG {
     {   
         return new Point(Math.round(this.x), Math.round(this.y));
     }
+    
+    @Override
+    public String toString()
+    {
+        return "(" + this.x + " ," + this.y + ")";
+    }
 }

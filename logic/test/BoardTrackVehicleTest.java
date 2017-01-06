@@ -1,6 +1,8 @@
 package logic.test;
 
 import static libs.Assert.assertion;
+import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
+import libs.math2.LineSection;
 import libs.math2.PointAG;
 import logic.Board;
 import logic.Mocks;
@@ -21,7 +23,7 @@ public class BoardTrackVehicleTest {
         this.vehicle = new Vehicle(0);
 
         v = new VelocityVector(2, Math.PI / 2, new PointAG(75, 75));
-        
+
         this.vehicle.v = v;
 
         track = Mocks.create_50_50__350_250_RectangularTrack();
@@ -29,7 +31,19 @@ public class BoardTrackVehicleTest {
         board.vehicles.add(vehicle);
     }
 
-    public void moveVehicleTest(double angle, PointAG inputPos, PointAG expectedPos) {
+    public static void main(String[] args) {
+        BoardTrackVehicleTest test = new BoardTrackVehicleTest();
+        test.givenVelocityVector_WhenVehicleMovedZigZagRoute_ThenVehiclePositionsEqualExpected();
+        test.givenTrack_ShouldStartLineEqualExpected();
+
+        for (int vehiclesCount = 0; vehiclesCount < 10; vehiclesCount++) {
+            test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate(vehiclesCount);
+        }
+
+        //test.halfRotation(); -> TODO: to be moved to graphical tsts
+    }
+
+    private void givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition(double angle, PointAG inputPos, PointAG expectedPos) {
         VelocityVector v2 = new VelocityVector(2, angle, inputPos);
         Vehicle veh2 = new Vehicle(1);
         veh2.v = v2;
@@ -37,8 +51,8 @@ public class BoardTrackVehicleTest {
         board.vehicles.add(veh2);
         board.moveVehicle(0);
 
-        assertion (veh2.v.position.x == expectedPos.x, "moveVehicleTest");
-        assertion (veh2.v.position.y == expectedPos.y, "moveVehicleTest");
+        assertion(veh2.v.position.x == expectedPos.x, "moveVehicleTest");
+        assertion(veh2.v.position.y == expectedPos.y, "moveVehicleTest");
     }
 
     public void halfRotation() {
@@ -52,34 +66,64 @@ public class BoardTrackVehicleTest {
         }
     }
 
-    public void zigZagDrive() {
+    public void givenVelocityVector_WhenVehicleMovedZigZagRoute_ThenVehiclePositionsEqualExpected() {
         board.vehicles.get(0).v.value = 3;
         VelocityVector v = board.vehicles.get(0).v;
-        
+
         v.position = new PointAG(75f, 75f);
-                
+
         PointAG expectedPositions[][] = {
-            {new PointAG(123.65405f, 98.43054f), new PointAG(207.44714f, 58.077923f)}
-            ,{new PointAG(291.24023f, 98.43054f), new PointAG(348.0033f, 71.09491f) }
-            ,{new PointAG(348.0033f, 71.09491f), new PointAG(348.0033f, 71.09491f)}
+            {new PointAG(123.65405f, 98.43054f), new PointAG(207.44714f, 58.077923f)},
+            {new PointAG(291.24023f, 98.43054f), new PointAG(348.0033f, 71.09491f)},
+            {new PointAG(348.0033f, 71.09491f), new PointAG(348.0033f, 71.09491f)}
         };
-                
+
         //change velocity vector so that the vehicle travles a zig zag route
-        
         for (int i = 0; i < 3; i++) {
             v.angle = Math.PI / 7;
-            
+
             moveVehicle31times();
             assertion(board.getVehiclePosition(0).x == expectedPositions[i][0].x, "zigZagDrive index=" + i + "0 ");
             assertion(board.getVehiclePosition(0).y == expectedPositions[i][0].y, "zigZagDrive index=" + i + "0 ");
-            
+
             v.angle = -Math.PI / 7;
-            moveVehicle31times();            
+            moveVehicle31times();
             assertion(board.getVehiclePosition(0).x == expectedPositions[i][1].x, "zigZagDrive index=" + i + "1 ");
             assertion(board.getVehiclePosition(0).y == expectedPositions[i][1].y, "zigZagDrive index=" + i + "1 ");
         }
-        
+
         System.out.println("No assertionion returned exception - zigZagDrive test passed");
+    }
+
+    public void givenTrack_ShouldStartLineEqualExpected() {
+        Track track = Mocks.create_0_0__30_30_TestRectangularTrack();
+
+        LineSection actualStartLine = track.getRaceStartLine();
+        LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
+
+        assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
+        System.out.println("givenTrackTestStartLine1 passed");
+    }
+
+    public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate(int numberOfVehicles) {
+        String methodName = "givenTrackTestStartPositions";
+
+        StringBuilder testResultMessage = new StringBuilder();
+        Track rectTrack = Mocks.create_0_0__30_30_TestRectangularTrack();
+
+        LineSection startLine = rectTrack.getRaceStartLine();
+
+        float startLineX = startLine.p1.x;
+
+        Board testBoard = new Board(numberOfVehicles, rectTrack);
+
+        for (Vehicle vehicle : testBoard.vehicles) {
+            testResultMessage.append(" ").append(vehicle.v.position).append(" ");
+            assertion(vehicle.v.position.x, startLineX, methodName);
+        }
+
+        testResultMessage.append(methodName).append(" passed for ");
+        System.out.print(testResultMessage);
     }
 
     private void moveVehicle31times() {
@@ -89,38 +133,14 @@ public class BoardTrackVehicleTest {
         for (int i = 0; i < ITERATIONS; i++) {
 
             board.moveVehicle(0);
-            
+
             //all the time vehicle should be on the track
-            assertion (track.pointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
+            assertion(track.pointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
         }
     }
-    
-    private void updateVehicleTravelledWayAngleTest()
-    {
+
+    private void updateVehicleTravelledWayAngleTest() {
         throw new RuntimeException("Not implemented yet");
     }
 
-    public static void main(String[] args) {
-        BoardTrackVehicleTest test = new BoardTrackVehicleTest();
-        test.zigZagDrive();
-        givenCIRCULAR_1TrackAllVehiclesOnStartLineShouldHaveSameYCoordinate();
-        //test.halfRotation(); -> TODO: to be moved to graphical tsts
-
-    }
-
-    
-    public static void givenCIRCULAR_1TrackAllVehiclesOnStartLineShouldHaveSameYCoordinate()
-    {
-        int numberOfVehicles = 7;
-        Board mockBoard = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
-        
-        //
-        for (Vehicle vehicle : mockBoard.vehicles)
-        {
-            assertion(vehicle.v.position.y == mockBoard.track.getRaceStartLine().p1.y, "testGetStartPosition()");
-            assertion(vehicle.v.position.y == mockBoard.track.getRaceStartLine().p2.y, "testGetStartPosition()");
-        }
-        
-    }
-    
 }

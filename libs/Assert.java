@@ -29,4 +29,13 @@ public class Assert {
         }
     }
 
+        public static void assertDifferenceNotGreaterThan(float value1, float value2
+                , float expectedMaxDifference, String methodName)
+        {
+            float difference = Math.abs(value1 - value2);
+            
+            if (difference > expectedMaxDifference)
+                throw new RuntimeException("Assertion failed in " + methodName 
+            +" act diff=" + difference + " expected difference = " + expectedMaxDifference);
+        }
 }

@@ -32,4 +32,10 @@ import java.awt.Point;
             float centerY = (p1.y + p2.y) / 2;
             return new PointAG(centerX, centerY);
         }
+        
+        @Override
+        public String toString(){
+            return "(" + this.p1.x + ", " + this.p1.y 
+                    + "), (" + this.p2.x +", " + this.p2.y +")";
+        }
     }
