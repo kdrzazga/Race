@@ -3,7 +3,6 @@ package libs.math2;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PolygonAG{
     //AG stands for Analitycal Geometry

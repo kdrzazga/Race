@@ -20,38 +20,25 @@ public class Board {
     public Board(int numberOfVehicles, Track track) {
         this.track = track;
         this.vehicles = new ArrayList<>();
-        
-        for(int i = 0; i < numberOfVehicles; i++)
-        {
+
+        for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.getStartPosition(i, numberOfVehicles));
             veh.active = true;
-            
+
             this.vehicles.add(veh);
         }
     }
-    
+
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         PointAG oldPosition = vehicle.v.position;
-        
+
         PointAG newPosition = findNewPosition(vehicle);
 
         if (track.pointWithinTrack(newPosition)) {
             vehicle.v.position = newPosition;
             updateVehicleTravelledWayAngle(vehicle, oldPosition, newPosition, track.getTrackCentre());
         }
-    }
-    
-    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG oldPosition, PointAG newPosition, PointAG trackCenter)
-    {
-         LineSection lsWithOldPos;
-         lsWithOldPos = new LineSection(trackCenter, oldPosition);
-         LineSection lsWithNewPos = new LineSection(trackCenter, newPosition);
-         
-         double angleWithOldPos = General.inclinationAngle(lsWithOldPos);
-         double angleWithNewPos = General.inclinationAngle(lsWithNewPos);
-         
-         vehicle.travelledWayAngle += angleWithNewPos - angleWithOldPos;
     }
 
     public PointAG getVehiclePosition(int vehicleId) {
@@ -61,13 +48,13 @@ public class Board {
 
     private PointAG findNewPosition(Vehicle vehicle) {
         float moveX, moveY, factorX, factorY;
-        
+
         double cos = Math.cos(vehicle.v.angle);
         double sin = Math.sin(vehicle.v.angle);
-                
+
         factorX = General.roundToFloat(cos, ROUNDING_PRECISION);
         factorY = General.roundToFloat(sin, ROUNDING_PRECISION);
-        
+
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
 
@@ -76,4 +63,16 @@ public class Board {
 
         return new PointAG(newPositionX, newPositionY);
     }
+
+    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG oldPosition, PointAG newPosition, PointAG trackCenter) {
+        LineSection lsWithOldPos;
+        lsWithOldPos = new LineSection(trackCenter, oldPosition);
+        LineSection lsWithNewPos = new LineSection(trackCenter, newPosition);
+
+        double angleWithOldPos = General.inclinationAngle(lsWithOldPos);
+        double angleWithNewPos = General.inclinationAngle(lsWithNewPos);
+
+        vehicle.travelledWayAngle += angleWithNewPos - angleWithOldPos;
+    }
+
 }

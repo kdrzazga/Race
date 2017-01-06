@@ -31,7 +31,14 @@ public class KeyboardInputTest {
     private static final KeyEvent noActionKey1 = new KeyEvent(mockEventSource, 0, 0, 0, KeyEvent.VK_DEAD_TILDE);
     private static final KeyEvent noActionKey2 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'p', 'p');
     private static final KeyEvent noActionKey3 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'W', 'W');
+    
+    public static void main(String args[]) {
+        testForPlayer1();
+        testForBothPlayers();
 
+        System.out.println("No exception occured. All tests PASSED");
+    }
+    
     private static void init() {
         mockBoard = Mocks.createBoardWithNVehiclesOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
@@ -102,10 +109,4 @@ public class KeyboardInputTest {
         assertion(player2.v.value, VelocityVector.V_MAX, "testForBothPlayers");
     }
 
-    public static void main(String args[]) {
-        testForPlayer1();
-        testForBothPlayers();
-
-        System.out.println("No exception occured. All tests PASSED");
-    }
 }

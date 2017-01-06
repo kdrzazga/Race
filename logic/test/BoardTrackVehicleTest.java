@@ -44,18 +44,6 @@ public class BoardTrackVehicleTest {
         //test.halfRotation(); -> TODO: to be moved to graphical tsts
     }
 
-    private void givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition(double angle, PointAG inputPos, PointAG expectedPos) {
-        VelocityVector v2 = new VelocityVector(2, angle, inputPos);
-        Vehicle veh2 = new Vehicle(1);
-        veh2.v = v2;
-        board.vehicles.clear();
-        board.vehicles.add(veh2);
-        board.moveVehicle(0);
-
-        assertion(veh2.v.position.x == expectedPos.x, "moveVehicleTest");
-        assertion(veh2.v.position.y == expectedPos.y, "moveVehicleTest");
-    }
-
     public void halfRotation() {
         board.vehicles.get(0).v.value = 15;
 
@@ -121,44 +109,43 @@ public class BoardTrackVehicleTest {
         for (Vehicle vehicle : testBoard.vehicles) {
             assertion(vehicle.v.position.x, startLineX, methodName);
             testResultMessage.append(" ").append(vehicle.v.position).append(" ");
-            
+
         }
 
         testResultMessage.append(methodName).append(" passed for ");
         System.out.println(testResultMessage);
-        
+
     }
 
-        public void givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
+    public void givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
         String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther";
 
         StringBuilder testResultMessage = new StringBuilder();
         testResultMessage.append(methodName).append(" passed for ");
         Track rectTrack = Mocks.create_50_50__350_250_RectangularTrack();
         Board testBoard = new Board(numberOfVehicles, rectTrack);
-        
-        double distanceetweenVehicle1And2 
+
+        double distanceetweenVehicle1And2
                 = this.getLineConnectingVehicles(testBoard.vehicles.get(0), testBoard.vehicles.get(1)).getLength();
-        
+
         for (int i = 2; i < testBoard.vehicles.size() - 1; i++) {
-            double distanceBetweenNextVehicles 
+            double distanceBetweenNextVehicles
                     = getLineConnectingVehicles(testBoard.vehicles.get(i), testBoard.vehicles.get(i + 1)).getLength();
-            
+
             assertion(distanceetweenVehicle1And2, distanceBetweenNextVehicles, methodName);
             testResultMessage.append(testBoard.vehicles.get(i).v.position).append(" ");
         }
-        
+
         System.out.println(testResultMessage);
     }
-    
-    private LineSection getLineConnectingVehicles(Vehicle vehicle1, Vehicle vehicle2)
-    {
+
+    private LineSection getLineConnectingVehicles(Vehicle vehicle1, Vehicle vehicle2) {
         PointAG vehicle1Position = vehicle1.v.position;
         PointAG vehicle2Position = vehicle2.v.position;
-        
-        return new LineSection(vehicle1Position, vehicle2Position);        
+
+        return new LineSection(vehicle1Position, vehicle2Position);
     }
-        
+
     private void moveVehicle31times() {
 
         int ITERATIONS = 31;
@@ -174,6 +161,18 @@ public class BoardTrackVehicleTest {
 
     private void updateVehicleTravelledWayAngleTest() {
         throw new RuntimeException("Not implemented yet");
+    }
+
+    private void givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition(double angle, PointAG inputPos, PointAG expectedPos) {
+        VelocityVector v2 = new VelocityVector(2, angle, inputPos);
+        Vehicle veh2 = new Vehicle(1);
+        veh2.v = v2;
+        board.vehicles.clear();
+        board.vehicles.add(veh2);
+        board.moveVehicle(0);
+
+        assertion(veh2.v.position.x == expectedPos.x, "moveVehicleTest");
+        assertion(veh2.v.position.y == expectedPos.y, "moveVehicleTest");
     }
 
 }

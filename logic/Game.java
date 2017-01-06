@@ -26,7 +26,7 @@ public class Game extends Thread {
     public Board board;
 
     public void findWinner() {
-
+        System.out.println (" findWinner() - Not implemented yet");
     }
 
     private void gameInit(int numberOfVehicles) {
