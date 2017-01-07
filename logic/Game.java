@@ -16,17 +16,23 @@ public class Game extends Thread {
 
         this.board = new Board(numberOfVehicles, track);
         this.gameInit(numberOfVehicles);
+        this.gameInit2();
     }
 
     public Game(Board board) {
         this.board = board;
         this.gameInit(board.vehicles.size());
+        this.gameInit2();
+    }
+
+    public Game() {
+        this.gameInit2();
     }
 
     public Board board;
 
     public void findWinner() {
-        System.out.println (" findWinner() - Not implemented yet");
+        System.out.println(" findWinner() - Not implemented yet");
     }
 
     private void gameInit(int numberOfVehicles) {
@@ -36,8 +42,10 @@ public class Game extends Thread {
                     + MAX_VEHICLES + " available");
         }
 
-        this.gameRunning = false;
+    }
 
+    private void gameInit2() {
+        this.gameRunning = false;
         this.start();
     }
 
@@ -47,7 +55,10 @@ public class Game extends Thread {
             try {
                 Thread.sleep(GAME_FRAME_MS);
 
-                System.out.print("_" + board.vehicles.size());
+                System.out.print(".");
+                if (board != null) {
+                    System.out.print(board.vehicles.size());
+                }
 
                 if (this.gameRunning) {
                     for (int i = 0; i < board.vehicles.size(); i++) {
@@ -74,5 +85,4 @@ public class Game extends Thread {
             this.gameRunning = gameRunning;
         }
     }
-
 }

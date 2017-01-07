@@ -9,12 +9,12 @@ import presentation.MainGameScreen;
 public class GameTest extends javax.swing.JFrame {
 
     private MainGameScreen gameScreen;
+    private Game game;
 
     public GameTest() {
         initComponents();
         initComponents2();
-    }
-    
+    }   
     
     public static void main(String args[]) {
         try {
@@ -152,6 +152,8 @@ public class GameTest extends javax.swing.JFrame {
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
+        
+        this.game = new Game();
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
 
@@ -170,7 +172,8 @@ public class GameTest extends javax.swing.JFrame {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
         }
 
-        Game game = new Game(board);
+        
+        game.board = board;
 
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
 

@@ -33,7 +33,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         pnlInfo = new javax.swing.JPanel();
         pnlBoard = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
@@ -99,14 +99,14 @@ public class MainGameScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initComponents2() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Board brd = game.board;
         
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
 
-        this.addWindowListener(new MainGameScreenAdapter(introFrame));
+        this.addWindowListener(new MainGameScreenAdapter(introFrame, this.game));
     }
 
 }
