@@ -1,15 +1,15 @@
-package presentation.test;
+package presentation;
 
 import javax.swing.JFrame;
 import logic.Board;
 import logic.Game;
-import presentation.Draw2d;
-import presentation.KeyboardInput;
+import logic.IGraphicalOutput;
+import presentation.test.GameTest;
 
-class MainGameScreen extends javax.swing.JFrame {
+public class MainGameScreen extends javax.swing.JFrame {
 
     private final GameTest introFrame;
-    private final Draw2d draw2d;
+    private final IGraphicalOutput drawOutput;
     public final Game game;
 
     public MainGameScreen(GameTest introFrame, Game game) {
@@ -21,7 +21,7 @@ class MainGameScreen extends javax.swing.JFrame {
         initComponents();
         initComponents2();
 
-        this.draw2d = new Draw2d(this.pnlBoard.getGraphics());
+        this.drawOutput = new Draw2d(this.pnlBoard.getGraphics());
         Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }
@@ -86,7 +86,7 @@ class MainGameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void draw() {
-        draw2d.drawTrack(game.board.track);
+        drawOutput.drawTrack(game.board.track);
     }
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
@@ -102,6 +102,7 @@ class MainGameScreen extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Board brd = game.board;
+        
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
 

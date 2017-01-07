@@ -1,6 +1,7 @@
 package presentation;
 
 import logic.Board;
+import logic.IGraphicalOutput;
 import logic.Track;
 import logic.Vehicle;
 

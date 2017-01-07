@@ -1,8 +1,4 @@
-package presentation;
-
-import logic.Board;
-import logic.Track;
-import logic.Vehicle;
+package logic;
 
 public interface IGraphicalOutput {
 

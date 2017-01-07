@@ -1,4 +1,6 @@
-package presentation.test;
+package presentation;
+
+import presentation.test.GameTest;
 
 class MainGameScreenAdapter extends java.awt.event.WindowAdapter {
 
@@ -14,3 +16,4 @@ class MainGameScreenAdapter extends java.awt.event.WindowAdapter {
         this.introFrame.setVisible(true);
     }
 }
+ 

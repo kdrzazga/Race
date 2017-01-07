@@ -6,6 +6,7 @@ import java.awt.Point;
 import libs.math2.LineSection;
 import logic.Board;
 import logic.Game;
+import logic.IGraphicalOutput;
 import logic.Track;
 import logic.Vehicle;
 

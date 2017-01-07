@@ -39,6 +39,35 @@ public class KeyboardInputTest {
         System.out.println("No exception occured. All tests PASSED");
     }
     
+    private static void testForPlayer1() {
+        init();
+        givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(player1, player1Accelerate);
+        givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(player1, player1SlowDown);
+    }
+
+    private static void testForBothPlayers() {
+        init();
+
+        ki.keyPressed(player1Accelerate);
+        assertion(player1.v.value, 1, "testForBothPlayers");
+        ki.keyPressed(player2Accelerate);
+        assertion(player2.v.value, 1, "testForBothPlayers");
+        ki.keyPressed(noActionKey1);
+        assertion(player1.v.value, 1, "testForBothPlayers");
+        assertion(player2.v.value, 1, "testForBothPlayers");
+
+        for (int i = 2; i < 10; i++) {
+            ki.keyPressed(noActionKey2);
+            ki.keyPressed(player1SlowDown);
+            ki.keyPressed(player2Accelerate);
+        }
+
+        ki.keyPressed(noActionKey3);
+        assertion(player1.v.value, VelocityVector.V_MIN, "testForBothPlayers");
+        assertion(player2.v.value, VelocityVector.V_MAX, "testForBothPlayers");
+    }
+
+    
     private static void init() {
         mockBoard = Mocks.createBoardWithNVehiclesOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
@@ -81,32 +110,5 @@ public class KeyboardInputTest {
         System.out.println("slowDownToStop passed for " + player.toString());
     }
 
-    private static void testForPlayer1() {
-        init();
-        givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(player1, player1Accelerate);
-        givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(player1, player1SlowDown);
-    }
-
-    private static void testForBothPlayers() {
-        init();
-
-        ki.keyPressed(player1Accelerate);
-        assertion(player1.v.value, 1, "testForBothPlayers");
-        ki.keyPressed(player2Accelerate);
-        assertion(player2.v.value, 1, "testForBothPlayers");
-        ki.keyPressed(noActionKey1);
-        assertion(player1.v.value, 1, "testForBothPlayers");
-        assertion(player2.v.value, 1, "testForBothPlayers");
-
-        for (int i = 2; i < 10; i++) {
-            ki.keyPressed(noActionKey2);
-            ki.keyPressed(player1SlowDown);
-            ki.keyPressed(player2Accelerate);
-        }
-
-        ki.keyPressed(noActionKey3);
-        assertion(player1.v.value, VelocityVector.V_MIN, "testForBothPlayers");
-        assertion(player2.v.value, VelocityVector.V_MAX, "testForBothPlayers");
-    }
-
+    
 }
