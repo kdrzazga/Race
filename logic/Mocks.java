@@ -22,19 +22,13 @@ public class Mocks {
         }
     };
 
-    public static Vehicle createVehicle0At100_100() {
-        Vehicle result = new Vehicle(0, 1, new PointAG(100, 100));
+    public static Vehicle createVehicleAtPosition(int id, float x, float y) {
+        Vehicle result = new Vehicle(id, 1, new PointAG(x, y));
         result.active = true;
 
         return result;
     }
 
-    public static Vehicle createVehicle1At100_120() {
-        Vehicle result = new Vehicle(1, 1, new PointAG(100, 120));
-        result.active = true;
-
-        return result;
-    }
 
     public static Board createBoardWithNVehiclesOnTrack(int numberOfVehicles, TrackType trackType) {
         Board result = new Board();
@@ -61,8 +55,8 @@ public class Mocks {
 
         result.track = create_50_50__350_250_RectangularTrack();
 
-        result.vehicles.add(createVehicle0At100_100());
-        result.vehicles.add(createVehicle1At100_120());
+        result.vehicles.add(createVehicleAtPosition(0, 100, 100));
+        result.vehicles.add(createVehicleAtPosition(1, 100, 120));
 
         return result;
     }

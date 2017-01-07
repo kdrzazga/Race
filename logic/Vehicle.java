@@ -25,8 +25,8 @@ public class Vehicle {
         this.id = id;
         this.v = new VelocityVector(speed, 0.0, position);
         this.active = active;
-    }    
-    
+    }
+
     public int getId() {
         return id;
     }
@@ -53,5 +53,11 @@ public class Vehicle {
         if (this.active) {
             this.v.slowDown();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "veh " + id + " at " + this.v.position + " speed = " 
+                + this.v.value + " travelled =" + this.travelledWayAngle;
     }
 }

@@ -148,7 +148,7 @@ public class BoardTrackVehicleTest {
 
     private void moveVehicle31times() {
 
-        int ITERATIONS = 31;
+        final int ITERATIONS = 31;
 
         for (int i = 0; i < ITERATIONS; i++) {
 
@@ -171,8 +171,7 @@ public class BoardTrackVehicleTest {
         board.vehicles.add(veh2);
         board.moveVehicle(0);
 
-        assertion(veh2.v.position.x == expectedPos.x, "moveVehicleTest");
-        assertion(veh2.v.position.y == expectedPos.y, "moveVehicleTest");
+        assertion(veh2.v.position.x == expectedPos.x, "givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition");
+        assertion(veh2.v.position.y == expectedPos.y, "givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition");
     }
-
 }
