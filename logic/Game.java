@@ -63,7 +63,7 @@ public class Game extends Thread {
                 if (this.gameRunning) {
                     for (int i = 0; i < board.vehicles.size(); i++) {
                         board.moveVehicle(i);
-                        System.out.println(board.vehicles.get(0).v.position);
+                        System.out.print(board.vehicles.get(0).v.position + " ");
                     }
 
                     this.findWinner();

@@ -170,9 +170,7 @@ public class GameTest extends javax.swing.JFrame {
         } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
-        }
-
-        
+        }        
         game.board = board;
 
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
@@ -183,7 +181,6 @@ public class GameTest extends javax.swing.JFrame {
             gameScreen = new MainGameScreen(this, game);
             gameScreen.setVisible(true);
         }
-
     }//GEN-LAST:event_btnStartActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,7 +21,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         initComponents();
         initComponents2();
 
-        this.drawOutput = new Draw2d(this.pnlBoard.getGraphics());
+        this.drawOutput = new Draw2d(this.pnlBoard);
         Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }

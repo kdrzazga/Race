@@ -1,5 +1,6 @@
 package presentation;
 
+import javax.swing.JPanel;
 import logic.Board;
 import logic.IGraphicalOutput;
 import logic.Track;
@@ -8,11 +9,13 @@ import logic.Vehicle;
 /*
 uses OpenGL
 */
-public class Draw3d implements IGraphicalOutput{
+public final class Draw3d implements IGraphicalOutput{
 
-    public Draw3d()
+    private JPanel drawablePanel;
+    
+    public Draw3d(JPanel drawablaPanel)
     {
-        throw new RuntimeException("Not implemented yet");
+        this.setPanelToDrawOn(drawablePanel);
     }
 
     @Override
@@ -29,4 +32,10 @@ public class Draw3d implements IGraphicalOutput{
     public void drawVehicle(Vehicle vehicle) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void setPanelToDrawOn(JPanel drawablePanel) {
+       this.drawablePanel = drawablePanel;
+    }
+
 }
