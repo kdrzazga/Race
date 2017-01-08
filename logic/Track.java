@@ -1,7 +1,6 @@
 package logic;
 
 import java.awt.Point;
-import java.util.Arrays;
 import libs.math2.*;
 
 public class Track {
@@ -14,7 +13,7 @@ public class Track {
         this.outerBound = new PolygonAG();
     }
 
-    public boolean pointWithinTrack(PointAG point) {
+    public boolean isPointWithinTrack(PointAG point) {
         return !this.innerBound.convertToPolygon().contains(point.convertToPoint())
                 && this.outerBound.convertToPolygon().contains(point.convertToPoint());
     }

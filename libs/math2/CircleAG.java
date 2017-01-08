@@ -15,8 +15,8 @@ import logic.Board;
             this.points = new PolygonAG();
             
             for (double angle = 0; angle < 2 * Math.PI; angle += 2 * Math.PI / numberOfPoints) {                
-                float x  = center.x + radius * General.roundToFloat(Math.cos(angle), Board.ROUNDING_PRECISION);                        
-                float y =  center.y + radius * General.roundToFloat(Math.sin(angle), Board.ROUNDING_PRECISION);
+                float x  = center.x + radius * General.roundToFloat(Math.cos(angle), General.ROUNDING_PRECISION);                        
+                float y =  center.y + radius * General.roundToFloat(Math.sin(angle), General.ROUNDING_PRECISION);
                 
                 points.addPointAG(x, y);
             }

@@ -12,6 +12,13 @@ public class Point3d{
         this.z = z;
     }
     
+    public Point3d(PointAG point2d, float z)
+    {
+        this.x = point2d.x;
+        this.y = point2d.y;
+        this.z = z;
+    }
+    
     public void move(float move_x, float move_y, float move_z)
     {
         this.x += move_x;

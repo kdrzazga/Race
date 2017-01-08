@@ -1,6 +1,5 @@
 package presentation;
 
-import javax.swing.JFrame;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;

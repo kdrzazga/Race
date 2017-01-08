@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class General {
+    
+    public static final int ROUNDING_PRECISION = 4;
 
     public static double roundToDouble(double value, int places) {
         BigDecimal bd = new BigDecimal(value);

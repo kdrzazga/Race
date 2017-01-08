@@ -155,7 +155,7 @@ public class BoardTrackVehicleTest {
             board.moveVehicle(0);
 
             //all the time vehicle should be on the track
-            assertion(track.pointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
+            assertion(track.isPointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
         }
     }
 
