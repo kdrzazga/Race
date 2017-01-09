@@ -85,7 +85,7 @@ public class MainGameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void draw() {
-        drawOutput.drawTrack(game.board.track);
+        drawOutput.draw(game.board.track);
     }
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved

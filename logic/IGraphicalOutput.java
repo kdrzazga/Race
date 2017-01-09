@@ -4,11 +4,11 @@ import javax.swing.JPanel;
 
 public interface IGraphicalOutput {
 
-    public void drawBoard(Board board);
+    public void draw(Board board);
     
-    public void drawTrack(Track track);    
+    public void draw(Track track);    
     
-    public void drawVehicle(Vehicle vehicle);
+    public void draw(Vehicle vehicle);
     
     public void setPanelToDrawOn(JPanel drawablePanel);
     

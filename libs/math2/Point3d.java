@@ -26,4 +26,8 @@ public class Point3d{
         this.z += move_z;
     }
 
+    public void move(Point3d vector)
+    {
+        this.move(vector.x, vector.y, vector.z);
+    }
 }

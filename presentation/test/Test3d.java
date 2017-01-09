@@ -117,11 +117,13 @@ public class Test3d {
         activePanel.setLayout(new BorderLayout(0, 0));
 
         displayCanvas = new Canvas() {
+            @Override
             public void addNotify() {
                 super.addNotify();
-                startMainThread();
+                startMainThread(); 
             }
 
+            @Override
             public void removeNotify() {
                 stopMainGameActionLoop();
                 super.removeNotify();

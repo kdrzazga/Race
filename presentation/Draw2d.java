@@ -28,13 +28,13 @@ public final class Draw2d implements IGraphicalOutput {
     }
 
     @Override
-    public void drawBoard(Board board) {
-        drawTrack(board.track);
+    public void draw(Board board) {
+        draw(board.track);
         drawAllVehicles(board);
     }
 
     @Override
-    public void drawTrack(Track track) {
+    public void draw(Track track) {
         g.setColor(TRACK_COLOR);
         g.drawPolygon(track.outerBound.convertToPolygon());
         g.drawPolygon(track.innerBound.convertToPolygon());
@@ -49,12 +49,12 @@ public final class Draw2d implements IGraphicalOutput {
 
     public void drawAllVehicles(Board board) {
         board.vehicles.forEach((vehicle) -> {
-            drawVehicle(vehicle);
+            draw(vehicle);
         });
     }
 
     @Override
-    public void drawVehicle(Vehicle vehicle) {
+    public void draw(Vehicle vehicle) {
         eraseSurrounding(vehicle);
 
         int maxColorIndex = VEHICLE_COLORS.length - 1;
