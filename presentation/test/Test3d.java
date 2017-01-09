@@ -18,58 +18,50 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
-/**
- * <p>
- * </p> @author Brian Matzon <brian@matzon.dk>
- */
+// original author Brian Matzon <brian@matzon.dk>
 public class Test3d {
 
-    private JFrame frame;
-    private final JPanel panel1 = new JPanel();
-    private final JPanel panel2 = new JPanel();
-    private final JTextPane textPane = new JTextPane();
-
-    /**
-     * The Canvas where the LWJGL Display is added
-     */
-    Canvas display_parent;
-
-    /**
-     * Thread which runs the main game loop
-     */
+    Canvas displayCanvas;
     Thread gameThread;
-
-    /**
-     * is the game loop running
-     */
     boolean running;
 
+    private JFrame frame;
+    private final JPanel infoPanel = new JPanel();
+    private final JPanel activePanel = new JPanel();
+    private final JTextPane infoPane = new JTextPane();
+
+    public static void main(String[] args) {
+        Test3d test3d = new Test3d();
+    }
+
     public Test3d() {
+        this.initializeFrame();
     }
 
     /**
      * Once the Canvas is created its add notify method will call this method to
      * start the LWJGL Display and game loop in another thread.
      */
-    public void startLWJGL() {
+    public void startMainThread() {
         gameThread = new Thread() {
+            @Override
             public void run() {
                 running = true;
                 try {
-                    Display.setParent(display_parent);
+                    Display.setParent(displayCanvas);
                     //Display.setVSyncEnabled(true);
                     Display.create();
                     initGL();
                 } catch (LWJGLException e) {
                     e.printStackTrace();
                 }
-                gameLoop();
+                performMainGameAction();
             }
         };
         gameThread.start();
     }
 
-    protected void gameLoop() {
+    protected void performMainGameAction() {
         while (running) {
             System.out.println(".");
 
@@ -96,7 +88,7 @@ public class Test3d {
      * destoryed. The main thread will wait for the Display.destroy() to
      * complete
      */
-    private void stopLWJGL() {
+    private void stopMainGameActionLoop() {
         running = false;
         try {
             gameThread.join();
@@ -105,49 +97,41 @@ public class Test3d {
         }
     }
 
-    private void execute() {
-        frame.setVisible(true);
-    }
-
-    private void initialize() {
+    private void initializeFrame() {
         frame = new JFrame();
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                frame.remove(display_parent);
+                frame.remove(displayCanvas);
                 frame.dispose();
             }
         });
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
-        frame.getContentPane().add(panel1);
-        panel1.setLayout(null);
-        textPane.setBounds(10, 5, 124, 20);
+        frame.getContentPane().add(infoPanel);
+        infoPanel.setLayout(null);
+        infoPane.setBounds(10, 5, 124, 20);
 
-        panel1.add(textPane);
-        frame.getContentPane().add(panel2);
-        panel2.setLayout(new BorderLayout(0, 0));
+        infoPanel.add(infoPane);
+        frame.getContentPane().add(activePanel);
+        activePanel.setLayout(new BorderLayout(0, 0));
 
-        display_parent = new Canvas() {
+        displayCanvas = new Canvas() {
             public void addNotify() {
                 super.addNotify();
-                startLWJGL();
+                startMainThread();
             }
 
             public void removeNotify() {
-                stopLWJGL();
+                stopMainGameActionLoop();
                 super.removeNotify();
             }
         };
-        display_parent.setFocusable(true);
-        display_parent.requestFocus();
-        display_parent.setIgnoreRepaint(true);
-        panel2.add(display_parent);
+        displayCanvas.setFocusable(true);
+        displayCanvas.requestFocus();
+        displayCanvas.setIgnoreRepaint(true);
+        activePanel.add(displayCanvas);
+        frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        Test3d sit = new Test3d();
-        sit.initialize();
-        sit.execute();
-    }
 }
