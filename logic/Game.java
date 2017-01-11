@@ -86,4 +86,8 @@ public class Game extends Thread {
             this.gameRunning = gameRunning;
         }
     }
+
+    public void setDrawingOutput(IGraphicalOutput drawingOutput) {
+        this.drawingOutput = drawingOutput;
+    }
 }
