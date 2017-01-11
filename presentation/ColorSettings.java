@@ -9,8 +9,9 @@ public class ColorSettings {
         Color.MAGENTA, Color.ORANGE, Color.CYAN,
         new Color(162, 42, 42)};//brown
 
-    public static final float OPEN_GL_COLORS[][] = {{1, 0, 0}, {0, 0, 1}, {0, 1, 0},
-    {1, 0, 1}, {1, 0, 0}, {1, 0, 0}, {0, 0, 1}
+    public static final float OPEN_GL_COLORS[][] = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
+    {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f},
+     {1f, 0.37f, 0f}
     };
 
     public static final Color TRACK_COLOR = Color.BLACK;

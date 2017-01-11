@@ -101,11 +101,14 @@ public class MainGameScreen extends javax.swing.JFrame {
         //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         Board brd = game.board;
-        
+
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
 
         this.addWindowListener(new MainGameScreenAdapter(introFrame, this.game));
     }
 
+    public javax.swing.JPanel getPnlBoard() {
+        return pnlBoard;
+    }
 }

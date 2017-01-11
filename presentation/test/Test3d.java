@@ -1,15 +1,7 @@
 package presentation.test;
 
-//<editor-fold defaultstate="collapsed" desc=" import OpenGL libraries">
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-// </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc=" import AWT + Swing libs">
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.GridLayout;
@@ -19,10 +11,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-// <editor-fold>
-import miscallenous.Mocks;
-import logic.Vehicle;
-import presentation.Draw3d;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import static org.lwjgl.opengl.GL11.glColor3f;
 
 // original author Brian Matzon <brian@matzon.dk>
 public class Test3d {
@@ -32,11 +26,9 @@ public class Test3d {
     boolean running;
 
     private JFrame frame;
-    private JPanel infoPanel;
-    private JPanel activePanel;
-    private JTextPane infoPane;
-    private Vehicle vehicleToDraw;
-    private Draw3d draw3d;
+    private final JPanel infoPanel = new JPanel();
+    private final JPanel activePanel = new JPanel();
+    private final JTextPane infoPane = new JTextPane();
 
     public static void main(String[] args) {
         Test3d test3d = new Test3d();
@@ -44,7 +36,6 @@ public class Test3d {
 
     public Test3d() {
         this.initializeFrame();
-        this.initializeGlObjects();
     }
 
     /**
@@ -57,9 +48,9 @@ public class Test3d {
             public void run() {
                 running = true;
                 try {
-                    Display.setParent(displayCanvas);
                     //Display.setVSyncEnabled(true);
-                    Display.create();
+                    initGL();
+                    setupProjectionMatrix();
                 } catch (LWJGLException e) {
                     e.printStackTrace();
                 }
@@ -69,24 +60,16 @@ public class Test3d {
         gameThread.start();
     }
 
-    private void performMainGameAction() {
+    protected void performMainGameAction() {
+        int i = 0;
         while (running) {
-            System.out.println(".");
+            System.out.println(i++);
+
+            Display.update();
 
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-                System.out.print("_");
-                glClearColor(0f, 0f, 0.2f, 0f);
-                glColor3f(1f, 0, 0);
-               
-                glBegin(GL_TRIANGLES);
-                    glVertex2f(80, 30);
-                    glVertex2f(130, 130);
-                    glVertex2f(10, 130);
-                glEnd();
-
-                this.draw3d.draw(vehicleToDraw);
-                Display.update();
-
+                draw();
+                 glClearColor(1f, 0f, 1f, 0f);
             } else {
                 glClearColor(1f, 1f, 1f, 0f);
             }
@@ -97,6 +80,32 @@ public class Test3d {
         Display.destroy();
     }
 
+    private void draw() {
+        
+        glColor3f(1f, 0, 1f);
+        glBegin(GL_TRIANGLES);
+            glVertex2f(80, 30);
+            glVertex2f(130, 130);
+            glVertex2f(10, 130);
+        glEnd();
+        Display.sync(10);
+        //glClearColor(1f, 0, 0, 0);
+        System.out.println("magenta");
+    }
+
+    private void initGL() throws LWJGLException {
+        Display.setParent(displayCanvas);
+        Display.setDisplayMode(new DisplayMode(640, 480));
+        Display.create();
+    }
+    private static void setupProjectionMatrix() {
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity(); // Resets any previous projection matrices
+        final double nearValue = 100;
+        final double farValue = -10;
+        glOrtho(0, 640, 480, 0, nearValue, farValue);
+        glMatrixMode(GL_MODELVIEW);
+    }
     /**
      * Tell game loop to stop running, after which the LWJGL Display will be
      * destoryed. The main thread will wait for the Display.destroy() to
@@ -111,16 +120,7 @@ public class Test3d {
         }
     }
 
-    private void initializeGlObjects() {
-        vehicleToDraw = Mocks.createVehicleAtPosition(0, 4, 4);
-        draw3d = new Draw3d(activePanel);
-    }
-
     private void initializeFrame() {
-        infoPanel = new JPanel();
-        activePanel = new JPanel();
-        infoPane = new JTextPane();
-
         frame = new JFrame();
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -129,7 +129,7 @@ public class Test3d {
                 frame.dispose();
             }
         });
-        frame.setBounds(100, 100, 800, 600);
+        frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
         frame.getContentPane().add(infoPanel);
