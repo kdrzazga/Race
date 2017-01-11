@@ -10,32 +10,32 @@ public class Assert {
 
     public static void assertion(float actual, float expected, String methodName) {
         if (actual != expected) {
-            throw new RuntimeException("Assertion failed in " + methodName 
-            +" act=" + actual + " exp=" + expected);
-        }
-    }
-    
-    public static void assertion(double actual, double expected, String methodName) {
-        if (actual != expected) {
-            throw new RuntimeException("Assertion failed in " + methodName 
-            +" act=" + actual + " exp=" + expected);
-        }
-    }
-    
-        public static void assertion(int actual, int expected, String methodName) {
-        if (actual != expected) {
-            throw new RuntimeException("Assertion failed in " + methodName 
-            +" act=" + actual + " exp=" + expected);
+            throw new RuntimeException("Assertion failed in " + methodName
+                    + " act=" + actual + " exp=" + expected);
         }
     }
 
-        public static void assertDifferenceNotGreaterThan(float value1, float value2
-                , float expectedMaxDifference, String methodName)
-        {
-            float difference = Math.abs(value1 - value2);
-            
-            if (difference > expectedMaxDifference)
-                throw new RuntimeException("Assertion failed in " + methodName 
-            +" act diff=" + difference + " expected difference = " + expectedMaxDifference);
+    public static void assertion(double actual, double expected, String methodName) {
+        if (actual != expected) {
+            throw new RuntimeException("Assertion failed in " + methodName
+                    + " act=" + actual + " exp=" + expected);
         }
+    }
+
+    public static void assertion(int actual, int expected, String methodName) {
+        if (actual != expected) {
+            throw new RuntimeException("Assertion failed in " + methodName
+                    + " act=" + actual + " exp=" + expected);
+        }
+    }
+
+    public static void assertDifferenceNotGreaterThan(float value1, float value2,
+             float expectedMaxDifference, String methodName) {
+        float difference = Math.abs(value1 - value2);
+
+        if (difference > expectedMaxDifference) {
+            throw new RuntimeException("Assertion failed in " + methodName
+                    + " act diff=" + difference + " expected difference = " + expectedMaxDifference);
+        }
+    }
 }

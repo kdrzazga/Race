@@ -1,9 +1,15 @@
 package presentation.test;
 
+//<editor-fold defaultstate="collapsed" desc=" import OpenGL libraries">
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc=" import AWT + Swing libs">
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.GridLayout;
@@ -13,10 +19,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
+// <editor-fold>
+import miscallenous.Mocks;
+import logic.Vehicle;
+import presentation.Draw3d;
 
 // original author Brian Matzon <brian@matzon.dk>
 public class Test3d {
@@ -26,9 +32,11 @@ public class Test3d {
     boolean running;
 
     private JFrame frame;
-    private final JPanel infoPanel = new JPanel();
-    private final JPanel activePanel = new JPanel();
-    private final JTextPane infoPane = new JTextPane();
+    private JPanel infoPanel;
+    private JPanel activePanel;
+    private JTextPane infoPane;
+    private Vehicle vehicleToDraw;
+    private Draw3d draw3d;
 
     public static void main(String[] args) {
         Test3d test3d = new Test3d();
@@ -36,6 +44,7 @@ public class Test3d {
 
     public Test3d() {
         this.initializeFrame();
+        this.initializeGlObjects();
     }
 
     /**
@@ -51,7 +60,6 @@ public class Test3d {
                     Display.setParent(displayCanvas);
                     //Display.setVSyncEnabled(true);
                     Display.create();
-                    initGL();
                 } catch (LWJGLException e) {
                     e.printStackTrace();
                 }
@@ -61,15 +69,24 @@ public class Test3d {
         gameThread.start();
     }
 
-    protected void performMainGameAction() {
+    private void performMainGameAction() {
         while (running) {
             System.out.println(".");
 
-            Display.update();
-
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-                glClearColor(1f, 0, 0, 0);
-                System.out.println("Pigs in space!");
+                System.out.print("_");
+                glClearColor(0f, 0f, 0.2f, 0f);
+                glColor3f(1f, 0, 0);
+               
+                glBegin(GL_TRIANGLES);
+                    glVertex2f(80, 30);
+                    glVertex2f(130, 130);
+                    glVertex2f(10, 130);
+                glEnd();
+
+                this.draw3d.draw(vehicleToDraw);
+                Display.update();
+
             } else {
                 glClearColor(1f, 1f, 1f, 0f);
             }
@@ -78,9 +95,6 @@ public class Test3d {
             Display.sync(10);
         }
         Display.destroy();
-    }
-
-    protected void initGL() {
     }
 
     /**
@@ -97,15 +111,25 @@ public class Test3d {
         }
     }
 
+    private void initializeGlObjects() {
+        vehicleToDraw = Mocks.createVehicleAtPosition(0, 4, 4);
+        draw3d = new Draw3d(activePanel);
+    }
+
     private void initializeFrame() {
+        infoPanel = new JPanel();
+        activePanel = new JPanel();
+        infoPane = new JTextPane();
+
         frame = new JFrame();
         frame.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 frame.remove(displayCanvas);
                 frame.dispose();
             }
         });
-        frame.setBounds(100, 100, 450, 300);
+        frame.setBounds(100, 100, 800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new GridLayout(0, 2, 0, 0));
         frame.getContentPane().add(infoPanel);
@@ -120,7 +144,7 @@ public class Test3d {
             @Override
             public void addNotify() {
                 super.addNotify();
-                startMainThread(); 
+                startMainThread();
             }
 
             @Override

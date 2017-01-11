@@ -2,8 +2,8 @@ package presentation.test;
 
 import logic.Board;
 import logic.Game;
-import logic.Mocks;
-import logic.Mocks.TrackType;
+import miscallenous.Mocks;
+import miscallenous.Mocks.TrackType;
 import presentation.MainGameScreen;
 
 public class GameTest extends javax.swing.JFrame {
@@ -14,9 +14,10 @@ public class GameTest extends javax.swing.JFrame {
     public GameTest() {
         initComponents();
         initComponents2();
-    }   
-    
+    }
+
     public static void main(String args[]) {
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code">
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -28,12 +29,7 @@ public class GameTest extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             @Override
@@ -42,7 +38,6 @@ public class GameTest extends javax.swing.JFrame {
             }
         });
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -152,7 +147,7 @@ public class GameTest extends javax.swing.JFrame {
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
-        
+
         this.game = new Game();
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -170,7 +165,7 @@ public class GameTest extends javax.swing.JFrame {
         } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
-        }        
+        }
         game.board = board;
 
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
@@ -193,6 +188,6 @@ public class GameTest extends javax.swing.JFrame {
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
-    private TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
-    private TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
+    private final TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
+    private final TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
 }

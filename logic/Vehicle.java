@@ -5,7 +5,7 @@ import libs.math2.PointAG;
 public class Vehicle {
 
     public VelocityVector v;
-    public double travelledWayAngle; //the path that Vehicle has moved is is expressed in angle, not in length (2PI = 1 lap, PI = 0.5 lap etc.)
+    public double travelledWayAngle; //the path that Vehicle has moved is is expressed not in length, but in angle (2PI = 1 lap, PI = 0.5 lap etc.)
     public boolean active;
     private final int id;
 

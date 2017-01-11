@@ -5,7 +5,7 @@ import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import logic.Board;
-import logic.Mocks;
+import miscallenous.Mocks;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;

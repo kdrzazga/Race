@@ -1,8 +1,12 @@
-package logic;
+package miscallenous;
 
 import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
+import logic.Board;
+import logic.Track;
+import logic.Vehicle;
+import logic.VelocityVector;
 
 public class Mocks {
 
@@ -28,7 +32,6 @@ public class Mocks {
 
         return result;
     }
-
 
     public static Board createBoardWithNVehiclesOnTrack(int numberOfVehicles, TrackType trackType) {
         Board result = new Board();

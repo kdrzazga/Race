@@ -10,6 +10,7 @@ public class Game extends Thread {
     public static final int GAME_FRAME_MS = 500;
 
     private boolean gameRunning;
+    private IGraphicalOutput drawingOutput;
     private final Object gameRunningLock = new Object();
 
     public Game(int numberOfVehicles, Track track) {

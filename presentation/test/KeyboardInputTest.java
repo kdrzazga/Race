@@ -8,7 +8,7 @@ import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
-import logic.Mocks;
+import miscallenous.Mocks;
 
 public class KeyboardInputTest {
 
@@ -18,6 +18,7 @@ public class KeyboardInputTest {
     private static Vehicle player2;
 
     private static final Component mockEventSource = new JFrame();
+     //<editor-fold defaultstate="collapsed" desc=" Assign keys to KeyEvents ">
     private static final KeyEvent player1Accelerate = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'w', 'w');
     private static final KeyEvent player1SlowDown = new KeyEvent(mockEventSource, 0, 0, 0, (int) 's', 's');
     private static final KeyEvent player1TurnLeft = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'a', 'a');
@@ -31,7 +32,8 @@ public class KeyboardInputTest {
     private static final KeyEvent noActionKey1 = new KeyEvent(mockEventSource, 0, 0, 0, KeyEvent.VK_DEAD_TILDE);
     private static final KeyEvent noActionKey2 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'p', 'p');
     private static final KeyEvent noActionKey3 = new KeyEvent(mockEventSource, 0, 0, 0, (int) 'W', 'W');
-    
+    //</editor-fold>
+
     public static void main(String args[]) {
         testForPlayer1();
         testForBothPlayers();
@@ -109,6 +111,5 @@ public class KeyboardInputTest {
         assertion(player.v.value, 0, "testForPlayer0");
         System.out.println("slowDownToStop passed for " + player.toString());
     }
-
-    
+   
 }

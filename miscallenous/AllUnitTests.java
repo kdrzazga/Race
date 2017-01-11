@@ -5,5 +5,5 @@ public class AllUnitTests {
     {
         logic.test.BoardTrackVehicleTest.main(args);
         presentation.test.KeyboardInputTest.main(args);
-    }
+    }    
 }

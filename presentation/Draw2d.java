@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JPanel;
@@ -17,11 +16,6 @@ public final class Draw2d implements IGraphicalOutput {
 
     private JPanel drawablePanel;
     private Graphics g;
-    private static final Color[] VEHICLE_COLORS = {Color.RED, Color.BLUE, Color.GREEN,
-        Color.MAGENTA, Color.ORANGE, Color.CYAN,
-        new Color(162, 42, 42)};//brown
-    private static final Color TRACK_COLOR = Color.BLACK;
-    private static Color BOARD_COLOR = Color.LIGHT_GRAY;
 
     public Draw2d(JPanel drawablePanel) {
         this.setPanelToDrawOn(drawablePanel);
@@ -35,7 +29,7 @@ public final class Draw2d implements IGraphicalOutput {
 
     @Override
     public void draw(Track track) {
-        g.setColor(TRACK_COLOR);
+        g.setColor(ColorSettings.TRACK_COLOR);
         g.drawPolygon(track.outerBound.convertToPolygon());
         g.drawPolygon(track.innerBound.convertToPolygon());
 
@@ -56,10 +50,7 @@ public final class Draw2d implements IGraphicalOutput {
     @Override
     public void draw(Vehicle vehicle) {
         eraseSurrounding(vehicle);
-
-        int maxColorIndex = VEHICLE_COLORS.length - 1;
-        Color drawingColor = VEHICLE_COLORS[vehicle.getId() % maxColorIndex];
-        g.setColor(drawingColor);
+        g.setColor(ColorSettings.getVehicleColorById(vehicle.getId()));
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
 
@@ -67,19 +58,15 @@ public final class Draw2d implements IGraphicalOutput {
     }
 
     private void eraseSurrounding(Vehicle vehicle) {
-        g.setColor(BOARD_COLOR);
+        g.setColor(ColorSettings.BOARD_COLOR);
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
         g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
     }
 
-    public static void setBOARD_COLOR(Color aBOARD_COLOR) {
-        BOARD_COLOR = aBOARD_COLOR;
-    }
-
     @Override
     public void setPanelToDrawOn(JPanel drawablePanel) {
-                this.drawablePanel = drawablePanel;
+        this.drawablePanel = drawablePanel;
         this.g = this.drawablePanel.getGraphics();
     }
 
