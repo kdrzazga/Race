@@ -6,18 +6,19 @@ import logic.IGraphicalOutput;
 import miscallenous.Mocks;
 import miscallenous.Mocks.TrackType;
 import presentation.Draw2d;
+import presentation.Draw3d;
 import presentation.MainGameScreen;
 
 public class GameTest extends javax.swing.JFrame {
-    
+
     private MainGameScreen gameScreen;
     private Game game;
-    
+
     public GameTest() {
         initComponents();
         initComponents2();
     }
-    
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code">
         try {
@@ -36,7 +37,7 @@ public class GameTest extends javax.swing.JFrame {
             new GameTest().setVisible(true);
         });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,46 +137,45 @@ public class GameTest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponents2() {
-        
+
         cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
             circularTrackType.toString()
         }));
-        
+
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
-        
+
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        gameScreen = new MainGameScreen(this);
+        gameScreen.setVisible(true);
         
         IGraphicalOutput graphics;
+        String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
+        if (selectedGraphics.equals("2D")) {
+            graphics = new Draw2d(gameScreen.getPnlBoard());
+
+        } else {
+            graphics = new Draw3d(gameScreen.getPnlBoard());
+        }
+
         String vehCount = this.cbPlayers.getSelectedItem().toString();
         int numberOfVehicles = new Integer(vehCount);
-        
         Board board;
-        
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
-        
         if (selectedTrack.equals(rectTrackType.toString())) {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
-            
+
         } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
         }
+
         this.game = new Game(board);
-        
-        String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
-        
-        if (selectedGraphics.equals("2D")) {
-            
-            gameScreen = new MainGameScreen(this, game);
-            gameScreen.setVisible(true);
-            graphics = new Draw2d(gameScreen.getPnlBoard());
-            game.setDrawingOutput(graphics);
-        }
-        game.setGameRunning(true);
+        this.game.setDrawingOutput(graphics);
+        this.game.setGameRunning(true);
     }//GEN-LAST:event_btnStartActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

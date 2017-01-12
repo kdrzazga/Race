@@ -5,22 +5,34 @@ import logic.Game;
 import logic.IGraphicalOutput;
 import presentation.test.GameTest;
 
-public class MainGameScreen extends javax.swing.JFrame {
+public final class MainGameScreen extends javax.swing.JFrame {
 
-    private final GameTest introFrame;
-    private final IGraphicalOutput drawOutput;
-    public final Game game;
+    private GameTest introFrame;
+    private IGraphicalOutput drawOutput;
+    public Game game;
 
-    public MainGameScreen(GameTest introFrame, Game game) {
+    public MainGameScreen(GameTest introFrame) {
+        init(introFrame);
+    }
+
+    public MainGameScreen(GameTest introFrame, IGraphicalOutput drawOutput) {
+        this.drawOutput = drawOutput;
+        init(introFrame);
+    }
+
+    public MainGameScreen(GameTest introFrame, Game game, IGraphicalOutput drawOutput) {
+        this.game = game;
+        this.drawOutput = drawOutput;
+        init(introFrame);
+    }
+
+    public void init(GameTest introFrame) {
 
         this.introFrame = introFrame;
-        this.game = game;
-
         introFrame.setVisible(false);
         initComponents();
         initComponents2();
 
-        this.drawOutput = new Draw2d(this.pnlBoard);
         ColorSettings.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }

@@ -30,6 +30,10 @@ public final class Draw3d implements IGraphicalOutput {
 
     private final Point3d vehicleSide2[] = new Point3d[vehicleSide1.length];//initialized in initVehicleOutline()
 
+    public Draw3d() {
+
+    }
+
     public Draw3d(JPanel drawablaPanel) {
         this.setPanelToDrawOn(drawablePanel);
         initVehicleOutline();
@@ -60,7 +64,7 @@ public final class Draw3d implements IGraphicalOutput {
     }
 
     private void drawSide(Point3d points[]) {
-        
+
         glBegin(GL_POLYGON);
         for (Point3d vehiclePoint : points) {
             glVertex3f(vehiclePoint.x, vehiclePoint.y, vehiclePoint.z);

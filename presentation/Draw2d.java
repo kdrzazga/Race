@@ -17,6 +17,10 @@ public final class Draw2d implements IGraphicalOutput {
     private JPanel drawablePanel;
     private Graphics g;
 
+    public Draw2d() {
+
+    }
+    
     public Draw2d(JPanel drawablePanel) {
         this.setPanelToDrawOn(drawablePanel);
     }
