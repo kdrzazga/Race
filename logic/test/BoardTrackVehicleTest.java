@@ -114,7 +114,6 @@ public class BoardTrackVehicleTest {
 
         testResultMessage.append(methodName).append(" passed for ");
         System.out.println(testResultMessage);
-
     }
 
     public void givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
