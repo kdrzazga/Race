@@ -1,27 +1,29 @@
 package presentation;
 
+import java.awt.event.WindowAdapter;
+import javax.swing.JFrame;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
 
-public final class MainGameScreen extends javax.swing.JFrame {
+public final class GameScreen extends JFrame {
 
-    public Game game;
+    private Game game;
+    public GameScreenAdapter gameScreenAdapter;
     private IntroFrame introFrame;
     private IGraphicalOutput drawOutput;
     private Board board;
-    private MainGameScreenAdapter mainGameScreenAdapter;
 
-    public MainGameScreen(IntroFrame introFrame) {
+    public GameScreen(IntroFrame introFrame) {
         init(introFrame);
     }
 
-    public MainGameScreen(IntroFrame introFrame, IGraphicalOutput drawOutput) {
+    public GameScreen(IntroFrame introFrame, IGraphicalOutput drawOutput) {
         this.drawOutput = drawOutput;
         init(introFrame);
     }
 
-    public MainGameScreen(IntroFrame introFrame, Board board) {
+    public GameScreen(IntroFrame introFrame, Board board) {
         this.board = board;
         init(introFrame);
     }
@@ -34,7 +36,7 @@ public final class MainGameScreen extends javax.swing.JFrame {
         initComponents2();
 
         ColorSettings.setBOARD_COLOR(this.pnlBoard.getBackground());
-        this.mainGameScreenAdapter = new MainGameScreenAdapter(introFrame);
+        this.gameScreenAdapter = new GameScreenAdapter(introFrame, this);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +46,7 @@ public final class MainGameScreen extends javax.swing.JFrame {
         pnlInfo = new javax.swing.JPanel();
         pnlBoard = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
@@ -110,12 +112,11 @@ public final class MainGameScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initComponents2() {
-        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         KeyboardInput ki = new KeyboardInput(board);
         this.addKeyListener(ki);
 
-        this.addWindowListener(mainGameScreenAdapter);
-        
+        this.addWindowListener(gameScreenAdapter);
     }
     // <editor-fold defaultstate="collapsed" desc="getters and setters">                          
 
@@ -127,8 +128,13 @@ public final class MainGameScreen extends javax.swing.JFrame {
         this.drawOutput = drawOutput;
     }
 
-    public MainGameScreenAdapter getMainGameScreenAdapter() {
-        return mainGameScreenAdapter;
+    public GameScreenAdapter getMainGameScreenAdapter() {
+        return gameScreenAdapter;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
     // </editor-fold>
+
 }

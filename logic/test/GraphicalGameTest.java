@@ -5,6 +5,7 @@ import logic.Board;
 import miscallenous.Mocks;
 import logic.Track;
 import logic.Vehicle;
+import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
 public class GraphicalGameTest extends javax.swing.JFrame {
 
@@ -15,24 +16,11 @@ public class GraphicalGameTest extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         System.out.println("Start line will notbe drawn in this class - check presentation.test.GameTest");
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphicalGameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        
+        setNimbusLookAndFeel(GraphicalGameTest.class.getName());
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GraphicalGameTest().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GraphicalGameTest().setVisible(true);
         });
     }
 

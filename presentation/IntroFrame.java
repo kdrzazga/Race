@@ -8,7 +8,7 @@ import miscallenous.Mocks.TrackType;
 
 public class IntroFrame extends javax.swing.JFrame {
 
-    private MainGameScreen gameScreen;
+    private GameScreen gameScreen;
     private Game game;
 
     public IntroFrame() {
@@ -129,7 +129,7 @@ public class IntroFrame extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         Board board = createBoardBasedOnSelectedUiItems();
 
-        gameScreen = new MainGameScreen(this, board);
+        gameScreen = new GameScreen(this, board);
         gameScreen.setVisible(true);
 
         IGraphicalOutput graphics = createGraphicalOutputBasedOnSelectedUiItems();
@@ -138,11 +138,12 @@ public class IntroFrame extends javax.swing.JFrame {
         
         this.game = new Game(board);
         this.game.setDrawingOutput(graphics);
+        this.gameScreen.setGame(game);
         
         this.gameScreen.draw();
-        this.gameScreen.getMainGameScreenAdapter().init(game);
+        this.gameScreen.gameScreenAdapter.init(game);
                 
-        this.game.setGameRunning(true);
+        //this.game.setGameRunning(true);
     }//GEN-LAST:event_btnStartActionPerformed
 
     private Board createBoardBasedOnSelectedUiItems() throws NumberFormatException {

@@ -106,9 +106,9 @@ public class BoardTrackVehicleTest {
 
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 
-        for (Vehicle vehicle : testBoard.vehicles) {
-            assertion(vehicle.v.position.x, startLineX, methodName);
-            testResultMessage.append(" ").append(vehicle.v.position).append(" ");
+        for (Vehicle veh : testBoard.vehicles) {
+            assertion(veh.v.position.x, startLineX, methodName);
+            testResultMessage.append(" ").append(veh.v.position).append(" ");
 
         }
 

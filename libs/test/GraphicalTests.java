@@ -6,6 +6,7 @@ import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
+import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
 public class GraphicalTests extends javax.swing.JFrame {
 
@@ -14,19 +15,7 @@ public class GraphicalTests extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        //<editor-fold defaultstate="collapsed" desc=" Nimbus Look and feel setting code">
-
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphicalTests.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        setNimbusLookAndFeel(GraphicalTests.class.getName());
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
