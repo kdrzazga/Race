@@ -62,7 +62,8 @@ public class Board {
         return new PointAG(newPositionX, newPositionY);
     }
 
-    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG oldPosition, PointAG newPosition, PointAG trackCenter) {
+    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG oldPosition
+            , PointAG newPosition, PointAG trackCenter) {
         LineSection lsWithOldPos;
         lsWithOldPos = new LineSection(trackCenter, oldPosition);
         LineSection lsWithNewPos = new LineSection(trackCenter, newPosition);

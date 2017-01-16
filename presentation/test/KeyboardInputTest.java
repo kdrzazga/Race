@@ -1,14 +1,15 @@
 package presentation.test;
 
-import java.awt.Component;
-import java.awt.event.KeyEvent;
-import javax.swing.JFrame;
 import presentation.KeyboardInput;
 import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
 import miscallenous.Mocks;
+
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 public class KeyboardInputTest {
 

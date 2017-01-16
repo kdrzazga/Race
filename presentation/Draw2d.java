@@ -1,16 +1,16 @@
 package presentation;
 
-import java.awt.Graphics;
-import java.awt.Point;
-import javax.swing.JPanel;
 import libs.math2.LineSection;
 import logic.Board;
 import logic.IGraphicalOutput;
 import logic.Track;
 import logic.Vehicle;
 
+import java.awt.Graphics;
+import java.awt.Point;
+import javax.swing.JPanel;
 /*
-uses JFrame
+uses awt to draw
  */
 public final class Draw2d implements IGraphicalOutput {
 
@@ -18,9 +18,8 @@ public final class Draw2d implements IGraphicalOutput {
     private Graphics g;
 
     public Draw2d() {
-
     }
-    
+
     public Draw2d(JPanel drawablePanel) {
         this.setPanelToDrawOn(drawablePanel);
     }
@@ -61,17 +60,16 @@ public final class Draw2d implements IGraphicalOutput {
         g.drawOval(vehiclePos.x - 2, vehiclePos.y - 2, 4, 4);
     }
 
-    private void eraseSurrounding(Vehicle vehicle) {
-        g.setColor(ColorSettings.BOARD_COLOR);
-
-        Point vehiclePos = vehicle.v.position.convertToPoint();
-        g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
-    }
-
     @Override
     public void setPanelToDrawOn(JPanel drawablePanel) {
         this.drawablePanel = drawablePanel;
         this.g = this.drawablePanel.getGraphics();
     }
 
+    private void eraseSurrounding(Vehicle vehicle) {
+        g.setColor(ColorSettings.BOARD_COLOR);
+
+        Point vehiclePos = vehicle.v.position.convertToPoint();
+        g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
+    }
 }

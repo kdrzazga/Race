@@ -1,10 +1,11 @@
 package presentation;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.TreeMap;
 import logic.Board;
 import logic.Vehicle;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class KeyboardInput implements KeyListener {
 

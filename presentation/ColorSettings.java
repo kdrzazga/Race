@@ -11,7 +11,7 @@ public class ColorSettings {
 
     public static final float[][] OPEN_GL_VEHICLE_COLORS = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
     {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f},
-     {1f, 0.37f, 0f}
+    {1f, 0.37f, 0f}
     };
 
     public static Color TRACK_COLOR = Color.BLACK;

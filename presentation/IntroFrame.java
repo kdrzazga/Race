@@ -5,7 +5,9 @@ import logic.Game;
 import logic.IGraphicalOutput;
 import miscallenous.Mocks;
 import miscallenous.Mocks.TrackType;
+
 import javax.swing.JFrame;
+import javax.swing.DefaultComboBoxModel;
 
 public class IntroFrame extends JFrame {
 
@@ -117,7 +119,7 @@ public class IntroFrame extends JFrame {
 
     private void initComponents2() {
 
-        cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
+        cbTrack.setModel(new DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
             circularTrackType.toString()
         }));

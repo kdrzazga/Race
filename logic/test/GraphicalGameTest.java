@@ -1,13 +1,15 @@
 package logic.test;
 
-import java.awt.Graphics;
 import logic.Board;
 import miscallenous.Mocks;
 import logic.Track;
 import logic.Vehicle;
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
-public class GraphicalGameTest extends javax.swing.JFrame {
+import java.awt.Graphics;
+import javax.swing.JFrame;
+
+public class GraphicalGameTest extends JFrame {
 
     public GraphicalGameTest() {
         initComponents();

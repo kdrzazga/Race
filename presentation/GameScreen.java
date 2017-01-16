@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 import logic.Board;
 import logic.Game;
