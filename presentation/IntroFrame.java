@@ -5,8 +5,9 @@ import logic.Game;
 import logic.IGraphicalOutput;
 import miscallenous.Mocks;
 import miscallenous.Mocks.TrackType;
+import javax.swing.JFrame;
 
-public class IntroFrame extends javax.swing.JFrame {
+public class IntroFrame extends JFrame {
 
     private GameScreen gameScreen;
     private Game game;
@@ -17,7 +18,7 @@ public class IntroFrame extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         pnlMain = new javax.swing.JPanel();
@@ -112,7 +113,7 @@ public class IntroFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
     private void initComponents2() {
 
@@ -143,7 +144,7 @@ public class IntroFrame extends javax.swing.JFrame {
         this.gameScreen.draw();
         this.gameScreen.gameScreenAdapter.init(game);
                 
-        //this.game.setGameRunning(true);
+        this.game.setGameRunning(true);
     }//GEN-LAST:event_btnStartActionPerformed
 
     private Board createBoardBasedOnSelectedUiItems() throws NumberFormatException {

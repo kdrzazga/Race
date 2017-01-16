@@ -1,6 +1,7 @@
 package presentation.test;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glColor3f;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -16,14 +17,13 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import static org.lwjgl.opengl.GL11.glColor3f;
 
 // original author Brian Matzon <brian@matzon.dk>
 public class Test3d {
 
-    Canvas displayCanvas;
-    Thread gameThread;
-    boolean running;
+    private Canvas displayCanvas;
+    private Thread gameThread;
+    private boolean running;
 
     private JFrame frame;
     private final JPanel infoPanel = new JPanel();
@@ -135,6 +135,7 @@ public class Test3d {
         frame.getContentPane().add(infoPanel);
         infoPanel.setLayout(null);
         infoPane.setBounds(10, 5, 124, 20);
+        infoPane.setText("Press space");
 
         infoPanel.add(infoPane);
         frame.getContentPane().add(activePanel);
