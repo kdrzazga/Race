@@ -4,6 +4,7 @@ import logic.Board;
 import logic.Game;
 import logic.Mocks;
 import logic.Mocks.TrackType;
+import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 import presentation.GameScreen;
 
 public class GameTest extends javax.swing.JFrame {
@@ -17,32 +18,12 @@ public class GameTest extends javax.swing.JFrame {
     }   
     
     public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+        setNimbusLookAndFeel(GameTest.class.getName());
         
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                new GameTest().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GameTest().setVisible(true);
         });
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -171,7 +152,6 @@ public class GameTest extends javax.swing.JFrame {
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
         }
-
         
         game.board = board;
 
@@ -183,7 +163,6 @@ public class GameTest extends javax.swing.JFrame {
             gameScreen = new GameScreen(this, game);
             gameScreen.setVisible(true);
         }
-
     }//GEN-LAST:event_btnStartActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
