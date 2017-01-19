@@ -5,6 +5,7 @@ import logic.Board;
 import logic.Mocks;
 import logic.Track;
 import logic.Vehicle;
+import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
 public class GraphicalGameTest extends javax.swing.JFrame {
 
@@ -15,30 +16,12 @@ public class GraphicalGameTest extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         System.out.println("Start line will notbe drawn in this class - check presentation.test.GameTest");
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GraphicalGameTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         
-        //</editor-fold>
+        setNimbusLookAndFeel(GraphicalGameTest.class.getName());
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GraphicalGameTest().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new GraphicalGameTest().setVisible(true);
         });
     }
 
