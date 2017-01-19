@@ -4,11 +4,11 @@ import logic.Board;
 import logic.Game;
 import logic.Mocks;
 import logic.Mocks.TrackType;
-import presentation.MainGameScreen;
+import presentation.GameScreen;
 
 public class GameTest extends javax.swing.JFrame {
 
-    private MainGameScreen gameScreen;
+    private GameScreen gameScreen;
     private Game game;
 
     public GameTest() {
@@ -180,7 +180,7 @@ public class GameTest extends javax.swing.JFrame {
         game.setGameRunning(true);
 
         if (selectedGraphics.equals("2D")) {
-            gameScreen = new MainGameScreen(this, game);
+            gameScreen = new GameScreen(this, game);
             gameScreen.setVisible(true);
         }
 

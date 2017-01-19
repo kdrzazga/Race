@@ -6,13 +6,13 @@ import logic.Game;
 import logic.IGraphicalOutput;
 import presentation.test.GameTest;
 
-public class MainGameScreen extends javax.swing.JFrame {
+public class GameScreen extends javax.swing.JFrame {
 
     private final GameTest introFrame;
     private final IGraphicalOutput drawOutput;
     public final Game game;
 
-    public MainGameScreen(GameTest introFrame, Game game) {
+    public GameScreen(GameTest introFrame, Game game) {
 
         this.introFrame = introFrame;
         this.game = game;
@@ -106,7 +106,7 @@ public class MainGameScreen extends javax.swing.JFrame {
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
 
-        this.addWindowListener(new MainGameScreenAdapter(introFrame, this.game));
+        this.addWindowListener(new GameScreenAdapter(introFrame, this.game));
     }
 
 }
