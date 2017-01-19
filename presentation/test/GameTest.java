@@ -1,5 +1,7 @@
 package presentation.test;
 
+import javax.swing.JFrame;
+
 import logic.Board;
 import logic.Game;
 import logic.Mocks;
@@ -7,7 +9,7 @@ import logic.Mocks.TrackType;
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 import presentation.GameScreen;
 
-public class GameTest extends javax.swing.JFrame {
+public class GameTest extends JFrame {
 
     private GameScreen gameScreen;
     private Game game;
