@@ -15,11 +15,11 @@ public class GameTest extends javax.swing.JFrame {
     public GameTest() {
         initComponents();
         initComponents2();
-    }   
-    
+    }
+
     public static void main(String args[]) {
         setNimbusLookAndFeel(GameTest.class.getName());
-        
+
         java.awt.EventQueue.invokeLater(() -> {
             new GameTest().setVisible(true);
         });
@@ -133,28 +133,12 @@ public class GameTest extends javax.swing.JFrame {
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
-        
+
         this.game = new Game();
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-
-        String vehCount = this.cbPlayers.getSelectedItem().toString();
-        int numberOfVehicles = new Integer(vehCount);
-
-        Board board;
-
-        String selectedTrack = (String) this.cbTrack.getSelectedItem();
-
-        if (selectedTrack.equals(rectTrackType.toString())) {
-            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
-
-        } else// if (selectedTrack.equals(CIRCULAR_TRACK)) 
-        {
-            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
-        }
+        game.board = createBoardBasedOnSelectedUiItems();
         
-        game.board = board;
-
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
 
         game.setGameRunning(true);
@@ -164,6 +148,21 @@ public class GameTest extends javax.swing.JFrame {
             gameScreen.setVisible(true);
         }
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private Board createBoardBasedOnSelectedUiItems() {
+        String vehCount = this.cbPlayers.getSelectedItem().toString();
+        int numberOfVehicles = new Integer(vehCount);
+        Board board;
+        String selectedTrack = (String) this.cbTrack.getSelectedItem();
+        if (selectedTrack.equals(rectTrackType.toString())) {
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
+
+        } else// if (selectedTrack.equals(CIRCULAR_TRACK))
+        {
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
+        }
+        return board;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;

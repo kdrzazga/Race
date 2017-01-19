@@ -8,6 +8,10 @@ import presentation.test.GameTest;
 
 public class GameScreen extends javax.swing.JFrame {
 
+    public IGraphicalOutput getDrawOutput() {
+        return drawOutput;
+    }
+
     private final GameTest introFrame;
     private final IGraphicalOutput drawOutput;
     public final Game game;
