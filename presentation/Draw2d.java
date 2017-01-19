@@ -3,6 +3,7 @@ package presentation;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import javax.swing.JPanel;
 import libs.math2.LineSection;
 import logic.Board;
 import logic.Game;
@@ -14,27 +15,23 @@ import logic.Vehicle;
 uses JFrame
  */
 public class Draw2d implements IGraphicalOutput {
-
-    private final Graphics g;
-    private static final Color[] VEHICLE_COLORS = {Color.RED, Color.BLUE, Color.GREEN,
-                                    Color.MAGENTA, Color.ORANGE, Color.CYAN,
-                                    new Color(162, 42, 42)};//brown
-    private static final Color TRACK_COLOR = Color.BLACK;
-    private static Color BOARD_COLOR = Color.LIGHT_GRAY;
+    private JPanel drawablePanel;
+    private Graphics g;
 
     public Draw2d(Graphics g) {
         this.g = g;
     }
 
     @Override
-    public void drawBoard(Board board) {
-        drawTrack(board.track);
+    public void draw(Board board) {
+        draw(board.track);
         drawAllVehicles(board);
     }
 
+
     @Override
-    public void drawTrack(Track track) {
-        g.setColor(TRACK_COLOR);
+    public void draw(Track track) {
+        g.setColor(ColorSettings.TRACK_COLOR);
         g.drawPolygon(track.outerBound.convertToPolygon());
         g.drawPolygon(track.innerBound.convertToPolygon());
         
@@ -46,20 +43,16 @@ public class Draw2d implements IGraphicalOutput {
         g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
     
-    public void drawAllVehicles(Board board)
-    {
+    public void drawAllVehicles(Board board) {
         board.vehicles.forEach((vehicle) -> {
-            drawVehicle(vehicle);
+            draw(vehicle);
         });
     }
 
     @Override
-    public void drawVehicle(Vehicle vehicle) {
+    public void draw(Vehicle vehicle) {
         eraseSurrounding(vehicle);
-        
-        int maxColorIndex = VEHICLE_COLORS.length - 1;
-        Color drawingColor = VEHICLE_COLORS[vehicle.getId() % maxColorIndex];
-        g.setColor(drawingColor);
+        g.setColor(ColorSettings.getVehicleColorById(vehicle.getId()));
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
 
@@ -67,14 +60,15 @@ public class Draw2d implements IGraphicalOutput {
     }
 
     private void eraseSurrounding(Vehicle vehicle) {
-        g.setColor(BOARD_COLOR);
+        g.setColor(ColorSettings.BOARD_COLOR);
         
         Point vehiclePos = vehicle.v.position.convertToPoint();
         g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
     }
 
-    public static void setBOARD_COLOR(Color aBOARD_COLOR) {
-        BOARD_COLOR = aBOARD_COLOR;
+    @Override
+    public void setPanelToDrawOn(JPanel drawablePanel) {
+        this.drawablePanel = drawablePanel;
+        this.g = this.drawablePanel.getGraphics();
     }
-
 }

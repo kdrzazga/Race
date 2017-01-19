@@ -22,7 +22,7 @@ public class GameScreen extends javax.swing.JFrame {
         initComponents2();
 
         this.drawOutput = new Draw2d(this.pnlBoard.getGraphics());
-        Draw2d.setBOARD_COLOR(this.pnlBoard.getBackground());
+        ColorSettings.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }
 
@@ -86,7 +86,7 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void draw() {
-        drawOutput.drawTrack(game.board.track);
+        drawOutput.draw(game.board.track);
     }
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
