@@ -52,7 +52,6 @@ public class Draw2d implements IGraphicalOutput {
 
     @Override
     public void draw(Vehicle vehicle) {
-        eraseSurrounding(vehicle);
         g.setColor(ColorSettings.getVehicleColorById(vehicle.getId()));
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
@@ -63,17 +62,17 @@ public class Draw2d implements IGraphicalOutput {
     @Override
     public void clearOutput()
     {
+        Color currentforegroundColor = this.drawablePanel.getForeground();
         Color backgroundColor = this.drawablePanel.getBackground();
-        System.out.println("clearOutput - Not finished yet");
+        
+        g.setColor(backgroundColor);
+        int width = this.drawablePanel.getWidth();
+        int height = this.drawablePanel.getHeight();
+        g.fillRect(0, 0, width, height);
+        g.setColor(currentforegroundColor);
     }
-    
-    private void eraseSurrounding(Vehicle vehicle) {
-        g.setColor(ColorSettings.BOARD_COLOR);
-
-        Point vehiclePos = vehicle.v.position.convertToPoint();
-        g.fillOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
-    }
-    
+   
+   
     @Override
     public void setPanelToDrawOn(JPanel drawablePanel) {
         this.drawablePanel = drawablePanel;
