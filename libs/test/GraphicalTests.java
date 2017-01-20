@@ -167,7 +167,5 @@ public class GraphicalTests extends JFrame {
         Graphics g = this.drawingPanel.getGraphics();
         g.drawPolygon(hexagon.convertToPolygon());
     }
-
-	////GEN-BEGIN:variables
-    ////GEN-END:variables
+	////GEN-BEGIN:variables    ////GEN-END:variables
 }
