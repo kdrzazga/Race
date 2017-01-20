@@ -69,6 +69,6 @@ public class Draw2d implements IGraphicalOutput {
         g.setColor(ColorSettings.BOARD_COLOR);
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
-        g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
+        g.fillOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
     }
 }

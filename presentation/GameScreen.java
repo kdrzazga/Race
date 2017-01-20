@@ -1,17 +1,13 @@
 package presentation;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import presentation.test.IntroFrame;
 
 public class GameScreen extends JFrame {
-
-    public IGraphicalOutput getDrawOutput() {
-        return drawOutput;
-    }
 
     private final IntroFrame introFrame;
     private final IGraphicalOutput drawOutput;
@@ -91,7 +87,7 @@ public class GameScreen extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void draw() {
-        drawOutput.draw(game.board.track);
+        drawOutput.draw(game.board);
     }
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
@@ -104,8 +100,6 @@ public class GameScreen extends JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initComponents2() {
-        //this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         Board brd = game.board;
         
         KeyboardInput ki = new KeyboardInput(brd);
@@ -113,5 +107,12 @@ public class GameScreen extends JFrame {
 
         this.addWindowListener(new GameScreenAdapter(introFrame, this.game));
     }
+    
+    public JPanel getPnlBoard() {
+        return pnlBoard;
+    }
 
+    public IGraphicalOutput getGraphicalOutput() {
+        return drawOutput;
+    }
 }

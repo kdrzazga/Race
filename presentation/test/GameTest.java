@@ -1,6 +1,7 @@
 package presentation.test;
 
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
+import presentation.IntroFrame;
 
 public class GameTest {
     public static void main(String args[]) {

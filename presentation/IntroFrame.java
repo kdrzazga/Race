@@ -1,13 +1,14 @@
-package presentation.test;
+package presentation;
 
 import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPanel;
 
 import logic.Board;
 import logic.Game;
+import logic.IGraphicalOutput;
 import logic.Mocks;
 import logic.Mocks.TrackType;
-import presentation.GameScreen;
 
 public class IntroFrame extends JFrame {
 
@@ -132,16 +133,24 @@ public class IntroFrame extends JFrame {
     }
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         game.board = createBoardBasedOnSelectedUiItems();
+
+        gameScreen = new GameScreen(this, game);
+        IGraphicalOutput graphicalOutput = createGraphicalOutputBasedOnSelectedGraphics(gameScreen.getPnlBoard());
         
+        game.setGraphicalOutput(graphicalOutput);
+        gameScreen.setVisible(true);
+        game.setGameRunning(true);
+    }//GEN-LAST:event_btnStartActionPerformed
+
+    private IGraphicalOutput createGraphicalOutputBasedOnSelectedGraphics(JPanel drawablePanel) {
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
 
-        game.setGameRunning(true);
-
         if (selectedGraphics.equals("2D")) {
-            gameScreen = new GameScreen(this, game);
-            gameScreen.setVisible(true);
+            return new Draw2d(drawablePanel);
+        } else {
+            return new Draw3d(drawablePanel);
         }
-    }//GEN-LAST:event_btnStartActionPerformed
+    }
 
     private Board createBoardBasedOnSelectedUiItems() {
         String vehCount = this.cbPlayers.getSelectedItem().toString();

@@ -12,6 +12,7 @@ public class Game extends Thread {
 
     private boolean gameRunning;
     private final Object gameRunningLock = new Object();
+    private IGraphicalOutput graphicalOutput;
 
     public Game(int numberOfVehicles, Track track) {
 
@@ -63,13 +64,16 @@ public class Game extends Thread {
                         board.moveVehicle(i);
                         System.out.println(board.vehicles.get(0).v.position);
                     }
-
                     this.findWinner();
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public void setGraphicalOutput(IGraphicalOutput graphicalOutput) {
+        this.graphicalOutput = graphicalOutput;
     }
 
     public boolean isGameRunning() {

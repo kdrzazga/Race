@@ -44,7 +44,7 @@ public class Board {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         return vehicle.v.position;
     }
-
+    
     private PointAG findNewPosition(Vehicle vehicle) {
         float moveX, moveY, factorX, factorY;
 

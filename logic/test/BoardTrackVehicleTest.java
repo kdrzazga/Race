@@ -91,11 +91,11 @@ public class BoardTrackVehicleTest {
         LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
 
         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
-        System.out.println("givenTrackTestStartLine1 passed");
+        System.out.println("givenTrack_ShouldStartLineEqualExpected passed");
     }
 
     public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1(int numberOfVehicles) {
-        String methodName = "givenTrackTestStartPositions";
+        String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1";
 
         StringBuilder testResultMessage = new StringBuilder();
         Track rectTrack = Mocks.create_0_0__30_30_TestRectangularTrack();

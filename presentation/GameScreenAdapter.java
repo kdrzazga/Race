@@ -3,7 +3,6 @@ package presentation;
 import java.awt.event.WindowAdapter;
 
 import logic.Game;
-import presentation.test.IntroFrame;
 
 class GameScreenAdapter extends WindowAdapter {
 
