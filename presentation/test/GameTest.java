@@ -1,7 +1,7 @@
 package presentation.test;
 
 import javax.swing.JFrame;
-import javax.swing.javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 
 import logic.Board;
 import logic.Game;
