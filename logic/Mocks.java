@@ -53,9 +53,7 @@ public class Mocks {
 
     public static Board createBoardWith2VehiclesOnRectTrack() {
         Board result = new Board();
-
         result.track = create_50_50__350_250_RectangularTrack();
-
         result.vehicles.add(createVehicleAtPosition(0, 100, 100));
         result.vehicles.add(createVehicleAtPosition(1, 100, 120));
 

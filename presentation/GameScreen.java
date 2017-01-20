@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import presentation.test.GameTest;
+import presentation.test.IntroFrame;
 
 public class GameScreen extends JFrame {
 
@@ -13,11 +13,11 @@ public class GameScreen extends JFrame {
         return drawOutput;
     }
 
-    private final GameTest introFrame;
+    private final IntroFrame introFrame;
     private final IGraphicalOutput drawOutput;
     public final Game game;
 
-    public GameScreen(GameTest introFrame, Game game) {
+    public GameScreen(IntroFrame introFrame, Game game) {
 
         this.introFrame = introFrame;
         this.game = game;

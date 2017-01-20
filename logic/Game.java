@@ -8,6 +8,7 @@ public class Game extends Thread {
     public static final int MIN_VEHICLES = 2;
     public static final int MAX_VEHICLES = 5;
     public static final int GAME_FRAME_MS = 500;
+    public Board board;
 
     private boolean gameRunning;
     private final Object gameRunningLock = new Object();
@@ -28,8 +29,6 @@ public class Game extends Thread {
     public Game() {
         this.gameInit2();
     }
-
-    public Board board;
 
     public void findWinner() {
         System.out.println(" findWinner() - Not implemented yet");

@@ -1,5 +1,6 @@
 package libs.test;
 
+import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
-public class GraphicalTests extends javax.swing.JFrame {
+public class GraphicalTests extends JFrame {
 
     public GraphicalTests() {
         initComponents();
@@ -91,7 +92,6 @@ public class GraphicalTests extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         PointAG center2D = new PointAG(100, 100);
         CircleAG circle = new CircleAG(center2D, 100, 100);
 
@@ -102,16 +102,13 @@ public class GraphicalTests extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDrawHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawHexActionPerformed
-
         PolygonAG hexagon = new PolygonAG();
 
         PointAG hexPoints[] = {new PointAG(100, 100), new PointAG(300, 100), new PointAG(400, 200),
             new PointAG(300, 300), new PointAG(100, 300), new PointAG(0, 200)};
 
         hexagon.points.addAll(Arrays.asList(hexPoints));
-
         Graphics g = this.jPanel1.getGraphics();
-
         g.drawPolygon(hexagon.convertToPolygon());
     }//GEN-LAST:event_btnDrawHexActionPerformed
 

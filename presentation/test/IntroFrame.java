@@ -10,21 +10,21 @@ import logic.Mocks.TrackType;
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 import presentation.GameScreen;
 
-public class GameTest extends JFrame {
+public class IntroFrame extends JFrame {
 
     private GameScreen gameScreen;
     private Game game;
 
-    public GameTest() {
+    public IntroFrame() {
         initComponents();
         initComponents2();
     }
 
     public static void main(String args[]) {
-        setNimbusLookAndFeel(GameTest.class.getName());
+        setNimbusLookAndFeel(IntroFrame.class.getName());
 
         java.awt.EventQueue.invokeLater(() -> {
-            new GameTest().setVisible(true);
+            new IntroFrame().setVisible(true);
         });
     }
 

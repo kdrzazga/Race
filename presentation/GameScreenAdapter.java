@@ -3,14 +3,14 @@ package presentation;
 import java.awt.event.WindowAdapter;
 
 import logic.Game;
-import presentation.test.GameTest;
+import presentation.test.IntroFrame;
 
 class GameScreenAdapter extends WindowAdapter {
 
-    private final GameTest introFrame;
+    private final IntroFrame introFrame;
     private final Game game;
     
-    public GameScreenAdapter(GameTest introFrame, Game game)
+    public GameScreenAdapter(IntroFrame introFrame, Game game)
     {
         this.introFrame = introFrame;
         this.game = game;

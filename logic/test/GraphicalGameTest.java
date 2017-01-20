@@ -9,7 +9,6 @@ import logic.Mocks;
 import logic.Track;
 import logic.Vehicle;
 
-
 public class GraphicalGameTest extends JFrame {
 
     public GraphicalGameTest() {
@@ -107,7 +106,7 @@ public class GraphicalGameTest extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mockDrawTrack(Track track) {
-        //this isrequired as class Draw2d is in upper layer
+        //this is required as class Draw2d is in upper layer
 
         boardG.drawPolygon(track.innerBound.convertToPolygon());
         boardG.drawPolygon(track.outerBound.convertToPolygon());
