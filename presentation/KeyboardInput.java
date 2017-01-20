@@ -55,7 +55,6 @@ public class KeyboardInput implements KeyListener {
     public void keyReleased(KeyEvent e) {
         //no need to implement
     }
-
     
     @Override
     public void keyTyped(KeyEvent e) {

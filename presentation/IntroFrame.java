@@ -7,7 +7,6 @@ import logic.Board;
 import logic.Game;
 import logic.Mocks;
 import logic.Mocks.TrackType;
-import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 import presentation.GameScreen;
 
 public class IntroFrame extends JFrame {
@@ -18,14 +17,6 @@ public class IntroFrame extends JFrame {
     public IntroFrame() {
         initComponents();
         initComponents2();
-    }
-
-    public static void main(String args[]) {
-        setNimbusLookAndFeel(IntroFrame.class.getName());
-
-        java.awt.EventQueue.invokeLater(() -> {
-            new IntroFrame().setVisible(true);
-        });
     }
 
     @SuppressWarnings("unchecked")
