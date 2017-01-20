@@ -18,8 +18,9 @@ public class Draw2d implements IGraphicalOutput {
     private JPanel drawablePanel;
     private Graphics g;
 
-    public Draw2d(Graphics g) {
-        this.g = g;
+    public Draw2d(JPanel drawablePanel) {
+        this.drawablePanel = drawablePanel;
+        this.g = drawablePanel.getGraphics();
     }
 
     @Override

@@ -26,7 +26,7 @@ public class GameScreen extends JFrame {
         initComponents();
         initComponents2();
 
-        this.drawOutput = new Draw2d(this.pnlBoard.getGraphics());
+        this.drawOutput = new Draw2d(this.pnlBoard);
         ColorSettings.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }

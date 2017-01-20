@@ -9,11 +9,13 @@ import logic.Vehicle;
 
 /*
 uses OpenGL
-*/
-public class Draw3d implements IGraphicalOutput{
+ */
+public class Draw3d implements IGraphicalOutput {
 
-    public Draw3d()
-    {
+    private final JPanel drawablePanel;
+
+    public Draw3d(JPanel drawablePanel) {
+        this.drawablePanel = drawablePanel;
         throw new RuntimeException("Not implemented yet");
     }
 
@@ -37,5 +39,4 @@ public class Draw3d implements IGraphicalOutput{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-   
 }
