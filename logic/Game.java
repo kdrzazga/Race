@@ -53,6 +53,7 @@ public class Game extends Thread {
         while (true) {
             try {
                 Thread.sleep(GAME_FRAME_MS);
+                
 
                 System.out.print(".");
                 if (board != null) {
@@ -60,11 +61,13 @@ public class Game extends Thread {
                 }
 
                 if (this.gameRunning) {
+                    updateGraphicalOutput();
                     for (int i = 0; i < board.vehicles.size(); i++) {
                         board.moveVehicle(i);
                         System.out.println(board.vehicles.get(0).v.position);
                     }
                     this.findWinner();
+
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,6 +77,11 @@ public class Game extends Thread {
 
     public void setGraphicalOutput(IGraphicalOutput graphicalOutput) {
         this.graphicalOutput = graphicalOutput;
+    }
+
+    private void updateGraphicalOutput() {
+        this.graphicalOutput.clearOutput();
+        this.graphicalOutput.draw(this.board);
     }
 
     public boolean isGameRunning() {

@@ -1,9 +1,19 @@
 package libs.test;
 
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.Arrays;
+import javax.swing.GroupLayout.Group;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
@@ -12,12 +22,16 @@ import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 
 public class GraphicalTests extends JFrame {
 
+    private JButton btnDrawHex;
+    private JButton btnDrawCircle;
+    private JPanel drawingPanel;
+
     public GraphicalTests() {
         initComponents();
     }
 
-    public static void main(String args[]) {        
-        setNimbusLookAndFeel(GraphicalTests.class.getName());    
+    public static void main(String args[]) {
+        setNimbusLookAndFeel(GraphicalTests.class.getName());
 
         java.awt.EventQueue.invokeLater(() -> {
             new GraphicalTests().setVisible(true);
@@ -25,96 +39,135 @@ public class GraphicalTests extends JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Components initialization">
     private void initComponents() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        btnDrawHex = new javax.swing.JButton();
+        initBtnDrawCircle();
+        initDrawingPanel();
+        initBtnDrawHex();
+        initContentPaneLayout();
+        pack();
+    }
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    private void initBtnDrawCircle() {
+        btnDrawCircle = new JButton();
 
-        jButton1.setText("Draw Circle");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
+        btnDrawCircle.setText("Draw Circle");
+        btnDrawCircle.addActionListener((ActionEvent evt) -> {
+            btnDrawCircleActionPerformed();
         });
+    }
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+    private void initDrawingPanel() {
+        drawingPanel = new JPanel();
+        drawingPanel.setBackground(new Color(204, 255, 204));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 242, Short.MAX_VALUE)
-        );
+        GroupLayout drawingPanelLayout = new GroupLayout(drawingPanel);
+        initDrawingPanelLayout(drawingPanelLayout);
+    }
 
+    private void initBtnDrawHex() {
+        btnDrawHex = new JButton();
         btnDrawHex.setText("Draw Hexagon");
-        btnDrawHex.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDrawHexActionPerformed(evt);
-            }
+        btnDrawHex.addActionListener((ActionEvent evt) -> {
+            btnDrawHexActionPerformed();
         });
+    }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    private void initContentPaneLayout() {
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        Group horizontalGroup = createHorizontalGroup(layout);
+        layout.setHorizontalGroup(horizontalGroup);
+
+        Group verticalGroup = createVerticalGroup(layout);
+        layout.setVerticalGroup(verticalGroup);
+    }
+
+    private ParallelGroup createVerticalGroup(GroupLayout layout) {
+        ParallelGroup drawButtonsGroup = createDrawButtonsGroup(layout);
+        SequentialGroup verticalSubGroup = createVerticalSubGroup(layout, drawButtonsGroup);
+       
+        return layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GroupLayout.Alignment.TRAILING, verticalSubGroup);
+    }
+
+    private SequentialGroup createVerticalSubGroup(GroupLayout layout, ParallelGroup drawButtonsGroup) {
+        SequentialGroup verticalSubGroup = layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
+                .addComponent(drawingPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(drawButtonsGroup)
+                .addContainerGap();
+        return verticalSubGroup;
+    }
+
+    private ParallelGroup createDrawButtonsGroup(GroupLayout layout) {
+        ParallelGroup drawButtonsGroup = layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(btnDrawCircle)
+                .addComponent(btnDrawHex);
+        return drawButtonsGroup;
+    }
+
+    private void initDrawingPanelLayout(GroupLayout drawingPanelLayout) {
+        drawingPanel.setLayout(drawingPanelLayout);
+        drawingPanelLayout.setHorizontalGroup(drawingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGap(0, 376, Short.MAX_VALUE)
+        );
+        drawingPanelLayout.setVerticalGroup(drawingPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGap(0, 242, Short.MAX_VALUE)
+        );
+    }
+
+    private Group createHorizontalGroup(GroupLayout layout) {
+        Group horizontalSubGroup1 = createHorizontalSubGroup1(layout);
+        Group horizontalSubGroup2 = createHorizontalSubGroup2(layout);
+
+        return layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(horizontalSubGroup1)
+                .addGroup(horizontalSubGroup2);
+    }
+
+    private Group createHorizontalSubGroup1(GroupLayout layout) {
+        return layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(drawingPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap();
+    }
+
+    private Group createHorizontalSubGroup2(GroupLayout layout) {
+        return layout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addComponent(jButton1)
+                .addComponent(btnDrawCircle)
                 .addGap(57, 57, 57)
                 .addComponent(btnDrawHex)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnDrawHex))
-                .addContainerGap())
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+    }
+	//GEN-BEGIN:initComponents
+	// </editor-fold>//GEN-END:initComponents
+   
+    private void btnDrawCircleActionPerformed() {
         PointAG center2D = new PointAG(100, 100);
         CircleAG circle = new CircleAG(center2D, 100, 100);
 
-        Graphics g = this.jPanel1.getGraphics();
+        Graphics g = this.drawingPanel.getGraphics();
         g.drawPolygon(circle.getPoints().convertToPolygon());
         Point center = circle.getCenter().convertToPoint();
         g.drawOval(center.x - 2, center.y - 2, 4, 4);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
-    private void btnDrawHexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawHexActionPerformed
+    private void btnDrawHexActionPerformed() {
         PolygonAG hexagon = new PolygonAG();
 
         PointAG hexPoints[] = {new PointAG(100, 100), new PointAG(300, 100), new PointAG(400, 200),
             new PointAG(300, 300), new PointAG(100, 300), new PointAG(0, 200)};
 
         hexagon.points.addAll(Arrays.asList(hexPoints));
-        Graphics g = this.jPanel1.getGraphics();
+        Graphics g = this.drawingPanel.getGraphics();
         g.drawPolygon(hexagon.convertToPolygon());
-    }//GEN-LAST:event_btnDrawHexActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDrawHex;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
+	////GEN-BEGIN:variables
+    ////GEN-END:variables
 }

@@ -12,4 +12,5 @@ public interface IGraphicalOutput {
     
     public void setPanelToDrawOn(JPanel drawablePanel);
     
+    public void clearOutput();
 }

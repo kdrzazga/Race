@@ -1,5 +1,6 @@
 package presentation;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JPanel;
@@ -58,17 +59,24 @@ public class Draw2d implements IGraphicalOutput {
 
         g.drawOval(vehiclePos.x - 2, vehiclePos.y - 2, 4, 4);
     }
-
+    
     @Override
-    public void setPanelToDrawOn(JPanel drawablePanel) {
-        this.drawablePanel = drawablePanel;
-        this.g = this.drawablePanel.getGraphics();
+    public void clearOutput()
+    {
+        Color backgroundColor = this.drawablePanel.getBackground();
+        System.out.println("clearOutput - Not finished yet");
     }
-
+    
     private void eraseSurrounding(Vehicle vehicle) {
         g.setColor(ColorSettings.BOARD_COLOR);
 
         Point vehiclePos = vehicle.v.position.convertToPoint();
         g.fillOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
+    }
+    
+    @Override
+    public void setPanelToDrawOn(JPanel drawablePanel) {
+        this.drawablePanel = drawablePanel;
+        this.g = this.drawablePanel.getGraphics();
     }
 }

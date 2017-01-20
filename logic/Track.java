@@ -61,5 +61,4 @@ public class Track {
 
         return new PointAG(x, y);
     }
-
 }
