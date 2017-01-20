@@ -14,6 +14,7 @@ import logic.Vehicle;
 uses JFrame
  */
 public class Draw2d implements IGraphicalOutput {
+
     private JPanel drawablePanel;
     private Graphics g;
 
@@ -32,15 +33,15 @@ public class Draw2d implements IGraphicalOutput {
         g.setColor(ColorSettings.TRACK_COLOR);
         g.drawPolygon(track.outerBound.convertToPolygon());
         g.drawPolygon(track.innerBound.convertToPolygon());
-        
-         LineSection startLine = track.getRaceStartLine();
-        
+
+        LineSection startLine = track.getRaceStartLine();
+
         Point p1 = startLine.p1.convertToPoint();
         Point p2 = startLine.p2.convertToPoint();
-        
+
         g.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
-    
+
     public void drawAllVehicles(Board board) {
         board.vehicles.forEach((vehicle) -> {
             draw(vehicle);
@@ -57,16 +58,16 @@ public class Draw2d implements IGraphicalOutput {
         g.drawOval(vehiclePos.x - 2, vehiclePos.y - 2, 4, 4);
     }
 
-    private void eraseSurrounding(Vehicle vehicle) {
-        g.setColor(ColorSettings.BOARD_COLOR);
-        
-        Point vehiclePos = vehicle.v.position.convertToPoint();
-        g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
-    }
-
     @Override
     public void setPanelToDrawOn(JPanel drawablePanel) {
         this.drawablePanel = drawablePanel;
         this.g = this.drawablePanel.getGraphics();
+    }
+
+    private void eraseSurrounding(Vehicle vehicle) {
+        g.setColor(ColorSettings.BOARD_COLOR);
+
+        Point vehiclePos = vehicle.v.position.convertToPoint();
+        g.drawOval(vehiclePos.x - 3, vehiclePos.y - 3, 6, 6);
     }
 }

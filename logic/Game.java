@@ -36,12 +36,11 @@ public class Game extends Thread {
     }
 
     private void gameInit(int numberOfVehicles) {
-        if (numberOfVehicles > MAX_VEHICLES) {
+        if ((numberOfVehicles < MIN_VEHICLES) || (numberOfVehicles > MAX_VEHICLES)) {
             throw new RuntimeException("Creating a game with wrong number of players (vehicles) + "
                     + numberOfVehicles + ". Only " + MIN_VEHICLES + " to "
                     + MAX_VEHICLES + " available");
         }
-
     }
 
     private void gameInit2() {
