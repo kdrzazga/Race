@@ -10,7 +10,6 @@ public class Board {
 
     public Track track;
     public ArrayList<Vehicle> vehicles;
-    public static final int ROUNDING_PRECISION = 4;
 
     public Board() {
         this.track = new Track();
@@ -35,7 +34,7 @@ public class Board {
 
         PointAG newPosition = findNewPosition(vehicle);
 
-        if (track.pointWithinTrack(newPosition)) {
+        if (track.isPointWithinTrack(newPosition)) {
             vehicle.v.position = newPosition;
             updateVehicleTravelledWayAngle(vehicle, oldPosition, newPosition, track.getTrackCentre());
         }
@@ -52,8 +51,8 @@ public class Board {
         double cos = Math.cos(vehicle.v.angle);
         double sin = Math.sin(vehicle.v.angle);
 
-        factorX = General.roundToFloat(cos, ROUNDING_PRECISION);
-        factorY = General.roundToFloat(sin, ROUNDING_PRECISION);
+        factorX = General.roundToFloat(cos);
+        factorY = General.roundToFloat(sin);
 
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
