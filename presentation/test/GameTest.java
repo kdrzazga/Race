@@ -1,6 +1,7 @@
 package presentation.test;
 
 import javax.swing.JFrame;
+import javax.swing.javax.swing.DefaultComboBoxModel;
 
 import logic.Board;
 import logic.Game;
@@ -127,7 +128,7 @@ public class GameTest extends JFrame {
 
     private void initComponents2() {
 
-        cbTrack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
+        cbTrack.setModel(new DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
             circularTrackType.toString()
         }));

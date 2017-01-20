@@ -1,9 +1,11 @@
 package presentation;
 
+import java.awt.event.WindowAdapter;
+
 import logic.Game;
 import presentation.test.GameTest;
 
-class GameScreenAdapter extends java.awt.event.WindowAdapter {
+class GameScreenAdapter extends WindowAdapter {
 
     private final GameTest introFrame;
     private final Game game;

@@ -1,6 +1,7 @@
 package logic;
 
 import java.awt.Point;
+
 import libs.math2.*;
 
 public class Track {

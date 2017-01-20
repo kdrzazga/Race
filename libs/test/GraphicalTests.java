@@ -3,6 +3,7 @@ package libs.test;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Arrays;
+
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
@@ -113,7 +114,6 @@ public class GraphicalTests extends javax.swing.JFrame {
 
         g.drawPolygon(hexagon.convertToPolygon());
     }//GEN-LAST:event_btnDrawHexActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDrawHex;

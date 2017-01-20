@@ -1,12 +1,13 @@
 package presentation;
 
 import javax.swing.JFrame;
+
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
 import presentation.test.GameTest;
 
-public class GameScreen extends javax.swing.JFrame {
+public class GameScreen extends JFrame {
 
     public IGraphicalOutput getDrawOutput() {
         return drawOutput;

@@ -3,6 +3,7 @@ package presentation;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JPanel;
+
 import libs.math2.LineSection;
 import logic.Board;
 import logic.IGraphicalOutput;
@@ -25,7 +26,6 @@ public class Draw2d implements IGraphicalOutput {
         draw(board.track);
         drawAllVehicles(board);
     }
-
 
     @Override
     public void draw(Track track) {

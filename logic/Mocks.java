@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.Arrays;
+
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
 

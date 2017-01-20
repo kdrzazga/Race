@@ -1,6 +1,7 @@
 package presentation;
 
 import javax.swing.JPanel;
+
 import logic.Board;
 import logic.IGraphicalOutput;
 import logic.Track;

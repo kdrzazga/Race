@@ -1,7 +1,7 @@
 package logic;
 
-import java.awt.Point;
 import java.util.ArrayList;
+
 import libs.math2.General;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
