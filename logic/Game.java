@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 public class Game extends Thread {
 
     public static final int MIN_VEHICLES = 2;
-    public static final int MAX_VEHICLES = 5;
-    public static final int GAME_FRAME_MS = 500;
+    public static final int MAX_VEHICLES = 10;
+    public static final int GAME_FRAME_MS = 70;
     public Board board;
 
     private boolean gameRunning;
@@ -54,20 +54,10 @@ public class Game extends Thread {
             try {
                 Thread.sleep(GAME_FRAME_MS);
                 
-
-                System.out.print(".");
-                if (board != null) {
-                    System.out.print(board.vehicles.size());
-                }
-
                 if (this.gameRunning) {
-                    updateGraphicalOutput();
-                    for (int i = 0; i < board.vehicles.size(); i++) {
-                        board.moveVehicle(i);
-                        System.out.println(board.vehicles.get(0).v.position);
-                    }
+                    this.board.moveAllVehicles();
+                    updateGraphicalOutput();                    
                     this.findWinner();
-
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);

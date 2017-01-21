@@ -1,13 +1,13 @@
 package presentation;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.TreeMap;
 
 import logic.Board;
 import logic.Vehicle;
 
-public class KeyboardInput implements KeyListener {
+public class KeyboardInput extends KeyAdapter {
 
     private enum Player {
         Player1, Player2
@@ -16,19 +16,17 @@ public class KeyboardInput implements KeyListener {
     private enum VehicleAction {
         Accelerate, SlowDown, TurnLeft, TurnRight
     }
-
     
     private final TreeMap<Integer, VehicleAction> keyVehActionMap;
     private final TreeMap<Integer, Player> keyPlayerMap;
 
     private final Board board;
 
-    private final int player1Keys[] = {'w', 's', 'a', 'd'};
+    private final int player1Keys[] = {'W', 'S', 'A', 'D'};
     private final int player2Keys[] = {KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
 
     private final VehicleAction[] vehAction = {VehicleAction.Accelerate, VehicleAction.SlowDown,
         VehicleAction.TurnLeft, VehicleAction.TurnRight};
-
     
     public KeyboardInput(Board board) {
         this.board = board;
@@ -39,7 +37,6 @@ public class KeyboardInput implements KeyListener {
         this.keyPlayerMap = new TreeMap<>();
         this.assignKeysToPlayers();
     }
-
     
     @Override
     public void keyPressed(KeyEvent e) {
@@ -60,7 +57,6 @@ public class KeyboardInput implements KeyListener {
     public void keyTyped(KeyEvent e) {
         //no need to implement
     }
-
     
     private void assignKeysToVehicleActions() {
         for (int i = 0; i < this.player1Keys.length; i++) {
@@ -115,5 +111,4 @@ public class KeyboardInput implements KeyListener {
                 break;
         }
     }
-
 }

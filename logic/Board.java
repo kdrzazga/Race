@@ -27,12 +27,18 @@ public class Board {
             this.vehicles.add(veh);
         }
     }
-
+    
+    public void moveAllVehicles() {
+        this.vehicles.forEach((vehicle) -> {
+            this.moveVehicle(vehicle.getId());
+        });
+    }
+    
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         PointAG oldPosition = vehicle.v.position;
 
-        PointAG newPosition = findNewPosition(vehicle);
+        PointAG newPosition = computeNewPosition(vehicle);
 
         if (track.isPointWithinTrack(newPosition)) {
             vehicle.v.position = newPosition;
@@ -45,7 +51,7 @@ public class Board {
         return vehicle.v.position;
     }
     
-    private PointAG findNewPosition(Vehicle vehicle) {
+    private PointAG computeNewPosition(Vehicle vehicle) {
         float moveX, moveY, factorX, factorY;
 
         double cos = Math.cos(vehicle.v.angle);
