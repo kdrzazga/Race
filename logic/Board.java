@@ -36,13 +36,13 @@ public class Board {
     
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
-        PointAG oldPosition = vehicle.v.position;
+        vehicle.previousLocation = vehicle.v.position;
 
         PointAG newPosition = computeNewPosition(vehicle);
 
         if (track.isPointWithinTrack(newPosition)) {
             vehicle.v.position = newPosition;
-            updateVehicleTravelledWayAngle(vehicle, oldPosition, newPosition, track.getTrackCentre());
+            updateVehicleTravelledWayAngle(vehicle, vehicle.previousLocation, newPosition, track.getTrackCentre());
         }
     }
 

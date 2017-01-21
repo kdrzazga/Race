@@ -13,4 +13,6 @@ public interface IGraphicalOutput {
     public void setPanelToDrawOn(JPanel drawablePanel);
     
     public void clearOutput();
+
+    public void eraseVehicles(Board track);
 }

@@ -5,6 +5,7 @@ import libs.math2.PointAG;
 public class Vehicle {
 
     public VelocityVector v;
+    public PointAG previousLocation;
     public double travelledWayAngle; //the path that Vehicle has moved is is expressed in angle, not in length (2PI = 1 lap, PI = 0.5 lap etc.)
     public boolean active;
     private final int id;
@@ -12,12 +13,14 @@ public class Vehicle {
     public Vehicle(int id) {
         this.travelledWayAngle = 0.0;
         this.id = id;
+        this.previousLocation = new PointAG(0, 0);
     }
 
     public Vehicle(int id, int speed, PointAG position) {
         this.travelledWayAngle = 0.0;
         this.id = id;
         this.v = new VelocityVector(speed, 0.0, position);
+        this.previousLocation = new PointAG(0, 0);
     }
 
     public Vehicle(int id, int speed, PointAG position, boolean active) {
@@ -25,6 +28,7 @@ public class Vehicle {
         this.id = id;
         this.v = new VelocityVector(speed, 0.0, position);
         this.active = active;
+        this.previousLocation = new PointAG(0, 0);
     }
 
     public int getId() {

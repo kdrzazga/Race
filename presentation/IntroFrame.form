@@ -81,6 +81,8 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="cbTrack" min="-2" pref="132" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="lblPlayers1" max="32767" attributes="0"/>
+                      <Component id="lblPlayers2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
               </Group>
@@ -104,7 +106,11 @@
                       <Component id="cbPlayers" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPlayers" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblPlayers1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblPlayers2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -157,6 +163,16 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayers1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Player1 control: arrow keys"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayers2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Player2 control: WSAD"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

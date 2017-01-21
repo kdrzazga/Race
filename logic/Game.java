@@ -70,7 +70,7 @@ public class Game extends Thread {
     }
 
     private void updateGraphicalOutput() {
-        this.graphicalOutput.clearOutput();
+        this.graphicalOutput.eraseVehicles(this.board);
         this.graphicalOutput.draw(this.board);
     }
 

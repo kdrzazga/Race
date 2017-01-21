@@ -31,6 +31,8 @@ public class IntroFrame extends JFrame {
         cbGraphics = new javax.swing.JComboBox<>();
         lblPlayers = new javax.swing.JLabel();
         cbPlayers = new javax.swing.JComboBox<>();
+        lblPlayers1 = new javax.swing.JLabel();
+        lblPlayers2 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,6 +46,10 @@ public class IntroFrame extends JFrame {
         cbGraphics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2D", "3D (not implemented)" }));
 
         lblPlayers.setText("Players");
+
+        lblPlayers1.setText("Player1 control: arrow keys");
+
+        lblPlayers2.setText("Player2 control: WSAD");
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -63,7 +69,9 @@ public class IntroFrame extends JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                         .addComponent(lblTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbTrack, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbTrack, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblPlayers1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPlayers2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
@@ -81,7 +89,11 @@ public class IntroFrame extends JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPlayers))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPlayers1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPlayers2)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         btnStart.setText("Start");
@@ -174,6 +186,8 @@ public class IntroFrame extends JFrame {
     private javax.swing.JComboBox<String> cbTrack;
     private javax.swing.JLabel lblGraphics;
     private javax.swing.JLabel lblPlayers;
+    private javax.swing.JLabel lblPlayers1;
+    private javax.swing.JLabel lblPlayers2;
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
