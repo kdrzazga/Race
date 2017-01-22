@@ -1,4 +1,4 @@
-package logic;
+ package logic;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ import libs.math2.PointAG;
 public class Mocks {
 
     public enum TrackType {
-        RECTANGULAR_1, CIRCULAR_1, TEST_RECTANGULAR;
+        RECTANGULAR_1, CIRCULAR_1, KIDNEY, TEST_RECTANGULAR;
 
         @Override
         public String toString() {
@@ -17,6 +17,8 @@ public class Mocks {
                     return "Rectangular track";
                 case CIRCULAR_1:
                     return "Circular track";
+                case KIDNEY:
+                    return "Kidney track";                    
                 default:
                     return "Test rectangular";
             }
@@ -34,10 +36,17 @@ public class Mocks {
     public static Board createBoardWithNVehiclesOnTrack(int numberOfVehicles, TrackType trackType) {
         Board result = new Board();
 
-        if (trackType.equals(TrackType.CIRCULAR_1)) {
-            result.track = create_50_50__550_550_DonutTrack();
-        } else {
-            result.track = create_50_50__350_250_RectangularTrack();
+        switch (trackType) {
+            case CIRCULAR_1:
+                result.track = create_50_50__550_550_DonutTrack();
+                break;
+            case RECTANGULAR_1:
+                result.track = create_50_50__350_250_RectangularTrack();
+                break;
+            default:
+                //KIDNEY:
+                result.track = create_7_5__550_800_KidneyTrack();
+                break;
         }
 
         int initialSpeed = VelocityVector.V_MIN;
@@ -78,7 +87,7 @@ public class Mocks {
     public static Track create_50_50__550_550_DonutTrack() {
 
         Track donutTrack = new Track();
-        PointAG donutCenter = new PointAG(300, 300);
+        PointAG donutCenter = new PointAG(300, 370);
         int outerBoundRadius = 250;
         int innerBoundRadius = 100;
         int numberOfPoints = 360;
@@ -102,5 +111,36 @@ public class Mocks {
         rectangularTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
 
         return rectangularTrack;
+    }
+    
+    public static Track create_7_5__550_800_KidneyTrack() {
+        Track kidneyTrack = new Track();
+
+        PointAG outerBoundPts[] = {
+                  new PointAG(75, 150),  new PointAG(100, 100),new PointAG(150, 50), new PointAG(200, 25)
+                , new PointAG(250, 20),  new PointAG(300, 26), new PointAG(350, 40), new PointAG(388, 50)
+                , new PointAG(427, 100), new PointAG(460,150), new PointAG(475, 200), new PointAG(500, 275)
+                , new PointAG(525, 350), new PointAG(530, 413), new PointAG(525, 500), new PointAG(500, 575)
+                , new PointAG(475, 626), new PointAG(425, 675), new PointAG(350, 700), new PointAG(300, 709)
+                , new PointAG(200, 707), new PointAG(120,709), new PointAG(100, 705), new PointAG(70, 696)
+                , new PointAG(23, 675),  new PointAG(24, 640), new PointAG(35, 605), new PointAG(50, 566)
+                , new PointAG(75, 530),  new PointAG(125,505), new PointAG(175,470), new PointAG(215, 425)
+                , new PointAG(212, 375), new PointAG(200,325), new PointAG(175,275), new PointAG(125, 240)
+                , new PointAG(100, 200)};
+        
+        PointAG innerBoundPts[] = {new PointAG(250, 175), new PointAG(275, 150), new PointAG(325, 148)
+                , new PointAG(367,235) , new PointAG(387, 298), new PointAG(409,366)
+                , new PointAG(429, 420), new PointAG(440, 473) , new PointAG(426, 518)
+                , new PointAG(400, 560), new PointAG(357, 607), new PointAG(300, 640)
+                , new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586)
+                , new PointAG(189, 545), new PointAG(244, 505), new PointAG(288, 460)
+                , new PointAG(307, 440), new PointAG(305, 389), new PointAG(302, 312)
+                , new PointAG(267, 241)};
+        
+        kidneyTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
+        kidneyTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
+        
+        return kidneyTrack;
+        
     }
 }

@@ -53,7 +53,7 @@ public class GameScreen extends JFrame {
         );
         pnlInfoLayout.setVerticalGroup(
             pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
         pnlBoard.setBackground(new java.awt.Color(204, 255, 204));

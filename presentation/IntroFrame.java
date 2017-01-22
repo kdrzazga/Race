@@ -134,7 +134,8 @@ public class IntroFrame extends JFrame {
 
         cbTrack.setModel(new DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
-            circularTrackType.toString()
+            circularTrackType.toString(),
+            kidneyTrackType.toString()
         }));
 
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
@@ -148,7 +149,7 @@ public class IntroFrame extends JFrame {
 
         gameScreen = new GameScreen(this, game);
         IGraphicalOutput graphicalOutput = createGraphicalOutputBasedOnSelectedGraphics(gameScreen.getPnlBoard());
-        
+
         game.setGraphicalOutput(graphicalOutput);
         gameScreen.setVisible(true);
         game.setGameRunning(true);
@@ -172,9 +173,13 @@ public class IntroFrame extends JFrame {
         if (selectedTrack.equals(rectTrackType.toString())) {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
 
-        } else// if (selectedTrack.equals(CIRCULAR_TRACK))
+        } else if (selectedTrack.equals(circularTrackType.toString()))
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
+        }
+        else// if (selectedTrack.equals(kidneyTrackType.toString()))
+        {
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.KIDNEY);
         }
         return board;
     }
@@ -191,6 +196,7 @@ public class IntroFrame extends JFrame {
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
-    private TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
-    private TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
+    private final TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
+    private final TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
+    private final TrackType kidneyTrackType = Mocks.TrackType.KIDNEY;
 }
