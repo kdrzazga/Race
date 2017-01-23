@@ -39,8 +39,8 @@ public class GraphicalGameTest extends JFrame {
         btnDrawTestTrack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(770, 800));
-  
+        setPreferredSize(new java.awt.Dimension(700, 600));
+
         boardPanel.setBackground(new java.awt.Color(204, 255, 204));
 
         javax.swing.GroupLayout boardPanelLayout = new javax.swing.GroupLayout(boardPanel);
