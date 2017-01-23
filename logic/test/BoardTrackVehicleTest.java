@@ -5,10 +5,10 @@ import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import logic.Board;
-import logic.Mocks;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
+import miscallenous.Mocks;
 
 public class BoardTrackVehicleTest {
 
