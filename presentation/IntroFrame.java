@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import logic.Mocks;
-import logic.Mocks.TrackType;
+import miscallenous.Mocks;
+import miscallenous.Mocks.TrackType;
 
 public class IntroFrame extends JFrame {
 
@@ -135,7 +135,8 @@ public class IntroFrame extends JFrame {
         cbTrack.setModel(new DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
             circularTrackType.toString(),
-            kidneyTrackType.toString()
+            kidneyTrackType.toString(),
+            sineTrackType.toString()
         }));
 
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
@@ -177,10 +178,14 @@ public class IntroFrame extends JFrame {
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
         }
-        else// if (selectedTrack.equals(kidneyTrackType.toString()))
+        else if (selectedTrack.equals(kidneyTrackType.toString()))
         {
             board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.KIDNEY);
         }
+        else// if (selectedTrack.equals(sineTrackType.toString()))
+        {
+            board = Mocks.createBoardWithNVehiclesOnTrack(numberOfVehicles, Mocks.TrackType.SINE);
+        }        
         return board;
     }
 
@@ -199,4 +204,5 @@ public class IntroFrame extends JFrame {
     private final TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
     private final TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
     private final TrackType kidneyTrackType = Mocks.TrackType.KIDNEY;
+    private final TrackType sineTrackType = Mocks.TrackType.SINE;
 }
