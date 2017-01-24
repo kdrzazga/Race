@@ -26,7 +26,7 @@ public class Track {
         LineSection sectionBetweenCenters;
         sectionBetweenCenters = new LineSection(innerBoundCenter, outerBoundCenter);
 
-        return sectionBetweenCenters.getCenter();
+        return sectionBetweenCenters.computeCenter();
     }
 
     public LineSection getRaceStartLine() {
@@ -37,24 +37,27 @@ public class Track {
         LineSection intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
         LineSection intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
 
-        return new LineSection(intersectedInnerLine.getCenter(), intersectedOuterLine.getCenter());
+        return new LineSection(intersectedInnerLine.computeCenter(), intersectedOuterLine.computeCenter());
     }
 
-    public PointAG getStartPosition(int index, int maxIndex) {
+    public PointAG getStartPosition(int index, int vehiclesNo) {
 
         LineSection startLine = this.getRaceStartLine();
+        
         float x, y;
 
         if (startLine.p1.x == startLine.p2.x) {
             x = startLine.p1.x;
         } else {
-            x = startLine.p2.x + index * (startLine.p1.x - startLine.p2.x) / maxIndex;
+            float distanceBetweenVehsX = (startLine.p2.x - startLine.p1.x) / (vehiclesNo + 1);
+            x = startLine.p1.x + (index + 1) * distanceBetweenVehsX;
         }
 
         if (startLine.p1.y == startLine.p2.y) {
             y = startLine.p1.y;
         } else {
-            y = startLine.p2.y + index * (startLine.p1.y - startLine.p2.y) / maxIndex;
+            float distanceBetweenVehsY = (startLine.p2.y - startLine.p1.y) / (vehiclesNo + 1);
+            y = startLine.p1.y + (index + 1) * distanceBetweenVehsY;
         }
 
         return new PointAG(x, y);

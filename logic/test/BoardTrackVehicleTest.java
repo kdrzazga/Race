@@ -127,11 +127,11 @@ public class BoardTrackVehicleTest {
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 
         double distanceetweenVehicle1And2
-                = this.getLineConnectingVehicles(testBoard.vehicles.get(0), testBoard.vehicles.get(1)).getLength();
+                = this.getLineConnectingVehicles(testBoard.vehicles.get(0), testBoard.vehicles.get(1)).computeLength();
 
         for (int i = 2; i < testBoard.vehicles.size() - 1; i++) {
             double distanceBetweenNextVehicles
-                    = getLineConnectingVehicles(testBoard.vehicles.get(i), testBoard.vehicles.get(i + 1)).getLength();
+                    = getLineConnectingVehicles(testBoard.vehicles.get(i), testBoard.vehicles.get(i + 1)).computeLength();
 
             assertion(distanceetweenVehicle1And2, distanceBetweenNextVehicles, methodName);
             testResultMessage.append(testBoard.vehicles.get(i).v.position).append(" ");
@@ -168,7 +168,7 @@ public class BoardTrackVehicleTest {
         
         GIVEN_RECTANGULAR_TRACK_WITH_1_VEHICLE_SPEED_1:
         {
-            rectBoard = Mocks.createBoardWithNVehiclesOnTrack(1, Mocks.TrackType.RECTANGULAR_1);
+            rectBoard = Mocks.createBoardOnTrack(1, Mocks.TrackType.RECTANGULAR_1);
             rectBoard.vehicles.get(0).v.value = 1;
             vehicleBeforeMove = rectBoard.vehicles.get(0).clone();
         }

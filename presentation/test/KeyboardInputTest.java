@@ -71,7 +71,7 @@ public class KeyboardInputTest {
     }
 
     private static void init() {
-        mockBoard = Mocks.createBoardWithNVehiclesOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
+        mockBoard = Mocks.createBoardOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);

@@ -24,6 +24,7 @@ public class GraphicalTests extends JFrame {
 
     private JButton btnDrawHex;
     private JButton btnDrawCircle;
+    private JButton btnDrawVector;
     private JPanel drawingPanel;
 
     public GraphicalTests() {
@@ -43,11 +44,21 @@ public class GraphicalTests extends JFrame {
     private void initComponents() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        initbtnDrawVector();
         initBtnDrawCircle();
         initDrawingPanel();
         initBtnDrawHex();
         initContentPaneLayout();
         pack();
+    }
+
+    private void initbtnDrawVector() {
+        btnDrawVector = new JButton();
+
+        btnDrawVector.setText("Draw Vector(LineSection)");
+        btnDrawVector.addActionListener((ActionEvent evt) -> {
+            btnDrawCircleActionPerformed();
+        });
     }
 
     private void initBtnDrawCircle() {
@@ -88,7 +99,7 @@ public class GraphicalTests extends JFrame {
     private ParallelGroup createVerticalGroup(GroupLayout layout) {
         ParallelGroup drawButtonsGroup = createDrawButtonsGroup(layout);
         SequentialGroup verticalSubGroup = createVerticalSubGroup(layout, drawButtonsGroup);
-       
+
         return layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, verticalSubGroup);
     }
@@ -138,15 +149,15 @@ public class GraphicalTests extends JFrame {
 
     private Group createHorizontalSubGroup2(GroupLayout layout) {
         return layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(37, 37, 37)
                 .addComponent(btnDrawCircle)
-                .addGap(57, 57, 57)
+                .addGap(37, 37, 37)
                 .addComponent(btnDrawHex)
+                .addGap(37, 37, 37)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
     }
 	//GEN-BEGIN:initComponents
 	// </editor-fold>//GEN-END:initComponents
-   
     private void btnDrawCircleActionPerformed() {
         PointAG center2D = new PointAG(100, 100);
         CircleAG circle = new CircleAG(center2D, 100, 100);
@@ -167,5 +178,6 @@ public class GraphicalTests extends JFrame {
         Graphics g = this.drawingPanel.getGraphics();
         g.drawPolygon(hexagon.convertToPolygon());
     }
-	////GEN-BEGIN:variables    ////GEN-END:variables
+    //                                              
+
 }

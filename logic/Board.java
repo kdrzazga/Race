@@ -93,8 +93,8 @@ public class Board {
         LineSection lsWithPrevLocation = new LineSection(trackCenter, vehicle.previousLocation);
         LineSection lsWithCurrLocation = new LineSection(trackCenter,  vehicle.v.position);
 
-        double angleWithPrevLocation = General.inclinationAngle(lsWithPrevLocation);
-        double angleWithNewPos = General.inclinationAngle(lsWithCurrLocation);
+        double angleWithPrevLocation = lsWithPrevLocation.computeInclinationAngle();
+        double angleWithNewPos = lsWithCurrLocation.computeInclinationAngle();
 
         vehicle.travelledWayAngle += angleWithPrevLocation - angleWithNewPos;
         if (vehicle.getId() == 0) System.out.println(vehicle.getId()+ " " + vehicle.travelledWayAngle);

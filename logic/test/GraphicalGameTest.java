@@ -19,11 +19,8 @@ public class GraphicalGameTest extends JFrame {
     }
 
     public static void main(String args[]) {
-        System.out.println("Start line will notbe drawn in this class - check presentation.test.GameTest");
-        
         setNimbusLookAndFeel(GraphicalGameTest.class.getName());
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(() -> {
             new GraphicalGameTest().setVisible(true);
         });
@@ -37,17 +34,23 @@ public class GraphicalGameTest extends JFrame {
         btnDrawBoard = new javax.swing.JButton();
         btnDrawRectTrack = new javax.swing.JButton();
         btnDrawTestTrack = new javax.swing.JButton();
+        btnDrawSineTrack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1200, 1200));
+        setMinimumSize(new java.awt.Dimension(500, 500));
         setPreferredSize(new java.awt.Dimension(700, 600));
 
         boardPanel.setBackground(new java.awt.Color(204, 255, 204));
+        boardPanel.setMaximumSize(new java.awt.Dimension(850, 600));
+        boardPanel.setMinimumSize(new java.awt.Dimension(850, 600));
+        boardPanel.setPreferredSize(new java.awt.Dimension(850, 600));
 
         javax.swing.GroupLayout boardPanelLayout = new javax.swing.GroupLayout(boardPanel);
         boardPanel.setLayout(boardPanelLayout);
         boardPanelLayout.setHorizontalGroup(
             boardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
         );
         boardPanelLayout.setVerticalGroup(
             boardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,6 +78,13 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        btnDrawSineTrack.setText("Draw Sine Track");
+        btnDrawSineTrack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDrawSineTrackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,8 +96,9 @@ public class GraphicalGameTest extends JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnDrawBoard))
                     .addComponent(btnDrawRectTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDrawTestTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnDrawTestTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDrawSineTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -96,13 +107,15 @@ public class GraphicalGameTest extends JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnDrawBoard)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(btnDrawRectTrack)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(btnDrawTestTrack)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnDrawSineTrack)
+                .addContainerGap(651, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(boardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -111,7 +124,6 @@ public class GraphicalGameTest extends JFrame {
 
     private void mockDrawTrack(Track track) {
         //this is required as class Draw2d is in upper layer
-
         boardG.drawPolygon(track.innerBound.convertToPolygon());
         boardG.drawPolygon(track.outerBound.convertToPolygon());
     }
@@ -132,24 +144,30 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = Mocks.createBoardWithNVehiclesOnTrack(3, Mocks.TrackType.CIRCULAR_1);
+        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.CIRCULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = Mocks.createBoardWithNVehiclesOnTrack(3, Mocks.TrackType.RECTANGULAR_1);
+        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.RECTANGULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        Board board = Mocks.createBoardWithNVehiclesOnTrack(3, Mocks.TrackType.TEST_RECTANGULAR);
+        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.TEST_RECTANGULAR);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
+
+    private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
+        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.SINE);
+        mockDrawBoard(board);
+    }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JButton btnDrawBoard;
     private javax.swing.JButton btnDrawRectTrack;
+    private javax.swing.JButton btnDrawSineTrack;
     private javax.swing.JButton btnDrawTestTrack;
     // End of variables declaration//GEN-END:variables
     private final Graphics boardG;
