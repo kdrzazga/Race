@@ -8,7 +8,7 @@ import logic.Board;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
-import miscallenous.Mocks;
+import miscallenous.BoardBuilder;
 
 public class BoardTrackVehicleTest {
 
@@ -26,7 +26,7 @@ public class BoardTrackVehicleTest {
 
         this.vehicle.v = v;
 
-        track = Mocks.create_50_50__350_250_RectangularTrack();
+        track = BoardBuilder.create_50_50__350_250_RectangularTrack();
         board.track = track;
         board.vehicles.add(vehicle);
     }
@@ -86,7 +86,7 @@ public class BoardTrackVehicleTest {
     }
 
     public void givenTrack_ShouldStartLineEqualExpected() {
-        Track rectTrack = Mocks.create_0_0__30_30_TestRectangularTrack();
+        Track rectTrack = BoardBuilder.create_0_0__30_30_TestRectangularTrack();
 
         LineSection actualStartLine = rectTrack.getRaceStartLine();
         LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
@@ -99,7 +99,7 @@ public class BoardTrackVehicleTest {
         String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1";
 
         StringBuilder testResultMessage = new StringBuilder();
-        Track rectTrack = Mocks.create_0_0__30_30_TestRectangularTrack();
+        Track rectTrack = BoardBuilder.create_0_0__30_30_TestRectangularTrack();
 
         LineSection startLine = rectTrack.getRaceStartLine();
 
@@ -123,7 +123,7 @@ public class BoardTrackVehicleTest {
 
         StringBuilder testResultMessage = new StringBuilder();
         testResultMessage.append(methodName).append(" passed for ");
-        Track rectTrack = Mocks.create_50_50__350_250_RectangularTrack();
+        Track rectTrack = BoardBuilder.create_50_50__350_250_RectangularTrack();
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 
         double distanceetweenVehicle1And2
@@ -168,7 +168,7 @@ public class BoardTrackVehicleTest {
         
         GIVEN_RECTANGULAR_TRACK_WITH_1_VEHICLE_SPEED_1:
         {
-            rectBoard = Mocks.createBoardOnTrack(1, Mocks.TrackType.RECTANGULAR_1);
+            rectBoard = BoardBuilder.createBoardOnTrack(1, BoardBuilder.TrackType.RECTANGULAR_1);
             rectBoard.vehicles.get(0).v.value = 1;
             vehicleBeforeMove = rectBoard.vehicles.get(0).clone();
         }

@@ -11,7 +11,7 @@ import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
 
-public class Mocks {
+public class BoardBuilder {
 
     public enum TrackType {
         RECTANGULAR_1, CIRCULAR_1, KIDNEY, SINE, TEST_RECTANGULAR;

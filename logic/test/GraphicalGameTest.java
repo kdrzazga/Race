@@ -9,7 +9,7 @@ import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
-import miscallenous.Mocks;
+import miscallenous.BoardBuilder;
 
 public class GraphicalGameTest extends JFrame {
 
@@ -144,22 +144,22 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.CIRCULAR_1);
+        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.CIRCULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.RECTANGULAR_1);
+        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.TEST_RECTANGULAR);
+        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
-        Board board = Mocks.createBoardOnTrack(3, Mocks.TrackType.SINE);
+        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.SINE);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 

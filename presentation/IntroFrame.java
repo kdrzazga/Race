@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import miscallenous.Mocks;
-import miscallenous.Mocks.TrackType;
+import miscallenous.BoardBuilder;
+import miscallenous.BoardBuilder.TrackType;
 
 public class IntroFrame extends JFrame {
 
@@ -172,19 +172,19 @@ public class IntroFrame extends JFrame {
         Board board;
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
         if (selectedTrack.equals(rectTrackType.toString())) {
-            board = Mocks.createBoardOnTrack(numberOfVehicles, Mocks.TrackType.RECTANGULAR_1);
+            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR_1);
 
         } else if (selectedTrack.equals(circularTrackType.toString()))
         {
-            board = Mocks.createBoardOnTrack(numberOfVehicles, Mocks.TrackType.CIRCULAR_1);
+            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.CIRCULAR_1);
         }
         else if (selectedTrack.equals(kidneyTrackType.toString()))
         {
-            board = Mocks.createBoardOnTrack(numberOfVehicles, Mocks.TrackType.KIDNEY);
+            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.KIDNEY);
         }
         else// if (selectedTrack.equals(sineTrackType.toString()))
         {
-            board = Mocks.createBoardOnTrack(numberOfVehicles, Mocks.TrackType.SINE);
+            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
         }        
         return board;
     }
@@ -201,8 +201,8 @@ public class IntroFrame extends JFrame {
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
-    private final TrackType rectTrackType = Mocks.TrackType.RECTANGULAR_1;
-    private final TrackType circularTrackType = Mocks.TrackType.CIRCULAR_1;
-    private final TrackType kidneyTrackType = Mocks.TrackType.KIDNEY;
-    private final TrackType sineTrackType = Mocks.TrackType.SINE;
+    private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR_1;
+    private final TrackType circularTrackType = BoardBuilder.TrackType.CIRCULAR_1;
+    private final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
+    private final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
 }

@@ -5,7 +5,7 @@ import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
-import miscallenous.Mocks;
+import miscallenous.BoardBuilder;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -71,7 +71,7 @@ public class KeyboardInputTest {
     }
 
     private static void init() {
-        mockBoard = Mocks.createBoardOnTrack(2, Mocks.TrackType.RECTANGULAR_1);
+        mockBoard = BoardBuilder.createBoardOnTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);
