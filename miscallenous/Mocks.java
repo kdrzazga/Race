@@ -81,8 +81,8 @@ public class Mocks {
     public static Track create_50_50__350_250_RectangularTrack() {
         Track rectangularTrack = new Track();
 
-        PointAG outerBoundPts[] = {new PointAG(50, 50), new PointAG(350, 50), new PointAG(350, 250), new PointAG(50, 250)};
-        PointAG innerBoundPts[] = {new PointAG(100, 100), new PointAG(250, 100), new PointAG(250, 150), new PointAG(100, 150)};
+        PointAG outerBoundPts[] = {new PointAG(50, 250), new PointAG(350, 250), new PointAG(350, 50), new PointAG(50, 50) };
+        PointAG innerBoundPts[] = {new PointAG(100, 150), new PointAG(250, 150),new PointAG(250, 100), new PointAG(100, 100) };
 
         rectangularTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         rectangularTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
@@ -99,7 +99,7 @@ public class Mocks {
         PointAG donutCenter = new PointAG(300, 370);
         int outerBoundRadius = 250;
         int innerBoundRadius = 100;
-        int numberOfPoints = 360;
+        int numberOfPoints = 90;
 
         CircleAG innerBound = new CircleAG(donutCenter, innerBoundRadius, numberOfPoints);
         CircleAG outerBound = new CircleAG(donutCenter, outerBoundRadius, numberOfPoints);
@@ -135,7 +135,7 @@ public class Mocks {
             new PointAG(23, 675), new PointAG(24, 640), new PointAG(35, 605), new PointAG(50, 566),
             new PointAG(75, 530), new PointAG(125, 505), new PointAG(175, 470), new PointAG(215, 425),
             new PointAG(212, 375), new PointAG(200, 325), new PointAG(175, 275), new PointAG(125, 240),
-            new PointAG(100, 200)};
+            new PointAG(100, 200), };
 
         PointAG innerBoundPts[] = {new PointAG(250, 175), new PointAG(275, 150), new PointAG(325, 148),
             new PointAG(367, 235), new PointAG(387, 298), new PointAG(409, 366), new PointAG(429, 420),
@@ -161,14 +161,15 @@ public class Mocks {
         final int TRACK_HEIGHT = 630;
         final int LEFT_SIDE_OFFSET = 70;
         final int RIGHT_SIDE_OFFSET = 370;
-
+        final int ITERATION_PIXEL_STEP = 20;
+        
         int y = 90;
 
         while (y < TRACK_HEIGHT) {
             float x = General.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
                     + LEFT_SIDE_OFFSET + HORIZONTAL_TRACK_OFFSET);
             outerBoundPts.add(new PointAG(x, y));
-            y += 3;
+            y += ITERATION_PIXEL_STEP;
         }
 
         y = (int) (0.9 * y);
@@ -177,7 +178,7 @@ public class Mocks {
             float x = General.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
                     + RIGHT_SIDE_OFFSET + HORIZONTAL_TRACK_OFFSET);
             outerBoundPts.add(new PointAG(x, y));
-            y -= 3;
+            y -= ITERATION_PIXEL_STEP;
         }
 
         final float INNER_OFFSET_HORIZONTAL = 195;

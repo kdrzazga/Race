@@ -32,7 +32,9 @@ public class PolygonAG{
         
         for(i = 0; i < this.points.size() - 2; i++)
         {
-            if (this.points.get(i).x < line.verticalX && this.points.get(i+1).x > line.verticalX)
+            PointAG p1 = this.points.get(i);
+            PointAG p2 = this.points.get(i + 1);
+            if (p1.x < line.verticalX && p2.x > line.verticalX)
                 break;
         }
         

@@ -2,7 +2,7 @@ package libs.math2;
 
 import java.awt.Point;
 
-   public class LineSection {
+   public class LineSection{
 
         public PointAG p1;
         public PointAG p2;

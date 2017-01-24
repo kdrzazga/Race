@@ -34,10 +34,10 @@ public class Track {
 
         LineAG lineContainingStartLineSection = new LineAG(X);
 
-        LineSection upperLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
-        LineSection lowerLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        LineSection intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        LineSection intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
 
-        return new LineSection(upperLine.getCenter(), lowerLine.getCenter());
+        return new LineSection(intersectedInnerLine.getCenter(), intersectedOuterLine.getCenter());
     }
 
     public PointAG getStartPosition(int index, int maxIndex) {
