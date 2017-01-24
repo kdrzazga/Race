@@ -33,6 +33,7 @@ public class BoardTrackVehicleTest {
 
     public static void main(String[] args) {
         BoardTrackVehicleTest test = new BoardTrackVehicleTest();
+        test.updateVehicleTravelledWayAngleTest();
         test.givenVelocityVector_WhenVehicleMovedZigZagRoute_ThenVehiclePositionsEqualExpected();
         test.givenTrack_ShouldStartLineEqualExpected();
 
@@ -71,12 +72,12 @@ public class BoardTrackVehicleTest {
         for (int i = 0; i < 3; i++) {
             v.angle = Math.PI / 7;
 
-            moveVehicle31times();
+            moveVehicle31times(this.board);
             assertion(board.getVehiclePosition(0).x == expectedPositions[i][0].x, "zigZagDrive index=" + i + "0 ");
             assertion(board.getVehiclePosition(0).y == expectedPositions[i][0].y, "zigZagDrive index=" + i + "0 ");
 
             v.angle = -Math.PI / 7;
-            moveVehicle31times();
+            moveVehicle31times(this.board);
             assertion(board.getVehiclePosition(0).x == expectedPositions[i][1].x, "zigZagDrive index=" + i + "1 ");
             assertion(board.getVehiclePosition(0).y == expectedPositions[i][1].y, "zigZagDrive index=" + i + "1 ");
         }
@@ -85,9 +86,9 @@ public class BoardTrackVehicleTest {
     }
 
     public void givenTrack_ShouldStartLineEqualExpected() {
-        Track track = Mocks.create_0_0__30_30_TestRectangularTrack();
+        Track rectTrack = Mocks.create_0_0__30_30_TestRectangularTrack();
 
-        LineSection actualStartLine = track.getRaceStartLine();
+        LineSection actualStartLine = rectTrack.getRaceStartLine();
         LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
 
         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
@@ -146,7 +147,7 @@ public class BoardTrackVehicleTest {
         return new LineSection(vehicle1Position, vehicle2Position);
     }
 
-    private void moveVehicle31times() {
+    private Vehicle moveVehicle31times(Board board) {
 
         final int ITERATIONS = 31;
 
@@ -157,10 +158,41 @@ public class BoardTrackVehicleTest {
             //all the time vehicle should be on the track
             assertion(track.isPointWithinTrack(board.getVehiclePosition(0)), "moveVehicle31times");
         }
+        return board.vehicles.get(0);
     }
 
-    private void updateVehicleTravelledWayAngleTest() {
-        throw new RuntimeException("Not implemented yet");
+    public void updateVehicleTravelledWayAngleTest() {  
+        Board rectBoard;
+        Vehicle vehicleBeforeMove;
+        Vehicle vehicleAfterMove;
+        
+        GIVEN_RECTANGULAR_TRACK_WITH_1_VEHICLE_SPEED_1:
+        {
+            rectBoard = Mocks.createBoardWithNVehiclesOnTrack(1, Mocks.TrackType.RECTANGULAR_1);
+            rectBoard.vehicles.get(0).v.value = 1;
+            vehicleBeforeMove = rectBoard.vehicles.get(0).clone();
+        }
+        WHEN_VEHICLE_MOVED_31_TIMES:
+        {
+            vehicleAfterMove = moveVehicle31times(rectBoard);
+        }
+        THEN_TRAVELLED_WAY_INCREASED:
+        {
+            assertion(vehicleBeforeMove.travelledWayAngle, 0.0, "updateVehicleTravelledWayAngleTest");
+            assertion(vehicleAfterMove.travelledWayAngle > 0, "updateVehicleTravelledWayAngleTest");            
+        }
+        GIVEN:
+        {
+            vehicleBeforeMove = vehicleAfterMove.clone();
+        }
+        WHEN_VEHICLE_MOVED_62_TIMES_MORE:
+        {
+            vehicleAfterMove = moveVehicle31times(rectBoard);
+        }
+        THEN:
+        {
+            throw new RuntimeException("Implementeation not finished");
+        }
     }
 
     private void givenVelocityVector_ShouldVehicleMoveToSpecifiedPosition(double angle, PointAG inputPos, PointAG expectedPos) {

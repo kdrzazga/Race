@@ -66,7 +66,6 @@ public class Mocks {
             boolean active = true;
             result.vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, active));
         }
-
         return result;
     }
 
@@ -139,13 +138,11 @@ public class Mocks {
             new PointAG(100, 200)};
 
         PointAG innerBoundPts[] = {new PointAG(250, 175), new PointAG(275, 150), new PointAG(325, 148),
-            new PointAG(367, 235), new PointAG(387, 298), new PointAG(409, 366),
-            new PointAG(429, 420), new PointAG(440, 473), new PointAG(426, 518),
-            new PointAG(400, 560), new PointAG(357, 607), new PointAG(300, 640),
-            new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586),
-            new PointAG(189, 545), new PointAG(244, 505), new PointAG(288, 460),
-            new PointAG(307, 440), new PointAG(305, 389), new PointAG(302, 312),
-            new PointAG(267, 241)};
+            new PointAG(367, 235), new PointAG(387, 298), new PointAG(409, 366), new PointAG(429, 420),
+            new PointAG(440, 473), new PointAG(426, 518), new PointAG(400, 560), new PointAG(357, 607),
+            new PointAG(300, 640), new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586),
+            new PointAG(189, 545), new PointAG(244, 505), new PointAG(288, 460), new PointAG(307, 440),
+            new PointAG(305, 389), new PointAG(302, 312), new PointAG(267, 241)};
 
         kidneyTrack.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         kidneyTrack.innerBound.points.addAll(Arrays.asList(innerBoundPts));
@@ -187,7 +184,7 @@ public class Mocks {
         final float INNER_OFFSET_VERTICAL = 70;
 
         for (int i = 0; i < outerBoundPts.size(); i++) {
-            
+
             float ptx = General.roundToFloat(outerBoundPts.get(i).x * 0.3 + INNER_OFFSET_HORIZONTAL);
             float pty = General.roundToFloat(outerBoundPts.get(i).y * 0.8 + INNER_OFFSET_VERTICAL);
             innerBoundPts.add(new PointAG(ptx, pty));

@@ -6,7 +6,7 @@ public class Vehicle {
 
     public VelocityVector v;
     public PointAG previousLocation;
-    public double travelledWayAngle; //the path that Vehicle has moved is is expressed in angle, not in length (2PI = 1 lap, PI = 0.5 lap etc.)
+    public double travelledWayAngle; //the path that Vehicle has travelled is expressed in angle, not in distance (2PI = 1 lap, PI = 0.5 lap etc.)
     public boolean active;
     private final int id;
 
@@ -29,6 +29,19 @@ public class Vehicle {
         this.v = new VelocityVector(speed, 0.0, position);
         this.active = active;
         this.previousLocation = new PointAG(0, 0);
+    }
+    
+    @Override
+    public Vehicle clone()
+    {
+        //no need to call super.clone() or throw CloneNotSupportedException
+        Vehicle clonedVehicle = new Vehicle(this.id, this.v.value, this.v.position, this.active);
+        clonedVehicle.v.angle = this.v.angle;
+        clonedVehicle.travelledWayAngle = this.travelledWayAngle;
+        clonedVehicle.previousLocation.x = this.previousLocation.x;
+        clonedVehicle.previousLocation.y = this.previousLocation.y;
+        
+        return clonedVehicle;                
     }
 
     public int getId() {
@@ -57,6 +70,11 @@ public class Vehicle {
         if (this.active) {
             this.v.slowDown();
         }
+    }
+    
+    public void stop() {
+        if (this.active)
+            this.v.value = 0;
     }
 
     @Override

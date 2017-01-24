@@ -5,6 +5,7 @@ import java.awt.Point;
 import libs.math2.*;
 
 public class Track {
+
     public PolygonAG innerBound;
     public PolygonAG outerBound;
 
@@ -18,7 +19,7 @@ public class Track {
                 && this.outerBound.convertToPolygon().contains(point.convertToPoint());
     }
 
-    public PointAG getTrackCentre() {
+    public PointAG getTrackCenter() {
         Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
         Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());
 
@@ -29,7 +30,7 @@ public class Track {
     }
 
     public LineSection getRaceStartLine() {
-        float X = getTrackCentre().x;
+        float X = getTrackCenter().x;
 
         LineAG lineContainingStartLineSection = new LineAG(X);
 
@@ -43,7 +44,7 @@ public class Track {
 
         LineSection startLine = this.getRaceStartLine();
         float x, y;
-        
+
         if (startLine.p1.x == startLine.p2.x) {
             x = startLine.p1.x;
         } else {
