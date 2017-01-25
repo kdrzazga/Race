@@ -144,7 +144,7 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.CIRCULAR_1);
+        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.DONUT);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 

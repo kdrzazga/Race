@@ -176,7 +176,7 @@ public class IntroFrame extends JFrame {
 
         } else if (selectedTrack.equals(circularTrackType.toString()))
         {
-            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.CIRCULAR_1);
+            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
         }
         else if (selectedTrack.equals(kidneyTrackType.toString()))
         {
@@ -202,7 +202,7 @@ public class IntroFrame extends JFrame {
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
     private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR_1;
-    private final TrackType circularTrackType = BoardBuilder.TrackType.CIRCULAR_1;
+    private final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;
     private final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
     private final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
 }

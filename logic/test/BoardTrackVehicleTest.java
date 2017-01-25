@@ -26,7 +26,7 @@ public class BoardTrackVehicleTest {
 
         this.vehicle.v = v;
 
-        track = BoardBuilder.create_50_50__350_250_RectangularTrack();
+        track = BoardBuilder.create_50_50__450_600_RectangularTrack();
         board.track = track;
         board.vehicles.add(vehicle);
     }
@@ -123,7 +123,7 @@ public class BoardTrackVehicleTest {
 
         StringBuilder testResultMessage = new StringBuilder();
         testResultMessage.append(methodName).append(" passed for ");
-        Track rectTrack = BoardBuilder.create_50_50__350_250_RectangularTrack();
+        Track rectTrack = BoardBuilder.create_50_50__450_600_RectangularTrack();
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 
         double distanceetweenVehicle1And2
