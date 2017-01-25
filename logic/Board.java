@@ -15,13 +15,13 @@ public class Board {
         this.track = new Track();
         this.vehicles = new ArrayList<>();
     }
-
+ 
     public Board(int numberOfVehicles, Track track) {
         this.track = track;
         this.vehicles = new ArrayList<>();
 
         for (int i = 0; i < numberOfVehicles; i++) {
-            Vehicle veh = new Vehicle(i, 0, this.track.getStartPosition(i, numberOfVehicles));
+            Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
 
             this.vehicles.add(veh);
@@ -43,9 +43,9 @@ public class Board {
     }
 
     private void assignNewPositionIfVehicleOnTrack(PointAG newPosition, Vehicle vehicle) {
-        if (track.isPointWithinTrack(newPosition)) {
+        if (track.isInsideTrack(newPosition)) {
             vehicle.v.position = newPosition;
-            updateVehicleTravelledWayAngle(vehicle, track.getTrackCenter());
+            updateVehicleTravelledWayAngle(vehicle, track.computeCenter());
         } else {
             vehicle.stop(); 
         }

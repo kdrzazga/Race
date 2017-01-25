@@ -33,6 +33,38 @@ public class BoardBuilder {
         }
     };
 
+    // <editor-fold defaultstate="collapsed" desc="Point arrays for tracks">
+    private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 650), new PointAG(550, 650), new PointAG(550, 400), new PointAG(325, 400),
+        new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 375), new PointAG(550, 375), new PointAG(550, 50),
+        new PointAG(50, 50)};
+    private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
+        new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
+        new PointAG(150, 100)};
+
+    private static final PointAG[] TEST_RECT_OUTER_BOUND_PTS = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
+    private static final PointAG[] TEST_RECT_INNER_BOUND_PTS = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
+
+    private static final PointAG[] KIDNEY_OUTER_BOUND_PTS = {
+        new PointAG(427, 100), new PointAG(460, 150), new PointAG(475, 200), new PointAG(500, 275),
+        new PointAG(525, 350), new PointAG(530, 413), new PointAG(525, 500), new PointAG(500, 575),
+        new PointAG(475, 626), new PointAG(425, 675), new PointAG(350, 700), new PointAG(300, 709),
+        new PointAG(200, 707), new PointAG(120, 709), new PointAG(100, 705), new PointAG(70, 696),
+        new PointAG(23, 675), new PointAG(24, 640), new PointAG(35, 605), new PointAG(50, 566),
+        new PointAG(75, 530), new PointAG(125, 505), new PointAG(175, 470), new PointAG(215, 425),
+        new PointAG(212, 375), new PointAG(200, 325), new PointAG(175, 275), new PointAG(125, 240),
+        new PointAG(100, 200),
+        new PointAG(75, 150), new PointAG(100, 100), new PointAG(150, 50), new PointAG(200, 25),
+        new PointAG(250, 20), new PointAG(300, 26), new PointAG(350, 40), new PointAG(388, 50)};
+    private static final PointAG[] KIDNEY_INNER_BOUND_PTS = {
+        new PointAG(250, 175), new PointAG(275, 150), new PointAG(325, 148), new PointAG(348, 180),
+        new PointAG(367, 235), new PointAG(387, 298), new PointAG(409, 366), new PointAG(429, 420),
+        new PointAG(440, 473), new PointAG(426, 518), new PointAG(400, 560), new PointAG(357, 607),
+        new PointAG(300, 640), new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586),
+        new PointAG(189, 545), new PointAG(244, 505), new PointAG(288, 460), new PointAG(307, 440),
+        new PointAG(305, 389), new PointAG(302, 312), new PointAG(267, 241)
+    };
+    //</editor-fold>
+
     public static Vehicle createVehicleAtPosition(int id, float x, float y) {
         Vehicle vehicle = new Vehicle(id, 1, new PointAG(x, y));
         vehicle.active = true;
@@ -40,7 +72,7 @@ public class BoardBuilder {
         return vehicle;
     }
 
-    public static Board createBoardOnTrack(int numberOfVehicles, TrackType trackType) {
+    public static Board createBoardWithTrack(int numberOfVehicles, TrackType trackType) {
         Board board = new Board();
         board.track = createTrack(trackType);
         board.vehicles = createVehicles(numberOfVehicles, board);
@@ -52,7 +84,7 @@ public class BoardBuilder {
         int initialSpeed = VelocityVector.V_MIN;
 
         for (int i = 0; i < numberOfVehicles; i++) {
-            PointAG vehiclePosition = board.track.getStartPosition(i, numberOfVehicles);
+            PointAG vehiclePosition = board.track.computeStartPosition(i, numberOfVehicles);
             boolean active = true;
             vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, active));
         }
@@ -60,16 +92,16 @@ public class BoardBuilder {
         return vehicles;
     }
 
-    private static Track createTrack(TrackType trackType) {
+    public static Track createTrack(TrackType trackType) {
         switch (trackType) {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
             case RECTANGULAR_1:
-                return create_50_50__450_600_RectangularTrack();
+                return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS);
             case KIDNEY:
-                return create_7_5__550_800_KidneyTrack();
+                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS);
             case TEST_RECTANGULAR:
-                return create_0_0__30_30_TestRectangularTrack();
+                return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS);
             default:
                 //SINE:
                 return create_50_50__450_500_SineTrack();
@@ -86,54 +118,11 @@ public class BoardBuilder {
 
     public static Board createBoardWith2VehiclesOnRectTrack() {
         Board rectBoard = new Board();
-        rectBoard.track = create_50_50__450_600_RectangularTrack();
+        rectBoard.track = BoardBuilder.createTrack(BoardBuilder.TrackType.RECTANGULAR_1);
         rectBoard.vehicles.add(createVehicleAtPosition(0, 100, 100));
         rectBoard.vehicles.add(createVehicleAtPosition(1, 100, 120));
 
         return rectBoard;
-    }
-
-    public static Track create_50_50__450_600_RectangularTrack() {
-        PointAG outerBoundPts[] = {new PointAG(50, 650), new PointAG(550, 650), new PointAG(550, 400), new PointAG(325, 400),
-            new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 375), new PointAG(550, 375), new PointAG(550, 50),
-            new PointAG(50, 50)};
-        PointAG innerBoundPts[] = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
-            new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
-            new PointAG(150, 100)};
-
-        return createTrack(outerBoundPts, innerBoundPts);
-    }
-
-    public static Track create_0_0__30_30_TestRectangularTrack() {
-        PointAG[] testRectangularOuterBoundPts = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
-        PointAG[] testRectangularInnerBoundPts = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
-
-        return createTrack(testRectangularOuterBoundPts, testRectangularInnerBoundPts);
-    }
-
-    public static Track create_7_5__550_800_KidneyTrack() {
-        PointAG[] kidneyOuterBoundPts = {
-            new PointAG(427, 100), new PointAG(460, 150), new PointAG(475, 200), new PointAG(500, 275),
-            new PointAG(525, 350), new PointAG(530, 413), new PointAG(525, 500), new PointAG(500, 575),
-            new PointAG(475, 626), new PointAG(425, 675), new PointAG(350, 700), new PointAG(300, 709),
-            new PointAG(200, 707), new PointAG(120, 709), new PointAG(100, 705), new PointAG(70, 696),
-            new PointAG(23, 675), new PointAG(24, 640), new PointAG(35, 605), new PointAG(50, 566),
-            new PointAG(75, 530), new PointAG(125, 505), new PointAG(175, 470), new PointAG(215, 425),
-            new PointAG(212, 375), new PointAG(200, 325), new PointAG(175, 275), new PointAG(125, 240),
-            new PointAG(100, 200),
-            new PointAG(75, 150), new PointAG(100, 100), new PointAG(150, 50), new PointAG(200, 25),
-            new PointAG(250, 20), new PointAG(300, 26), new PointAG(350, 40), new PointAG(388, 50)};
-
-        PointAG[] kidneyInnerBoundPts = {
-            new PointAG(250, 175), new PointAG(275, 150), new PointAG(325, 148), new PointAG(348, 180),
-            new PointAG(367, 235), new PointAG(387, 298), new PointAG(409, 366), new PointAG(429, 420),
-            new PointAG(440, 473), new PointAG(426, 518), new PointAG(400, 560), new PointAG(357, 607),
-            new PointAG(300, 640), new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586),
-            new PointAG(189, 545), new PointAG(244, 505), new PointAG(288, 460), new PointAG(307, 440),
-            new PointAG(305, 389), new PointAG(302, 312), new PointAG(267, 241)
-        };
-
-        return createTrack(kidneyOuterBoundPts, kidneyInnerBoundPts);
     }
 
     /*
@@ -203,4 +192,5 @@ public class BoardBuilder {
         //return createTrack(sineTrack, outerBoundPts.toArray(), innerBoundPts.toArray());
         return sineTrack;
     }
+
 }

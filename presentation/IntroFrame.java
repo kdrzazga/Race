@@ -172,19 +172,19 @@ public class IntroFrame extends JFrame {
         Board board;
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
         if (selectedTrack.equals(rectTrackType.toString())) {
-            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR_1);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR_1);
 
         } else if (selectedTrack.equals(circularTrackType.toString()))
         {
-            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
         }
         else if (selectedTrack.equals(kidneyTrackType.toString()))
         {
-            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.KIDNEY);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.KIDNEY);
         }
         else// if (selectedTrack.equals(sineTrackType.toString()))
         {
-            board = BoardBuilder.createBoardOnTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
         }        
         return board;
     }

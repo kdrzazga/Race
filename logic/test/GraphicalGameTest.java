@@ -144,22 +144,22 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.DONUT);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
-        Board board = BoardBuilder.createBoardOnTrack(3, BoardBuilder.TrackType.SINE);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 

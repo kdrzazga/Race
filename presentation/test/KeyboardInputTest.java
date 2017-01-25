@@ -20,10 +20,10 @@ public class KeyboardInputTest {
 
     private static final Component MOCK_EVENT_SOURCE = new JFrame();
     //<editor-fold defaultstate="collapsed" desc=" Assign keys to KeyEvents ">
-    private static final KeyEvent PLAYER_1_ACCELERATE = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'w', 'w');
-    private static final KeyEvent PLAYER_1_SLOW_DOWN = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 's', 's');
-    private static final KeyEvent PLAYER_1_TURN_LEFT = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'a', 'a');
-    private static final KeyEvent PLAYER_1_TURN_RIGHT = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'a', 'a');
+    private static final KeyEvent PLAYER_1_ACCELERATE = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'W', 'W');
+    private static final KeyEvent PLAYER_1_SLOW_DOWN = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'S', 'S');
+    private static final KeyEvent PLAYER_1_TURN_LEFT = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'A', 'A');
+    private static final KeyEvent PLAYER_1_TURN_RIGHT = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'D', 'D');
 
     private static final KeyEvent PLAYER_2_ACCELERATE = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, KeyEvent.VK_UP);
     private static final KeyEvent PLAYER_2_SLOW_DOWN = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, KeyEvent.VK_DOWN);
@@ -31,8 +31,8 @@ public class KeyboardInputTest {
     private static final KeyEvent PLAYER_2_TURN_RIGHT = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, KeyEvent.VK_RIGHT);
 
     private static final KeyEvent NO_ACTION_KEY_1 = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, KeyEvent.VK_DEAD_TILDE);
-    private static final KeyEvent NO_ACTION_KEY_2 = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'p', 'p');
-    private static final KeyEvent NO_ACTION_KEY_3 = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'W', 'W');
+    private static final KeyEvent NO_ACTION_KEY_2 = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'P', 'P');
+    private static final KeyEvent NO_ACTION_KEY_3 = new KeyEvent(MOCK_EVENT_SOURCE, 0, 0, 0, (int) 'w', 'w');
     //</editor-fold>
 
     public static void main(String args[]) {
@@ -52,14 +52,14 @@ public class KeyboardInputTest {
         init();
 
         ki.keyPressed(PLAYER_1_ACCELERATE);
-        assertion(player1.v.value, 2, "testForBothPlayers");
+        assertion(player1.v.value, VelocityVector.V_MIN + 1, "testForBothPlayers");
         ki.keyPressed(PLAYER_2_ACCELERATE);
-        assertion(player2.v.value, 2, "testForBothPlayers");
+        assertion(player2.v.value, VelocityVector.V_MIN + 1, "testForBothPlayers");
         ki.keyPressed(NO_ACTION_KEY_1);
-        assertion(player1.v.value, 2, "testForBothPlayers");
-        assertion(player2.v.value, 2, "testForBothPlayers");
+        assertion(player1.v.value, VelocityVector.V_MIN + 1, "testForBothPlayers");
+        assertion(player2.v.value, VelocityVector.V_MIN + 1, "testForBothPlayers");
 
-        for (int i = 2; i < VelocityVector.V_MAX + 3; i++) {
+        for (int i = VelocityVector.V_MIN + 1; i < VelocityVector.V_MAX + 3; i++) {
             ki.keyPressed(NO_ACTION_KEY_2);
             ki.keyPressed(PLAYER_1_SLOW_DOWN);
             ki.keyPressed(PLAYER_2_ACCELERATE);
@@ -71,7 +71,7 @@ public class KeyboardInputTest {
     }
 
     private static void init() {
-        mockBoard = BoardBuilder.createBoardOnTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
+        mockBoard = BoardBuilder.createBoardWithTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
         ki = new KeyboardInput(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);
@@ -79,13 +79,13 @@ public class KeyboardInputTest {
 
     private static void givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(Vehicle player, KeyEvent accelerate) {
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 2, "accelerateTillMaxSpeed");
+        assertion(player.v.value, VelocityVector.V_MIN + 1, "accelerateTillMaxSpeed");
         ki.keyPressed(NO_ACTION_KEY_1);
         ki.keyPressed(accelerate);
-        assertion(player.v.value, 3, "accelerateTillMaxSpeed");
+        assertion(player.v.value, VelocityVector.V_MIN + 2, "accelerateTillMaxSpeed");
         ki.keyPressed(accelerate);
         ki.keyPressed(NO_ACTION_KEY_3);
-        for (int exp = 4; exp <= VelocityVector.V_MAX; exp++) {
+        for (int exp = VelocityVector.V_MIN + 3; exp <= VelocityVector.V_MAX; exp++) {
             assertion(player.v.value, exp, "accelerateTillMaxSpeed");
             ki.keyPressed(accelerate);
         }

@@ -14,12 +14,12 @@ public class Track {
         this.outerBound = new PolygonAG();
     }
 
-    public boolean isPointWithinTrack(PointAG point) {
+    public boolean isInsideTrack(PointAG point) {
         return !this.innerBound.convertToPolygon().contains(point.convertToPoint())
                 && this.outerBound.convertToPolygon().contains(point.convertToPoint());
     }
 
-    public PointAG getTrackCenter() {
+    public PointAG computeCenter() {
         Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
         Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());
 
@@ -30,7 +30,7 @@ public class Track {
     }
 
     public LineSection getRaceStartLine() {
-        float X = getTrackCenter().x;
+        float X = computeCenter().x;
 
         LineAG lineContainingStartLineSection = new LineAG(X);
 
@@ -40,7 +40,7 @@ public class Track {
         return new LineSection(intersectedInnerLine.computeCenter(), intersectedOuterLine.computeCenter());
     }
 
-    public PointAG getStartPosition(int index, int vehiclesNo) {
+    public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
 
         LineSection startLine = this.getRaceStartLine();
         
@@ -49,15 +49,15 @@ public class Track {
         if (startLine.p1.x == startLine.p2.x) {
             x = startLine.p1.x;
         } else {
-            float distanceBetweenVehsX = (startLine.p2.x - startLine.p1.x) / (vehiclesNo + 1);
-            x = startLine.p1.x + (index + 1) * distanceBetweenVehsX;
+            float distanceBetweenVehsX = (startLine.p2.x - startLine.p1.x) / (numberOfVehicles + 1);
+            x = startLine.p1.x + (vehicleIndex + 1) * distanceBetweenVehsX;
         }
 
         if (startLine.p1.y == startLine.p2.y) {
             y = startLine.p1.y;
         } else {
-            float distanceBetweenVehsY = (startLine.p2.y - startLine.p1.y) / (vehiclesNo + 1);
-            y = startLine.p1.y + (index + 1) * distanceBetweenVehsY;
+            float distanceBetweenVehsY = (startLine.p2.y - startLine.p1.y) / (numberOfVehicles + 1);
+            y = startLine.p1.y + (vehicleIndex + 1) * distanceBetweenVehsY;
         }
 
         return new PointAG(x, y);
