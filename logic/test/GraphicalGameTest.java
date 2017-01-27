@@ -15,7 +15,8 @@ public class GraphicalGameTest extends JFrame {
 
     public GraphicalGameTest() {
         initComponents();
-        boardG = this.boardPanel.getGraphics();
+        initComponents2();
+        
     }
 
     public static void main(String args[]) {
@@ -122,6 +123,9 @@ public class GraphicalGameTest extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+      private void initComponents2() {
+          boardG = this.boardPanel.getGraphics();
+      }
     private void mockDrawTrack(Track track) {
         //this is required as class Draw2d is in upper layer
         boardG.drawPolygon(track.innerBound.convertToPolygon());
@@ -170,6 +174,6 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JButton btnDrawSineTrack;
     private javax.swing.JButton btnDrawTestTrack;
     // End of variables declaration//GEN-END:variables
-    private final Graphics boardG;
+    private Graphics boardG;
 
 }

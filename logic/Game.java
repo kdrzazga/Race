@@ -13,6 +13,7 @@ public class Game extends Thread {
     private boolean gameRunning;
     private final Object gameRunningLock = new Object();
     private IGraphicalOutput graphicalOutput;
+    private InfoPanel pnlInfo;
 
     public Game(int numberOfVehicles, Track track) {
 
@@ -53,10 +54,11 @@ public class Game extends Thread {
         while (true) {
             try {
                 Thread.sleep(GAME_FRAME_MS);
-                
+
                 if (this.gameRunning) {
                     this.board.moveAllVehicles();
-                    updateGraphicalOutput();                    
+                    updateGraphicalOutput();
+                    updateInfoPanel();
                     this.findWinner();
                 }
             } catch (InterruptedException ex) {
@@ -74,6 +76,12 @@ public class Game extends Thread {
         this.graphicalOutput.draw(this.board);
     }
 
+    private void updateInfoPanel() {
+        this.board.vehicles.forEach(vehicle -> {
+            this.pnlInfo.setPlayerInfo(vehicle.getId(), vehicle.v.value, vehicle.travelledWayAngle);
+        });
+    }
+
     public boolean isGameRunning() {
         synchronized (gameRunningLock) {
             return gameRunning;
@@ -84,5 +92,9 @@ public class Game extends Thread {
         synchronized (gameRunningLock) {
             this.gameRunning = gameRunning;
         }
+    }
+
+    public void setPnlInfo(InfoPanel pnlInfo) {
+        this.pnlInfo = pnlInfo;
     }
 }

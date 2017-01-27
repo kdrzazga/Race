@@ -1,11 +1,14 @@
 package presentation;
 
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
+import logic.InfoPanel;
 
 public class GameScreen extends JFrame {
 
@@ -13,13 +16,16 @@ public class GameScreen extends JFrame {
     private final IGraphicalOutput drawOutput;
     public final Game game;
 
+    private InfoPanel pnlInfo;
+    private JPanel pnlBoard;
+
     public GameScreen(IntroFrame introFrame, Game game) {
 
         this.introFrame = introFrame;
         this.game = game;
-
-        introFrame.setVisible(false);
         initComponents();
+        this.game.setPnlInfo(this.pnlInfo);
+        introFrame.setVisible(false);
         initComponents2();
 
         this.drawOutput = new Draw2d(this.pnlBoard);
@@ -27,94 +33,69 @@ public class GameScreen extends JFrame {
         draw();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        pnlInfo = new javax.swing.JPanel();
-        pnlBoard = new javax.swing.JPanel();
+        this.pnlInfo = new InfoPanel(this.game.board.vehicles.size());
+        this.pnlBoard = new JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(204, 204, 0));
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
             }
         });
 
-        pnlInfo.setBackground(new java.awt.Color(153, 255, 102));
-        pnlInfo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout pnlInfoLayout = new javax.swing.GroupLayout(pnlInfo);
-        pnlInfo.setLayout(pnlInfoLayout);
-        pnlInfoLayout.setHorizontalGroup(
-            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
-        );
-        pnlInfoLayout.setVerticalGroup(
-            pnlInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
-        );
-
-        pnlBoard.setBackground(new java.awt.Color(204, 255, 204));
-        pnlBoard.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout pnlBoardLayout = new javax.swing.GroupLayout(pnlBoard);
+        GroupLayout pnlBoardLayout = new GroupLayout(pnlBoard);
         pnlBoard.setLayout(pnlBoardLayout);
         pnlBoardLayout.setHorizontalGroup(
-            pnlBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 568, Short.MAX_VALUE)
+                pnlBoardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 568, Short.MAX_VALUE)
         );
         pnlBoardLayout.setVerticalGroup(
-            pnlBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                pnlBoardLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pnlInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(pnlInfo, GroupLayout.PREFERRED_SIZE + 50, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pnlBoard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(pnlInfo, GroupLayout.DEFAULT_SIZE + 50, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlBoard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+        this.pnlBoard.setBackground(new Color(204, 255, 204));
+
+        this.pack();
+        this.setVisible(true);
+    }
 
     private void draw() {
         drawOutput.draw(game.board);
     }
 
-    private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
+    private void formComponentMoved(java.awt.event.ComponentEvent evt) {
         draw();
-    }//GEN-LAST:event_formComponentMoved
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel pnlBoard;
-    private javax.swing.JPanel pnlInfo;
-    // End of variables declaration//GEN-END:variables
+    }
 
     private void initComponents2() {
         Board brd = game.board;
-        
+
         KeyboardInput ki = new KeyboardInput(brd);
         this.addKeyListener(ki);
 
         this.addWindowListener(new GameScreenAdapter(introFrame, this.game));
     }
-    
+
     public JPanel getPnlBoard() {
         return pnlBoard;
-    }
-
-    public IGraphicalOutput getGraphicalOutput() {
-        return drawOutput;
     }
 }
