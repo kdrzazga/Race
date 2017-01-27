@@ -7,6 +7,7 @@ import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import libs.math2.General;
 
 import presentation.ColorSettings;
 
@@ -75,7 +76,7 @@ public class InfoPanel extends JPanel {
     }
 
     public void setPlayerInfo(int id, int speed, double travelledWay) {
-        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + travelledWay);
+        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + General.roundToFloat(travelledWay, 2));
         this.playerInfos[id].lblPlayerSpeed.setText(PlayerInfo.SPEED_TEXT + speed);
     }
 }

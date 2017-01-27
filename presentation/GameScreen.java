@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
+import java.awt.event.ComponentAdapter;
+
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
@@ -35,16 +37,16 @@ public class GameScreen extends JFrame {
 
     private void initComponents() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        this.pnlInfo = new InfoPanel(this.game.board.vehicles.size());
-        this.pnlBoard = new JPanel();
-
-        addComponentListener(new java.awt.event.ComponentAdapter() {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
             }
         });
+        
+        this.pnlInfo = new InfoPanel(this.game.board.vehicles.size());
+
+        this.pnlBoard = new JPanel();
 
         GroupLayout pnlBoardLayout = new GroupLayout(pnlBoard);
         pnlBoard.setLayout(pnlBoardLayout);

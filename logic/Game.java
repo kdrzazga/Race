@@ -33,7 +33,8 @@ public class Game extends Thread {
     }
 
     public void findWinner() {
-        System.out.println(" findWinner() - Not implemented yet");
+        System.out.println(" findWinner() - Not implemented yet. "
+                + "Won't be implemented until travelledWay works correctly");
     }
 
     private void gameInit(int numberOfVehicles) {
