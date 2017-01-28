@@ -1,12 +1,11 @@
-
 import java.awt.EventQueue;
 
 import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
-import presentation.test.IntroFrame;
+import presentation.IntroFrame;
 
 public class Race {
 
-    public static void main(String args) {
+    public static void main(String[] args) {
         startGame();
     }
 

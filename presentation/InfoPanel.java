@@ -1,4 +1,4 @@
-package logic;
+package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,10 +8,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import libs.math2.General;
+import logic.Game;
+import logic.IInfoPanel;
 
-import presentation.ColorSettings;
-
-public class InfoPanel extends JPanel {
+public class InfoPanel extends JPanel implements IInfoPanel {
 
     public class PlayerInfo {
 
@@ -75,6 +75,7 @@ public class InfoPanel extends JPanel {
         }
     }
 
+    @Override
     public void setPlayerInfo(int id, int speed, double travelledWay) {
         this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + General.roundToFloat(travelledWay, 2));
         this.playerInfos[id].lblPlayerSpeed.setText(PlayerInfo.SPEED_TEXT + speed);

@@ -5,18 +5,24 @@ import java.awt.Color;
 
 public class ColorSettings {
 
-    public static final Color[] AWT_VEHICLE_COLORS = {Color.RED, Color.BLUE, Color.GREEN,
-        Color.MAGENTA, Color.ORANGE, Color.CYAN,
-        new Color(162, 42, 42)};//brown
+    private final static Color DARK_GREEN = new Color(0, 120, 0);
+    private final static Color VIOLET = new Color(180, 0, 180);
+    private final static Color YELLOW_GREEN = new Color(135, 155, 21);
+    private final static Color BROWN = new Color(152, 22, 22);
+    private final static Color DARK_CYAN = new Color(1, 129, 128);
+    private final static Color DARK_ORANGE = new Color(207, 132, 0);    
+
+    public static final Color[] AWT_VEHICLE_COLORS = {Color.RED, Color.BLUE, DARK_GREEN,
+        VIOLET, Color.DARK_GRAY, YELLOW_GREEN, BROWN, DARK_CYAN, DARK_ORANGE};
 
     public static final float[][] OPEN_GL_VEHICLE_COLORS = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
-    {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f},
-    {1f, 0.37f, 0f}
+    {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f}, {1f, 0.37f, 0f}
     };
 
     public static Color TRACK_COLOR = Color.BLACK;
 
-    public static Color BOARD_COLOR = Color.LIGHT_GRAY;
+    public static Color BOARD_COLOR = new Color(204, 255, 204);
+
     /*
     public static void glColor(Color awtColor) {
 
@@ -31,9 +37,8 @@ public class ColorSettings {
             }
         }
     }*/
-
     public static Color getVehicleColorById(int id) {
-        int maxColorIndex = AWT_VEHICLE_COLORS.length - 1;
+        int maxColorIndex = AWT_VEHICLE_COLORS.length;
         return AWT_VEHICLE_COLORS[id % maxColorIndex];
     }
 

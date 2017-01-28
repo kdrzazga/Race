@@ -13,7 +13,7 @@ public class Game extends Thread {
     private boolean gameRunning;
     private final Object gameRunningLock = new Object();
     private IGraphicalOutput graphicalOutput;
-    private InfoPanel pnlInfo;
+    private IInfoPanel pnlInfo;
 
     public Game(int numberOfVehicles, Track track) {
 
@@ -95,7 +95,7 @@ public class Game extends Thread {
         }
     }
 
-    public void setPnlInfo(InfoPanel pnlInfo) {
+    public void setPnlInfo(IInfoPanel pnlInfo) {
         this.pnlInfo = pnlInfo;
     }
 }

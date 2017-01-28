@@ -1,6 +1,5 @@
 package presentation;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -10,7 +9,6 @@ import java.awt.event.ComponentAdapter;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import logic.InfoPanel;
 
 public class GameScreen extends JFrame {
 
@@ -22,32 +20,43 @@ public class GameScreen extends JFrame {
     private JPanel pnlBoard;
 
     public GameScreen(IntroFrame introFrame, Game game) {
-
         this.introFrame = introFrame;
         this.game = game;
         initComponents();
-        this.game.setPnlInfo(this.pnlInfo);
-        introFrame.setVisible(false);
-        initComponents2();
-
+        this.game.setPnlInfo(this.pnlInfo);  
         this.drawOutput = new Draw2d(this.pnlBoard);
-        ColorSettings.setBOARD_COLOR(this.pnlBoard.getBackground());
         draw();
     }
 
     private void initComponents() {
+        this.initPanels();
+        this.initFrames();         
+    }
+
+    private void initFrames() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        initComponentMovedAction();
+        initKeyboardAdapter();
+        
+        this.pack();
+        this.setVisible(true);        
+        this.introFrame.setVisible(false);
+    }
+
+    private void initComponentMovedAction() {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
             }
         });
-        
+    }
+
+    private void initPanels() {
         this.pnlInfo = new InfoPanel(this.game.board.vehicles.size());
-
+        
         this.pnlBoard = new JPanel();
-
+        
         GroupLayout pnlBoardLayout = new GroupLayout(pnlBoard);
         pnlBoard.setLayout(pnlBoardLayout);
         pnlBoardLayout.setHorizontalGroup(
@@ -74,10 +83,7 @@ public class GameScreen extends JFrame {
                         .addComponent(pnlBoard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        this.pnlBoard.setBackground(new Color(204, 255, 204));
-
-        this.pack();
-        this.setVisible(true);
+        this.pnlBoard.setBackground(ColorSettings.BOARD_COLOR);
     }
 
     private void draw() {
@@ -88,7 +94,7 @@ public class GameScreen extends JFrame {
         draw();
     }
 
-    private void initComponents2() {
+    private void initKeyboardAdapter() {
         Board brd = game.board;
 
         KeyboardInput ki = new KeyboardInput(brd);
