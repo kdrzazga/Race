@@ -9,6 +9,9 @@ public class Track {
     public PolygonAG innerBound;
     public PolygonAG outerBound;
 
+    private LineSection intersectedInnerLine;
+    private LineSection intersectedOuterLine;
+
     public Track() {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
@@ -29,21 +32,33 @@ public class Track {
         return sectionBetweenCenters.computeCenter();
     }
 
-    public LineSection getRaceStartLine() {
+    public LineSection computeVerticalStartLine() {
+        findLinesIntersectedByVertStartLine();
         float X = computeCenter().x;
+        float y1 = intersectedInnerLine.computeY(X);
+        float y2 = intersectedOuterLine.computeY(X);
+        
+        return new LineSection(X, y1, X, y2);
+    }
 
-        LineAG lineContainingStartLineSection = new LineAG(X);
-
-        LineSection intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
-        LineSection intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
-
+    public LineSection computeStartLine() {
+        findLinesIntersectedByVertStartLine();
         return new LineSection(intersectedInnerLine.computeCenter(), intersectedOuterLine.computeCenter());
+    }
+
+    private void findLinesIntersectedByVertStartLine() {
+        float X = computeCenter().x;
+        
+        LineAG lineContainingStartLineSection = new LineAG(X);
+        
+        intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
     }
 
     public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
 
-        LineSection startLine = this.getRaceStartLine();
-        
+        LineSection startLine = this.computeVerticalStartLine();
+
         float x, y;
 
         if (startLine.p1.x == startLine.p2.x) {

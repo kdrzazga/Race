@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import logic.Board;
 import logic.Vehicle;
 
-public class KeyboardInput extends KeyAdapter {
+public class KeyboardControlsAdapter extends KeyAdapter {
 
     private enum Player {
         Player1, Player2
@@ -28,7 +28,7 @@ public class KeyboardInput extends KeyAdapter {
     private final VehicleAction[] vehAction = {VehicleAction.Accelerate, VehicleAction.SlowDown,
         VehicleAction.TurnLeft, VehicleAction.TurnRight};
     
-    public KeyboardInput(Board board) {
+    public KeyboardControlsAdapter(Board board) {
         this.board = board;
 
         this.keyVehActionMap = new TreeMap<>();

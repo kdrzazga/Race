@@ -16,7 +16,7 @@ public class GameScreen extends JFrame {
     private final IGraphicalOutput drawOutput;
     public final Game game;
 
-    private InfoPanel pnlInfo;
+    private PlayerInfoPanel pnlInfo;
     private JPanel pnlBoard;
 
     public GameScreen(IntroFrame introFrame, Game game) {
@@ -53,7 +53,7 @@ public class GameScreen extends JFrame {
     }
 
     private void initPanels() {
-        this.pnlInfo = new InfoPanel(this.game.board.vehicles.size());
+        this.pnlInfo = new PlayerInfoPanel(this.game.board.vehicles.size());
         
         this.pnlBoard = new JPanel();
         
@@ -97,7 +97,7 @@ public class GameScreen extends JFrame {
     private void initKeyboardAdapter() {
         Board brd = game.board;
 
-        KeyboardInput ki = new KeyboardInput(brd);
+        KeyboardControlsAdapter ki = new KeyboardControlsAdapter(brd);
         this.addKeyListener(ki);
 
         this.addWindowListener(new GameScreenAdapter(introFrame, this.game));

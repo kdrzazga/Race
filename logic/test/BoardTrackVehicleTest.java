@@ -47,7 +47,7 @@ public class BoardTrackVehicleTest {
     public void givenTrack_ShouldStartLineEqualExpected() {
         Track rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
 
-        LineSection actualStartLine = rectTrack.getRaceStartLine();
+        LineSection actualStartLine = rectTrack.computeVerticalStartLine();
         LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
 
         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
@@ -60,7 +60,7 @@ public class BoardTrackVehicleTest {
         StringBuilder testResultMessage = new StringBuilder();
         Track rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
 
-        LineSection startLine = rectTrack.getRaceStartLine();
+        LineSection startLine = rectTrack.computeVerticalStartLine();
         float startLineX = startLine.p1.x;
         Board testBoard = new Board(numberOfVehicles, rectTrack);
 

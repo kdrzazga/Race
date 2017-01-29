@@ -7,11 +7,12 @@ import java.awt.Label;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import libs.math2.General;
 import logic.Game;
-import logic.IInfoPanel;
+import logic.IPlayerInfoPanel;
 
-public class InfoPanel extends JPanel implements IInfoPanel {
+public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
 
     public class PlayerInfo {
 
@@ -53,7 +54,7 @@ public class InfoPanel extends JPanel implements IInfoPanel {
 
     private final int numberOfPlayers;
 
-    public InfoPanel(int numberOfVehicles) {
+    public PlayerInfoPanel(int numberOfVehicles) {
         super(new GridLayout(Game.MAX_VEHICLES * PlayerInfo.LABELS_PER_PLAYER_COUNT, 1));
         this.numberOfPlayers = numberOfVehicles;
         initComponents();

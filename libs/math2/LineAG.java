@@ -31,6 +31,18 @@ public class LineAG {
             this.B = -this.A * p1.x + p1.y;
         }
     }
+    
+    public float computeY(float x)
+    {
+        if (this.vertical)
+        {
+            throw new RuntimeException("Method computeY not available for vertical lines.");
+        }
+        else
+        {
+            return this.A * x + this.B;
+        }
+    }
    
     public PointAG findIntersection(LineAG line) {
         float x, y;

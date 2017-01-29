@@ -140,7 +140,7 @@ public class GraphicalGameTest extends JFrame {
             int y = vehicle.v.position.convertToPoint().y;
 
             boardG.drawOval(x - 2, y - 2, 4, 4);
-            LineSection startLine = board.track.getRaceStartLine();
+            LineSection startLine = board.track.computeVerticalStartLine();
             Point p1 = startLine.p1.convertToPoint();
             Point p2 = startLine.p2.convertToPoint();
             boardG.drawLine(p1.x, p1.y, p2.x, p2.y);

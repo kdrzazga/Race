@@ -1,6 +1,6 @@
 package presentation.test;
 
-import presentation.KeyboardInput;
+import presentation.KeyboardControlsAdapter;
 import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 public class KeyboardInputTest {
 
-    private static KeyboardInput ki;
+    private static KeyboardControlsAdapter ki;
     private static Board mockBoard;
     private static Vehicle player1;
     private static Vehicle player2;
@@ -72,7 +72,7 @@ public class KeyboardInputTest {
 
     private static void init() {
         mockBoard = BoardBuilder.createBoardWithTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
-        ki = new KeyboardInput(mockBoard);
+        ki = new KeyboardControlsAdapter(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);
     }
