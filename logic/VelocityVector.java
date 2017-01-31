@@ -9,6 +9,10 @@ public class VelocityVector {
     public final static float ROTATION_UNIT = (float) (Math.PI / 10);
     public final static int ACCELERATE_UNIT = 1;
 
+    public int value;
+    public double angle;
+    public PointAG position;
+
     public VelocityVector(int value, double angle, PointAG position) {
 
         this.value = value;
@@ -16,42 +20,38 @@ public class VelocityVector {
         this.position = position;
     }
 
-    public int value;
-    public double angle;
-    public PointAG position;
-
-    public void turnLeft()
-    {
+    public void turnLeft() {
         this.turn(-ROTATION_UNIT);
     }
-    
-    public void turnRight()
-    {
+
+    public void turnRight() {
         this.turn(ROTATION_UNIT);
     }
-        
-    public void accelerate()
-    {
+
+    public void accelerate() {
         this.accelerate(ACCELERATE_UNIT);
     }
-    
-    public void slowDown()
-    {
+
+    public void slowDown() {
         this.accelerate(-ACCELERATE_UNIT);
     }
-    
+
+    public VelocityVector clone() {
+        return new VelocityVector(this.value, this.angle, this.position);
+    }
+
     private void turn(double turnAngle) {
         this.angle = (this.angle + turnAngle) % (2 * Math.PI);
     }
 
     private void accelerate(int accelerateValue) {
         if (this.value + accelerateValue > V_MAX) {
-            this.value = V_MAX; 
+            this.value = V_MAX;
         } else if (this.value + accelerateValue < V_MIN) {
             this.value = V_MIN;
         } else {
             this.value += accelerateValue;
         }
     }
-    
+
 }

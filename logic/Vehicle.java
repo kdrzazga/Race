@@ -5,43 +5,44 @@ import libs.math2.PointAG;
 public class Vehicle {
 
     public VelocityVector v;
-    public PointAG previousLocation;
+    public VelocityVector previousV;
     public double travelledWayAngle; //the path that Vehicle has travelled is expressed in angle, not in distance (2PI = 1 lap, PI = 0.5 lap etc.)
     public boolean active;
-    private final int id;
+    public static final int SIZE = 8;
+    int id;
 
     public Vehicle(int id) {
-        this.travelledWayAngle = 0.0;
-        this.id = id;
-        this.previousLocation = new PointAG(0, 0);
+        init(id);
     }
 
     public Vehicle(int id, int speed, PointAG position) {
-        this.travelledWayAngle = 0.0;
-        this.id = id;
+        init(id);
         this.v = new VelocityVector(speed, 0.0, position);
-        this.previousLocation = new PointAG(0, 0);
+
     }
 
     public Vehicle(int id, int speed, PointAG position, boolean active) {
-        this.travelledWayAngle = 0.0;
-        this.id = id;
+        init(id);
         this.v = new VelocityVector(speed, 0.0, position);
         this.active = active;
-        this.previousLocation = new PointAG(0, 0);
+
     }
-    
+
+    private void init(int id) {
+        this.travelledWayAngle = 0.0;
+        this.id = id;
+        this.previousV = new VelocityVector(0, 0, new PointAG(0, 0));
+    }
+
     @Override
-    public Vehicle clone()
-    {
+    public Vehicle clone() {
         //no need to call super.clone() or throw CloneNotSupportedException
         Vehicle clonedVehicle = new Vehicle(this.id, this.v.value, this.v.position, this.active);
         clonedVehicle.v.angle = this.v.angle;
         clonedVehicle.travelledWayAngle = this.travelledWayAngle;
-        clonedVehicle.previousLocation.x = this.previousLocation.x;
-        clonedVehicle.previousLocation.y = this.previousLocation.y;
-        
-        return clonedVehicle;                
+        clonedVehicle.previousV = this.previousV.clone();
+
+        return clonedVehicle;
     }
 
     public int getId() {
@@ -71,15 +72,16 @@ public class Vehicle {
             this.v.slowDown();
         }
     }
-    
+
     public void stop() {
-        if (this.active)
+        if (this.active) {
             this.v.value = 0;
+        }
     }
 
     @Override
     public String toString() {
-        return "veh " + id + " at " + this.v.position + " speed = " 
+        return "veh " + id + " at " + this.v.position + " speed = "
                 + this.v.value + " travelled =" + this.travelledWayAngle;
     }
 }

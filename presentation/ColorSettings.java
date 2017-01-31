@@ -8,20 +8,24 @@ public class ColorSettings {
     private final static Color DARK_GREEN = new Color(0, 120, 0);
     private final static Color VIOLET = new Color(180, 0, 180);
     private final static Color YELLOW_GREEN = new Color(135, 155, 21);
-    private final static Color BROWN = new Color(152, 22, 22);
+    private final static Color BROWN = new Color(142, 25, 25);
+    private final static Color LIGHT_BROWN = new Color(232, 102, 102);
+    private final static Color LIGHT_BLUE = new Color(115, 115, 255);
     private final static Color DARK_CYAN = new Color(1, 129, 128);
     private final static Color DARK_ORANGE = new Color(207, 132, 0);
 
-    public static final Color[] AWT_VEHICLE_COLORS = {Color.RED, Color.BLUE, DARK_GREEN,
-        VIOLET, Color.LIGHT_GRAY, YELLOW_GREEN, BROWN, DARK_CYAN, DARK_ORANGE};
+    public static final Color[] AWT_VEHICLE_COLORS = { Color.GREEN,Color.YELLOW, Color.RED,
+         LIGHT_BLUE, Color.WHITE, Color.MAGENTA, LIGHT_BROWN, Color.CYAN, Color.PINK};
 
     public static final float[][] OPEN_GL_VEHICLE_COLORS = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
     {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f}, {1f, 0.37f, 0f}
     };
 
-    public static Color BOARD_COLOR = Color.lightGray;//new Color(204, 255, 204);
+    public static Color BOARD_COLOR = Color.LIGHT_GRAY;
     public static Color TRACK_COLOR = Color.GRAY;
-    public static Color START_LINE_COLOR = Color.GREEN;
+    public static Color START_LINE_COLOR = Color.LIGHT_GRAY;
+    public static Color INFO_PANEL_COLOR = BROWN;
+
     /*
     public static void glColor(Color awtColor) {
 

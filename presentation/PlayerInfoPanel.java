@@ -61,7 +61,7 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
     }
 
     private void initComponents() {
-        this.setBackground(new Color(245, 255, 245));
+        this.setBackground(ColorSettings.INFO_PANEL_COLOR);
         this.setBorder(BorderFactory.createEtchedBorder());
 
         playerInfos = new PlayerInfo[numberOfPlayers];

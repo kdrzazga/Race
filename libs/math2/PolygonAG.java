@@ -56,6 +56,6 @@ public class PolygonAG{
     
     public void scale(float scaleFactor)
     {
-        
+        throw new RuntimeException("scale method not implemented yet");
     }
 }

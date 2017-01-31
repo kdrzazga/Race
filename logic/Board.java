@@ -36,7 +36,7 @@ public class Board {
 
     public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
-        vehicle.previousLocation = vehicle.v.position;
+        vehicle.previousV = vehicle.v.clone();
         PointAG newPosition = computeNewPosition(vehicle);
         assignNewPositionIfVehicleOnTrack(newPosition, vehicle);
         checkVehicleCrashWithOthers(vehicle);
@@ -59,11 +59,8 @@ public class Board {
     private PointAG computeNewPosition(Vehicle vehicle) {
         float moveX, moveY, factorX, factorY;
 
-        double cos = Math.cos(vehicle.v.angle);
-        double sin = Math.sin(vehicle.v.angle);
-
-        factorX = General.roundToFloat(cos);
-        factorY = General.roundToFloat(sin);
+        factorX = General.roundToFloat(Math.cos(vehicle.v.angle));
+        factorY = General.roundToFloat(Math.sin(vehicle.v.angle));
 
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
@@ -75,13 +72,13 @@ public class Board {
     }
 
     private void checkVehicleCrashWithOthers(Vehicle thisVehicle) {
-        double crashRadius = 3;
+        
         this.vehicles.forEach((otherVehicle) -> {
             if (!otherVehicle.equals(thisVehicle)) {
                 PointAG thisVehicleLocation = thisVehicle.v.position; 
                 PointAG otherVehicleLocation = otherVehicle.v.position;
                 
-                if (thisVehicleLocation.distanceToAntherPointAG(otherVehicleLocation) < crashRadius) {
+                if (thisVehicleLocation.distanceToAntherPointAG(otherVehicleLocation) < Vehicle.SIZE) {
                     thisVehicle.stop();
                     otherVehicle.stop();
                 }
@@ -90,14 +87,14 @@ public class Board {
     }
 
     private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG trackCenter) {
-        LineSection lsWithPrevLocation = new LineSection(trackCenter, vehicle.previousLocation);
+        LineSection lsWithPrevLocation = new LineSection(trackCenter, vehicle.previousV.position);
         LineSection lsWithCurrLocation = new LineSection(trackCenter, vehicle.v.position);
 
         double angleWithPrevLocation = lsWithPrevLocation.computeInclinationAngle();
         double angleWithNewPos = lsWithCurrLocation.computeInclinationAngle();
 
         vehicle.travelledWayAngle = angleWithNewPos;
-        if (vehicle.getId() == 0) System.out.println(vehicle.getId()+ " " + vehicle.travelledWayAngle);
+        //if (vehicle.getId() == 0) System.out.println(vehicle.getId()+ " " + vehicle.travelledWayAngle);
     }
 
 }

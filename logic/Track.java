@@ -37,7 +37,7 @@ public class Track {
         float X = computeCenter().x;
         float y1 = intersectedInnerLine.computeY(X);
         float y2 = intersectedOuterLine.computeY(X);
-        
+
         return new LineSection(X, y1, X, y2);
     }
 
@@ -46,35 +46,33 @@ public class Track {
         return new LineSection(intersectedInnerLine.computeCenter(), intersectedOuterLine.computeCenter());
     }
 
-    private void findLinesIntersectedByVertStartLine() {
+    public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
+        LineSection startLine = this.computeVerticalStartLine();
+        
+        float x = computeCoordinate(numberOfVehicles, vehicleIndex, startLine.p1.x, startLine.p2.x);
+        float y = computeCoordinate(numberOfVehicles, vehicleIndex, startLine.p1.y, startLine.p2.y);
+        return new PointAG(x, y);
+    }
+
+        private void findLinesIntersectedByVertStartLine() {
         float X = computeCenter().x;
-        
+
         LineAG lineContainingStartLineSection = new LineAG(X);
-        
+
         intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
         intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
     }
-
-    public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
-
-        LineSection startLine = this.computeVerticalStartLine();
-
-        float x, y;
-
-        if (startLine.p1.x == startLine.p2.x) {
-            x = startLine.p1.x;
+    
+    private float computeCoordinate(int numberOfVehicles, int vehicleIndex, float coordinateP1, float coordinateP2) {
+        float y;
+        if (coordinateP1 == coordinateP2) {
+            y = coordinateP1;
         } else {
-            float distanceBetweenVehsX = (startLine.p2.x - startLine.p1.x) / (numberOfVehicles + 1);
-            x = startLine.p1.x + (vehicleIndex + 1) * distanceBetweenVehsX;
+            float distanceBetweenVehsY = (coordinateP2 - coordinateP1) / (numberOfVehicles + 1);
+            y = coordinateP1 + (vehicleIndex + 1) * distanceBetweenVehsY;
         }
-
-        if (startLine.p1.y == startLine.p2.y) {
-            y = startLine.p1.y;
-        } else {
-            float distanceBetweenVehsY = (startLine.p2.y - startLine.p1.y) / (numberOfVehicles + 1);
-            y = startLine.p1.y + (vehicleIndex + 1) * distanceBetweenVehsY;
-        }
-
-        return new PointAG(x, y);
+        return y;
     }
+
+    
 }

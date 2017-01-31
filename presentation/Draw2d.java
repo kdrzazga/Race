@@ -6,12 +6,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import javax.swing.JPanel;
+import libs.math2.General;
 
 import libs.math2.LineSection;
 import logic.Board;
 import logic.IGraphicalOutput;
 import logic.Track;
 import logic.Vehicle;
+import logic.VelocityVector;
 
 /*
 uses JFrame
@@ -24,8 +26,7 @@ public class Draw2d implements IGraphicalOutput {
     private static final int DEFAULT_LINE_THICKNESS = 2;
 
     private final BasicStroke THICK_STROKE = new BasicStroke(TRACK_LINE_THICKNESS, BasicStroke.CAP_SQUARE, // End cap
-            BasicStroke.JOIN_MITER, 10.0f, // Miter limit
-            new float[]{16.0f, 16.0f}, // Dash pattern
+            BasicStroke.JOIN_MITER, 10.0f, /* Miter limit*/ new float[]{16.0f, 16.0f}, // Dash pattern
             0.0f);
 
     public Draw2d(JPanel drawablePanel) {
@@ -42,7 +43,6 @@ public class Draw2d implements IGraphicalOutput {
     @Override
     public void draw(Track track) {
         g.setColor(ColorSettings.TRACK_COLOR);
-
         g.fillPolygon(track.outerBound.convertToPolygon());
 
         drawTrackBorder(track);
@@ -50,18 +50,8 @@ public class Draw2d implements IGraphicalOutput {
         g.setColor(ColorSettings.BOARD_COLOR);
         g.fillPolygon(track.innerBound.convertToPolygon());
 
-        LineSection startLine = track.computeVerticalStartLine();
-
-        Point p1 = startLine.p1.convertToPoint();
-        Point p2 = startLine.p2.convertToPoint();
-
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(DEFAULT_LINE_THICKNESS));
-        g.setColor(ColorSettings.START_LINE_COLOR);
-        g.drawLine(p1.x, p1.y, p2.x, p2.y);
-
-        /*Point trackCenter = track.computeCenter().convertToPoint();
-        g.drawOval(trackCenter.x - 2, trackCenter.y - 2, 4, 4);*/
+        drawStartLine(track);
+        //drawTrackCenter(track);
     }
 
     @Override
@@ -83,7 +73,7 @@ public class Draw2d implements IGraphicalOutput {
     @Override
     public void draw(Vehicle vehicle) {
         Color vehicleColor = ColorSettings.getVehicleColorById(vehicle.getId());
-        drawVehicle(vehicle.v.position.convertToPoint(), vehicleColor);
+        drawVehicle(vehicle.v, vehicleColor);
     }
 
     @Override
@@ -104,16 +94,52 @@ public class Draw2d implements IGraphicalOutput {
         Color backgroundColor = ColorSettings.TRACK_COLOR;
 
         board.vehicles.forEach((vehicle) -> {
-            drawVehicle(vehicle.previousLocation.convertToPoint(), backgroundColor);
+            VelocityVector previousV = vehicle.previousV;
+            drawVehicle(previousV, backgroundColor);
         });
         g.setColor(ColorSettings.BOARD_COLOR);
     }
 
-    public void drawVehicle(Point vehiclePos, Color vehicleColor) {
-        final int  VEHICLE_SIZE = 8;
+    public void drawVehicle(VelocityVector vehicleV, Color vehicleColor) {
+        Point position = vehicleV.position.convertToPoint();
+        //final float VEHICLE_LENGTH = 0.6f * Vehicle.SIZE;
+
         g.setColor(vehicleColor);
-        g.fillOval(vehiclePos.x - (int)(VEHICLE_SIZE / 2), vehiclePos.y - (int)(VEHICLE_SIZE / 2)
-                , VEHICLE_SIZE, VEHICLE_SIZE);
+        int centerX = position.x - (int) (Vehicle.SIZE / 2);
+        int centerY = position.y - (int) (Vehicle.SIZE / 2);
+
+        g.fillOval(centerX, centerY, Vehicle.SIZE, Vehicle.SIZE);
+        /*float factorX, factorY;
+
+        factorX = General.roundToFloat(Math.cos(vehicleV.angle));
+        factorY = General.roundToFloat(Math.sin(vehicleV.angle));
+
+        int deltaX, deltaY;
+
+        deltaX = (int) Math.ceil(factorX * VEHICLE_LENGTH);
+        deltaY = (int) Math.ceil(factorY * VEHICLE_LENGTH);
+
+        g.drawLine(position.x, position.y, position.x + deltaX, position.y + deltaY);
+         */
+    }
+
+    @Override
+    public void drawStartLine(Track track) {
+        LineSection startLine = track.computeVerticalStartLine();
+
+        Point p1 = startLine.p1.convertToPoint();
+        Point p2 = startLine.p2.convertToPoint();
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(DEFAULT_LINE_THICKNESS));
+        g.setColor(ColorSettings.START_LINE_COLOR);
+        g.drawLine(p1.x, p1.y, p2.x, p2.y);
+    }
+
+    private void drawTrackCenter(Track track) {
+        g.setColor(ColorSettings.START_LINE_COLOR);
+        Point trackCenter = track.computeCenter().convertToPoint();
+        g.drawOval(trackCenter.x - 2, trackCenter.y - 2, 4, 4);
     }
 
     @Override
