@@ -13,16 +13,15 @@ public class ColorSettings {
     private final static Color DARK_ORANGE = new Color(207, 132, 0);
 
     public static final Color[] AWT_VEHICLE_COLORS = {Color.RED, Color.BLUE, DARK_GREEN,
-        VIOLET, Color.DARK_GRAY, YELLOW_GREEN, BROWN, DARK_CYAN, DARK_ORANGE};
+        VIOLET, Color.LIGHT_GRAY, YELLOW_GREEN, BROWN, DARK_CYAN, DARK_ORANGE};
 
     public static final float[][] OPEN_GL_VEHICLE_COLORS = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
     {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f}, {1f, 0.37f, 0f}
     };
 
-    public static Color TRACK_COLOR = Color.BLACK;
-
-    public static Color BOARD_COLOR = new Color(204, 255, 204);
-
+    public static Color BOARD_COLOR = Color.lightGray;//new Color(204, 255, 204);
+    public static Color TRACK_COLOR = Color.GRAY;
+    public static Color START_LINE_COLOR = Color.GREEN;
     /*
     public static void glColor(Color awtColor) {
 

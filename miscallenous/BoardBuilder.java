@@ -35,8 +35,8 @@ public class BoardBuilder {
 
     // <editor-fold defaultstate="collapsed" desc="Point arrays for tracks">
     private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 650), new PointAG(550, 650), new PointAG(550, 400), new PointAG(325, 400),
-        new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 375), new PointAG(550, 375), new PointAG(550, 50),
-        new PointAG(50, 50)};
+        new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 345), new PointAG(370, 345), new PointAG(370, 375), new PointAG(550, 375)
+        , new PointAG(550, 50), new PointAG(50, 50)};
     private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
         new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
         new PointAG(150, 100)};
@@ -153,12 +153,12 @@ public class BoardBuilder {
         final int WIDTH_FACTOR = 90;
         final double VERTICAL_FACTOR = 2 * Math.PI / 500;
         final int HORIZONTAL_TRACK_OFFSET = 55;
-        final int TRACK_HEIGHT = 630;
+        final int TRACK_HEIGHT = 870;
         final int LEFT_SIDE_OFFSET = 70;
         final int RIGHT_SIDE_OFFSET = 370;
         final int ITERATION_STEP_IN_PIXELS = 20;
 
-        int y = 90;
+        int y = 10;
 
         while (y < TRACK_HEIGHT) {
             float x = General.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)

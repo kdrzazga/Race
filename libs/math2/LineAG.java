@@ -2,9 +2,10 @@ package libs.math2;
 
 public class LineAG {
 
-    //y = Ax + B
+    //equation y = Ax + B
     public float A;
     public float B;
+    //vertical line like x=3 has no coefficients A and B
     public float verticalX;
     public boolean vertical;
 

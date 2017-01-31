@@ -53,4 +53,9 @@ public class PolygonAG{
         
         return result;
     }
+    
+    public void scale(float scaleFactor)
+    {
+        
+    }
 }

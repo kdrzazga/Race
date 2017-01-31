@@ -74,7 +74,8 @@ public class Game extends Thread {
 
     private void updateGraphicalOutput() {
         this.graphicalOutput.eraseVehicles(this.board);
-        this.graphicalOutput.draw(this.board);
+        this.graphicalOutput.drawAllVehicles(this.board);
+        this.graphicalOutput.drawTrackBorder(this.board.track);
     }
 
     private void updateInfoPanel() {
