@@ -1,4 +1,4 @@
-package miscallenous;
+package libs;
 
 import javax.swing.UIManager;
 

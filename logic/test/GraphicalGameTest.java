@@ -5,7 +5,7 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import libs.math2.LineSection;
 
-import static miscallenous.JFrameCommons.setNimbusLookAndFeel;
+import static libs.JFrameCommons.setNimbusLookAndFeel;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
