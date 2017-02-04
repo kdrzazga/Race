@@ -10,8 +10,9 @@ import miscallenous.BoardBuilder;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import libs.UnitTest;
 
-public class KeyboardInputTest {
+public class KeyboardInputTest extends UnitTest{
 
     private static KeyboardControlsAdapter ki;
     private static Board mockBoard;
@@ -38,8 +39,7 @@ public class KeyboardInputTest {
     public static void main(String args[]) {
         testForPlayer1();
         testForBothPlayers();
-
-        System.out.println("No exception occured. All tests PASSED");
+        KeyboardInputTest.showTestPassedMessage(KeyboardInputTest.class.getName());
     }
 
     private static void testForPlayer1() {
@@ -71,7 +71,7 @@ public class KeyboardInputTest {
     }
 
     private static void init() {
-        mockBoard = BoardBuilder.createBoardWithTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
+        mockBoard = BoardBuilder.createBoardWithTrack(2, 0, BoardBuilder.TrackType.RECTANGULAR_1);
         ki = new KeyboardControlsAdapter(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);

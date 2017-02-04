@@ -31,29 +31,7 @@ public class General {
         return result;
     }
 
-    public static Point computeCenterOfPolygon(Polygon polygon) {
-
-        if (polygon.xpoints.length != polygon.ypoints.length) {
-            throw new RuntimeException(" Polygon error - number of X coornates differs from number of Ys");
-        }
-
-        int sumXCoordinates = 0;
-        int sumYCoordinates = 0;
-
-        for (int i = 0; i < polygon.xpoints.length; i++) {
-            sumXCoordinates += polygon.xpoints[i];
-            sumYCoordinates += polygon.ypoints[i];
-        }
-
-        int centerX = sumXCoordinates / polygon.npoints;
-        int centerY = sumYCoordinates / polygon.npoints;
-
-        return new Point(centerX, centerY);
-    }
-
-
-
-    private static BigDecimal rounding(BigDecimal decimalValue, int places) {
+ private static BigDecimal rounding(BigDecimal decimalValue, int places) {
         if (places < 0) {
             throw new IllegalArgumentException();
         }

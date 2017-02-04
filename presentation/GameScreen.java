@@ -5,12 +5,13 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle;
 import java.awt.event.ComponentAdapter;
+import javax.swing.JDialog;
 
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
 
-public class GameScreen extends JFrame {
+public class GameScreen extends JDialog {
 
     private final IntroFrame introFrame;
     private final IGraphicalOutput drawOutput;

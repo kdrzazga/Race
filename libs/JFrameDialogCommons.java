@@ -2,7 +2,7 @@ package libs;
 
 import javax.swing.UIManager;
 
-public class JFrameCommons {
+public class JFrameDialogCommons {
     public static void setNimbusLookAndFeel(String className) {
         
         try {

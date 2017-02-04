@@ -14,8 +14,8 @@ public class ColorSettings {
     private final static Color DARK_CYAN = new Color(1, 129, 128);
     private final static Color DARK_ORANGE = new Color(207, 132, 0);
 
-    public static final Color[] AWT_VEHICLE_COLORS = { Color.GREEN,Color.YELLOW, Color.RED,
-         LIGHT_BLUE, Color.WHITE, Color.MAGENTA, LIGHT_BROWN, Color.CYAN, Color.PINK};
+    public static final Color[] AWT_VEHICLE_COLORS = { Color.CYAN, Color.WHITE,Color.RED, Color.YELLOW,
+         LIGHT_BLUE, Color.PINK, Color.MAGENTA, LIGHT_BROWN, Color.GREEN};
 
     public static final float[][] OPEN_GL_VEHICLE_COLORS = {{1f, 0f, 0f}, {0f, 0f, 1f}, {0f, 1f, 0f},
     {1f, 0f, 1f}, {1f, 0.9f, 0.2f}, {0f, 1f, 1f}, {1f, 0.37f, 0f}

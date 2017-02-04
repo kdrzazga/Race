@@ -1,6 +1,6 @@
 import java.awt.EventQueue;
 
-import static libs.JFrameCommons.setNimbusLookAndFeel;
+import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
 import presentation.IntroFrame;
 
 public class Race {

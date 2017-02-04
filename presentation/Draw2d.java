@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import libs.math2.General;
 
 import libs.math2.LineSection;
+import libs.math2.PolygonAG;
 import logic.Board;
 import logic.IGraphicalOutput;
 import logic.Track;
@@ -24,6 +25,7 @@ public class Draw2d implements IGraphicalOutput {
     private Graphics g;
     private static final int TRACK_LINE_THICKNESS = 3;
     private static final int DEFAULT_LINE_THICKNESS = 2;
+    private static final float VEHICLE_LENGTH = 0.6f * Vehicle.SIZE;
 
     private final BasicStroke THICK_STROKE = new BasicStroke(TRACK_LINE_THICKNESS, BasicStroke.CAP_SQUARE, // End cap
             BasicStroke.JOIN_MITER, 10.0f, /* Miter limit*/ new float[]{16.0f, 16.0f}, // Dash pattern
@@ -59,8 +61,14 @@ public class Draw2d implements IGraphicalOutput {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(THICK_STROKE);
         g.setColor(Color.WHITE);
-        g.drawPolygon(track.outerBound.convertToPolygon());
-        g.drawPolygon(track.innerBound.convertToPolygon());
+        
+        PolygonAG outerBorder = new PolygonAG(track.outerBound);
+        outerBorder.scale(1.015f);
+         g.drawPolygon(outerBorder.convertToPolygon());
+        
+        PolygonAG innerBorder = new PolygonAG(track.innerBound);
+        innerBorder.scale(0.985f);
+        g.drawPolygon(innerBorder.convertToPolygon());
     }
 
     @Override
@@ -92,24 +100,29 @@ public class Draw2d implements IGraphicalOutput {
     @Override
     public void eraseVehicles(Board board) {
         Color backgroundColor = ColorSettings.TRACK_COLOR;
+        g.setColor(backgroundColor);
 
         board.vehicles.forEach((vehicle) -> {
             VelocityVector previousV = vehicle.previousV;
-            drawVehicle(previousV, backgroundColor);
+            float eraseSize = Vehicle.SIZE + VEHICLE_LENGTH;
+            int upperLeftCornerX = (int) (previousV.position.x - eraseSize / 2);
+            int upperLeftCornerY = (int) (previousV.position.y - eraseSize / 2);
+            float prevVehicleCoverFactor = 1.181f;
+            int radius = (int) (prevVehicleCoverFactor * eraseSize);
+            g.fillOval(upperLeftCornerX, upperLeftCornerY, radius, radius);
         });
         g.setColor(ColorSettings.BOARD_COLOR);
     }
 
     public void drawVehicle(VelocityVector vehicleV, Color vehicleColor) {
         Point position = vehicleV.position.convertToPoint();
-        //final float VEHICLE_LENGTH = 0.6f * Vehicle.SIZE;
 
         g.setColor(vehicleColor);
         int centerX = position.x - (int) (Vehicle.SIZE / 2);
         int centerY = position.y - (int) (Vehicle.SIZE / 2);
 
         g.fillOval(centerX, centerY, Vehicle.SIZE, Vehicle.SIZE);
-        /*float factorX, factorY;
+        float factorX, factorY;
 
         factorX = General.roundToFloat(Math.cos(vehicleV.angle));
         factorY = General.roundToFloat(Math.sin(vehicleV.angle));
@@ -120,7 +133,6 @@ public class Draw2d implements IGraphicalOutput {
         deltaY = (int) Math.ceil(factorY * VEHICLE_LENGTH);
 
         g.drawLine(position.x, position.y, position.x + deltaX, position.y + deltaY);
-         */
     }
 
     @Override

@@ -136,7 +136,10 @@ public class IntroFrame extends JFrame {
             rectTrackType.toString(),
             circularTrackType.toString(),
             kidneyTrackType.toString(),
-            sineTrackType.toString()
+            sineTrackType.toString(),
+            triangleTrackType.toString(),
+            pentagonTrackType.toString(),
+            weraTrackType.toString()
         }));
 
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
@@ -172,19 +175,31 @@ public class IntroFrame extends JFrame {
         Board board;
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
         if (selectedTrack.equals(rectTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR_1);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.RECTANGULAR_1);
 
         } else if (selectedTrack.equals(circularTrackType.toString()))
         {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.DONUT);
         }
         else if (selectedTrack.equals(kidneyTrackType.toString()))
         {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.KIDNEY);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.KIDNEY);
+        }
+        else if (selectedTrack.equals(triangleTrackType.toString()))
+        {
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.TRIANGLE);
+        }
+        else if (selectedTrack.equals(pentagonTrackType.toString()))
+        {
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.PENTAGON);
+        }
+        else if (selectedTrack.equals(weraTrackType.toString()))
+        {
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.WERONIKA);
         }
         else// if (selectedTrack.equals(sineTrackType.toString()))
         {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, 2, BoardBuilder.TrackType.SINE);
         }        
         return board;
     }
@@ -205,4 +220,8 @@ public class IntroFrame extends JFrame {
     private final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;
     private final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
     private final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
+    private final TrackType triangleTrackType = BoardBuilder.TrackType.TRIANGLE;
+    private final TrackType pentagonTrackType = BoardBuilder.TrackType.PENTAGON;
+    private final TrackType weraTrackType = BoardBuilder.TrackType.WERONIKA;
+    
 }

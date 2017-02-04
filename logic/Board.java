@@ -94,7 +94,7 @@ public class Board {
         double angleWithNewPos = lsWithCurrLocation.computeInclinationAngle();
 
         vehicle.travelledWayAngle = angleWithNewPos;
-        //if (vehicle.getId() == 0) System.out.println(vehicle.getId()+ " " + vehicle.travelledWayAngle);
+        System.out.println("updateVehicleTravelledWayAngle is invalid");
     }
 
 }

@@ -1,6 +1,6 @@
 package presentation.test;
 
-import static libs.JFrameCommons.setNimbusLookAndFeel;
+import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
 import presentation.IntroFrame;
 
 public class GameTest {

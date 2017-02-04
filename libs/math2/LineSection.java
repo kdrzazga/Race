@@ -24,6 +24,14 @@ public class LineSection extends LineAG{
         this.p1 = p1;
         this.p2 = p2;
     }
+    
+    public LineSection(PointAG point, float angle, float length)
+    {
+        super(point, angle);      
+        this.p1 = point;
+        this.p2 = new PointAG(point);
+        p2.moveByVector(length, angle);
+    }
 
     public LineSection(LineSection lineSectionToCopy) {
         super(new PointAG(lineSectionToCopy.p1), new PointAG(lineSectionToCopy.p2));
@@ -76,6 +84,30 @@ public class LineSection extends LineAG{
         }
         else
             throw new RuntimeException(x + " doesn't belong to line section");
+    }
+    
+    public PointAG computeIntersection(LineSection lineSection2)
+    {
+        PointAG intersection = super.findIntersection(lineSection2);
+        
+        if (intersection != null)
+        {
+            if (this.xBelongsToLineSection(intersection.x) 
+                && this.yBelongsToLineSection(intersection.y))
+                    return intersection;
+            else return null;
+        }
+        else
+            return null;
+    }
+    
+    public void moveP2MultiplyingBy(float scalar)
+    {
+        double length = this.computeLength();
+        double inclination = this.computeInclinationAngle() + Math.PI;
+        
+        this.p2 = new PointAG(this.p1);
+        this.p2.moveByVector(length * scalar, inclination);
     }
 
     @Override

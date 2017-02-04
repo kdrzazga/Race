@@ -18,7 +18,7 @@ import javax.swing.GroupLayout.SequentialGroup;
 import libs.math2.CircleAG;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
-import static libs.JFrameCommons.setNimbusLookAndFeel;
+import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
 
 public class GraphicalTests extends JFrame {
 

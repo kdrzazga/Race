@@ -1,6 +1,7 @@
 package logic;
 
 import libs.math2.PointAG;
+import logic.drive_algorithms.IDriveAlgorithm;
 
 public class Vehicle {
 
@@ -8,30 +9,46 @@ public class Vehicle {
     public VelocityVector previousV;
     public double travelledWayAngle; //the path that Vehicle has travelled is expressed in angle, not in distance (2PI = 1 lap, PI = 0.5 lap etc.)
     public boolean active;
+    public boolean humanControlled;
+    public IDriveAlgorithm driveAlgorithm;
     public static final int SIZE = 8;
     int id;
 
     public Vehicle(int id) {
-        init(id);
+        init(id, true);
+    }
+   
+    public Vehicle(int id, int speed, PointAG position, IDriveAlgorithm driveAlgorithm, boolean active)
+    {
+        init(id, active);
+        this.v = new VelocityVector(speed, 0.0, position);
+        if (driveAlgorithm != null)
+        {
+            this.driveAlgorithm = driveAlgorithm;
+            this.humanControlled = false;
+        }
+        else
+        {
+            this.humanControlled = true;
+        }
     }
 
     public Vehicle(int id, int speed, PointAG position) {
-        init(id);
+        init(id, true);
         this.v = new VelocityVector(speed, 0.0, position);
-
     }
 
     public Vehicle(int id, int speed, PointAG position, boolean active) {
-        init(id);
+        init(id, active);
         this.v = new VelocityVector(speed, 0.0, position);
         this.active = active;
-
     }
 
-    private void init(int id) {
+    private void init(int id, boolean active) {
         this.travelledWayAngle = 0.0;
         this.id = id;
         this.previousV = new VelocityVector(0, 0, new PointAG(0, 0));
+        this.active = active;
     }
 
     @Override

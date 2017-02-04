@@ -6,15 +6,17 @@ import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.General;
 import libs.math2.PointAG;
+import libs.math2.PolygonAG;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
+import logic.drive_algorithms.SimpleDrive;
 
 public class BoardBuilder {
 
     public enum TrackType {
-        RECTANGULAR_1, DONUT, KIDNEY, SINE, TEST_RECTANGULAR;
+        RECTANGULAR_1, DONUT, KIDNEY, SINE, TRIANGLE, PENTAGON, WERONIKA, TEST_RECTANGULAR;
 
         @Override
         public String toString() {
@@ -27,6 +29,12 @@ public class BoardBuilder {
                     return "Kidney";
                 case SINE:
                     return "Sine";
+                case TRIANGLE:
+                    return "Triagle";
+                case PENTAGON:
+                    return "Pentagon track";
+                case WERONIKA:
+                    return "Weronika";
                 default:
                     return "Test rectangular";
             }
@@ -35,14 +43,23 @@ public class BoardBuilder {
 
     // <editor-fold defaultstate="collapsed" desc="Point arrays for tracks">
     private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 710), new PointAG(550, 710), new PointAG(550, 400), new PointAG(325, 400),
-        new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 345), new PointAG(370, 345), new PointAG(370, 375), new PointAG(550, 375)
-        , new PointAG(550, 50), new PointAG(50, 50)};
+        new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 345), new PointAG(370, 345), new PointAG(370, 375), new PointAG(550, 375),
+        new PointAG(550, 50), new PointAG(50, 50)};
     private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
         new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
         new PointAG(150, 100)};
 
     private static final PointAG[] TEST_RECT_OUTER_BOUND_PTS = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
     private static final PointAG[] TEST_RECT_INNER_BOUND_PTS = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
+
+    private static final PointAG[] TRIANGLE_OUTER_BOUND_PTS = {new PointAG(529, 680), new PointAG(500, 700), new PointAG(410, 710), new PointAG(190, 720),
+        new PointAG(145, 705), new PointAG(30, 80), new PointAG(54, 50), new PointAG(84, 53), new PointAG(140, 88), new PointAG(535, 640)};
+
+    private static final PointAG[] PENTAGON_OUTER_BOUND_PTS = {new PointAG(8, 640), new PointAG(20, 120), new PointAG(45, 80), new PointAG(170, 29), new PointAG(230, 17), new PointAG(534, 130),
+        new PointAG(544, 166), new PointAG(400, 680), new PointAG(370, 700), new PointAG(250, 680), new PointAG(40, 690)};
+
+    private static final PointAG[] WERONIKA_OUTER_BOUND_PTS = {new PointAG(10, 10), new PointAG(500, 15), new PointAG(490, 900), new PointAG(10, 890)};
+    private static final PointAG[] WERONIKA_INNER_BOUND_PTS = {new PointAG(240, 640), new PointAG(260, 640), new PointAG(260, 660), new PointAG(240, 660)};
 
     private static final PointAG[] KIDNEY_OUTER_BOUND_PTS = {
         new PointAG(427, 100), new PointAG(460, 150), new PointAG(475, 200), new PointAG(500, 275),
@@ -72,21 +89,27 @@ public class BoardBuilder {
         return vehicle;
     }
 
-    public static Board createBoardWithTrack(int numberOfVehicles, TrackType trackType) {
+    public static Board createBoardWithTrack(int numberOfVehicles, int numberOfHumanControlled, TrackType trackType) {
         Board board = new Board();
         board.track = createTrack(trackType);
-        board.vehicles = createVehicles(numberOfVehicles, board);
+        board.vehicles = createVehicles(numberOfVehicles, numberOfHumanControlled, board);
         return board;
     }
 
-    private static ArrayList<Vehicle> createVehicles(int numberOfVehicles, Board board) {
+    private static ArrayList<Vehicle> createVehicles(int numberOfVehicles, int numberOfHumanControlled, Board board) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         int initialSpeed = VelocityVector.V_MIN;
 
         for (int i = 0; i < numberOfVehicles; i++) {
             PointAG vehiclePosition = board.track.computeStartPosition(i, numberOfVehicles);
             boolean active = true;
-            vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, active));
+            if (i >= numberOfHumanControlled -1)
+            {
+                vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, new SimpleDrive(), active));
+            }
+            else
+                vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, null, active));
+            
         }
 
         return vehicles;
@@ -100,6 +123,12 @@ public class BoardBuilder {
                 return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS);
             case KIDNEY:
                 return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS);
+            case TRIANGLE:
+                return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f);
+            case PENTAGON:
+                return createTrack(PENTAGON_OUTER_BOUND_PTS, 0.7f);
+            case WERONIKA:
+                return createTrack(WERONIKA_OUTER_BOUND_PTS, WERONIKA_INNER_BOUND_PTS);
             case TEST_RECTANGULAR:
                 return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS);
             default:
@@ -108,11 +137,19 @@ public class BoardBuilder {
         }
     }
 
+    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor) {
+        Track track = new Track();
+        track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
+
+        track.innerBound = new PolygonAG(track.outerBound);
+        track.innerBound.scale(scaleFactor);
+        return track;
+    }
+
     private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts) {
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         track.innerBound.points.addAll(Arrays.asList(innerBoundPts));
-
         return track;
     }
 

@@ -1,13 +1,15 @@
 package logic;
 
-import java.awt.Point;
-
+import java.util.ArrayList;
 import libs.math2.*;
+import logic.drive_algorithms.IDriveAlgorithm;
 
 public class Track {
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
+    
+    public ArrayList<IDriveAlgorithm> acceptableAlgorithms;
 
     private LineSection intersectedInnerLine;
     private LineSection intersectedOuterLine;
@@ -15,6 +17,7 @@ public class Track {
     public Track() {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
+        this.acceptableAlgorithms = new ArrayList<>();
     }
 
     public boolean isInsideTrack(PointAG point) {
@@ -23,8 +26,8 @@ public class Track {
     }
 
     public PointAG computeCenter() {
-        Point outerBoundCenter = General.computeCenterOfPolygon(outerBound.convertToPolygon());
-        Point innerBoundCenter = General.computeCenterOfPolygon(innerBound.convertToPolygon());
+        PointAG outerBoundCenter = outerBound.computeCenter();
+        PointAG innerBoundCenter = innerBound.computeCenter();
 
         LineSection sectionBetweenCenters;
         sectionBetweenCenters = new LineSection(innerBoundCenter, outerBoundCenter);
@@ -48,21 +51,21 @@ public class Track {
 
     public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
         LineSection startLine = this.computeVerticalStartLine();
-        
+
         float x = computeCoordinate(numberOfVehicles, vehicleIndex, startLine.p1.x, startLine.p2.x);
         float y = computeCoordinate(numberOfVehicles, vehicleIndex, startLine.p1.y, startLine.p2.y);
         return new PointAG(x, y);
     }
-
-        private void findLinesIntersectedByVertStartLine() {
+    
+    private void findLinesIntersectedByVertStartLine() {
         float X = computeCenter().x;
-
+ 
         LineAG lineContainingStartLineSection = new LineAG(X);
 
         intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
         intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
     }
-    
+
     private float computeCoordinate(int numberOfVehicles, int vehicleIndex, float coordinateP1, float coordinateP2) {
         float y;
         if (coordinateP1 == coordinateP2) {
@@ -73,6 +76,5 @@ public class Track {
         }
         return y;
     }
-
-    
+  
 }
