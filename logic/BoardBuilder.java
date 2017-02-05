@@ -1,4 +1,4 @@
-package miscallenous;
+package logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,11 +7,6 @@ import libs.math2.CircleAG;
 import libs.math2.General;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
-import logic.Board;
-import logic.Game;
-import logic.Track;
-import logic.Vehicle;
-import logic.VelocityVector;
 import logic.drive_algorithms.DriveAlgorithm;
 import logic.drive_algorithms.HumanDriveNullObject;
 import logic.drive_algorithms.TurnLeftAlgorithm;

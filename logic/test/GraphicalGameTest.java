@@ -12,7 +12,7 @@ import logic.Board;
 import logic.Track;
 import logic.Vehicle;
 import logic.drive_algorithms.SimpleDrive;
-import miscallenous.BoardBuilder;
+import logic.BoardBuilder;
 
 public class GraphicalGameTest extends JFrame {
 

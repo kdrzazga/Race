@@ -10,7 +10,7 @@ import logic.Board;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
-import miscallenous.BoardBuilder;
+import logic.BoardBuilder;
 
 public class BoardTrackVehicleTest {
 
