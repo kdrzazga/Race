@@ -44,8 +44,8 @@ public class PointAG {
     }
 
     public void moveByVector(double length, double angle) {
-        this.x += General.roundToFloat(length * Math.sin(angle));
-        this.y += General.roundToFloat(length * Math.cos(angle));
+        this.x += Numbers.roundToFloat(length * Math.sin(angle));
+        this.y += Numbers.roundToFloat(length * Math.cos(angle));
     }
 
     public void moveByVector(LineSection vector) {

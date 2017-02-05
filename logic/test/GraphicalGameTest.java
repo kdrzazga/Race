@@ -18,12 +18,12 @@ public class GraphicalGameTest extends JFrame {
 
     public GraphicalGameTest() {
         initComponents();
-        initComponents2();        
+        initComponents2();
     }
 
     public static void main(String args[]) {
         setNimbusLookAndFeel(GraphicalGameTest.class.getName());
-        
+
         java.awt.EventQueue.invokeLater(() -> {
             new GraphicalGameTest().setVisible(true);
         });
@@ -41,6 +41,10 @@ public class GraphicalGameTest extends JFrame {
         btnDrawKidneyTrack = new javax.swing.JButton();
         btnTriangleTrack = new javax.swing.JButton();
         btnPentagonTrack = new javax.swing.JButton();
+        cbTrackCenter = new javax.swing.JCheckBox();
+        cbInnerCenter = new javax.swing.JCheckBox();
+        cbDesiredRoute = new javax.swing.JCheckBox();
+        cbCheckpoints = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 1200));
@@ -112,6 +116,14 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        cbTrackCenter.setText("Draw center");
+
+        cbInnerCenter.setText("Draw inner bnd center");
+
+        cbDesiredRoute.setText("Draw desired route");
+
+        cbCheckpoints.setText("Draw checkpoints");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,15 +131,17 @@ public class GraphicalGameTest extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnDrawBoard))
                     .addComponent(btnDrawRectTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDrawTestTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDrawSineTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDrawKidneyTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTriangleTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPentagonTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPentagonTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTrackCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbInnerCenter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDrawBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbDesiredRoute, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbCheckpoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -149,7 +163,15 @@ public class GraphicalGameTest extends JFrame {
                 .addComponent(btnTriangleTrack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPentagonTrack)
-                .addContainerGap(527, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbTrackCenter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbInnerCenter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbDesiredRoute)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbCheckpoints)
+                .addContainerGap(394, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(boardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
                 .addContainerGap())
@@ -158,17 +180,16 @@ public class GraphicalGameTest extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-      private void initComponents2() {
-          boardG = this.boardPanel.getGraphics();
-      }
-    
-    private void clearBoard()
-    {
+    private void initComponents2() {
+        boardG = this.boardPanel.getGraphics();
+    }
+
+    private void clearBoard() {
         this.boardG.setColor(this.getBackground());
         this.boardG.fillRect(0, 0, this.boardPanel.getWidth(), this.boardPanel.getHeight());
         this.boardG.setColor(Color.BLACK);
     }
-      
+
     private void mockDrawTrack(Track track) {
         //this is required as class Draw2d is in upper layer
         boardG.drawPolygon(track.innerBound.convertToPolygon());
@@ -177,12 +198,33 @@ public class GraphicalGameTest extends JFrame {
 
     private void mockDrawBoard(Board board) {
         clearBoard();
-        
-        Point center = board.track.computeCenter().convertToPoint();
-        
-        boardG.fillRect(center.x-2, center.y-2, 4, 4);
+
+        if (cbTrackCenter.isSelected()) {
+            drawTrackCenter(board);
+        }
+
+        if (cbInnerCenter.isSelected()) {
+            drawInnerBoundCenter(board);
+        }
+
+        if (cbDesiredRoute.isSelected()) {
+            drawDesiredRoute(board);
+        }
+
+        if (cbCheckpoints.isSelected()) {
+             boardG.setColor(Color.MAGENTA);
+            for (PolygonAG checkpoint : board.track.checkpoints)
+            {
+                boardG.drawPolygon(checkpoint.convertToPolygon());
+            }
+        }
+        boardG.setColor(Color.BLACK);
         mockDrawTrack(board.track);
 
+        drawVehicles(board);
+    }
+
+    private void drawVehicles(Board board) {
         for (Vehicle vehicle : board.vehicles) {
             int x = vehicle.v.position.convertToPoint().x;
             int y = vehicle.v.position.convertToPoint().y;
@@ -193,21 +235,33 @@ public class GraphicalGameTest extends JFrame {
             Point p2 = startLine.p2.convertToPoint();
             boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
         }
-        
+    }
+
+    private void drawInnerBoundCenter(Board board) {
+        Point innerBoundCenter = board.track.innerBound.computeCenter().convertToPoint();
+        boardG.setColor(Color.BLUE);
+        boardG.fillRect(innerBoundCenter.x - 2, innerBoundCenter.y - 2, 4, 4);
+    }
+
+    private void drawTrackCenter(Board board) {
+        Point trackCenter = board.track.computeCenter().convertToPoint();
+        boardG.setColor(Color.RED);
+        boardG.fillRect(trackCenter.x - 2, trackCenter.y - 2, 4, 4);
+    }
+
+    private void drawDesiredRoute(Board board) {
         SimpleDrive algorithm = new SimpleDrive(board.track);
-        
+
         PolygonAG route = algorithm.getDesiredRoute();
-        
+
         boardG.setColor(Color.red);
-        
-        for (int i = 0; i < route.points.size() - 2; i++)
-        {
+
+        for (int i = 0; i < route.points.size() - 2; i++) {
             LineSection side = new LineSection(route.points.get(i), route.points.get(i + 1));
             Point p1 = side.p1.convertToPoint();
             Point p2 = side.p2.convertToPoint();
             boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
         }
-        
         boardG.setColor(Color.BLACK);
     }
 
@@ -228,7 +282,7 @@ public class GraphicalGameTest extends JFrame {
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
         Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE);
-        mockDrawBoard(board);        
+        mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 
     private void btnDrawKidneyTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawKidneyTrackActionPerformed
@@ -255,6 +309,10 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JButton btnDrawTestTrack;
     private javax.swing.JButton btnPentagonTrack;
     private javax.swing.JButton btnTriangleTrack;
+    private javax.swing.JCheckBox cbCheckpoints;
+    private javax.swing.JCheckBox cbDesiredRoute;
+    private javax.swing.JCheckBox cbInnerCenter;
+    private javax.swing.JCheckBox cbTrackCenter;
     // End of variables declaration//GEN-END:variables
     private Graphics boardG;
 

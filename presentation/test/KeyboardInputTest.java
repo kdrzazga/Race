@@ -5,7 +5,7 @@ import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;
-import miscallenous.BoardBuilder;
+import logic.BoardBuilder;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;

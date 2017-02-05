@@ -35,16 +35,17 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnDrawBoard" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Component id="btnDrawRectTrack" max="32767" attributes="0"/>
                   <Component id="btnDrawTestTrack" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnDrawSineTrack" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnDrawKidneyTrack" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnTriangleTrack" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnPentagonTrack" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cbTrackCenter" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cbInnerCenter" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnDrawBoard" alignment="1" max="32767" attributes="0"/>
+                  <Component id="cbDesiredRoute" alignment="1" max="32767" attributes="0"/>
+                  <Component id="cbCheckpoints" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="boardPanel" min="-2" max="-2" attributes="0"/>
@@ -69,7 +70,15 @@
               <Component id="btnTriangleTrack" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnPentagonTrack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="527" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="cbTrackCenter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="cbInnerCenter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="cbDesiredRoute" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="cbCheckpoints" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="394" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="boardPanel" pref="822" max="32767" attributes="0"/>
@@ -163,6 +172,26 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPentagonTrackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbTrackCenter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Draw center"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbInnerCenter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Draw inner bnd center"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbDesiredRoute">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Draw desired route"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="cbCheckpoints">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Draw checkpoints"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

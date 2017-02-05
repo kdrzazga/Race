@@ -3,7 +3,7 @@ package libs.test;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
-import libs.math2.General;
+import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
@@ -79,7 +79,7 @@ public class GraphicalTests2 extends javax.swing.JDialog {
 
     private void btnLineTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineTestsActionPerformed
         final int length = 70;
-        for (float angle = -General.roundToFloat(Math.PI); angle < Math.PI; angle += 0.1) {
+        for (float angle = -Numbers.roundToFloat(Math.PI); angle < Math.PI; angle += 0.1) {
             this.ray = new LineSection(center, angle, length);
 
             drawLine(ray, Color.red);
@@ -95,7 +95,7 @@ public class GraphicalTests2 extends javax.swing.JDialog {
         PolygonAG smallTriangle = new PolygonAG(smallTrianglePts);
         drawPolygonAG(smallTriangle, Color.LIGHT_GRAY);
 
-        final float pi = General.roundToFloat(Math.PI);
+        final float pi = Numbers.roundToFloat(Math.PI);
         final int length = 250;
         for (float angle = -pi; angle < pi; angle += 0.1) {
             this.ray = new LineSection(center, angle, length);

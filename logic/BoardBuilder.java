@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import libs.math2.CircleAG;
-import libs.math2.General;
+import libs.math2.Numbers;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import logic.drive_algorithms.DriveAlgorithm;
@@ -45,7 +45,8 @@ public class BoardBuilder {
         new PointAG(550, 50), new PointAG(50, 50)};
     private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
         new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
-        new PointAG(150, 100)};
+        new PointAG(150, 100), new PointAG(150, 150), new PointAG(150, 200), new PointAG(150, 250), new PointAG(150, 300),new PointAG(150, 350)
+          , new PointAG(150, 360), new PointAG(150, 370), new PointAG(150, 380), new PointAG(150, 400), new PointAG(150, 450), new PointAG(150, 500), new PointAG(150, 550)};
 
     private static final PointAG[] TEST_RECT_OUTER_BOUND_PTS = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
     private static final PointAG[] TEST_RECT_INNER_BOUND_PTS = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
@@ -102,14 +103,14 @@ public class BoardBuilder {
             PointAG vehiclePosition = board.track.computeStartPosition(i, numberOfVehicles);
             DriveAlgorithm driveAlgorithm;
             boolean active = true;
-            
+
             if (i >= Game.NUMBER_OF_HUMAN_CONTROLLED_VEHICLES) {
                 driveAlgorithm = new TurnLeftAlgorithm(board.track);
             } else {
                 driveAlgorithm = new HumanDriveNullObject();
             }
-            Vehicle vehicle = new Vehicle(i, initialSpeed, vehiclePosition, driveAlgorithm, active);            
-            driveAlgorithm.setVehicle(vehicle);            
+            Vehicle vehicle = new Vehicle(i, initialSpeed, vehiclePosition, driveAlgorithm, active);
+            driveAlgorithm.setVehicle(vehicle);
             vehicles.add(vehicle);
         }
 
@@ -144,6 +145,8 @@ public class BoardBuilder {
 
         track.innerBound = new PolygonAG(track.outerBound);
         track.innerBound.scale(scaleFactor);
+
+        track.computeCheckpoints();
         return track;
     }
 
@@ -151,6 +154,8 @@ public class BoardBuilder {
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         track.innerBound.points.addAll(Arrays.asList(innerBoundPts));
+
+        track.computeCheckpoints();
         return track;
     }
 
@@ -179,7 +184,7 @@ public class BoardBuilder {
 
         donutTrack.innerBound = innerBound.getPoints();
         donutTrack.outerBound = outerBound.getPoints();
-
+        donutTrack.computeCheckpoints();
         return donutTrack;
     }
 
@@ -199,7 +204,7 @@ public class BoardBuilder {
         int y = 10;
 
         while (y < TRACK_HEIGHT) {
-            float x = General.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
+            float x = Numbers.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
                     + LEFT_SIDE_OFFSET + HORIZONTAL_TRACK_OFFSET);
             outerBoundPts.add(new PointAG(x, y));
             y += ITERATION_STEP_IN_PIXELS;
@@ -208,7 +213,7 @@ public class BoardBuilder {
         y = (int) (0.9 * y);
 
         while (y > 0.1 * TRACK_HEIGHT) {
-            float x = General.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
+            float x = Numbers.roundToFloat(WIDTH_FACTOR * Math.sin(VERTICAL_FACTOR * y)
                     + RIGHT_SIDE_OFFSET + HORIZONTAL_TRACK_OFFSET);
             outerBoundPts.add(new PointAG(x, y));
             y -= ITERATION_STEP_IN_PIXELS;
@@ -219,14 +224,14 @@ public class BoardBuilder {
 
         for (int i = 0; i < outerBoundPts.size(); i++) {
 
-            float ptx = General.roundToFloat(outerBoundPts.get(i).x * 0.3 + INNER_OFFSET_HORIZONTAL);
-            float pty = General.roundToFloat(outerBoundPts.get(i).y * 0.8 + INNER_OFFSET_VERTICAL);
+            float ptx = Numbers.roundToFloat(outerBoundPts.get(i).x * 0.3 + INNER_OFFSET_HORIZONTAL);
+            float pty = Numbers.roundToFloat(outerBoundPts.get(i).y * 0.8 + INNER_OFFSET_VERTICAL);
             innerBoundPts.add(new PointAG(ptx, pty));
         }
 
         sineTrack.outerBound.points.addAll(outerBoundPts);
         sineTrack.innerBound.points.addAll(innerBoundPts);
-
+        sineTrack.computeCheckpoints();
         return sineTrack;
     }
 

@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import javax.swing.JPanel;
-import libs.math2.General;
+import libs.math2.Numbers;
 
 import libs.math2.LineSection;
 import libs.math2.PolygonAG;
@@ -124,8 +124,8 @@ public class Draw2d implements IGraphicalOutput {
         g.fillOval(centerX, centerY, Vehicle.SIZE, Vehicle.SIZE);
         float factorX, factorY;
 
-        factorX = General.roundToFloat(Math.cos(vehicleV.angle));
-        factorY = General.roundToFloat(Math.sin(vehicleV.angle));
+        factorX = Numbers.roundToFloat(Math.cos(vehicleV.angle));
+        factorY = Numbers.roundToFloat(Math.sin(vehicleV.angle));
 
         int deltaX, deltaY;
 

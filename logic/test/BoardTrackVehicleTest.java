@@ -3,7 +3,7 @@ package logic.test;
 import static libs.Assert.assertion;
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
 import static libs.UnitTest.showTestPassedMessage;
-import libs.math2.General;
+import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import logic.Board;
@@ -86,12 +86,12 @@ public class BoardTrackVehicleTest {
         PointAG vehicle0Position = testBoard.vehicles.get(0).v.position;
         PointAG vehicle1Position = testBoard.vehicles.get(1).v.position;
                 
-        float distanceBetweenVehicle0And1 = General.roundToFloat(vehicle0Position.distanceToAntherPointAG(vehicle1Position));
+        float distanceBetweenVehicle0And1 = Numbers.roundToFloat(vehicle0Position.distanceToAntherPointAG(vehicle1Position));
 
         for (int i = 2; i < testBoard.vehicles.size() - 1; i++) {
             PointAG vehiclePosition = testBoard.vehicles.get(i).v.position;
             PointAG nextVehiclePosition = testBoard.vehicles.get(i + 1).v.position;
-            float distanceBetweenNextVehicles = General.roundToFloat(vehiclePosition.distanceToAntherPointAG(nextVehiclePosition));
+            float distanceBetweenNextVehicles = Numbers.roundToFloat(vehiclePosition.distanceToAntherPointAG(nextVehiclePosition));
 
             assertion(distanceBetweenVehicle0And1, distanceBetweenNextVehicles, methodName);
             testResultMessage.append(testBoard.vehicles.get(i).v.position).append(" ");

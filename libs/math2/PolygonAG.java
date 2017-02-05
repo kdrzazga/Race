@@ -18,9 +18,8 @@ public class PolygonAG {
         this.points = new ArrayList<>();
         this.points.addAll(Arrays.asList(points));
     }
-    
-    public PolygonAG(PolygonAG polygonToBeCloned)
-    {
+
+    public PolygonAG(PolygonAG polygonToBeCloned) {
         this.points = new ArrayList<>();
         this.points.addAll(polygonToBeCloned.points);
     }
@@ -92,8 +91,8 @@ public class PolygonAG {
             sumYCoordinates += point.y;
         }
 
-        float centerX = General.roundToFloat(sumXCoordinates / this.points.size());
-        float centerY = General.roundToFloat(sumYCoordinates / this.points.size());
+        float centerX = Numbers.roundToFloat(sumXCoordinates / this.points.size());
+        float centerY = Numbers.roundToFloat(sumYCoordinates / this.points.size());
 
         return new PointAG(centerX, centerY);
     }
@@ -111,5 +110,23 @@ public class PolygonAG {
         });
 
         this.points = scaledPoints;
+    }
+
+    public float[] getXPoints() {
+        float[] xpoints = new float[this.points.size()];
+
+        for (int i = 0; i < this.points.size(); i++) {
+            xpoints[i] = this.points.get(i).x;
+        }
+        return xpoints;
+    }
+
+    public float[] getYPoints() {
+        float[] ypoints = new float[this.points.size()];
+
+        for (int i = 0; i < this.points.size(); i++) {
+            ypoints[i] = this.points.get(i).y;
+        }
+        return ypoints;
     }
 }

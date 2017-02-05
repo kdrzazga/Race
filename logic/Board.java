@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-import libs.math2.General;
+import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 
@@ -48,7 +48,7 @@ public class Board {
     private void assignNewPositionIfVehicleOnTrack(PointAG newPosition, Vehicle vehicle) {
         if (track.isInsideTrack(newPosition)) {
             vehicle.v.position = newPosition;
-            updateVehicleTravelledWayAngle(vehicle, track.computeCenter());
+            checkIfPassingCheckpoint(vehicle, track.computeCenter());
         } else {
             vehicle.stop(); 
         }
@@ -62,8 +62,8 @@ public class Board {
     private PointAG computeNewPosition(Vehicle vehicle) {
         float moveX, moveY, factorX, factorY;
 
-        factorX = General.roundToFloat(Math.cos(vehicle.v.angle));
-        factorY = General.roundToFloat(Math.sin(vehicle.v.angle));
+        factorX = Numbers.roundToFloat(Math.cos(vehicle.v.angle));
+        factorY = Numbers.roundToFloat(Math.sin(vehicle.v.angle));
 
         moveX = factorX * vehicle.v.value;
         moveY = factorY * vehicle.v.value;
@@ -89,7 +89,7 @@ public class Board {
         });
     }
 
-    private void updateVehicleTravelledWayAngle(Vehicle vehicle, PointAG trackCenter) {
+    private void checkIfPassingCheckpoint(Vehicle vehicle, PointAG trackCenter) {
         LineSection lsWithPrevLocation = new LineSection(trackCenter, vehicle.previousV.position);
         LineSection lsWithCurrLocation = new LineSection(trackCenter, vehicle.v.position);
 
@@ -97,7 +97,7 @@ public class Board {
         double angleWithNewPos = lsWithCurrLocation.computeInclinationAngle();
 
         vehicle.travelledWayAngle = angleWithNewPos;
-        System.out.println("updateVehicleTravelledWayAngle is invalid");
+        System.out.println("checkIfPassingCheckpoint is invalid");
     }
 
 }

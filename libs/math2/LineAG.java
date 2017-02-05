@@ -33,15 +33,15 @@ public class LineAG {
     }
 
     public LineAG(PointAG p1, float angle) {
-        if (General.roundToFloat(angle) == General.roundToFloat(Math.PI / 2)
-                || (General.roundToFloat(angle) == General.roundToFloat(-Math.PI / 2))) {
+        if (Numbers.roundToFloat(angle) == Numbers.roundToFloat(Math.PI / 2)
+                || (Numbers.roundToFloat(angle) == Numbers.roundToFloat(-Math.PI / 2))) {
             this.vertical = true;
             this.verticalX = p1.x;
         }
         else
         {
             this.vertical = false;
-            this.A = General.roundToFloat(Math.tan(angle));
+            this.A = Numbers.roundToFloat(Math.tan(angle));
             this.B = p1.y - this.A * p1.x;
         }
     }

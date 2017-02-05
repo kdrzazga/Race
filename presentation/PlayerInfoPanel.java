@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import libs.math2.General;
+import libs.math2.Numbers;
 import logic.Game;
 import logic.IPlayerInfoPanel;
 
@@ -78,7 +78,7 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
 
     @Override
     public void setPlayerInfo(int id, int speed, double travelledWay) {
-        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + General.roundToFloat(travelledWay, 2));
+        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + Numbers.roundToFloat(travelledWay, 2));
         this.playerInfos[id].lblPlayerSpeed.setText(PlayerInfo.SPEED_TEXT + speed);
     }
 }

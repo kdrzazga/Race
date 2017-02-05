@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 import logic.Board;
 import logic.Game;
 import logic.IGraphicalOutput;
-import miscallenous.BoardBuilder;
-import miscallenous.BoardBuilder.TrackType;
+import logic.BoardBuilder;
+import logic.BoardBuilder.TrackType;
 
 public class IntroFrame extends JFrame {
 

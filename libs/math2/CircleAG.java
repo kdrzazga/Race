@@ -13,8 +13,8 @@ package libs.math2;
             this.points = new PolygonAG();
             
             for (double angle = Math.PI; angle > -Math.PI; angle -= 2 * Math.PI / numberOfPoints) {                
-                float x  = center.x + radius * General.roundToFloat(Math.cos(angle));                        
-                float y =  center.y + radius * General.roundToFloat(Math.sin(angle));
+                float x  = center.x + radius * Numbers.roundToFloat(Math.cos(angle));                        
+                float y =  center.y + radius * Numbers.roundToFloat(Math.sin(angle));
                 
                 points.addPointAG(x, y);
             }
