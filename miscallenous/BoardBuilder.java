@@ -8,10 +8,13 @@ import libs.math2.General;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import logic.Board;
+import logic.Game;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
-import logic.drive_algorithms.SimpleDrive;
+import logic.drive_algorithms.DriveAlgorithm;
+import logic.drive_algorithms.HumanDriveNullObject;
+import logic.drive_algorithms.TurnLeftAlgorithm;
 
 public class BoardBuilder {
 
@@ -89,27 +92,30 @@ public class BoardBuilder {
         return vehicle;
     }
 
-    public static Board createBoardWithTrack(int numberOfVehicles, int numberOfHumanControlled, TrackType trackType) {
+    public static Board createBoardWithTrack(int numberOfVehicles, TrackType trackType) {
         Board board = new Board();
         board.track = createTrack(trackType);
-        board.vehicles = createVehicles(numberOfVehicles, numberOfHumanControlled, board);
+        board.vehicles = createVehicles(numberOfVehicles, board);
         return board;
     }
 
-    private static ArrayList<Vehicle> createVehicles(int numberOfVehicles, int numberOfHumanControlled, Board board) {
+    private static ArrayList<Vehicle> createVehicles(int numberOfVehicles, Board board) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
         int initialSpeed = VelocityVector.V_MIN;
 
         for (int i = 0; i < numberOfVehicles; i++) {
             PointAG vehiclePosition = board.track.computeStartPosition(i, numberOfVehicles);
+            DriveAlgorithm driveAlgorithm;
             boolean active = true;
-            if (i >= numberOfHumanControlled -1)
-            {
-                vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, new SimpleDrive(), active));
-            }
-            else
-                vehicles.add(new Vehicle(i, initialSpeed, vehiclePosition, null, active));
             
+            if (i >= Game.NUMBER_OF_HUMAN_CONTROLLED_VEHICLES) {
+                driveAlgorithm = new TurnLeftAlgorithm(board.track);
+            } else {
+                driveAlgorithm = new HumanDriveNullObject();
+            }
+            Vehicle vehicle = new Vehicle(i, initialSpeed, vehiclePosition, driveAlgorithm, active);            
+            driveAlgorithm.setVehicle(vehicle);            
+            vehicles.add(vehicle);
         }
 
         return vehicles;
@@ -226,7 +232,6 @@ public class BoardBuilder {
         sineTrack.outerBound.points.addAll(outerBoundPts);
         sineTrack.innerBound.points.addAll(innerBoundPts);
 
-        //return createTrack(sineTrack, outerBoundPts.toArray(), innerBoundPts.toArray());
         return sineTrack;
     }
 

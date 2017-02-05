@@ -194,7 +194,7 @@ public class GraphicalGameTest extends JFrame {
             boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
         }
         
-        SimpleDrive algorithm = new SimpleDrive(board.track, board.vehicles.get(1));
+        SimpleDrive algorithm = new SimpleDrive(board.track);
         
         PolygonAG route = algorithm.getDesiredRoute();
         
@@ -212,37 +212,37 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.DONUT);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.RECTANGULAR_1);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.TEST_RECTANGULAR);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.SINE);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE);
         mockDrawBoard(board);        
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 
     private void btnDrawKidneyTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawKidneyTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.KIDNEY);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.KIDNEY);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawKidneyTrackActionPerformed
 
     private void btnTriangleTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriangleTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.TRIANGLE);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TRIANGLE);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnTriangleTrackActionPerformed
 
     private void btnPentagonTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPentagonTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, 0, BoardBuilder.TrackType.PENTAGON);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.PENTAGON);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnPentagonTrackActionPerformed
 

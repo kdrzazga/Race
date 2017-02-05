@@ -52,6 +52,10 @@ public class PointAG {
         this.moveByVector(vector.computeLength(), vector.computeInclinationAngle());
     }
 
+    public boolean equals(PointAG point) {
+        return (this.x == point.x && this.y == this.y);
+    }
+
     @Override
     public String toString() {
         return "(" + this.x + " ," + this.y + ")";

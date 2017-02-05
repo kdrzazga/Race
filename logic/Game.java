@@ -2,11 +2,13 @@ package logic;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logic.drive_algorithms.HumanDriveNullObject;
 
 public class Game extends Thread {
 
     public static final int MIN_VEHICLES = 2;
     public static final int MAX_VEHICLES = 10;
+    public static final int NUMBER_OF_HUMAN_CONTROLLED_VEHICLES = 2;
     public static final int GAME_FRAME_MS = 70;
     public Board board;
 
@@ -57,6 +59,7 @@ public class Game extends Thread {
                 Thread.sleep(GAME_FRAME_MS);
 
                 if (this.gameRunning) {
+                    analyzeComputerPlayers();
                     this.board.moveAllVehicles();
                     updateGraphicalOutput();
                     updateInfoPanel();
@@ -70,6 +73,14 @@ public class Game extends Thread {
 
     public void setGraphicalOutput(IGraphicalOutput graphicalOutput) {
         this.graphicalOutput = graphicalOutput;
+    }
+
+    private void analyzeComputerPlayers() {
+        this.board.vehicles.forEach((vehicle) -> {
+            if (!(vehicle.driveAlgorithm instanceof HumanDriveNullObject)) {
+                vehicle.driveAlgorithm.computeVelocityVector();
+            }
+        });
     }
 
     private void updateGraphicalOutput() {

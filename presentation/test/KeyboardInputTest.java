@@ -71,7 +71,7 @@ public class KeyboardInputTest extends UnitTest{
     }
 
     private static void init() {
-        mockBoard = BoardBuilder.createBoardWithTrack(2, 0, BoardBuilder.TrackType.RECTANGULAR_1);
+        mockBoard = BoardBuilder.createBoardWithTrack(2, BoardBuilder.TrackType.RECTANGULAR_1);
         ki = new KeyboardControlsAdapter(mockBoard);
         player1 = mockBoard.vehicles.get(0);
         player2 = mockBoard.vehicles.get(1);

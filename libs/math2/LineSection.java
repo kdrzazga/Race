@@ -88,13 +88,16 @@ public class LineSection extends LineAG{
     
     public PointAG computeIntersection(LineSection lineSection2)
     {
-        PointAG intersection = super.findIntersection(lineSection2);
-        
+        PointAG intersection = super.findIntersection(lineSection2);        
+        return returnIntersectionIfInLineSection(intersection);
+    }
+
+    private PointAG returnIntersectionIfInLineSection(PointAG intersection) {
         if (intersection != null)
         {
-            if (this.xBelongsToLineSection(intersection.x) 
-                && this.yBelongsToLineSection(intersection.y))
-                    return intersection;
+            if (this.xBelongsToLineSection(intersection.x)
+                    && this.yBelongsToLineSection(intersection.y))
+                return intersection;
             else return null;
         }
         else

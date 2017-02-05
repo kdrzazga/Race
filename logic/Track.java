@@ -2,22 +2,18 @@ package logic;
 
 import java.util.ArrayList;
 import libs.math2.*;
-import logic.drive_algorithms.IDriveAlgorithm;
 
 public class Track {
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
     
-    public ArrayList<IDriveAlgorithm> acceptableAlgorithms;
-
     private LineSection intersectedInnerLine;
     private LineSection intersectedOuterLine;
 
     public Track() {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
-        this.acceptableAlgorithms = new ArrayList<>();
     }
 
     public boolean isInsideTrack(PointAG point) {
@@ -76,5 +72,4 @@ public class Track {
         }
         return y;
     }
-  
 }

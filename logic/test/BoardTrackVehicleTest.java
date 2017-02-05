@@ -6,7 +6,6 @@ import static libs.UnitTest.showTestPassedMessage;
 import libs.math2.General;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
-import libs.test.LineSectionTests;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
@@ -82,7 +81,7 @@ public class BoardTrackVehicleTest {
         StringBuilder testResultMessage = new StringBuilder();
         testResultMessage.append(methodName).append(" passed for ");
         
-        Board testBoard = BoardBuilder.createBoardWithTrack(numberOfVehicles, 0, BoardBuilder.TrackType.DONUT);
+        Board testBoard = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
 
         PointAG vehicle0Position = testBoard.vehicles.get(0).v.position;
         PointAG vehicle1Position = testBoard.vehicles.get(1).v.position;
@@ -119,7 +118,7 @@ public class BoardTrackVehicleTest {
         
         GIVEN_RECTANGULAR_TRACK_WITH_1_VEHICLE_SPEED_1:
         {
-            rectBoard = BoardBuilder.createBoardWithTrack(1, 0, BoardBuilder.TrackType.RECTANGULAR_1);
+            rectBoard = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
             rectBoard.vehicles.get(0).v.value = 1;
             vehicleBeforeMove = rectBoard.vehicles.get(0).clone();
         }

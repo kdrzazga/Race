@@ -12,13 +12,11 @@ public class Board {
     public ArrayList<Vehicle> vehicles;
 
     public Board() {
-        this.track = new Track();
-        this.vehicles = new ArrayList<>();
+        init(new Track());
     }
  
     public Board(int numberOfVehicles, Track track) {
-        this.track = track;
-        this.vehicles = new ArrayList<>();
+        init(track);
 
         for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
@@ -26,6 +24,11 @@ public class Board {
 
             this.vehicles.add(veh);
         }
+    }
+
+    private void init(Track track) {
+        this.track = track;
+        this.vehicles = new ArrayList<>();
     }
 
     public void moveAllVehicles() {
