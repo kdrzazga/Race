@@ -14,11 +14,11 @@ import logic.IGraphicalOutput;
 public class GameScreen extends JDialog {
 
     private final IntroFrame introFrame;
-    private final IGraphicalOutput drawOutput;
+    protected IGraphicalOutput drawOutput;
     public final Game game;
 
-    private PlayerInfoPanel pnlInfo;
-    private JPanel pnlBoard;
+    protected PlayerInfoPanel pnlInfo;
+    protected JPanel pnlBoard;
 
     public GameScreen(IntroFrame introFrame, Game game) {
         this.introFrame = introFrame;

@@ -14,12 +14,12 @@ import logic.drive_algorithms.TurnLeftAlgorithm;
 public class BoardBuilder {
 
     public enum TrackType {
-        RECTANGULAR_1, DONUT, KIDNEY, SINE, TRIANGLE, PENTAGON, WERONIKA, TEST_RECTANGULAR;
+        RECTANGULAR, DONUT, KIDNEY, SINE, TRIANGLE, PENTAGON, WERONIKA, TEST_RECTANGULAR;
 
         @Override
         public String toString() {
             switch (this) {
-                case RECTANGULAR_1:
+                case RECTANGULAR:
                     return "Rectangular track";
                 case DONUT:
                     return "Donut";
@@ -121,7 +121,7 @@ public class BoardBuilder {
         switch (trackType) {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
-            case RECTANGULAR_1:
+            case RECTANGULAR:
                 return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS);
             case KIDNEY:
                 return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS);
@@ -161,7 +161,7 @@ public class BoardBuilder {
 
     public static Board createBoardWith2VehiclesOnRectTrack() {
         Board rectBoard = new Board();
-        rectBoard.track = BoardBuilder.createTrack(BoardBuilder.TrackType.RECTANGULAR_1);
+        rectBoard.track = BoardBuilder.createTrack(BoardBuilder.TrackType.RECTANGULAR);
         rectBoard.vehicles.add(createVehicleAtPosition(0, 100, 100));
         rectBoard.vehicles.add(createVehicleAtPosition(1, 100, 120));
 

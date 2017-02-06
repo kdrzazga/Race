@@ -3,6 +3,7 @@ package libs.test;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import libs.Colors;
 import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
@@ -27,6 +28,7 @@ public class GraphicalTests2 extends javax.swing.JDialog {
         btnLineTests = new javax.swing.JButton();
         btnPolygonTest = new javax.swing.JButton();
         btnScaledPolygons = new javax.swing.JButton();
+        btnColorsTest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,6 +53,13 @@ public class GraphicalTests2 extends javax.swing.JDialog {
             }
         });
 
+        btnColorsTest.setText("Test Colors");
+        btnColorsTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnColorsTestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,7 +71,9 @@ public class GraphicalTests2 extends javax.swing.JDialog {
                 .addComponent(btnPolygonTest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnScaledPolygons)
-                .addContainerGap(412, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnColorsTest)
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +82,8 @@ public class GraphicalTests2 extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLineTests)
                     .addComponent(btnPolygonTest)
-                    .addComponent(btnScaledPolygons)))
+                    .addComponent(btnScaledPolygons)
+                    .addComponent(btnColorsTest)))
         );
 
         pack();
@@ -132,6 +144,21 @@ public class GraphicalTests2 extends javax.swing.JDialog {
         drawScaledRectangle(baseRectanglePts, Color.MAGENTA, 3f);
     }//GEN-LAST:event_btnScaledPolygonsActionPerformed
 
+    private void btnColorsTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColorsTestActionPerformed
+        for (int i = 0; i < 30; i++) {
+            this.g.setColor(Colors.getColor(i));
+            g.fillRect(0, 10 + 15 * i, 80, 15);
+        }
+        for (int i = 0; i < 30; i++) {
+            this.g.setColor(Colors.getDarkColor(i));
+            g.fillRect(120, 10 + 15 * i, 80, 15);
+        }
+        for (int i = 0; i < 30; i++) {
+            this.g.setColor(Colors.getLightColor(i));
+            g.fillRect(240, 10 + 15 * i, 80, 15);
+        }
+    }//GEN-LAST:event_btnColorsTestActionPerformed
+
     private void drawScaledRectangle(PointAG[] baseRectanglePts, Color color, float scale) {
         PolygonAG scaledRectangle1 = new PolygonAG(baseRectanglePts);
         scaledRectangle1.scale(scale);
@@ -155,6 +182,7 @@ public class GraphicalTests2 extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnColorsTest;
     private javax.swing.JButton btnLineTests;
     private javax.swing.JButton btnPolygonTest;
     private javax.swing.JButton btnScaledPolygons;

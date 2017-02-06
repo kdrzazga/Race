@@ -10,40 +10,31 @@ public class Game extends Thread {
     public static final int MAX_VEHICLES = 10;
     public static final int NUMBER_OF_HUMAN_CONTROLLED_VEHICLES = 2;
     public static final int GAME_FRAME_MS = 70;
+
+    public int lapsToWin;
     public Board board;
 
+    private int currentPlace;
     private boolean gameRunning;
     private final Object gameRunningLock = new Object();
     private IGraphicalOutput graphicalOutput;
     private IPlayerInfoPanel pnlInfo;
 
-    public Game(int numberOfVehicles, Track track) {
-
-        this.board = new Board(numberOfVehicles, track);
-        this.gameInit(numberOfVehicles);
-        this.gameInit2();
-    }
-
-    public Game(Board board) {
-        this.board = board;
-        this.gameInit(board.vehicles.size());
-        this.gameInit2();
-    }
-
-    public Game() {
+    public Game(int lapsToWin) {
+        currentPlace = 1;
+        this.lapsToWin = lapsToWin;
         this.gameInit2();
     }
 
     public void findWinner() {
-        System.out.println(" findWinner() - Not implemented yet. "
-                + "Won't be implemented until travelledWay works correctly");
-    }
+        for (int i = 0; i < board.vehicles.size(); i++) {
+            if (board.vehicles.get(i).laps == this.lapsToWin) {
+                board.vehicles.get(i).stop();
+                board.vehicles.get(i).active = false;
 
-    private void gameInit(int numberOfVehicles) {
-        if ((numberOfVehicles < MIN_VEHICLES) || (numberOfVehicles > MAX_VEHICLES)) {
-            throw new RuntimeException("Creating a game with wrong number of players (vehicles) + "
-                    + numberOfVehicles + ". Only " + MIN_VEHICLES + " to "
-                    + MAX_VEHICLES + " available");
+                board.vehicles.get(i).finalPlace = currentPlace;
+                currentPlace++;
+            }
         }
     }
 
@@ -63,7 +54,7 @@ public class Game extends Thread {
                     this.board.moveAllVehicles();
                     updateGraphicalOutput();
                     updateInfoPanel();
-                    this.findWinner();
+                    findWinner();
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +84,7 @@ public class Game extends Thread {
     private void updateInfoPanel() {
         if (this.pnlInfo != null) {
             this.board.vehicles.forEach(vehicle -> {
-                this.pnlInfo.setPlayerInfo(vehicle.getId(), vehicle.v.value, vehicle.travelledWayAngle);
+                this.pnlInfo.setPlayerInfo(vehicle.getId(), vehicle.v.value, vehicle.laps);
             });
         } else {
             System.out.println("Info panel not created - update not possible");

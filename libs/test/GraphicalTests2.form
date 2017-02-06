@@ -30,7 +30,9 @@
               <Component id="btnPolygonTest" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnScaledPolygons" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="412" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnColorsTest" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="297" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,6 +44,7 @@
                   <Component id="btnLineTests" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPolygonTest" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnScaledPolygons" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnColorsTest" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -70,6 +73,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnScaledPolygonsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnColorsTest">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test Colors"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnColorsTestActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

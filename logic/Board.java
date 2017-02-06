@@ -1,9 +1,10 @@
 package logic;
 
+import java.awt.Point;
+import java.awt.Polygon;
 import java.util.ArrayList;
 
 import libs.math2.Numbers;
-import libs.math2.LineSection;
 import libs.math2.PointAG;
 
 public class Board {
@@ -14,7 +15,7 @@ public class Board {
     public Board() {
         init(new Track());
     }
- 
+
     public Board(int numberOfVehicles, Track track) {
         init(track);
 
@@ -48,9 +49,9 @@ public class Board {
     private void assignNewPositionIfVehicleOnTrack(PointAG newPosition, Vehicle vehicle) {
         if (track.isInsideTrack(newPosition)) {
             vehicle.v.position = newPosition;
-            checkIfPassingCheckpoint(vehicle, track.computeCenter());
+            checkIfPassingCheckpoint(vehicle);
         } else {
-            vehicle.stop(); 
+            vehicle.stop();
         }
     }
 
@@ -75,12 +76,12 @@ public class Board {
     }
 
     private void checkVehicleCrashWithOthers(Vehicle thisVehicle) {
-        
+
         this.vehicles.forEach((otherVehicle) -> {
             if (!otherVehicle.equals(thisVehicle)) {
-                PointAG thisVehicleLocation = thisVehicle.v.position; 
+                PointAG thisVehicleLocation = thisVehicle.v.position;
                 PointAG otherVehicleLocation = otherVehicle.v.position;
-                
+
                 if (thisVehicleLocation.distanceToAntherPointAG(otherVehicleLocation) < Vehicle.SIZE) {
                     thisVehicle.stop();
                     otherVehicle.stop();
@@ -89,14 +90,21 @@ public class Board {
         });
     }
 
-    private void checkIfPassingCheckpoint(Vehicle vehicle, PointAG trackCenter) {
-        LineSection lsWithPrevLocation = new LineSection(trackCenter, vehicle.previousV.position);
-        LineSection lsWithCurrLocation = new LineSection(trackCenter, vehicle.v.position);
+    private void checkIfPassingCheckpoint(Vehicle vehicle) {
+        for (int i = 0; i < this.track.checkpoints.length - 1; i++) {
+            Polygon checkpointPolygon = this.track.checkpoints[i].convertToPolygon();
+            Point vehicleLocation = vehicle.v.position.convertToPoint();
 
-        double angleWithPrevLocation = lsWithPrevLocation.computeInclinationAngle();
-        double angleWithNewPos = lsWithCurrLocation.computeInclinationAngle();
+            if (checkpointPolygon.contains(vehicleLocation)) {
+                vehicle.checkpointsVisited.values[i] = true;
+                System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
 
-        vehicle.travelledWayAngle = angleWithNewPos;
+                if (vehicle.checkpointsVisited.areAllTrue()) {
+                    vehicle.laps++;
+                    vehicle.checkpointsVisited.setAllItems(false);
+                }
+            }
+        }
         System.out.println("checkIfPassingCheckpoint is invalid");
     }
 

@@ -5,9 +5,7 @@ import logic.Track;
 import logic.Vehicle;
 
 public class SimpleDrive extends DriveAlgorithm {
-
-    public Track track;
-    public Vehicle vehicle;
+   
     private PolygonAG desiredRoute;
 
     public SimpleDrive(Track track) {
@@ -15,6 +13,7 @@ public class SimpleDrive extends DriveAlgorithm {
         this.computeDesiredRoute();
     }
 
+    @Override
     public void computeVelocityVector() {
         System.out.println("computeVelocityVector() - not implemented yet");
     }
@@ -32,6 +31,7 @@ public class SimpleDrive extends DriveAlgorithm {
         this.track = track;
     }
 
+    @Override
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }

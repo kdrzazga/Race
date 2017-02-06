@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JFrame;
+import libs.Colors;
 import libs.math2.LineSection;
 
 import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
@@ -45,6 +46,7 @@ public class GraphicalGameTest extends JFrame {
         cbInnerCenter = new javax.swing.JCheckBox();
         cbDesiredRoute = new javax.swing.JCheckBox();
         cbCheckpoints = new javax.swing.JCheckBox();
+        btnWeronikaTrack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 1200));
@@ -124,6 +126,13 @@ public class GraphicalGameTest extends JFrame {
 
         cbCheckpoints.setText("Draw checkpoints");
 
+        btnWeronikaTrack.setText("Draw Weronika Track");
+        btnWeronikaTrack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWeronikaTrackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,39 +150,42 @@ public class GraphicalGameTest extends JFrame {
                     .addComponent(cbInnerCenter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDrawBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbDesiredRoute, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbCheckpoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbCheckpoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnWeronikaTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnDrawBoard)
-                .addGap(18, 18, 18)
-                .addComponent(btnDrawRectTrack)
-                .addGap(18, 18, 18)
-                .addComponent(btnDrawTestTrack)
-                .addGap(18, 18, 18)
-                .addComponent(btnDrawSineTrack)
-                .addGap(18, 18, 18)
-                .addComponent(btnDrawKidneyTrack)
-                .addGap(18, 18, 18)
-                .addComponent(btnTriangleTrack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPentagonTrack)
-                .addGap(18, 18, 18)
-                .addComponent(cbTrackCenter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbInnerCenter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbDesiredRoute)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbCheckpoints)
-                .addContainerGap(394, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(boardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnDrawBoard)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDrawRectTrack)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDrawTestTrack)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDrawSineTrack)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDrawKidneyTrack)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTriangleTrack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPentagonTrack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnWeronikaTrack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                        .addComponent(cbTrackCenter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbInnerCenter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbDesiredRoute)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbCheckpoints))
+                    .addComponent(boardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -212,10 +224,14 @@ public class GraphicalGameTest extends JFrame {
         }
 
         if (cbCheckpoints.isSelected()) {
-             boardG.setColor(Color.MAGENTA);
-            for (PolygonAG checkpoint : board.track.checkpoints)
-            {
+
+            int colorIndex = 0;
+            for (PolygonAG checkpoint : board.track.checkpoints) {
+                Color color = Colors.getDarkColor(colorIndex);
+                boardG.setColor(color);
+                System.out.print("Color " + color + " index " + colorIndex + "\t");
                 boardG.drawPolygon(checkpoint.convertToPolygon());
+                colorIndex++;
             }
         }
         boardG.setColor(Color.BLACK);
@@ -271,7 +287,7 @@ public class GraphicalGameTest extends JFrame {
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR_1);
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR);
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
@@ -300,6 +316,11 @@ public class GraphicalGameTest extends JFrame {
         mockDrawBoard(board);
     }//GEN-LAST:event_btnPentagonTrackActionPerformed
 
+    private void btnWeronikaTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeronikaTrackActionPerformed
+        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA);
+        mockDrawBoard(board);
+    }//GEN-LAST:event_btnWeronikaTrackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JButton btnDrawBoard;
@@ -309,11 +330,13 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JButton btnDrawTestTrack;
     private javax.swing.JButton btnPentagonTrack;
     private javax.swing.JButton btnTriangleTrack;
+    private javax.swing.JButton btnWeronikaTrack;
     private javax.swing.JCheckBox cbCheckpoints;
     private javax.swing.JCheckBox cbDesiredRoute;
     private javax.swing.JCheckBox cbInnerCenter;
     private javax.swing.JCheckBox cbTrackCenter;
     // End of variables declaration//GEN-END:variables
     private Graphics boardG;
+    
 
 }

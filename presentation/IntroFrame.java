@@ -12,8 +12,8 @@ import logic.BoardBuilder.TrackType;
 
 public class IntroFrame extends JFrame {
 
-    private GameScreen gameScreen;
-    private Game game;
+    protected GameScreen gameScreen;
+    protected Game game;
 
     public IntroFrame() {
         initComponents();
@@ -130,7 +130,7 @@ public class IntroFrame extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initComponents2() {
+    protected void initComponents2() {
 
         cbTrack.setModel(new DefaultComboBoxModel<>(new String[]{
             rectTrackType.toString(),
@@ -138,26 +138,31 @@ public class IntroFrame extends JFrame {
             kidneyTrackType.toString(),
             sineTrackType.toString(),
             triangleTrackType.toString(),
-            pentagonTrackType.toString(),
-            weraTrackType.toString()
+            pentagonTrackType.toString(), //weraTrackType.toString()
         }));
 
         for (int i = Game.MIN_VEHICLES; i < Game.MAX_VEHICLES; i++) {
             cbPlayers.addItem(Integer.toString(i));
         }
 
-        this.game = new Game();
+        int lapsToWin = 5;
+        
+        this.game = new Game(lapsToWin);
     }
-    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+    protected void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         game.board = createBoardBasedOnSelectedUiItems();
-
         gameScreen = new GameScreen(this, game);
+        startGame(gameScreen);
+    }//GEN-LAST:event_btnStartActionPerformed
+
+    public void startGame(GameScreen gameScreen) {
+
         IGraphicalOutput graphicalOutput = createGraphicalOutputBasedOnSelectedGraphics(gameScreen.getPnlBoard());
 
         game.setGraphicalOutput(graphicalOutput);
         gameScreen.setVisible(true);
         game.setGameRunning(true);
-    }//GEN-LAST:event_btnStartActionPerformed
+    }
 
     private IGraphicalOutput createGraphicalOutputBasedOnSelectedGraphics(JPanel drawablePanel) {
         String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
@@ -169,14 +174,13 @@ public class IntroFrame extends JFrame {
         }
     }
 
-    private Board createBoardBasedOnSelectedUiItems() {
-        String vehCount = this.cbPlayers.getSelectedItem().toString();
-        int numberOfVehicles = new Integer(vehCount);
+    protected Board createBoardBasedOnSelectedUiItems() {
+        int numberOfVehicles = readSelectedNumberOfVehicles();
         Board board;
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
         if (selectedTrack.equals(rectTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR_1);
+            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR);
         } else if (selectedTrack.equals(circularTrackType.toString())) {
             board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
         } else if (selectedTrack.equals(kidneyTrackType.toString())) {
@@ -185,8 +189,6 @@ public class IntroFrame extends JFrame {
             board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.TRIANGLE);
         } else if (selectedTrack.equals(pentagonTrackType.toString())) {
             board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.PENTAGON);
-        } else if (selectedTrack.equals(weraTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.WERONIKA);
         } else// if (selectedTrack.equals(sineTrackType.toString()))
         {
             board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
@@ -194,11 +196,17 @@ public class IntroFrame extends JFrame {
         return board;
     }
 
+    protected int readSelectedNumberOfVehicles() throws NumberFormatException {
+        String vehCount = this.cbPlayers.getSelectedItem().toString();
+        int numberOfVehicles = new Integer(vehCount);
+        return numberOfVehicles;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbGraphics;
-    private javax.swing.JComboBox<String> cbPlayers;
-    private javax.swing.JComboBox<String> cbTrack;
+    protected javax.swing.JComboBox<String> cbPlayers;
+    protected javax.swing.JComboBox<String> cbTrack;
     private javax.swing.JLabel lblGraphics;
     private javax.swing.JLabel lblPlayers;
     private javax.swing.JLabel lblPlayers1;
@@ -206,12 +214,11 @@ public class IntroFrame extends JFrame {
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
     // End of variables declaration//GEN-END:variables
-    private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR_1;
+    private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR;
     private final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;
     private final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
     private final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
     private final TrackType triangleTrackType = BoardBuilder.TrackType.TRIANGLE;
     private final TrackType pentagonTrackType = BoardBuilder.TrackType.PENTAGON;
-    private final TrackType weraTrackType = BoardBuilder.TrackType.WERONIKA;
 
 }

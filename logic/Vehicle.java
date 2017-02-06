@@ -1,5 +1,6 @@
 package logic;
 
+import libs.BooleanArray;
 import libs.math2.PointAG;
 import logic.drive_algorithms.DriveAlgorithm;
 
@@ -7,18 +8,20 @@ public class Vehicle {
 
     public VelocityVector v;
     public VelocityVector previousV;
-    public double travelledWayAngle; //the path that Vehicle has travelled is expressed in angle, not in distance (2PI = 1 lap, PI = 0.5 lap etc.)
+    public int laps;
+    public int finalPlace;
     public boolean active;
     public DriveAlgorithm driveAlgorithm;
     public static final int SIZE = 8;
+    public static final int NUMBER_OF_CHECKPOINTS = 4;
+    public BooleanArray checkpointsVisited;
     int id;
 
     public Vehicle(int id) {
         init(id, true);
     }
-   
-    public Vehicle(int id, int speed, PointAG position, DriveAlgorithm driveAlgorithm, boolean active)
-    {
+
+    public Vehicle(int id, int speed, PointAG position, DriveAlgorithm driveAlgorithm, boolean active) {
         init(id, active);
         this.v = new VelocityVector(speed, 0.0, position);
         this.driveAlgorithm = driveAlgorithm;
@@ -36,7 +39,9 @@ public class Vehicle {
     }
 
     private void init(int id, boolean active) {
-        this.travelledWayAngle = 0.0;
+        this.checkpointsVisited = new BooleanArray(NUMBER_OF_CHECKPOINTS);
+        this.checkpointsVisited.setAllItems(false);
+        this.laps = 1;
         this.id = id;
         this.previousV = new VelocityVector(0, 0, new PointAG(0, 0));
         this.active = active;
@@ -47,7 +52,7 @@ public class Vehicle {
         //no need to call super.clone() or throw CloneNotSupportedException
         Vehicle clonedVehicle = new Vehicle(this.id, this.v.value, this.v.position, this.active);
         clonedVehicle.v.angle = this.v.angle;
-        clonedVehicle.travelledWayAngle = this.travelledWayAngle;
+        clonedVehicle.laps = this.laps;
         clonedVehicle.previousV = this.previousV.clone();
 
         return clonedVehicle;
@@ -90,6 +95,6 @@ public class Vehicle {
     @Override
     public String toString() {
         return "veh " + id + " at " + this.v.position + " speed = "
-                + this.v.value + " travelled =" + this.travelledWayAngle;
+                + this.v.value + " travelled =" + this.laps;
     }
 }

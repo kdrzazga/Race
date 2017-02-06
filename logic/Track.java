@@ -6,16 +6,18 @@ public class Track {
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
-
+    
     public PolygonAG checkpoints[];
 
+    public static final int NUMBER_OF_CHECKPOINTS = 5;
+    
     private LineSection intersectedInnerLine;
     private LineSection intersectedOuterLine;
 
     public Track() {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
-        this.checkpoints = new PolygonAG[5];
+        this.checkpoints = new PolygonAG[NUMBER_OF_CHECKPOINTS];
     }
 
     public boolean isInsideTrack(PointAG point) {

@@ -21,8 +21,8 @@ uses JFrame
  */
 public class Draw2d implements IGraphicalOutput {
 
-    private JPanel drawablePanel;
-    private Graphics g;
+    protected JPanel drawablePanel;
+    protected Graphics g;
     private static final int TRACK_LINE_THICKNESS = 3;
     private static final int DEFAULT_LINE_THICKNESS = 2;
     private static final float VEHICLE_LENGTH = 0.6f * Vehicle.SIZE;
@@ -53,7 +53,6 @@ public class Draw2d implements IGraphicalOutput {
         g.fillPolygon(track.innerBound.convertToPolygon());
 
         drawStartLine(track);
-        //drawTrackCenter(track);
     }
 
     @Override
@@ -146,12 +145,6 @@ public class Draw2d implements IGraphicalOutput {
         g2.setStroke(new BasicStroke(DEFAULT_LINE_THICKNESS));
         g.setColor(ColorSettings.START_LINE_COLOR);
         g.drawLine(p1.x, p1.y, p2.x, p2.y);
-    }
-
-    private void drawTrackCenter(Track track) {
-        g.setColor(ColorSettings.START_LINE_COLOR);
-        Point trackCenter = track.computeCenter().convertToPoint();
-        g.drawOval(trackCenter.x - 2, trackCenter.y - 2, 4, 4);
     }
 
     @Override
