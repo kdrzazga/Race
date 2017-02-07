@@ -14,7 +14,7 @@ public class BooleanArray {
         }
     }
 
-    public boolean areAllTrue() {
+    public boolean allAreTrue() {
         for (Boolean value : values) {
             if (!value) {
                 return false;
@@ -23,7 +23,7 @@ public class BooleanArray {
         return true;
     }
     
-    public boolean areAllFalse() {
+    public boolean allAreFalse() {
         for (Boolean value : values) {
             if (value) {
                 return false;

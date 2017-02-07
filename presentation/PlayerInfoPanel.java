@@ -1,4 +1,4 @@
- package presentation;
+package presentation;
 
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -7,7 +7,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import libs.math2.Numbers;
 import logic.Game;
 import logic.IPlayerInfoPanel;
 
@@ -33,7 +32,8 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
         public PlayerInfo(int id) {
             this.id = id;
 
-            lblPlayer = new JLabel(GAP_SMALL + "Player " + id + GAP_BIG);
+            lblPlayer = new JLabel(GAP_SMALL + "Player " + (id + 1) + GAP_BIG);
+            //in code players are numbereed starting from 0, on screen Player0 is displayedas Player 1 etc.
             initLabel(lblPlayer, playerFont);
 
             lblPlayerSpeed = new JLabel(SPEED_TEXT);
@@ -76,8 +76,14 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
     }
 
     @Override
-    public void setPlayerInfo(int id, int speed, double travelledWay) {
-        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + Numbers.roundToFloat(travelledWay, 2));
+    public void setRunningPlayerInfo(int id, int speed, int laps) {
+        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.LAP_TEXT + laps);
         this.playerInfos[id].lblPlayerSpeed.setText(PlayerInfo.SPEED_TEXT + speed);
+    }
+
+    @Override
+    public void setPlayerWinnerInfo(int id, int finalPlace) {
+        this.playerInfos[id].lblPlayerLap.setText(PlayerInfo.GAP_BIG);
+        this.playerInfos[id].lblPlayerSpeed.setText(PlayerInfo.GAP_SMALL + "Final place " + finalPlace);
     }
 }

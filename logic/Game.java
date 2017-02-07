@@ -20,20 +20,22 @@ public class Game extends Thread {
     private IGraphicalOutput graphicalOutput;
     private IPlayerInfoPanel pnlInfo;
 
-    public Game(int lapsToWin) {
-        currentPlace = 1;
-        this.lapsToWin = lapsToWin;
+    public Game() {
         this.gameInit2();
     }
 
     public void findWinner() {
         for (int i = 0; i < board.vehicles.size(); i++) {
-            if (board.vehicles.get(i).laps == this.lapsToWin) {
-                board.vehicles.get(i).stop();
-                board.vehicles.get(i).active = false;
+            final Vehicle vehicle = board.vehicles.get(i);
 
-                board.vehicles.get(i).finalPlace = currentPlace;
-                currentPlace++;
+            if (vehicle.active) {
+                if (vehicle.laps == this.lapsToWin + 1) {//laps counted from 1 not from 0                    
+                    vehicle.stop();
+                    vehicle.active = false;
+
+                    vehicle.finalPlace = currentPlace;
+                    currentPlace++;
+                }
             }
         }
     }
@@ -84,7 +86,11 @@ public class Game extends Thread {
     private void updateInfoPanel() {
         if (this.pnlInfo != null) {
             this.board.vehicles.forEach(vehicle -> {
-                this.pnlInfo.setPlayerInfo(vehicle.getId(), vehicle.v.value, vehicle.laps);
+                if (vehicle.finalPlace <= 0) {//no final place = race not finished yet
+                    this.pnlInfo.setRunningPlayerInfo(vehicle.getId(), vehicle.v.value, vehicle.laps);
+                } else {
+                    this.pnlInfo.setPlayerWinnerInfo(vehicle.getId(), vehicle.finalPlace);
+                }
             });
         } else {
             System.out.println("Info panel not created - update not possible");
@@ -100,7 +106,13 @@ public class Game extends Thread {
     public void setGameRunning(boolean gameRunning) {
         synchronized (gameRunningLock) {
             this.gameRunning = gameRunning;
+            this.reset(lapsToWin);
         }
+    }
+
+    public void reset(int lapsToWin) {
+        currentPlace = 1;
+        this.lapsToWin = lapsToWin;
     }
 
     public void setPnlInfo(IPlayerInfoPanel pnlInfo) {

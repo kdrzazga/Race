@@ -1,5 +1,8 @@
 package presentation;
 
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
@@ -24,6 +27,7 @@ public class IntroFrame extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lapRadioButtonsGroup = new javax.swing.ButtonGroup();
         pnlMain = new javax.swing.JPanel();
         lblTrack = new javax.swing.JLabel();
         cbTrack = new javax.swing.JComboBox<>();
@@ -33,6 +37,10 @@ public class IntroFrame extends JFrame {
         cbPlayers = new javax.swing.JComboBox<>();
         lblPlayers1 = new javax.swing.JLabel();
         lblPlayers2 = new javax.swing.JLabel();
+        lblLaps = new javax.swing.JLabel();
+        radio3Laps = new javax.swing.JRadioButton();
+        radio5Laps = new javax.swing.JRadioButton();
+        radio7Laps = new javax.swing.JRadioButton();
         btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,6 +59,18 @@ public class IntroFrame extends JFrame {
 
         lblPlayers2.setText("Player2 control: WSAD");
 
+        lblLaps.setText("Laps");
+
+        lapRadioButtonsGroup.add(radio3Laps);
+        radio3Laps.setSelected(true);
+        radio3Laps.setText("3");
+
+        lapRadioButtonsGroup.add(radio5Laps);
+        radio5Laps.setText("5");
+
+        lapRadioButtonsGroup.add(radio7Laps);
+        radio7Laps.setText("7");
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
@@ -58,10 +78,6 @@ public class IntroFrame extends JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pnlMainLayout.createSequentialGroup()
-                        .addComponent(lblPlayers)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                         .addComponent(lblGraphics)
                         .addGap(18, 18, 18)
@@ -71,7 +87,23 @@ public class IntroFrame extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbTrack, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblPlayers1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPlayers2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblPlayers2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addComponent(lblPlayers)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                .addComponent(lblLaps)
+                                .addGap(41, 41, 41)))
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addComponent(radio3Laps)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radio5Laps)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radio7Laps))
+                            .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
@@ -89,11 +121,17 @@ public class IntroFrame extends JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPlayers))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLaps)
+                    .addComponent(radio3Laps)
+                    .addComponent(radio5Laps)
+                    .addComponent(radio7Laps))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPlayers1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblPlayers2)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         btnStart.setText("Start");
@@ -113,7 +151,7 @@ public class IntroFrame extends JFrame {
                         .addContainerGap()
                         .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
+                        .addGap(108, 108, 108)
                         .addComponent(btnStart)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -121,10 +159,10 @@ public class IntroFrame extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnStart)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -145,9 +183,7 @@ public class IntroFrame extends JFrame {
             cbPlayers.addItem(Integer.toString(i));
         }
 
-        int lapsToWin = 5;
-        
-        this.game = new Game(lapsToWin);
+        this.game = new Game();
     }
     protected void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         game.board = createBoardBasedOnSelectedUiItems();
@@ -176,6 +212,10 @@ public class IntroFrame extends JFrame {
 
     protected Board createBoardBasedOnSelectedUiItems() {
         int numberOfVehicles = readSelectedNumberOfVehicles();
+
+        int lapsToWin = new Integer(getSelectedButtonText(this.lapRadioButtonsGroup));
+
+        this.game.reset(lapsToWin);
         Board board;
         String selectedTrack = (String) this.cbTrack.getSelectedItem();
 
@@ -196,6 +236,18 @@ public class IntroFrame extends JFrame {
         return board;
     }
 
+    private String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return "";
+    }
+
     protected int readSelectedNumberOfVehicles() throws NumberFormatException {
         String vehCount = this.cbPlayers.getSelectedItem().toString();
         int numberOfVehicles = new Integer(vehCount);
@@ -205,14 +257,19 @@ public class IntroFrame extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbGraphics;
-    protected javax.swing.JComboBox<String> cbPlayers;
+    private javax.swing.JComboBox<String> cbPlayers;
     protected javax.swing.JComboBox<String> cbTrack;
+    private javax.swing.ButtonGroup lapRadioButtonsGroup;
     private javax.swing.JLabel lblGraphics;
+    private javax.swing.JLabel lblLaps;
     private javax.swing.JLabel lblPlayers;
     private javax.swing.JLabel lblPlayers1;
     private javax.swing.JLabel lblPlayers2;
     private javax.swing.JLabel lblTrack;
     private javax.swing.JPanel pnlMain;
+    private javax.swing.JRadioButton radio3Laps;
+    private javax.swing.JRadioButton radio5Laps;
+    private javax.swing.JRadioButton radio7Laps;
     // End of variables declaration//GEN-END:variables
     private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR;
     private final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;

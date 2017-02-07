@@ -28,7 +28,7 @@ public class Track {
     public void computeCheckpoints() {
         PointAG innerBoundCenter = innerBound.computeCenter();
 
-        int height = Numbers.roundToInt(VelocityVector.V_MAX * 1.5);
+        int height = Numbers.roundToInt(VelocityVector.V_MAX * 2.1);
 
         PointAG centralPt1 = new PointAG(innerBoundCenter.x, innerBoundCenter.y - height / 2);
         PointAG centralPt2 = new PointAG(innerBoundCenter.x, innerBoundCenter.y + height / 2);

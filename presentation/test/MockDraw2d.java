@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JPanel;
 import libs.Colors;
-import libs.math2.PolygonAG;
 import logic.Track;
 import presentation.ColorSettings;
 import presentation.Draw2d;
@@ -27,16 +26,17 @@ public class MockDraw2d extends Draw2d {
         Point trackCenter = track.computeCenter().convertToPoint();
         g.drawOval(trackCenter.x - 2, trackCenter.y - 2, 4, 4);
     }
-    
-    private void drawCheckpoints(Track track)
-    {
+
+    private void drawCheckpoints(Track track) {
         int colorIndex = 0;
-            for (PolygonAG checkpoint : track.checkpoints) {
-                Color color = Colors.getDarkColor(colorIndex);
-                g.setColor(color);
-                System.out.print("Color " + color + " index " + colorIndex + "\t");
-                g.drawPolygon(checkpoint.convertToPolygon());
-                colorIndex++;
-            }
+        for (int i = 0; i < track.checkpoints.length; i++) {
+            Color color = Colors.getDarkColor(colorIndex);
+            g.setColor(color);
+            Point center = track.checkpoints[i].computeCenter().convertToPoint();
+            
+            g.drawString(Integer.toString(i), center.x, center.y);
+            g.drawPolygon(track.checkpoints[i].convertToPolygon());
+            colorIndex++;
+        }
     }
 }

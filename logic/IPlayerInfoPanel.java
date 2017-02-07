@@ -2,5 +2,7 @@ package logic;
 
 public interface IPlayerInfoPanel {
 
-    void setPlayerInfo(int id, int speed, double travelledWay);    
+    void setRunningPlayerInfo(int id, int speed, int laps);    
+    
+    void setPlayerWinnerInfo(int id, int finalPlace);    
 }

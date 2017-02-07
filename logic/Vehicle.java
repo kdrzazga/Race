@@ -13,7 +13,7 @@ public class Vehicle {
     public boolean active;
     public DriveAlgorithm driveAlgorithm;
     public static final int SIZE = 8;
-    public static final int NUMBER_OF_CHECKPOINTS = 4;
+    private static final int NUMBER_OF_CHECKPOINTS = 5;
     public BooleanArray checkpointsVisited;
     int id;
 
@@ -42,6 +42,7 @@ public class Vehicle {
         this.checkpointsVisited = new BooleanArray(NUMBER_OF_CHECKPOINTS);
         this.checkpointsVisited.setAllItems(false);
         this.laps = 1;
+        this.finalPlace = -1;
         this.id = id;
         this.previousV = new VelocityVector(0, 0, new PointAG(0, 0));
         this.active = active;

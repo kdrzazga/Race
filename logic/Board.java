@@ -91,7 +91,7 @@ public class Board {
     }
 
     private void checkIfPassingCheckpoint(Vehicle vehicle) {
-        for (int i = 0; i < this.track.checkpoints.length - 1; i++) {
+        for (int i = 0; i < this.track.checkpoints.length ; i++) {
             Polygon checkpointPolygon = this.track.checkpoints[i].convertToPolygon();
             Point vehicleLocation = vehicle.v.position.convertToPoint();
 
@@ -99,13 +99,16 @@ public class Board {
                 vehicle.checkpointsVisited.values[i] = true;
                 System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
 
-                if (vehicle.checkpointsVisited.areAllTrue()) {
+                boolean vehicleCrossedFinishLine = this.track.checkpoints[4].convertToPolygon().contains(vehicleLocation);
+                
+                if (vehicle.checkpointsVisited.allAreTrue() && vehicleCrossedFinishLine) {
+                    System.out.println("i amin");
                     vehicle.laps++;
                     vehicle.checkpointsVisited.setAllItems(false);
                 }
             }
         }
-        System.out.println("checkIfPassingCheckpoint is invalid");
+        
     }
 
 }
