@@ -47,6 +47,8 @@
                   <Component id="cbDesiredRoute" alignment="1" max="32767" attributes="0"/>
                   <Component id="cbCheckpoints" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnWeronikaTrack" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnMoveVehicle0" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnVehicleTurnRight" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="boardPanel" min="-2" max="-2" attributes="0"/>
@@ -75,7 +77,11 @@
                       <Component id="btnPentagonTrack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnWeronikaTrack" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="367" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnMoveVehicle0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnVehicleTurnRight" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="297" max="32767" attributes="0"/>
                       <Component id="cbTrackCenter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cbInnerCenter" min="-2" max="-2" attributes="0"/>
@@ -203,6 +209,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWeronikaTrackActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMoveVehicle0">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Move vehcile0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoveVehicle0ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnVehicleTurnRight">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vehicle Turn Right"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVehicleTurnRightActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

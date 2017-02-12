@@ -10,6 +10,7 @@ public class SimpleDrive extends DriveAlgorithm {
 
     public SimpleDrive(Track track) {
         this.track = track;
+        this.desiredRoute = new PolygonAG();
         this.computeDesiredRoute();
     }
 
@@ -19,8 +20,6 @@ public class SimpleDrive extends DriveAlgorithm {
     }
 
     private void computeDesiredRoute() {
-        this.desiredRoute = new PolygonAG(this.track.outerBound);
-        this.desiredRoute.scale(0.79f);
     }
 
     public PolygonAG getDesiredRoute() {

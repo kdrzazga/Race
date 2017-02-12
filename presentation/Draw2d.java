@@ -61,11 +61,11 @@ public class Draw2d implements IGraphicalOutput {
         g2.setStroke(THICK_STROKE);
         g.setColor(Color.WHITE);
         
-        PolygonAG outerBorder = new PolygonAG(track.outerBound);
+        PolygonAG outerBorder = track.outerBound.clone();
         outerBorder.scale(1.015f);
          g.drawPolygon(outerBorder.convertToPolygon());
         
-        PolygonAG innerBorder = new PolygonAG(track.innerBound);
+        PolygonAG innerBorder = track.innerBound.clone();
         innerBorder.scale(0.985f);
         g.drawPolygon(innerBorder.convertToPolygon());
     }

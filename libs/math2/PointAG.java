@@ -17,9 +17,9 @@ public class PointAG {
         this.y = p.y;
     }
 
-    public PointAG(PointAG p) {
-        this.x = p.x;
-        this.y = p.y;
+    @Override
+    public PointAG clone() {
+        return new PointAG(this.x, this.y);
     }
 
     public Point convertToPoint() {
@@ -32,13 +32,13 @@ public class PointAG {
     }
 
     public PointAG createPointByMovingdByVector(LineSection vector) {
-        PointAG movedPoint = new PointAG(this);
+        PointAG movedPoint = this.clone();
         movedPoint.moveByVector(vector);
         return movedPoint;
     }
 
     public PointAG createPointByMovingdByVector(float length, float angle) {
-        PointAG movedPoint = new PointAG(this);
+        PointAG movedPoint = this.clone();
         movedPoint.moveByVector(length, angle);
         return movedPoint;
     }

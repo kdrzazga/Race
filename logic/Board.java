@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import libs.math2.Numbers;
 import libs.math2.PointAG;
+import libs.math2.PolygonAG;
 
 public class Board {
 
@@ -19,6 +20,10 @@ public class Board {
     public Board(int numberOfVehicles, Track track) {
         init(track);
 
+        initVehicles(numberOfVehicles);
+    }
+
+    protected void initVehicles(int numberOfVehicles) {
         for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
@@ -98,8 +103,10 @@ public class Board {
             if (checkpointPolygon.contains(vehicleLocation)) {
                 vehicle.checkpointsVisited.values[i] = true;
                 System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
+                
+                PolygonAG checkpointWithFinishLine = this.track.checkpoints[Track.CHECKPOINT_WITH_START_LINE_INDEX];
 
-                boolean vehicleCrossedFinishLine = this.track.checkpoints[4].convertToPolygon().contains(vehicleLocation);
+                boolean vehicleCrossedFinishLine = checkpointWithFinishLine.convertToPolygon().contains(vehicleLocation);
                 
                 if (vehicle.checkpointsVisited.allAreTrue() && vehicleCrossedFinishLine) {
                     System.out.println("i amin");
@@ -111,4 +118,12 @@ public class Board {
         
     }
 
+ /*   @Override
+    public Board clone()
+    {
+        Board clonedBoard = new Board();
+        clonedBoard.track = t
+        return clonedBoard;
+    }*/
+    
 }

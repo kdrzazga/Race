@@ -69,7 +69,7 @@ public class LineAG {
             y = line.A * this.verticalX + line.B;
         } else { //line.vertical = true
             x = line.verticalX;
-            y = line.A * this.verticalX + line.B;
+            y = this.A * x + this.B;
         }
 
         return new PointAG(x, y);

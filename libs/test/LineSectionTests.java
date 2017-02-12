@@ -5,13 +5,12 @@ import libs.math2.PointAG;
 import static libs.Assert.assertion;
 import libs.UnitTest;
 
-public class LineSectionTests extends UnitTest
-{
+public class LineSectionTests extends UnitTest {
 
     public static void main(String args[]) {
         testComputeIntersection();
         testMoveP1MultiplyingBy();
-       showTestPassedMessage(LineSectionTests.class.getName());
+        showTestPassedMessage(LineSectionTests.class.getName());
     }
 
     private static void testMoveP1MultiplyingBy() {

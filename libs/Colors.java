@@ -58,5 +58,5 @@ public class Colors {
             }
         }
     }*/
-    public static final float[][] OPEN_GL_VEHICLE_COLORS = libs.Colors.OPEN_GL_COLORS;
+   
 }

@@ -34,24 +34,31 @@ public class BoardTrackVehicleTest {
     }
 
     public static void main(String[] args) {
-        BoardTrackVehicleTest test = new BoardTrackVehicleTest();   
-        test.givenTrack_ShouldStartLineEqualExpected();
-        test.givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(10);        
+        BoardTrackVehicleTest test = new BoardTrackVehicleTest();
+        test.testStartLine();
+        test.givenRestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(10);
 
         for (int vehiclesCount = 0; vehiclesCount < 10; vehiclesCount++) {
             test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1(vehiclesCount);
         }
-        
-        //test.updateVehicleTravelledWayAngleTest();
+
+        test.testIncreasingLaps();
         showTestPassedMessage(BoardTrackVehicleTest.class.getName());
     }
 
-    public void givenTrack_ShouldStartLineEqualExpected() {
-        Track rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
-
-        LineSection actualStartLine = rectTrack.computeVerticalStartLine();
-        LineSection expectedStartLine1 = new LineSection(15, 0, 15, 10);
-
+    public void testStartLine() {
+        Track rectTrack;
+        LineSection actualStartLine;
+        LineSection expectedStartLine1;
+        
+        GIVEN:
+        rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
+        expectedStartLine1 = new LineSection(15, 0, 15, 10);
+        
+        WHEN:
+        actualStartLine = rectTrack.computeVerticalStartLine();
+        
+        THEN:
         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
         System.out.println("givenTrack_ShouldStartLineEqualExpected passed");
     }
@@ -80,12 +87,12 @@ public class BoardTrackVehicleTest {
 
         StringBuilder testResultMessage = new StringBuilder();
         testResultMessage.append(methodName).append(" passed for ");
-        
+
         Board testBoard = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
 
         PointAG vehicle0Position = testBoard.vehicles.get(0).v.position;
         PointAG vehicle1Position = testBoard.vehicles.get(1).v.position;
-                
+
         float distanceBetweenVehicle0And1 = Numbers.roundToFloat(vehicle0Position.distanceToAntherPointAG(vehicle1Position));
 
         for (int i = 2; i < testBoard.vehicles.size() - 1; i++) {
@@ -100,48 +107,55 @@ public class BoardTrackVehicleTest {
         System.out.println(testResultMessage);
     }
 
-    private Vehicle moveVehicle31times(Board board) {
-        final int ITERATIONS = 31;
+    private Vehicle moveVehicleNTimes(Board board, int N, int vehicleId) {
 
-        for (int i = 0; i < ITERATIONS; i++) {
-            board.moveVehicle(0);
+        for (int i = 0; i < N; i++) {
+            board.moveVehicle(vehicleId);
             //all the time vehicle should be on the track
-            assertion(track.isInsideTrack(board.getVehiclePosition(0)), "moveVehicle31times");
+            assertion(board.track.isInsideTrack(board.getVehiclePosition(vehicleId))
+                , "moveVehicle31times - design your test in the way the vehicle will be in track all the time "
+            + " current pos=" + board.vehicles.get(vehicleId).v.position);
         }
-        return board.vehicles.get(0);
+        return board.vehicles.get(vehicleId);
     }
 
-    public void updateVehicleTravelledWayAngleTest() {  
+    public void testIncreasingLaps() {
         Board rectBoard;
-        Vehicle vehicleBeforeMove;
-        Vehicle vehicleAfterMove;
+        Vehicle veh;
+        final int vehicleId = 0;
+        int lapsBeforeMove;    
         
-        GIVEN_RECTANGULAR_TRACK_WITH_1_VEHICLE_SPEED_1:
+        GIVEN_WERONIKA_TRACK_WITH_1_VEHICLE_SPEED_1:
         {
             rectBoard = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA);
-            rectBoard.vehicles.get(0).v.value = 1;
-            vehicleBeforeMove = rectBoard.vehicles.get(0).clone();
+            veh = rectBoard.vehicles.get(vehicleId);
+            veh.v.value = 1;
+            lapsBeforeMove = veh.laps;
         }
-        WHEN_VEHICLE_MOVED_31_TIMES:
+        WHEN_VEHICLE_TRAVELLED_SQUARE_DISTANCE:
         {
-            vehicleAfterMove = moveVehicle31times(rectBoard);
+            veh = moveVehicleNTimes(rectBoard, 31, vehicleId);//go right
+            turnVehicleRight90deg(veh);
+            veh = moveVehicleNTimes(rectBoard, 250, vehicleId);//go down
+            turnVehicleRight90deg(veh);
+            veh = moveVehicleNTimes(rectBoard, 62, vehicleId);//go left
+            turnVehicleRight90deg(veh);
+            veh = moveVehicleNTimes(rectBoard, 250, vehicleId);//go up
+            turnVehicleRight90deg(veh);
+            veh = moveVehicleNTimes(rectBoard, 31, vehicleId);//go right to starting position     
         }
-        THEN_TRAVELLED_WAY_INCREASED:
+        THEN_LAP_WAS_INCREASED:
         {
-           /* assertion(vehicleBeforeMove.travelledWayAngle, 0.0, "updateVehicleTravelledWayAngleTest");
-            assertion(vehicleAfterMove.travelledWayAngle > 0, "updateVehicleTravelledWayAngleTest"); */           
-        }
-        GIVEN:
-        {
-            vehicleBeforeMove = vehicleAfterMove.clone();
-        }
-        WHEN_VEHICLE_MOVED_62_TIMES_MORE:
-        {
-            vehicleAfterMove = moveVehicle31times(rectBoard);
-        }
-        THEN:
-        {
-            throw new RuntimeException("Implementeation not finished");
+            assertion(veh.laps, lapsBeforeMove + 1, "updateVehicleTravelledWayAngleTest");
+        }        
+    }
+
+    private void turnVehicleRight90deg(Vehicle vehicle1) {
+        float iteration = 0;
+        float iterationsToDo90degTurn = Numbers.roundToFloat(Math.PI/ 2/ VelocityVector.ROTATION_UNIT);
+        while (iteration < iterationsToDo90degTurn) {
+            vehicle1.turnRight();
+            iteration++;
         }
     }
 }

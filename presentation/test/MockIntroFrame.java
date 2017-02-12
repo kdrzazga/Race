@@ -35,7 +35,6 @@ public class MockIntroFrame extends IntroFrame {
 
         return board;
     }
-
     @Override
     protected void btnStartActionPerformed(java.awt.event.ActionEvent evt
     ) {

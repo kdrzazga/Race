@@ -19,9 +19,11 @@ public class PolygonAG {
         this.points.addAll(Arrays.asList(points));
     }
 
-    public PolygonAG(PolygonAG polygonToBeCloned) {
-        this.points = new ArrayList<>();
-        this.points.addAll(polygonToBeCloned.points);
+    public PolygonAG clone() {
+        PolygonAG clonedPolygon = new PolygonAG();
+        clonedPolygon.points = new ArrayList<>();
+        clonedPolygon.points.addAll(this.points);
+        return clonedPolygon;
     }
 
     public void addPoint(int x, int y) {
@@ -34,7 +36,7 @@ public class PolygonAG {
 
     public LineSection getLineSectionCrossedBy(LineSection lineSection) {
         if (lineSection.vertical) {
-            return getLineSectionCrossingVerticalLine(lineSection);
+            return getLineSectionCrossingVerticalSection(lineSection);
         } else {
             for (int i = 0; i < this.points.size() - 2; i++) {
                 LineSection lineSectionToCheck = new LineSection(this.points.get(i), this.points.get(i + 1));
@@ -47,22 +49,33 @@ public class PolygonAG {
         }
     }
 
-    public LineSection getLineSectionCrossingVerticalLine(LineAG line) {
-        if (!line.vertical) {
+    public LineSection getLineSectionCrossingVerticalSection(LineSection section) {
+        if (!section.vertical) {
             throw new RuntimeException("Wrong argument - line not vertical. " + libs.math2.PolygonAG.class.getName());
         }
 
+        LineSection result;
+
         int i;
 
-        for (i = 0; i < this.points.size() - 2; i++) {
+        for (i = 0; i < this.points.size() - 1; i++) {
             PointAG p1 = this.points.get(i);
             PointAG p2 = this.points.get(i + 1);
-            if (p1.x < line.verticalX && p2.x > line.verticalX) {
-                break;
+            result = new LineSection(p1, p2);
+            
+            float minX = Math.min(p1.x, p2.x);
+            float maxX = Math.max(p1.x, p2.x);
+            
+            if (minX < section.verticalX && maxX > section.verticalX) {
+                
+                PointAG intersection = result.computeIntersection(section);
+                if (intersection != null) {
+                    return result;
+                }
             }
         }
 
-        return new LineSection(this.points.get(i), this.points.get(i + 1));
+        return null;
     }
 
     public Polygon convertToPolygon() {

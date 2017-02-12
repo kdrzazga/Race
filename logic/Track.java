@@ -6,13 +6,15 @@ public class Track {
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
-    
+
     public PolygonAG checkpoints[];
 
     public static final int NUMBER_OF_CHECKPOINTS = 5;
-    
-    private LineSection intersectedInnerLine;
-    private LineSection intersectedOuterLine;
+    public static final int CHECKPOINT_WITH_START_LINE_INDEX = 0;
+
+    protected LineSection intersectedInnerLine;
+    protected LineSection intersectedOuterLine;
+    protected LineSection downFromCenterLineSection;
 
     public Track() {
         this.innerBound = new PolygonAG();
@@ -41,34 +43,36 @@ public class Track {
         PointAG bottomLeftPt1 = new PointAG(this.computeMinX(), this.computeMaxY() - height / 2);
         PointAG bottomLeftPt2 = new PointAG(this.computeMinX(), this.computeMaxY() + height / 2);
 
-        for (int i = 0; i < this.checkpoints.length - 1; i++) {
+        for (int i = CHECKPOINT_WITH_START_LINE_INDEX + 1; i < this.checkpoints.length; i++) {
             this.checkpoints[i] = new PolygonAG();
             this.checkpoints[i].points.add(centralPt2);
             this.checkpoints[i].points.add(centralPt1);
         }
 
-        checkpoints[0].points.add(topLeftPt1);
-        checkpoints[0].points.add(topLeftPt2);
+        LineSection startLine = this.computeVerticalStartLine();
+        
+        float x1 = startLine.p1.x;
+        float x2 = startLine.p2.x;
+        float y1 = startLine.p1.y;
+        float y2 = startLine.p2.y;
 
-        checkpoints[1].points.add(topRightPt1);
-        checkpoints[1].points.add(topRightPt2);
+        checkpoints[CHECKPOINT_WITH_START_LINE_INDEX] = new PolygonAG();
+        checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x1, y1);
+        checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x2, y2);
+        checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x2 + height, y2);
+        checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x1 + height, y1);
 
-        checkpoints[2].points.add(bottomLeftPt1);
-        checkpoints[2].points.add(bottomLeftPt2);
+        checkpoints[1].points.add(bottomRightPt1);
+        checkpoints[1].points.add(bottomRightPt2);
 
-        checkpoints[3].points.add(bottomRightPt1);
-        checkpoints[3].points.add(bottomRightPt2);
+        checkpoints[2].points.add(topRightPt1);
+        checkpoints[2].points.add(topRightPt2);
 
-        float x1 = this.computeVerticalStartLine().p1.x;
-        float x2 = this.computeVerticalStartLine().p2.x;
-        float y1 = this.computeVerticalStartLine().p1.y;
-        float y2 = this.computeVerticalStartLine().p2.y;
+        checkpoints[3].points.add(topLeftPt1);
+        checkpoints[3].points.add(topLeftPt2);
 
-        checkpoints[4] = new PolygonAG();
-        checkpoints[4].addPointAG(x1, y1);
-        checkpoints[4].addPointAG(x2, y2);
-        checkpoints[4].addPointAG(x2 + height, y2);
-        checkpoints[4].addPointAG(x1 + height, y1);
+        checkpoints[4].points.add(bottomLeftPt1);
+        checkpoints[4].points.add(bottomLeftPt2);
     }
 
     public PointAG computeCenter() {
@@ -104,12 +108,16 @@ public class Track {
     }
 
     private void findLinesIntersectedByVertStartLine() {
-        float X = computeCenter().x;
+        PointAG center  = this.computeCenter();
 
-        LineAG lineContainingStartLineSection = new LineAG(X);
+        downFromCenterLineSection = new LineSection(center, new PointAG(center.x, Float.MAX_VALUE /2 ));
 
-        intersectedInnerLine = this.innerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
-        intersectedOuterLine = this.outerBound.getLineSectionCrossingVerticalLine(lineContainingStartLineSection);
+        intersectedInnerLine = this.innerBound.getLineSectionCrossedBy(downFromCenterLineSection);
+        intersectedOuterLine = this.outerBound.getLineSectionCrossedBy(downFromCenterLineSection);
+        
+        if (intersectedInnerLine == null || intersectedOuterLine == null)
+            throw new RuntimeException("findLinesIntersectedByVertStartLine() exception" 
+                    + " - WRONG line sectionshave been used for computing. Please debug");
     }
 
     private float computeCoordinate(int numberOfVehicles, int vehicleIndex, float coordinateP1, float coordinateP2) {
@@ -121,6 +129,16 @@ public class Track {
             y = coordinateP1 + (vehicleIndex + 1) * distanceBetweenVehsY;
         }
         return y;
+    }
+    
+    public Track clone()
+    {
+        Track clonedTrack = new Track();
+        clonedTrack.checkpoints = this.checkpoints.clone();
+        clonedTrack.innerBound = this.innerBound.clone();
+        clonedTrack.outerBound = this.outerBound.clone();
+       
+        return clonedTrack;
     }
 
     public float computeMinX() {

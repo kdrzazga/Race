@@ -47,6 +47,8 @@ public class GraphicalGameTest extends JFrame {
         cbDesiredRoute = new javax.swing.JCheckBox();
         cbCheckpoints = new javax.swing.JCheckBox();
         btnWeronikaTrack = new javax.swing.JButton();
+        btnMoveVehicle0 = new javax.swing.JButton();
+        btnVehicleTurnRight = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 1200));
@@ -133,6 +135,20 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        btnMoveVehicle0.setText("Move vehcile0");
+        btnMoveVehicle0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoveVehicle0ActionPerformed(evt);
+            }
+        });
+
+        btnVehicleTurnRight.setText("Vehicle Turn Right");
+        btnVehicleTurnRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehicleTurnRightActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,7 +167,9 @@ public class GraphicalGameTest extends JFrame {
                     .addComponent(btnDrawBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbDesiredRoute, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbCheckpoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnWeronikaTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnWeronikaTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMoveVehicle0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVehicleTurnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -177,7 +195,11 @@ public class GraphicalGameTest extends JFrame {
                         .addComponent(btnPentagonTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnWeronikaTrack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMoveVehicle0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVehicleTurnRight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                         .addComponent(cbTrackCenter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbInnerCenter)
@@ -206,9 +228,10 @@ public class GraphicalGameTest extends JFrame {
         //this is required as class Draw2d is in upper layer
         boardG.drawPolygon(track.innerBound.convertToPolygon());
         boardG.drawPolygon(track.outerBound.convertToPolygon());
+        drawStartLine(track);
     }
 
-    private void mockDrawBoard(Board board) {
+    private void mockDrawBoard(MockBoard board) {
         clearBoard();
 
         if (cbTrackCenter.isSelected()) {
@@ -241,16 +264,19 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void drawVehicles(Board board) {
-        for (Vehicle vehicle : board.vehicles) {
+        board.vehicles.forEach((vehicle) -> {
             int x = vehicle.v.position.convertToPoint().x;
             int y = vehicle.v.position.convertToPoint().y;
 
             boardG.drawOval(x - 2, y - 2, 4, 4);
-            LineSection startLine = board.track.computeVerticalStartLine();
-            Point p1 = startLine.p1.convertToPoint();
-            Point p2 = startLine.p2.convertToPoint();
-            boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
-        }
+        });
+    }
+
+    private void drawStartLine(Track track) {
+        LineSection startLine = track.computeVerticalStartLine();
+        Point p1 = startLine.p1.convertToPoint();
+        Point p2 = startLine.p2.convertToPoint();
+        boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
     }
 
     private void drawInnerBoundCenter(Board board) {
@@ -282,44 +308,78 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR);
-        mockDrawBoard(board);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR));
+        mockDrawBoard((MockBoard) board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 
     private void btnDrawKidneyTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawKidneyTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.KIDNEY);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.KIDNEY));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawKidneyTrackActionPerformed
 
     private void btnTriangleTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriangleTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TRIANGLE);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TRIANGLE));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnTriangleTrackActionPerformed
 
     private void btnPentagonTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPentagonTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.PENTAGON);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.PENTAGON));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnPentagonTrackActionPerformed
 
     private void btnWeronikaTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeronikaTrackActionPerformed
-        Board board = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA);
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnWeronikaTrackActionPerformed
+
+    private void btnMoveVehicle0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveVehicle0ActionPerformed
+        if (board == null) {
+            initVehiceOnWeronikaTrack();
+        }
+        board.moveAllVehicles();
+        mockDrawBoard(board);
+        
+        board.mockTrack.computeVerticalStartLine();
+        LineSection line = board.mockTrack.getDownFromCenterLineSection();
+        Point p1 = line.p1.convertToPoint();
+        Point p2 = line.p2.convertToPoint();
+        boardG.setColor(Color.MAGENTA);
+        boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
+        boardG.setColor(Color.BLACK);
+    }//GEN-LAST:event_btnMoveVehicle0ActionPerformed
+
+    private void initVehiceOnWeronikaTrack() {
+
+        board = new MockBoard(BoardBuilder.createBoardWithTrack(1, BoardBuilder.TrackType.WERONIKA));
+        mockDrawBoard(board);
+        final Vehicle vehicle = board.vehicles.get(0);
+        vehicle.v.value = 1;
+        vehicle.v.angle = 0;
+        vehicle.active = true;
+
+    }
+
+    private void btnVehicleTurnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehicleTurnRightActionPerformed
+        if (board == null) {
+            initVehiceOnWeronikaTrack();
+        }
+        board.vehicles.get(0).turnRight();
+    }//GEN-LAST:event_btnVehicleTurnRightActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
@@ -328,8 +388,10 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JButton btnDrawRectTrack;
     private javax.swing.JButton btnDrawSineTrack;
     private javax.swing.JButton btnDrawTestTrack;
+    private javax.swing.JButton btnMoveVehicle0;
     private javax.swing.JButton btnPentagonTrack;
     private javax.swing.JButton btnTriangleTrack;
+    private javax.swing.JButton btnVehicleTurnRight;
     private javax.swing.JButton btnWeronikaTrack;
     private javax.swing.JCheckBox cbCheckpoints;
     private javax.swing.JCheckBox cbDesiredRoute;
@@ -337,6 +399,5 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JCheckBox cbTrackCenter;
     // End of variables declaration//GEN-END:variables
     private Graphics boardG;
-    
-
+    private MockBoard board;
 }

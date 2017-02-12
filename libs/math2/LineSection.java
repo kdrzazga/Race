@@ -29,14 +29,13 @@ public class LineSection extends LineAG{
     {
         super(point, angle);      
         this.p1 = point;
-        this.p2 = new PointAG(point);
+        this.p2 = point.clone();
         p2.moveByVector(length, angle);
     }
 
-    public LineSection(LineSection lineSectionToCopy) {
-        super(new PointAG(lineSectionToCopy.p1), new PointAG(lineSectionToCopy.p2));
-        this.p1 = new PointAG(lineSectionToCopy.p1);
-        this.p2 = new PointAG(lineSectionToCopy.p2);
+    @Override
+    public LineSection clone() {        
+        return new LineSection(this.p1.clone(), this.p2.clone());
     }
 
     public double computeLength() {
@@ -109,7 +108,7 @@ public class LineSection extends LineAG{
         double length = this.computeLength();
         double inclination = this.computeInclinationAngle() + Math.PI;
         
-        this.p2 = new PointAG(this.p1);
+        this.p2 = this.p1.clone();
         this.p2.moveByVector(length * scalar, inclination);
     }
 

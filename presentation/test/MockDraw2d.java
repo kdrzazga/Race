@@ -5,6 +5,7 @@ import java.awt.Point;
 import javax.swing.JPanel;
 import libs.Colors;
 import logic.Track;
+import logic.test.MockTrack;
 import presentation.ColorSettings;
 import presentation.Draw2d;
 
@@ -12,6 +13,13 @@ public class MockDraw2d extends Draw2d {
 
     public MockDraw2d(JPanel drawablePanel) {
         super(drawablePanel);
+    }
+    
+    public void draw(MockTrack mockTrack)
+    {
+        Track track = mockTrack;        
+        this.draw(track);
+        
     }
 
     @Override
