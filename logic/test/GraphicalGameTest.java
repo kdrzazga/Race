@@ -14,6 +14,7 @@ import logic.Track;
 import logic.Vehicle;
 import logic.drive_algorithms.SimpleDrive;
 import logic.BoardBuilder;
+import logic.VelocityVector;
 
 public class GraphicalGameTest extends JFrame {
 
@@ -49,6 +50,9 @@ public class GraphicalGameTest extends JFrame {
         btnWeronikaTrack = new javax.swing.JButton();
         btnMoveVehicle0 = new javax.swing.JButton();
         btnVehicleTurnRight = new javax.swing.JButton();
+        sliderVelocity = new javax.swing.JSlider();
+        lblMousePoint = new javax.swing.JLabel();
+        btnDrawnDownFromCenter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 1200));
@@ -59,16 +63,21 @@ public class GraphicalGameTest extends JFrame {
         boardPanel.setMaximumSize(new java.awt.Dimension(850, 600));
         boardPanel.setMinimumSize(new java.awt.Dimension(850, 600));
         boardPanel.setPreferredSize(new java.awt.Dimension(850, 600));
+        boardPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                boardPanelMouseMoved(evt);
+            }
+        });
 
         javax.swing.GroupLayout boardPanelLayout = new javax.swing.GroupLayout(boardPanel);
         boardPanel.setLayout(boardPanelLayout);
         boardPanelLayout.setHorizontalGroup(
             boardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 909, Short.MAX_VALUE)
         );
         boardPanelLayout.setVerticalGroup(
             boardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 828, Short.MAX_VALUE)
         );
 
         btnDrawBoard.setText("Draw Donut Track");
@@ -149,11 +158,22 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        sliderVelocity.setMaximum(15);
+
+        lblMousePoint.setText("()");
+
+        btnDrawnDownFromCenter.setText("Drawn Down From Center");
+        btnDrawnDownFromCenter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDrawnDownFromCenterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDrawRectTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,15 +183,21 @@ public class GraphicalGameTest extends JFrame {
                     .addComponent(btnTriangleTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPentagonTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbTrackCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbInnerCenter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDrawBoard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbDesiredRoute, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbCheckpoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbInnerCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDrawBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbDesiredRoute, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbCheckpoints, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnWeronikaTrack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnMoveVehicle0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVehicleTurnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVehicleTurnRight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sliderVelocity, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(lblMousePoint, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDrawnDownFromCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,9 +223,15 @@ public class GraphicalGameTest extends JFrame {
                         .addComponent(btnWeronikaTrack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnMoveVehicle0)
+                        .addGap(18, 18, 18)
+                        .addComponent(sliderVelocity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVehicleTurnRight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDrawnDownFromCenter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMousePoint)
+                        .addGap(91, 91, 91)
                         .addComponent(cbTrackCenter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbInnerCenter)
@@ -216,6 +248,7 @@ public class GraphicalGameTest extends JFrame {
 
     private void initComponents2() {
         boardG = this.boardPanel.getGraphics();
+        this.sliderVelocity.setExtent(VelocityVector.V_MAX);
     }
 
     private void clearBoard() {
@@ -352,23 +385,32 @@ public class GraphicalGameTest extends JFrame {
             initVehiceOnWeronikaTrack();
         }
         board.moveAllVehicles();
+        board.vehicles.get(0).v.value = this.sliderVelocity.getValue();
         mockDrawBoard(board);
-        
+
+        drawDownFromCenterLineSection();
+    }//GEN-LAST:event_btnMoveVehicle0ActionPerformed
+
+    private void drawDownFromCenterLineSection() {
+        if (board == null) {
+            initVehiceOnWeronikaTrack();
+        }
+
         board.mockTrack.computeVerticalStartLine();
         LineSection line = board.mockTrack.getDownFromCenterLineSection();
         Point p1 = line.p1.convertToPoint();
         Point p2 = line.p2.convertToPoint();
-        boardG.setColor(Color.MAGENTA);
+        //boardG.setColor(Color.MAGENTA);
         boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
-        boardG.setColor(Color.BLACK);
-    }//GEN-LAST:event_btnMoveVehicle0ActionPerformed
+        //boardG.setColor(Color.BLACK);
+    }
 
     private void initVehiceOnWeronikaTrack() {
 
         board = new MockBoard(BoardBuilder.createBoardWithTrack(1, BoardBuilder.TrackType.WERONIKA));
         mockDrawBoard(board);
         final Vehicle vehicle = board.vehicles.get(0);
-        vehicle.v.value = 1;
+        vehicle.v.value = sliderVelocity.getValue();
         vehicle.v.angle = 0;
         vehicle.active = true;
 
@@ -381,6 +423,15 @@ public class GraphicalGameTest extends JFrame {
         board.vehicles.get(0).turnRight();
     }//GEN-LAST:event_btnVehicleTurnRightActionPerformed
 
+    private void boardPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boardPanelMouseMoved
+        String location = "(" + evt.getX() + " ," + evt.getY() + ")";
+        this.lblMousePoint.setText(location);
+    }//GEN-LAST:event_boardPanelMouseMoved
+
+    private void btnDrawnDownFromCenterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawnDownFromCenterActionPerformed
+        drawDownFromCenterLineSection();
+    }//GEN-LAST:event_btnDrawnDownFromCenterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JButton btnDrawBoard;
@@ -388,6 +439,7 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JButton btnDrawRectTrack;
     private javax.swing.JButton btnDrawSineTrack;
     private javax.swing.JButton btnDrawTestTrack;
+    private javax.swing.JButton btnDrawnDownFromCenter;
     private javax.swing.JButton btnMoveVehicle0;
     private javax.swing.JButton btnPentagonTrack;
     private javax.swing.JButton btnTriangleTrack;
@@ -397,6 +449,8 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JCheckBox cbDesiredRoute;
     private javax.swing.JCheckBox cbInnerCenter;
     private javax.swing.JCheckBox cbTrackCenter;
+    private javax.swing.JLabel lblMousePoint;
+    private javax.swing.JSlider sliderVelocity;
     // End of variables declaration//GEN-END:variables
     private Graphics boardG;
     private MockBoard board;

@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import libs.UnitTest;
 
-public class KeyboardInputTest extends UnitTest{
+public class KeyboardInputTest extends UnitTest {
 
     private static KeyboardControlsAdapter ki;
     private static Board mockBoard;

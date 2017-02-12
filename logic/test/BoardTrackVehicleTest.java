@@ -2,7 +2,7 @@ package logic.test;
 
 import static libs.Assert.assertion;
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
-import static libs.UnitTest.showTestPassedMessage;
+import libs.UnitTest;
 import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
@@ -12,7 +12,7 @@ import logic.Vehicle;
 import logic.VelocityVector;
 import logic.BoardBuilder;
 
-public class BoardTrackVehicleTest {
+public class BoardTrackVehicleTest extends UnitTest{
 
     Board board;
     Track track;

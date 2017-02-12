@@ -1,14 +1,14 @@
 package libs.test;
 
 import static libs.Assert.assertion;
-import static libs.UnitTest.showTestPassedMessage;
+import libs.UnitTest;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import logic.Board;
 import logic.BoardBuilder;
 
-public class PolygonAgTests {
+public class PolygonAgTests extends UnitTest{
 
     public static void main(String[] args) {
         testGetLineSectionCrossedBy();

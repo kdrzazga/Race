@@ -32,26 +32,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnDrawRectTrack" max="32767" attributes="0"/>
-                  <Component id="btnDrawTestTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnDrawSineTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnDrawKidneyTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnTriangleTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnPentagonTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="cbTrackCenter" alignment="0" max="32767" attributes="0"/>
-                  <Component id="cbInnerCenter" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnDrawBoard" alignment="1" max="32767" attributes="0"/>
-                  <Component id="cbDesiredRoute" alignment="1" max="32767" attributes="0"/>
-                  <Component id="cbCheckpoints" alignment="1" max="32767" attributes="0"/>
-                  <Component id="btnWeronikaTrack" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnMoveVehicle0" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnVehicleTurnRight" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnDrawTestTrack" max="32767" attributes="0"/>
+                  <Component id="btnDrawSineTrack" max="32767" attributes="0"/>
+                  <Component id="btnDrawKidneyTrack" max="32767" attributes="0"/>
+                  <Component id="btnTriangleTrack" max="32767" attributes="0"/>
+                  <Component id="btnPentagonTrack" max="32767" attributes="0"/>
+                  <Component id="cbTrackCenter" max="32767" attributes="0"/>
+                  <Component id="cbInnerCenter" max="32767" attributes="0"/>
+                  <Component id="btnDrawBoard" max="32767" attributes="0"/>
+                  <Component id="cbDesiredRoute" max="32767" attributes="0"/>
+                  <Component id="cbCheckpoints" max="32767" attributes="0"/>
+                  <Component id="btnWeronikaTrack" max="32767" attributes="0"/>
+                  <Component id="btnMoveVehicle0" max="32767" attributes="0"/>
+                  <Component id="btnVehicleTurnRight" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="sliderVelocity" pref="0" max="32767" attributes="0"/>
+                          <Component id="lblMousePoint" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="btnDrawnDownFromCenter" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="boardPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="boardPanel" min="-2" pref="909" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -79,9 +87,15 @@
                       <Component id="btnWeronikaTrack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnMoveVehicle0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="sliderVelocity" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVehicleTurnRight" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="297" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnDrawnDownFromCenter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblMousePoint" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                       <Component id="cbTrackCenter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cbInnerCenter" min="-2" max="-2" attributes="0"/>
@@ -113,16 +127,19 @@
           <Dimension value="[850, 600]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="boardPanelMouseMoved"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="850" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="909" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="828" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -225,6 +242,24 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVehicleTurnRightActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSlider" name="sliderVelocity">
+      <Properties>
+        <Property name="maximum" type="int" value="15"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMousePoint">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="()"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDrawnDownFromCenter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Drawn Down From Center"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDrawnDownFromCenterActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
