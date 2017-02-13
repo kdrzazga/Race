@@ -50,7 +50,7 @@ public class Track {
         }
 
         LineSection startLine = this.computeVerticalStartLine();
-        
+
         float x1 = startLine.p1.x;
         float x2 = startLine.p2.x;
         float y1 = startLine.p1.y;
@@ -87,17 +87,17 @@ public class Track {
 
     public LineSection computeVerticalStartLine() {
         findLinesIntersectedByVertStartLine();
-        float X = computeCenter().x;
+        float X = innerBound.computeCenter().x;
         float y1 = intersectedInnerLine.computeY(X);
         float y2 = intersectedOuterLine.computeY(X);
 
         return new LineSection(X, y1, X, y2);
     }
 
-    public LineSection computeStartLine() {
+    /*public LineSection computeStartLine() {
         findLinesIntersectedByVertStartLine();
         return new LineSection(intersectedInnerLine.computeCenter(), intersectedOuterLine.computeCenter());
-    }
+    }*/
 
     public PointAG computeStartPosition(int vehicleIndex, int numberOfVehicles) {
         LineSection startLine = this.computeVerticalStartLine();
@@ -108,16 +108,17 @@ public class Track {
     }
 
     private void findLinesIntersectedByVertStartLine() {
-        PointAG center  = this.computeCenter();
+        PointAG center = innerBound.computeCenter();
 
-        downFromCenterLineSection = new LineSection(center, new PointAG(center.x, Float.MAX_VALUE /2 ));
+        downFromCenterLineSection = new LineSection(center, new PointAG(center.x, Numbers.roundToInt(Math.pow(2, 20))));
 
         intersectedInnerLine = this.innerBound.getLineSectionCrossedBy(downFromCenterLineSection);
         intersectedOuterLine = this.outerBound.getLineSectionCrossedBy(downFromCenterLineSection);
-        
-        if (intersectedInnerLine == null || intersectedOuterLine == null)
-            throw new RuntimeException("findLinesIntersectedByVertStartLine() exception" 
+
+        if (intersectedInnerLine == null || intersectedOuterLine == null) {
+            throw new RuntimeException("findLinesIntersectedByVertStartLine() exception"
                     + " - WRONG line sectionshave been used for computing. Please debug");
+        }
     }
 
     private float computeCoordinate(int numberOfVehicles, int vehicleIndex, float coordinateP1, float coordinateP2) {
@@ -130,14 +131,13 @@ public class Track {
         }
         return y;
     }
-    
-    public Track clone()
-    {
+
+    public Track clone() {
         Track clonedTrack = new Track();
         clonedTrack.checkpoints = this.checkpoints.clone();
         clonedTrack.innerBound = this.innerBound.clone();
         clonedTrack.outerBound = this.outerBound.clone();
-       
+
         return clonedTrack;
     }
 

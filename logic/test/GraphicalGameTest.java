@@ -400,9 +400,9 @@ public class GraphicalGameTest extends JFrame {
         LineSection line = board.mockTrack.getDownFromCenterLineSection();
         Point p1 = line.p1.convertToPoint();
         Point p2 = line.p2.convertToPoint();
-        //boardG.setColor(Color.MAGENTA);
+        boardG.setColor(Color.MAGENTA);
         boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
-        //boardG.setColor(Color.BLACK);
+        boardG.setColor(Color.BLACK);
     }
 
     private void initVehiceOnWeronikaTrack() {

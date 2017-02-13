@@ -19,6 +19,7 @@ public class PolygonAG {
         this.points.addAll(Arrays.asList(points));
     }
 
+    @Override
     public PolygonAG clone() {
         PolygonAG clonedPolygon = new PolygonAG();
         clonedPolygon.points = new ArrayList<>();
@@ -68,7 +69,7 @@ public class PolygonAG {
             
             if (minX < section.verticalX && maxX > section.verticalX) {
                 
-                PointAG intersection = result.computeIntersection(section);
+                PointAG intersection = section.computeIntersection(result);
                 if (intersection != null) {
                     return result;
                 }

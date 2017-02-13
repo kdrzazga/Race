@@ -4,12 +4,15 @@ import libs.math2.LineSection;
 import libs.math2.PointAG;
 import static libs.Assert.assertion;
 import libs.UnitTest;
+import libs.math2.Numbers;
 
 public class LineSectionTests extends UnitTest {
 
     public static void main(String args[]) {
         testComputeIntersection();
         testMoveP1MultiplyingBy();
+        testXBelongsToLineSection();
+        testYBelongsToLineSection();
         showTestPassedMessage(LineSectionTests.class.getName());
     }
 
@@ -78,5 +81,35 @@ public class LineSectionTests extends UnitTest {
             assertion(intersection2_3.y, 3.7333336f, "testComputeIntersection");
             assertion(nullIntersection1 == null, "testComputeIntersection");//pararell lines - no intersection
         }
+    }
+
+    public static void testXBelongsToLineSection() {
+        LineSection verticalLineSection;
+        PointAG p1 = new PointAG(10.3f, 100);
+        PointAG p2 = new PointAG(10.3f, 10.3f);
+        PointAG p3 = new PointAG(-10.3f, 10.3f);
+        
+        WHEN:
+        verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
+        
+        THEN:
+        assertion(verticalLineSection.xBelongsToLineSection(p1.x), "testXBelongsToLineSection");
+        assertion(verticalLineSection.xBelongsToLineSection(p2.x), "testXBelongsToLineSection");
+        assertion(!verticalLineSection.xBelongsToLineSection(p3.x), "testXBelongsToLineSection");
+    }
+
+    public static void testYBelongsToLineSection() {
+        LineSection verticalLineSection;
+        PointAG p1 = new PointAG(10.3f, 100);
+        PointAG p2 = new PointAG(10.3f, 10.3f);
+        PointAG p3 = new PointAG(-10.3f, 20.3f);
+        
+        WHEN:
+        verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
+        
+        THEN:
+        assertion(!verticalLineSection.yBelongsToLineSection(p1.y), "testYBelongsToLineSection");
+        assertion(verticalLineSection.yBelongsToLineSection(p2.y), "testYBelongsToLineSection");
+        assertion(verticalLineSection.yBelongsToLineSection(p3.y), "testYBelongsToLineSection");
     }
 }

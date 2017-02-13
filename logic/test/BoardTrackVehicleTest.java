@@ -53,7 +53,7 @@ public class BoardTrackVehicleTest extends UnitTest{
         
         GIVEN:
         rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
-        expectedStartLine1 = new LineSection(15, 0, 15, 10);
+        expectedStartLine1 = new LineSection(15, 20, 15, 30);
         
         WHEN:
         actualStartLine = rectTrack.computeVerticalStartLine();
@@ -135,13 +135,13 @@ public class BoardTrackVehicleTest extends UnitTest{
         WHEN_VEHICLE_TRAVELLED_SQUARE_DISTANCE:
         {
             veh = moveVehicleNTimes(rectBoard, 31, vehicleId);//go right
-            turnVehicleRight90deg(veh);
+            turnVehicleLeft90deg(veh);
             veh = moveVehicleNTimes(rectBoard, 250, vehicleId);//go down
-            turnVehicleRight90deg(veh);
+            turnVehicleLeft90deg(veh);
             veh = moveVehicleNTimes(rectBoard, 62, vehicleId);//go left
-            turnVehicleRight90deg(veh);
+            turnVehicleLeft90deg(veh);
             veh = moveVehicleNTimes(rectBoard, 250, vehicleId);//go up
-            turnVehicleRight90deg(veh);
+            turnVehicleLeft90deg(veh);
             veh = moveVehicleNTimes(rectBoard, 31, vehicleId);//go right to starting position     
         }
         THEN_LAP_WAS_INCREASED:
@@ -150,11 +150,11 @@ public class BoardTrackVehicleTest extends UnitTest{
         }        
     }
 
-    private void turnVehicleRight90deg(Vehicle vehicle1) {
+    private void turnVehicleLeft90deg(Vehicle vehicle1) {
         float iteration = 0;
         float iterationsToDo90degTurn = Numbers.roundToFloat(Math.PI/ 2/ VelocityVector.ROTATION_UNIT);
         while (iteration < iterationsToDo90degTurn) {
-            vehicle1.turnRight();
+            vehicle1.turnLeft();
             iteration++;
         }
     }

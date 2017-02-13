@@ -12,7 +12,7 @@ public class PolygonAgTests extends UnitTest{
 
     public static void main(String[] args) {
         testGetLineSectionCrossedBy();
-        //testGetLineSectionCrossingVerticalSection();
+        testGetLineSectionCrossingVerticalSection();
         showTestPassedMessage(PolygonAgTests.class.getSimpleName());
     }
 
@@ -44,18 +44,17 @@ public class PolygonAgTests extends UnitTest{
         PointAG[] rectangleVertices = {new PointAG(10, 10), new PointAG(500, 15), new PointAG(490, 900), new PointAG(10, 890)};
         LineSection verticalLineSection, crossingSection;
         byte i = 0;
+        
         GIVEN:
-
         rectangle = new PolygonAG(rectangleVertices);
         verticalLineSection = computeVerticalSectionDownFromCenter(rectangle);
 
         WHEN:
         crossingSection = rectangle.getLineSectionCrossingVerticalSection(verticalLineSection);
         
-        THEN:
-        
-        assertion(crossingSection.p1.equals(new PointAG(500, 15)), "testGetLineSectionCrossingVericalSection");
-        assertion(crossingSection.p2.equals(new PointAG(490, 900)), "testGetLineSectionCrossingVericalSection");
+        THEN:        
+        assertion(crossingSection.p2.equals(new PointAG(10, 890)), "testGetLineSectionCrossingVericalSection");
+        assertion(crossingSection.p1.equals(new PointAG(490, 900)), "testGetLineSectionCrossingVericalSection");
     }
 
     private static PolygonAG getOuterRectangleFromWeronikaTrack() {
@@ -65,7 +64,7 @@ public class PolygonAgTests extends UnitTest{
 
     private static LineSection computeVerticalSectionDownFromCenter(PolygonAG rectangle) {
         PointAG verticalSectionP1 = rectangle.computeCenter();
-        PointAG verticalSectionP2 = new PointAG(verticalSectionP1.x, Float.MAX_VALUE);
+        PointAG verticalSectionP2 = new PointAG(verticalSectionP1.x, 50000);
         return new LineSection(verticalSectionP1, verticalSectionP2);
 
     }
