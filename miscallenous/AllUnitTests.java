@@ -7,6 +7,7 @@ public class AllUnitTests {
         libs.test.PolygonAgTests.main(args);
         libs.test.BooleanArrayTests.main(args);
         logic.test.BoardTrackVehicleTest.main(args);
+        //logic.test.DriveAlgorithmTests.main(args);
         presentation.test.KeyboardInputTest.main(args);  
     }
 }

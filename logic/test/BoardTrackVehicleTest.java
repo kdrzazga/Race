@@ -20,15 +20,15 @@ public class BoardTrackVehicleTest extends UnitTest{
     VelocityVector v;
 
     public BoardTrackVehicleTest() {
+        final BoardBuilder.TrackType rectTrack = BoardBuilder.TrackType.RECTANGULAR;
         this.board = new Board();
-        this.track = new Track();
+        this.track = new Track(rectTrack.toString());
         this.vehicle = new Vehicle(0);
 
         v = new VelocityVector(2, Math.PI / 2, new PointAG(75, 75));
+        this.vehicle.v = v;        
 
-        this.vehicle.v = v;
-
-        track = BoardBuilder.createTrack(BoardBuilder.TrackType.RECTANGULAR);
+        track = BoardBuilder.createTrack(rectTrack);
         board.track = track;
         board.vehicles.add(vehicle);
     }

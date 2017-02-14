@@ -13,7 +13,6 @@ public class ColorSettings {
     public static Color START_LINE_COLOR = Color.LIGHT_GRAY;
     public static Color INFO_PANEL_COLOR = BROWN;
 
-
     public static Color getVehicleColorById(int id) {
         int maxColorIndex = AWT_VEHICLE_COLORS.length;
         return AWT_VEHICLE_COLORS[id % maxColorIndex];

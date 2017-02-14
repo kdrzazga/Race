@@ -11,15 +11,18 @@ public class Track {
 
     public static final int NUMBER_OF_CHECKPOINTS = 5;
     public static final int CHECKPOINT_WITH_START_LINE_INDEX = 0;
+    private static final int TRACK_HEIGHT_LIMIT = Numbers.roundToInt(Math.pow(2, 20));//more than million
 
+    private String name;
     protected LineSection intersectedInnerLine;
     protected LineSection intersectedOuterLine;
     protected LineSection downFromCenterLineSection;
-
-    public Track() {
+    
+    public Track(String name) {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
         this.checkpoints = new PolygonAG[NUMBER_OF_CHECKPOINTS];
+        this.name = name;
     }
 
     public boolean isInsideTrack(PointAG point) {
@@ -108,9 +111,9 @@ public class Track {
     }
 
     private void findLinesIntersectedByVertStartLine() {
-        PointAG center = innerBound.computeCenter();
+        PointAG center = innerBound.computeCenter();        
 
-        downFromCenterLineSection = new LineSection(center, new PointAG(center.x, Numbers.roundToInt(Math.pow(2, 20))));
+        downFromCenterLineSection = new LineSection(center, new PointAG(center.x, TRACK_HEIGHT_LIMIT));
 
         intersectedInnerLine = this.innerBound.getLineSectionCrossedBy(downFromCenterLineSection);
         intersectedOuterLine = this.outerBound.getLineSectionCrossedBy(downFromCenterLineSection);
@@ -132,8 +135,9 @@ public class Track {
         return y;
     }
 
+    @Override
     public Track clone() {
-        Track clonedTrack = new Track();
+        Track clonedTrack = new Track(this.name);
         clonedTrack.checkpoints = this.checkpoints.clone();
         clonedTrack.innerBound = this.innerBound.clone();
         clonedTrack.outerBound = this.outerBound.clone();
@@ -155,5 +159,9 @@ public class Track {
 
     public float computeMaxY() {
         return Numbers.getMax(this.outerBound.getYPoints());
+    }
+
+    public String getName() {
+        return name;
     }
 }

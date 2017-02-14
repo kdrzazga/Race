@@ -12,7 +12,7 @@ import libs.math2.PolygonAG;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
-import logic.drive_algorithms.SimpleDrive;
+import logic.drive_algorithms.KeepCloseInnerBound;
 import logic.BoardBuilder;
 import logic.VelocityVector;
 
@@ -325,7 +325,7 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void drawDesiredRoute(Board board) {
-        SimpleDrive algorithm = new SimpleDrive(board.track);
+        KeepCloseInnerBound algorithm = new KeepCloseInnerBound(board.track);
 
         PolygonAG route = algorithm.getDesiredRoute();
 

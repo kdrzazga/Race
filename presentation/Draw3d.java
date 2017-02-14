@@ -16,7 +16,7 @@ public class Draw3d implements IGraphicalOutput {
 
     public Draw3d(JPanel drawablePanel) {
         this.drawablePanel = drawablePanel;
-        throw new RuntimeException("Not implemented yet");
+        throw new RuntimeException("3d not implemented yet");
     }
 
     @Override

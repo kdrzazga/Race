@@ -7,6 +7,7 @@ public class MockTrack extends Track {
 
     public MockTrack(Track track)
     {
+        super(track.getName());
         this.checkpoints = track.checkpoints.clone();
         this.innerBound = track.innerBound.clone();
         this.outerBound = track.outerBound.clone();       

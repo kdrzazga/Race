@@ -6,7 +6,6 @@ import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.Numbers;
 import libs.math2.PointAG;
-import libs.math2.PolygonAG;
 import logic.drive_algorithms.DriveAlgorithm;
 import logic.drive_algorithms.HumanDriveNullObject;
 import logic.drive_algorithms.TurnLeftAlgorithm;
@@ -126,25 +125,25 @@ public class BoardBuilder {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
             case RECTANGULAR:
-                return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS);
+                return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS, trackType.toString());
             case KIDNEY:
-                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS);
+                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS, trackType.toString());
             case TRIANGLE:
-                return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f);
+                return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f, trackType.toString());
             case PENTAGON:
-                return createTrack(PENTAGON_OUTER_BOUND_PTS, 0.7f);
+                return createTrack(PENTAGON_OUTER_BOUND_PTS, 0.7f, trackType.toString());
             case WERONIKA:
-                return createTrack(WERONIKA_OUTER_BOUND_PTS, WERONIKA_INNER_BOUND_PTS);
+                return createTrack(WERONIKA_OUTER_BOUND_PTS, WERONIKA_INNER_BOUND_PTS, trackType.toString());
             case TEST_RECTANGULAR:
-                return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS);
+                return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS, trackType.toString());
             default:
                 //SINE:
                 return create_50_50__450_500_SineTrack();
         }
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor) {
-        Track track = new Track();
+    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor, String name) {
+        Track track = new Track(name);
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
 
         track.innerBound = track.outerBound.clone();
@@ -154,8 +153,8 @@ public class BoardBuilder {
         return track;
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts) {
-        Track track = new Track();
+    private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts,String name) {
+        Track track = new Track(name);
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         track.innerBound.points.addAll(Arrays.asList(innerBoundPts));
 
@@ -177,7 +176,7 @@ public class BoardBuilder {
      */
     public static Track create_50_50__550_550_DonutTrack() {
 
-        Track donutTrack = new Track();
+        Track donutTrack = new Track(TrackType.DONUT.toString());
         PointAG donutCenter = new PointAG(300, 370);
         int outerBoundRadius = 250;
         int innerBoundRadius = 100;
@@ -193,7 +192,7 @@ public class BoardBuilder {
     }
 
     public static Track create_50_50__450_500_SineTrack() {
-        Track sineTrack = new Track();
+        Track sineTrack = new Track(TrackType.SINE.toString());
         ArrayList<PointAG> outerBoundPts = new ArrayList<>();
         ArrayList<PointAG> innerBoundPts = new ArrayList<>();
 

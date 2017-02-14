@@ -4,11 +4,10 @@ import libs.math2.PolygonAG;
 import logic.Track;
 import logic.Vehicle;
 
-public class SimpleDrive extends DriveAlgorithm {
-   
-    private PolygonAG desiredRoute;
+public class KeepCloseInnerBound extends DriveAlgorithm {
 
-    public SimpleDrive(Track track) {
+    public KeepCloseInnerBound(Track track) {
+        super(true, "Keep Close Inner Bound");
         this.track = track;
         this.desiredRoute = new PolygonAG();
         this.computeDesiredRoute();
@@ -16,13 +15,18 @@ public class SimpleDrive extends DriveAlgorithm {
 
     @Override
     public void computeVelocityVector() {
-        System.out.println("computeVelocityVector() - not implemented yet");
+        throw new RuntimeException("computeVelocityVector() - not implemented yet");
     }
 
     private void computeDesiredRoute() {
+        this.desiredRoute = getTrack().innerBound.clone();
+        this.desiredRoute.scale(1.2f);
     }
 
     public PolygonAG getDesiredRoute() {
+        if (this.desiredRoute == null)
+            this.computeDesiredRoute();
+        
         return desiredRoute;
     }
     
@@ -33,9 +37,5 @@ public class SimpleDrive extends DriveAlgorithm {
     @Override
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-    }
-
-    public static String getName() {
-        return SimpleDrive.class.getSimpleName();
     }
 }

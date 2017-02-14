@@ -14,16 +14,15 @@ public class Board {
     public ArrayList<Vehicle> vehicles;
 
     public Board() {
-        init(new Track());
+        init(new Track(""));
     }
 
     public Board(int numberOfVehicles, Track track) {
         init(track);
-
         initVehicles(numberOfVehicles);
     }
 
-    protected void initVehicles(int numberOfVehicles) {
+    protected final void initVehicles(int numberOfVehicles) {
         for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
