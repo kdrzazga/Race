@@ -63,12 +63,12 @@ public class PolygonAG {
             PointAG p1 = this.points.get(i);
             PointAG p2 = this.points.get(i + 1);
             result = new LineSection(p1, p2);
-            
+
             float minX = Math.min(p1.x, p2.x);
             float maxX = Math.max(p1.x, p2.x);
-            
+
             if (minX < section.verticalX && maxX > section.verticalX) {
-                
+
                 PointAG intersection = section.computeIntersection(result);
                 if (intersection != null) {
                     return result;
@@ -124,6 +124,33 @@ public class PolygonAG {
         });
 
         this.points = scaledPoints;
+    }
+
+    public boolean isConvex() {
+        /*pls be aware this method may not work for vertices with fractional 
+        coordinates (polygonAG is truncated to Polygon with interger
+        coordinates for checking if a point  is inside 
+        
+        This should actually be converted into Exception,
+        leaving just a comment is silly
+         */
+        final int pointsCount = this.points.size();
+        final Polygon truncatedPolygon = this.convertToPolygon();
+
+        for (int i = 0; i < pointsCount; i++) {
+            PointAG pointI = this.points.get(i);
+            for (int j = i; j < pointsCount; j++) {
+                PointAG pointJ = this.points.get(i);
+                LineSection side = new LineSection(pointI, pointJ);
+                PointAG sectionCenter = side.computeCenter();
+
+                if (truncatedPolygon.contains(sectionCenter.x, sectionCenter.y)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public float[] getXPoints() {

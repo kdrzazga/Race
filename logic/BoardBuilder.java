@@ -39,7 +39,7 @@ public class BoardBuilder {
     };
 
     // <editor-fold defaultstate="collapsed" desc="Point arrays for tracks">
-    private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 710), new PointAG(550, 710), new PointAG(550, 400), new PointAG(325, 400),
+    private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 710), new PointAG(350, 710), new PointAG(550, 710), new PointAG(550, 400), new PointAG(325, 400),
         new PointAG(325, 275), new PointAG(350, 275), new PointAG(350, 345), new PointAG(370, 345), new PointAG(370, 375), new PointAG(550, 375),
         new PointAG(550, 50), new PointAG(50, 50)};
     private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),

@@ -1,5 +1,6 @@
 package logic.test;
 
+import java.awt.Polygon;
 import static libs.Assert.assertion;
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
 import libs.UnitTest;
@@ -7,29 +8,30 @@ import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import logic.Board;
+import logic.BoardBuilder.TrackType;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
 import logic.BoardBuilder;
 
-public class BoardTrackVehicleTest extends UnitTest{
+public class BoardTrackVehicleTest extends UnitTest {
 
     Board board;
-    Track track;
+    Track rectTrack;
     Vehicle vehicle;
     VelocityVector v;
 
     public BoardTrackVehicleTest() {
-        final BoardBuilder.TrackType rectTrack = BoardBuilder.TrackType.RECTANGULAR;
+        final BoardBuilder.TrackType track = BoardBuilder.TrackType.RECTANGULAR;
         this.board = new Board();
-        this.track = new Track(rectTrack.toString());
+        this.rectTrack = new Track(track.toString());
         this.vehicle = new Vehicle(0);
 
         v = new VelocityVector(2, Math.PI / 2, new PointAG(75, 75));
-        this.vehicle.v = v;        
+        this.vehicle.v = v;
 
-        track = BoardBuilder.createTrack(rectTrack);
-        board.track = track;
+        this.rectTrack = BoardBuilder.createTrack(track);
+        board.track = this.rectTrack;
         board.vehicles.add(vehicle);
     }
 
@@ -43,6 +45,8 @@ public class BoardTrackVehicleTest extends UnitTest{
         }
 
         test.testIncreasingLaps();
+        test.testIfInnerBoundsAreInsideOuters();
+
         showTestPassedMessage(BoardTrackVehicleTest.class.getName());
     }
 
@@ -50,14 +54,14 @@ public class BoardTrackVehicleTest extends UnitTest{
         Track rectTrack;
         LineSection actualStartLine;
         LineSection expectedStartLine1;
-        
-        GIVEN:
+
+        GIVEN_TRACK_UNDER_TEST:
         rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
         expectedStartLine1 = new LineSection(15, 20, 15, 30);
-        
+
         WHEN:
         actualStartLine = rectTrack.computeVerticalStartLine();
-        
+
         THEN:
         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
         System.out.println("givenTrack_ShouldStartLineEqualExpected passed");
@@ -67,11 +71,11 @@ public class BoardTrackVehicleTest extends UnitTest{
         String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1";
 
         StringBuilder testResultMessage = new StringBuilder();
-        Track rectTrack = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
+        Track track = BoardBuilder.createTrack(BoardBuilder.TrackType.TEST_RECTANGULAR);
 
-        LineSection startLine = rectTrack.computeVerticalStartLine();
+        LineSection startLine = track.computeVerticalStartLine();
         float startLineX = startLine.p1.x;
-        Board testBoard = new Board(numberOfVehicles, rectTrack);
+        Board testBoard = new Board(numberOfVehicles, track);
 
         for (Vehicle veh : testBoard.vehicles) {
             assertion(veh.v.position.x, startLineX, methodName);
@@ -112,9 +116,9 @@ public class BoardTrackVehicleTest extends UnitTest{
         for (int i = 0; i < N; i++) {
             board.moveVehicle(vehicleId);
             //all the time vehicle should be on the track
-            assertion(board.track.isInsideTrack(board.getVehiclePosition(vehicleId))
-                , "moveVehicle31times - design your test in the way the vehicle will be in track all the time "
-            + " current pos=" + board.vehicles.get(vehicleId).v.position);
+            assertion(board.track.isInsideTrack(board.getVehiclePosition(vehicleId)),
+                     "moveVehicle31times - design your test in the way the vehicle will be in track all the time "
+                    + " current pos=" + board.vehicles.get(vehicleId).v.position);
         }
         return board.vehicles.get(vehicleId);
     }
@@ -123,8 +127,8 @@ public class BoardTrackVehicleTest extends UnitTest{
         Board rectBoard;
         Vehicle veh;
         final int vehicleId = 0;
-        int lapsBeforeMove;    
-        
+        int lapsBeforeMove;
+
         GIVEN_WERONIKA_TRACK_WITH_1_VEHICLE_SPEED_1:
         {
             rectBoard = BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA);
@@ -147,12 +151,46 @@ public class BoardTrackVehicleTest extends UnitTest{
         THEN_LAP_WAS_INCREASED:
         {
             assertion(veh.laps, lapsBeforeMove + 1, "updateVehicleTravelledWayAngleTest");
-        }        
+        }
+    }
+
+    public void testIfInnerBoundsAreInsideOuters() {
+        Track trackUnderTest;
+        TrackType tracksToTest[] = {
+            TrackType.DONUT,
+            TrackType.KIDNEY,
+            TrackType.PENTAGON,
+            TrackType.RECTANGULAR,
+            TrackType.SINE,
+            TrackType.TEST_RECTANGULAR,
+            TrackType.TRIANGLE,
+            TrackType.WERONIKA
+        };
+
+        for (TrackType trackType : tracksToTest) {
+            GIVEN:
+            trackUnderTest = BoardBuilder.createTrack(trackType);
+
+            WHEN:
+            testIfInnerBoundIsInsideOuter(trackUnderTest);
+        }
+    }
+
+    private void testIfInnerBoundIsInsideOuter(Track track) {
+        track.innerBound.points.forEach((PointAG innerPoint) -> {            
+            Polygon truncatedOuterBnd = track.outerBound.convertToPolygon();
+            
+            THEN:
+            assertion(truncatedOuterBnd.contains(innerPoint.x, innerPoint.y),
+                    "(At least) one of points of inner bound is "
+                    + " not inside outer bound for track " + track.getName()
+                    + " invalid point is " + innerPoint);
+        });
     }
 
     private void turnVehicleLeft90deg(Vehicle vehicle1) {
         float iteration = 0;
-        float iterationsToDo90degTurn = Numbers.roundToFloat(Math.PI/ 2/ VelocityVector.ROTATION_UNIT);
+        float iterationsToDo90degTurn = Numbers.roundToFloat(Math.PI / 2 / VelocityVector.ROTATION_UNIT);
         while (iteration < iterationsToDo90degTurn) {
             vehicle1.turnLeft();
             iteration++;

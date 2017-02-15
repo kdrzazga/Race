@@ -11,7 +11,7 @@ public class Track {
 
     public static final int NUMBER_OF_CHECKPOINTS = 5;
     public static final int CHECKPOINT_WITH_START_LINE_INDEX = 0;
-    private static final int TRACK_HEIGHT_LIMIT = Numbers.roundToInt(Math.pow(2, 20));//more than million
+    private static final int TRACK_HEIGHT_LIMIT = Numbers.roundToInt(Math.pow(2, 20));//more than a million
 
     private String name;
     protected LineSection intersectedInnerLine;
@@ -26,8 +26,8 @@ public class Track {
     }
 
     public boolean isInsideTrack(PointAG point) {
-        return !this.innerBound.convertToPolygon().contains(point.convertToPoint())
-                && this.outerBound.convertToPolygon().contains(point.convertToPoint());
+        return !this.innerBound.convertToPolygon().contains(point.x, point.y)
+                && this.outerBound.convertToPolygon().contains(point.x, point.y);
     }
 
     public void computeCheckpoints() {

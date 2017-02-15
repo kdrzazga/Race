@@ -47,6 +47,19 @@ public class LineSection extends LineAG{
         float centerY = (p1.y + p2.y) / 2;
         return new PointAG(centerX, centerY);
     }
+    
+        /* positive angles:
+                pi rad
+                |
+     3pi/2 rad--o---    pi/2 rad
+                |\ pi/4 rad
+                2pi rad = 0 rad     
+     */
+    
+    public double computePositiveIncclinationAngle()
+    {
+        return computeInclinationAngle() +Math.PI;
+    }
 
     /* angles:
                 0 deg

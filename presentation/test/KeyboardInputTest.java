@@ -45,7 +45,7 @@ public class KeyboardInputTest extends UnitTest {
     private static void testForPlayer1() {
         init();
         givenAccelerateKeyPressed_ShouldPlayer1AccelerateToMaxSpeed(player1, PLAYER_1_ACCELERATE);
-        givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(player1, PLAYER_1_SLOW_DOWN);
+        testSlowDownToStopOnKeyPressed(player1, PLAYER_1_SLOW_DOWN);
     }
 
     private static void testForBothPlayers() {
@@ -96,15 +96,20 @@ public class KeyboardInputTest extends UnitTest {
         System.out.println("accelerateTillMaxSpeed passed for " + player.toString());
     }
 
-    private static void givenSlowDownKeyPressed_ShouldPlayer1SlowDownToStop(Vehicle player, KeyEvent slowDown) {
+    private static void testSlowDownToStopOnKeyPressed(Vehicle player, KeyEvent slowDown) {
+        GIVEN:
         ki.keyPressed(slowDown);
         ki.keyPressed(slowDown);
+        
+        WHEN_PLAYER_SLOWS_DOWN_TO_STOP:
         for (int expectedSpeed = VelocityVector.V_MAX - 2; expectedSpeed >= VelocityVector.V_MIN; expectedSpeed--) {
             assertion(player.v.value, expectedSpeed, "testForPlayer0");
             ki.keyPressed(slowDown);
         }
 
         ki.keyPressed(slowDown);
+        
+        THEN_PLAYER_STOPPED:
         assertion(player.v.value, VelocityVector.V_MIN, "testForPlayer0");
         System.out.println("slowDownToStop passed for " + player.toString());
     }

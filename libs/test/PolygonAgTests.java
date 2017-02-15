@@ -8,11 +8,12 @@ import libs.math2.PolygonAG;
 import logic.Board;
 import logic.BoardBuilder;
 
-public class PolygonAgTests extends UnitTest{
+public class PolygonAgTests extends UnitTest {
 
     public static void main(String[] args) {
         testGetLineSectionCrossedBy();
         testGetLineSectionCrossingVerticalSection();
+        testIsConvex();
         showTestPassedMessage(PolygonAgTests.class.getSimpleName());
     }
 
@@ -25,11 +26,11 @@ public class PolygonAgTests extends UnitTest{
         {
             triangle = new PolygonAG(trianglePts);
         }
-        WHEN:
+        WHEN_CROSSING_LINE_SECTION_COMPUTER:
         {
             crossingLineSection = triangle.getLineSectionCrossedBy(crossingLineSection);
         }
-        THEN:
+        THEN_CROSSING_LINE_SECTION_HAS_EXPECTED_POINTS:
         {
             assertion(crossingLineSection.p1.x, 1100, "testGetLineSectionCrossedBy");
             assertion(crossingLineSection.p1.y, 1100, "testGetLineSectionCrossedBy");
@@ -44,22 +45,31 @@ public class PolygonAgTests extends UnitTest{
         PointAG[] rectangleVertices = {new PointAG(10, 10), new PointAG(500, 15), new PointAG(490, 900), new PointAG(10, 890)};
         LineSection verticalLineSection, crossingSection;
         byte i = 0;
-        
+
         GIVEN:
         rectangle = new PolygonAG(rectangleVertices);
         verticalLineSection = computeVerticalSectionDownFromCenter(rectangle);
 
         WHEN:
         crossingSection = rectangle.getLineSectionCrossingVerticalSection(verticalLineSection);
-        
-        THEN:        
+
+        THEN:
         assertion(crossingSection.p2.equals(new PointAG(10, 890)), "testGetLineSectionCrossingVericalSection");
         assertion(crossingSection.p1.equals(new PointAG(490, 900)), "testGetLineSectionCrossingVericalSection");
     }
 
-    private static PolygonAG getOuterRectangleFromWeronikaTrack() {
-        Board weronikaBoard = BoardBuilder.createBoardWithTrack(0, BoardBuilder.TrackType.WERONIKA);
-        return weronikaBoard.track.outerBound;
+    private static void testIsConvex() {
+        PointAG concavePolygonVertices[] = {new PointAG(10, 10), new PointAG(20, 30), new PointAG(10, 50),
+            new PointAG(40, 50), new PointAG(40, 10)};
+        PointAG convexPolygonVertices[] = {new PointAG(1000.3f, 1000.12f), new PointAG(3000.3f, 2000.12f),
+            new PointAG(5000.3f, 3000.12f), new PointAG(1000.3f, 3000.12f)};
+        PolygonAG concavePolygonUnderTest, convexPolygonUnderTest;
+        GIVEN:
+        concavePolygonUnderTest = new PolygonAG(concavePolygonVertices);
+        convexPolygonUnderTest = new PolygonAG(convexPolygonVertices);
+        THEN:
+        assertion(!concavePolygonUnderTest.isConvex(), "testIsConvex on concavePolygon");
+        assertion(convexPolygonUnderTest.isConvex(), "testIsConvex on convexPolygon");
     }
 
     private static LineSection computeVerticalSectionDownFromCenter(PolygonAG rectangle) {
