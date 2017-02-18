@@ -2,7 +2,6 @@ package libs.test;
 
 import libs.math2.LineSection;
 import libs.math2.PointAG;
-import static libs.Assert.assertion;
 import libs.UnitTest;
 import libs.math2.Numbers;
 

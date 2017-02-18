@@ -146,19 +146,19 @@ public class Track {
     }
 
     public float computeMinX() {
-        return Numbers.getMin(this.outerBound.getXPoints());
+        return this.outerBound.computeMinX();
     }
 
     public float computeMaxX() {
-        return Numbers.getMax(this.outerBound.getXPoints());
+        return this.outerBound.computeMaxX();
     }
 
     public float computeMinY() {
-        return Numbers.getMin(this.outerBound.getYPoints());
+        return this.outerBound.computeMinY();
     }
 
     public float computeMaxY() {
-        return Numbers.getMax(this.outerBound.getYPoints());
+        return this.outerBound.computeMaxY();
     }
 
     public String getName() {

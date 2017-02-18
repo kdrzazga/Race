@@ -1,6 +1,5 @@
 package libs.test;
 
-import static libs.Assert.assertion;
 import libs.BooleanArray;
 import libs.UnitTest;
 

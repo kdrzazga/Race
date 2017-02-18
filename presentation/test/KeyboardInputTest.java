@@ -1,7 +1,6 @@
 package presentation.test;
 
 import presentation.KeyboardControlsAdapter;
-import static libs.Assert.assertion;
 import logic.Board;
 import logic.Vehicle;
 import logic.VelocityVector;

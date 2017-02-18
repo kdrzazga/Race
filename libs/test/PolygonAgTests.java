@@ -1,19 +1,16 @@
 package libs.test;
 
-import static libs.Assert.assertion;
 import libs.UnitTest;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
-import logic.Board;
-import logic.BoardBuilder;
 
 public class PolygonAgTests extends UnitTest {
 
     public static void main(String[] args) {
         testGetLineSectionCrossedBy();
         testGetLineSectionCrossingVerticalSection();
-        testIsConvex();
+        //testIsConvex();
         showTestPassedMessage(PolygonAgTests.class.getSimpleName());
     }
 
@@ -44,7 +41,6 @@ public class PolygonAgTests extends UnitTest {
         PolygonAG rectangle;
         PointAG[] rectangleVertices = {new PointAG(10, 10), new PointAG(500, 15), new PointAG(490, 900), new PointAG(10, 890)};
         LineSection verticalLineSection, crossingSection;
-        byte i = 0;
 
         GIVEN:
         rectangle = new PolygonAG(rectangleVertices);
@@ -59,17 +55,23 @@ public class PolygonAgTests extends UnitTest {
     }
 
     private static void testIsConvex() {
-        PointAG concavePolygonVertices[] = {new PointAG(10, 10), new PointAG(20, 30), new PointAG(10, 50),
+        PointAG[] concave1PolygonVertices = {new PointAG(0,900), new PointAG(123, 500), new PointAG(2500, 900),
+            new PointAG(124, 900), new PointAG(123, 899), new PointAG(122, 900)};
+        PointAG[] concave2PolygonVertices = {new PointAG(10.53f, 10), new PointAG(12.33f, 30), new PointAG(10, 50),
             new PointAG(40, 50), new PointAG(40, 10)};
-        PointAG convexPolygonVertices[] = {new PointAG(1000.3f, 1000.12f), new PointAG(3000.3f, 2000.12f),
+        PointAG[] convexPolygon1Vertices = {new PointAG(1000.3f, 1000.12f), new PointAG(3000.3f, 2000.12f),
             new PointAG(5000.3f, 3000.12f), new PointAG(1000.3f, 3000.12f)};
-        PolygonAG concavePolygonUnderTest, convexPolygonUnderTest;
+        PolygonAG concavePolygon1UnderTest, convexPolygon1UnderTest, concavePolygon2UnderTest;
+        
         GIVEN:
-        concavePolygonUnderTest = new PolygonAG(concavePolygonVertices);
-        convexPolygonUnderTest = new PolygonAG(convexPolygonVertices);
+        concavePolygon1UnderTest = new PolygonAG(concave1PolygonVertices);
+        concavePolygon2UnderTest = new PolygonAG(concave2PolygonVertices);
+        convexPolygon1UnderTest = new PolygonAG(convexPolygon1Vertices);
+        
         THEN:
-        assertion(!concavePolygonUnderTest.isConvex(), "testIsConvex on concavePolygon");
-        assertion(convexPolygonUnderTest.isConvex(), "testIsConvex on convexPolygon");
+        assertion(!concavePolygon1UnderTest.isConvex(), "testIsConvex on concavePolygon 1");
+        assertion(!concavePolygon2UnderTest.isConvex(), "testIsConvex on concavePolygon 2");
+        assertion(convexPolygon1UnderTest.isConvex(), "testIsConvex on convexPolygon");
     }
 
     private static LineSection computeVerticalSectionDownFromCenter(PolygonAG rectangle) {

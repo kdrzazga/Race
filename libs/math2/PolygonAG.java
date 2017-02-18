@@ -56,7 +56,6 @@ public class PolygonAG {
         }
 
         LineSection result;
-
         int i;
 
         for (i = 0; i < this.points.size() - 1; i++) {
@@ -75,7 +74,6 @@ public class PolygonAG {
                 }
             }
         }
-
         return null;
     }
 
@@ -112,6 +110,46 @@ public class PolygonAG {
     }
 
     public void scale(float scaleFactor) {
+        if (this.isConvex()) {
+            scaleConvexPolygon(scaleFactor);
+        } else {
+            scaleConcavePolygon(scaleFactor);
+        }
+    }
+
+    public PointAG computeCentroid() {
+        double A = this.computeSignedArea();
+        double CxSum = 0, CySum = 0;
+        for (int i = 0; i < this.points.size() - 1; i++) {
+            PointAG p = this.points.get(i);
+            PointAG pPlus1 = this.points.get(i + 1);
+            
+            double factor = (p.x * pPlus1.y - pPlus1.x * p.y);
+            CxSum += (p.x + pPlus1.x) * factor;
+            CySum += (p.y + pPlus1.y) * factor;
+        }
+        double Cx = CxSum / (6*A);
+        double Cy = CySum / (6*A);
+
+        return new PointAG(Numbers.roundToFloat(Cx), Numbers.roundToFloat(Cy));
+    }
+
+    private double computeSignedArea() {
+        double factor = 0;
+        for (int i = 0; i < this.points.size() - 1; i++) {
+            PointAG p = this.points.get(i);
+            PointAG pPlus1 = this.points.get(i + 1);
+
+            factor += (p.x * pPlus1.y - pPlus1.x * p.y);
+        }
+        return factor / 2;
+    }
+
+    private void scaleConcavePolygon(float scaleFactor) {
+        throw new RuntimeException("Not implemented yet");
+    }
+
+    private void scaleConvexPolygon(float scaleFactor) {
         PointAG center = this.computeCenter();
 
         ArrayList<PointAG> scaledPoints = new ArrayList<>(this.points.size());
@@ -127,20 +165,15 @@ public class PolygonAG {
     }
 
     public boolean isConvex() {
-        /*pls be aware this method may not work for vertices with fractional 
-        coordinates (polygonAG is truncated to Polygon with interger
-        coordinates for checking if a point  is inside 
-        
-        This should actually be converted into Exception,
-        leaving just a comment is silly
-         */
+        checkIfPolygonBigEnough();
+
         final int pointsCount = this.points.size();
         final Polygon truncatedPolygon = this.convertToPolygon();
 
         for (int i = 0; i < pointsCount; i++) {
             PointAG pointI = this.points.get(i);
-            for (int j = i; j < pointsCount; j++) {
-                PointAG pointJ = this.points.get(i);
+            for (int j = i + 1; j < pointsCount; j++) {
+                PointAG pointJ = this.points.get(j);
                 LineSection side = new LineSection(pointI, pointJ);
                 PointAG sectionCenter = side.computeCenter();
 
@@ -149,8 +182,17 @@ public class PolygonAG {
                 }
             }
         }
-
         return true;
+    }
+
+    private void checkIfPolygonBigEnough()  {
+        for (int i = 0; i < this.points.size() - 1; i++) {
+            LineSection section = new LineSection(this.points.get(i), this.points.get(i + 1));
+            if (section.computeLength() < 1) {
+                throw new RuntimeException("Polygon too small to check if it's convex"
+                        + " with this algorithm, pls google a different algorithm.");
+            }
+        }
     }
 
     public float[] getXPoints() {
@@ -169,5 +211,21 @@ public class PolygonAG {
             ypoints[i] = this.points.get(i).y;
         }
         return ypoints;
+    }
+    
+    public float computeMinX() {
+        return Numbers.getMin(this.getXPoints());
+    }
+
+    public float computeMaxX() {
+        return Numbers.getMax(this.getXPoints());
+    }
+
+    public float computeMinY() {
+        return Numbers.getMin(this.getYPoints());
+    }
+
+    public float computeMaxY() {
+        return Numbers.getMax(this.getYPoints());
     }
 }
