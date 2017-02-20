@@ -9,9 +9,9 @@ import logic.BoardBuilder;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
-import libs.UnitTest;
+import libs.Test;
 
-public class KeyboardInputTest extends UnitTest {
+public class KeyboardInputTest extends Test {
 
     private static KeyboardControlsAdapter ki;
     private static Board mockBoard;

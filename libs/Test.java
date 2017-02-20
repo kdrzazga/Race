@@ -1,6 +1,6 @@
 package libs;
 
-public abstract class UnitTest {
+public abstract class Test {
 
     public static void showTestPassedMessage(String childClassName)
     {

@@ -1,9 +1,15 @@
 package libs.test;
 
 import libs.BooleanArray;
-import libs.UnitTest;
+import libs.Test;
 
-public class BooleanArrayTests extends UnitTest{
+public class BooleanArrayTests extends Test {
+
+    public static void main(String[] args) {
+        BooleanArrayTests.testAddingBools();
+        BooleanArrayTests.testSetAllItems();
+        showTestPassedMessage("testAddingBools");
+    }
 
     public static void testAddingBools() {
         BooleanArray bools;
@@ -13,23 +19,20 @@ public class BooleanArrayTests extends UnitTest{
         }
         WHEN:
         {
-            bools.values[0]= true;
-            bools.values[1]= true;
-            bools.values[2]= false;
-            bools.values[3]= true;
-            bools.values[4]= false;
-            bools.values[5]= true;
-            
+            bools.values[0] = true;
+            bools.values[1] = true;
+            bools.values[2] = false;
+            bools.values[3] = true;
+            bools.values[4] = false;
+            bools.values[5] = true;
         }
         THEN:
         {
             assertion(bools.toString().equals("110101"), "testAddingBools");
         }
-
     }
 
-    public static void testSetAllItems()
-    {
+    public static void testSetAllItems() {
         BooleanArray bools = new BooleanArray(5);
         GIVEN:
         {
@@ -45,8 +48,7 @@ public class BooleanArrayTests extends UnitTest{
         }
         THEN:
         {
-            for (Boolean bool : bools.values)
-            {
+            for (Boolean bool : bools.values) {
                 assertion(!bool, "testSetAllItems");
             }
         }
@@ -56,17 +58,10 @@ public class BooleanArrayTests extends UnitTest{
         }
         THEN:
         {
-            for (Boolean bool : bools.values)
-            {
+            for (Boolean bool : bools.values) {
                 assertion(bool, "testSetAllItems");
             }
         }
-    }
-    
-    public static void main(String[] args) {
-        BooleanArrayTests.testAddingBools();
-        BooleanArrayTests.testSetAllItems();
-        showTestPassedMessage("testAddingBools");
     }
 
 }

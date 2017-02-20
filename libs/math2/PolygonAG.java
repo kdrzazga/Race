@@ -1,4 +1,4 @@
-package libs.math2;
+package libs.math2; 
 
 import java.awt.Point;
 import java.awt.Polygon;
@@ -110,11 +110,11 @@ public class PolygonAG {
     }
 
     public void scale(float scaleFactor) {
-        if (this.isConvex()) {
+        //if (this.isConvex()) {
             scaleConvexPolygon(scaleFactor);
-        } else {
+        /*} else {
             scaleConcavePolygon(scaleFactor);
-        }
+        }*/
     }
 
     public PointAG computeCentroid() {
@@ -150,7 +150,7 @@ public class PolygonAG {
     }
 
     private void scaleConvexPolygon(float scaleFactor) {
-        PointAG center = this.computeCenter();
+        PointAG center = this.computeCentroid();
 
         ArrayList<PointAG> scaledPoints = new ArrayList<>(this.points.size());
 

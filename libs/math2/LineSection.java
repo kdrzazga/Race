@@ -56,7 +56,7 @@ public class LineSection extends LineAG{
                 2pi rad = 0 rad     
      */
     
-    public double computePositiveIncclinationAngle()
+    public double computePositiveInclinationAngle()
     {
         return computeInclinationAngle() +Math.PI;
     }
@@ -125,6 +125,17 @@ public class LineSection extends LineAG{
         this.p2.moveByVector(length * scalar, inclination);
     }
 
+    public LineSection createPararellSection(float distance)
+    {
+        LineAG perpLineP1 = this.computePerpendicularLine(this.p1);
+        LineAG perpLineP2 = this.computePerpendicularLine(this.p2);
+        
+        PointAG parSectionP1 = perpLineP1.givenXMovePointAlongLine(this.p1.x, distance);
+        PointAG parSectionP2 = perpLineP2.givenXMovePointAlongLine(this.p2.x, distance);
+        
+        return new LineSection(parSectionP1, parSectionP2);
+    }
+    
     @Override
     public String toString() {
         return "(" + this.p1.x + ", " + this.p1.y

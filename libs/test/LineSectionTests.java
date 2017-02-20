@@ -2,21 +2,24 @@ package libs.test;
 
 import libs.math2.LineSection;
 import libs.math2.PointAG;
-import libs.UnitTest;
+import libs.Test;
 import libs.math2.Numbers;
 
-public class LineSectionTests extends UnitTest {
+public class LineSectionTests extends Test {
 
     public static void main(String args[]) {
         testComputeIntersection();
         testMoveP1MultiplyingBy();
         testXBelongsToLineSection();
         testYBelongsToLineSection();
+        testCreatePararellSection();
         showTestPassedMessage(LineSectionTests.class.getName());
     }
 
+    public static LineSection lineSection[] = new LineSection[4];
+
     private static void testMoveP1MultiplyingBy() {
-        LineSection lineSection[] = new LineSection[4];
+        final String methodName = "testMoveP2MultiplyingBy";
 
         GIVEN:
         {
@@ -36,22 +39,23 @@ public class LineSectionTests extends UnitTest {
 
         THEN:
         {
-            assertion(lineSection[0].p2.x, 20f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[0].p2.y, 20f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[1].p2.x, -10f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[1].p2.y, -10f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[2].p2.x, 0f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[2].p2.y, 80f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[3].p2.x, 10f, "testMoveP2MultiplyingBy");
-            assertion(lineSection[3].p2.y, 27.326f, "testMoveP2MultiplyingBy");
+
+            assertion(lineSection[0].p2.x, 20f, methodName);
+            assertion(lineSection[0].p2.y, 20f, methodName);
+            assertion(lineSection[1].p2.x, -10f, methodName);
+            assertion(lineSection[1].p2.y, -10f, methodName);
+            assertion(lineSection[2].p2.x, 0f, methodName);
+            assertion(lineSection[2].p2.y, 80f, methodName);
+            assertion(lineSection[3].p2.x, 10f, methodName);
+            assertion(lineSection[3].p2.y, 27.326f, methodName);
         }
 
     }
+    private static LineSection lineSection2, lineSection3, pararellLineSection1, pararellLineSection2;
+    private static PointAG intersection1_2, nullIntersection1_3, intersection2_3, nullIntersection1;
 
     public static void testComputeIntersection() {
-        LineSection lineSection1, lineSection2, lineSection3, verticalLineSection, pararellLineSection1, pararellLineSection2;
-
-        PointAG intersection1_2, nullIntersection1_3, intersection2_3, nullIntersection1;
+        final String methodName = "testComputeIntersection";
 
         GIVEN:
         {
@@ -73,42 +77,67 @@ public class LineSectionTests extends UnitTest {
 
         THEN:
         {
-            assertion(intersection1_2.x, 5f, "testComputeIntersection");
-            assertion(intersection1_2.y, 5f, "testComputeIntersection");
-            assertion(nullIntersection1_3 == null, "testComputeIntersection");//intersection at point (-14, -14)- outside both sections
-            assertion(intersection2_3.x, 6.266667f, "testComputeIntersection");
-            assertion(intersection2_3.y, 3.7333336f, "testComputeIntersection");
-            assertion(nullIntersection1 == null, "testComputeIntersection");//pararell lines - no intersection
+            assertion(intersection1_2.x, 5f, methodName);
+            assertion(intersection1_2.y, 5f, methodName);
+            assertion(nullIntersection1_3 == null, methodName);//intersection at point (-14, -14)- outside both sections
+            assertion(intersection2_3.x, 6.266667f, methodName);
+            assertion(intersection2_3.y, 3.7333336f, methodName);
+            assertion(nullIntersection1 == null, methodName);//pararell lines - no intersection
         }
     }
 
+    private static LineSection verticalLineSection;
+    private static PointAG p1, p2, p3;
+
     public static void testXBelongsToLineSection() {
-        LineSection verticalLineSection;
-        PointAG p1 = new PointAG(10.3f, 100);
-        PointAG p2 = new PointAG(10.3f, 10.3f);
-        PointAG p3 = new PointAG(-10.3f, 10.3f);
-        
+        final String methodName = "testXBelongsToLineSection";
+
+        GIVEN:
+        p1 = new PointAG(10.3f, 100);
+        p2 = new PointAG(10.3f, 10.3f);
+        p3 = new PointAG(-10.3f, 10.3f);
+
         WHEN:
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
-        
+
         THEN:
-        assertion(verticalLineSection.xBelongsToLineSection(p1.x), "testXBelongsToLineSection");
-        assertion(verticalLineSection.xBelongsToLineSection(p2.x), "testXBelongsToLineSection");
-        assertion(!verticalLineSection.xBelongsToLineSection(p3.x), "testXBelongsToLineSection");
+        assertion(verticalLineSection.xBelongsToLineSection(p1.x), methodName);
+        assertion(verticalLineSection.xBelongsToLineSection(p2.x), methodName);
+        assertion(!verticalLineSection.xBelongsToLineSection(p3.x), methodName);
     }
 
     public static void testYBelongsToLineSection() {
-        LineSection verticalLineSection;
-        PointAG p1 = new PointAG(10.3f, 100);
-        PointAG p2 = new PointAG(10.3f, 10.3f);
-        PointAG p3 = new PointAG(-10.3f, 20.3f);
-        
+        final String methodName = "testYBelongsToLineSection";
+
+        GIVEN:
+        p1 = new PointAG(10.3f, 100);
+        p2 = new PointAG(10.3f, 10.3f);
+        p3 = new PointAG(-10.3f, 20.3f);
+
         WHEN:
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
-        
+
         THEN:
-        assertion(!verticalLineSection.yBelongsToLineSection(p1.y), "testYBelongsToLineSection");
-        assertion(verticalLineSection.yBelongsToLineSection(p2.y), "testYBelongsToLineSection");
-        assertion(verticalLineSection.yBelongsToLineSection(p3.y), "testYBelongsToLineSection");
+        assertion(!verticalLineSection.yBelongsToLineSection(p1.y), methodName);
+        assertion(verticalLineSection.yBelongsToLineSection(p2.y), methodName);
+        assertion(verticalLineSection.yBelongsToLineSection(p3.y), methodName);
+    }
+
+    private static LineSection lineSection1, lineSectionAbove, lineSectionBelow, sameLineSection;
+    private static float ls1Length;
+
+    public static void testCreatePararellSection() {
+        GIVEN:
+
+        lineSection1 = new LineSection(new PointAG(20, 20), new PointAG(40, 40));
+        ls1Length = Numbers.roundToFloat(lineSection1.computeLength());
+        WHEN:
+
+        sameLineSection = lineSection1.createPararellSection(0);
+        lineSectionAbove = lineSection1.createPararellSection(ls1Length + 1);
+        lineSectionBelow = lineSection1.createPararellSection(-ls1Length - 1);
+        THEN:
+
+        ;
     }
 }

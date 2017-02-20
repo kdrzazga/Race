@@ -20,7 +20,7 @@ public class TestPolygonsBuilder {
 
     private static final PointAG[] TETRAGON_BIG_PTS = {
         new PointAG(-50, 50), new PointAG(650, 50), new PointAG(650, -50), new PointAG(-50, -50)};
-
+ 
     private static final PointAG[] TETRAGON_SMALL_PTS = {
         new PointAG(-50, 50), new PointAG(50, 50), new PointAG(50, -50), new PointAG(-50, -50)};
     
@@ -65,13 +65,14 @@ public class TestPolygonsBuilder {
         return createPolygon(polygonType, new PointAG(500, 500));
     }
     
-    public static PointAG computePointOutsidePolygon(PolygonAG polygon)
+    public static PointAG computeTestPointOutsidePolygon(PolygonAG polygon)
     {
         float outsideX = polygon.computeMaxX() + 1;
         float outsideY = polygon.computeMaxY() + 1;
         return new PointAG(outsideX, outsideY);
     }
-    public static PointAG computePointInsidePolygon(PolygonAG polygon)
+    
+    public static PointAG computeTestPointInsidePolygon(PolygonAG polygon)
     {
         float outsideX = polygon.computeMaxX() - 1;
         float outsideY = polygon.computeMaxY() - 1;

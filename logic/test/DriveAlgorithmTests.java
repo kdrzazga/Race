@@ -1,13 +1,13 @@
 package logic.test;
 
-import libs.UnitTest;
+import libs.Test;
 import libs.math2.PolygonAG;
 import logic.BoardBuilder;
 import logic.Track;
 import logic.drive_algorithms.DriveAlgorithm;
 import logic.drive_algorithms.KeepCloseInnerBound;
 
-public class DriveAlgorithmTests extends UnitTest {
+public class DriveAlgorithmTests extends Test {
 
     public static void main(String[] args) {
         testComputeDesiredRoute();

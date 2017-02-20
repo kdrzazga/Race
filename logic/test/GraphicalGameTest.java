@@ -53,6 +53,7 @@ public class GraphicalGameTest extends JFrame {
         sliderVelocity = new javax.swing.JSlider();
         lblMousePoint = new javax.swing.JLabel();
         btnDrawnDownFromCenter = new javax.swing.JButton();
+        cbTrackCentroid = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1200, 1200));
@@ -129,8 +130,12 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        cbTrackCenter.setBackground(new java.awt.Color(0, 0, 0));
+        cbTrackCenter.setForeground(new java.awt.Color(255, 0, 51));
         cbTrackCenter.setText("Draw center");
 
+        cbInnerCenter.setBackground(new java.awt.Color(0, 0, 0));
+        cbInnerCenter.setForeground(new java.awt.Color(51, 51, 255));
         cbInnerCenter.setText("Draw inner bnd center");
 
         cbDesiredRoute.setText("Draw desired route");
@@ -169,6 +174,16 @@ public class GraphicalGameTest extends JFrame {
             }
         });
 
+        cbTrackCentroid.setBackground(new java.awt.Color(0, 0, 0));
+        cbTrackCentroid.setForeground(new java.awt.Color(204, 255, 255));
+        cbTrackCentroid.setText("Draw centroid");
+        cbTrackCentroid.setActionCommand("Draw centroid");
+        cbTrackCentroid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTrackCentroidActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -195,7 +210,8 @@ public class GraphicalGameTest extends JFrame {
                             .addComponent(sliderVelocity, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(lblMousePoint, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDrawnDownFromCenter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cbTrackCentroid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -231,7 +247,9 @@ public class GraphicalGameTest extends JFrame {
                         .addComponent(btnDrawnDownFromCenter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMousePoint)
-                        .addGap(91, 91, 91)
+                        .addGap(61, 61, 61)
+                        .addComponent(cbTrackCentroid)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbTrackCenter)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbInnerCenter)
@@ -271,6 +289,10 @@ public class GraphicalGameTest extends JFrame {
             drawTrackCenter(board);
         }
 
+        if (cbTrackCentroid.isSelected()) {
+            drawCentroid(board);
+        }
+        
         if (cbInnerCenter.isSelected()) {
             drawInnerBoundCenter(board);
         }
@@ -315,6 +337,11 @@ public class GraphicalGameTest extends JFrame {
     private void drawInnerBoundCenter(Board board) {
         Point innerBoundCenter = board.track.innerBound.computeCenter().convertToPoint();
         boardG.setColor(Color.BLUE);
+        boardG.fillRect(innerBoundCenter.x - 2, innerBoundCenter.y - 2, 4, 4);
+    }
+    private void drawCentroid(Board board) {
+        Point innerBoundCenter = board.track.innerBound.computeCentroid().convertToPoint();
+        boardG.setColor(Color.CYAN);
         boardG.fillRect(innerBoundCenter.x - 2, innerBoundCenter.y - 2, 4, 4);
     }
 
@@ -432,6 +459,10 @@ public class GraphicalGameTest extends JFrame {
         drawDownFromCenterLineSection();
     }//GEN-LAST:event_btnDrawnDownFromCenterActionPerformed
 
+    private void cbTrackCentroidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTrackCentroidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTrackCentroidActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel boardPanel;
     private javax.swing.JButton btnDrawBoard;
@@ -449,6 +480,7 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JCheckBox cbDesiredRoute;
     private javax.swing.JCheckBox cbInnerCenter;
     private javax.swing.JCheckBox cbTrackCenter;
+    private javax.swing.JCheckBox cbTrackCentroid;
     private javax.swing.JLabel lblMousePoint;
     private javax.swing.JSlider sliderVelocity;
     // End of variables declaration//GEN-END:variables

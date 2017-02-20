@@ -18,8 +18,7 @@ public class MockDraw2d extends Draw2d {
     public void draw(MockTrack mockTrack)
     {
         Track track = mockTrack;        
-        this.draw(track);
-        
+        this.draw(track);        
     }
 
     @Override

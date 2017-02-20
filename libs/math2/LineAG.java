@@ -12,7 +12,7 @@ public class LineAG {
     public LineAG(float A, float B) {
         this.A = A;
         this.B = B;
-        vertical = false;
+        this.vertical = false;
     }
 
     public LineAG(float verticalX) {
@@ -37,9 +37,7 @@ public class LineAG {
                 || (Numbers.roundToFloat(angle) == Numbers.roundToFloat(-Math.PI / 2))) {
             this.vertical = true;
             this.verticalX = p1.x;
-        }
-        else
-        {
+        } else {
             this.vertical = false;
             this.A = Numbers.roundToFloat(Math.tan(angle));
             this.B = p1.y - this.A * p1.x;
@@ -51,6 +49,16 @@ public class LineAG {
             throw new RuntimeException("Method computeY not available for vertical lines.");
         } else {
             return this.A * x + this.B;
+        }
+    }
+
+    public float computeX(float y) {
+        if (this.vertical) {
+            return this.verticalX;
+        } else if (this.A == 0) {
+            throw new RuntimeException("Can't compute x for flat line.");
+        } else {
+            return (y - this.B) / A;
         }
     }
 
@@ -75,4 +83,41 @@ public class LineAG {
         return new PointAG(x, y);
     }
 
+    public LineAG computePerpendicularLine(PointAG pointOfNewLine) {
+        if ((this.A == 0) && (!this.vertical)) {
+            return new LineAG(pointOfNewLine.x);
+        } else if (this.vertical) {
+            return new LineAG(0, pointOfNewLine.y);
+        } else {
+            float perpendicularA = -1 / A;
+            float perpendicularB = pointOfNewLine.y - perpendicularA * pointOfNewLine.x;
+            return new LineAG(perpendicularA, perpendicularB);
+        }
+    }
+
+    public PointAG givenXMovePointAlongLine(float XofPointToMove, float distance) {
+        if (!this.vertical) {
+            float YofPointToMove = this.computeY(XofPointToMove);
+
+            return movePoint(XofPointToMove, YofPointToMove, distance);
+        } else {
+            throw new RuntimeException("Cannot move on vertical line. Try using givenYMovePointAlongLine instead.");
+        }
+    }
+
+    public PointAG givenYMovePointAlongLine(float YofPointToMove, float distance) {
+        if (this.vertical) {
+            return new PointAG(this.verticalX, YofPointToMove + distance);
+        } else {
+            float XofPointToMove = this.computeX(YofPointToMove);
+            return movePoint(XofPointToMove, YofPointToMove, distance);
+        }
+    }
+    
+    private PointAG movePoint(float XofPointToMove, float YofPointToMove, float distance) {
+        PointAG pointToMove = new PointAG(XofPointToMove, YofPointToMove);
+        double angle = Math.atan(this.A);
+        pointToMove.moveByVector(distance, angle);
+        return pointToMove;
+    }    
 }
