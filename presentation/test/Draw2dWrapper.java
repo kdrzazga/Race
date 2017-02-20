@@ -5,17 +5,17 @@ import java.awt.Point;
 import javax.swing.JPanel;
 import libs.Colors;
 import logic.Track;
-import logic.test.MockTrack;
+import logic.test.TrackWrapper;
 import presentation.ColorSettings;
 import presentation.Draw2d;
 
-public class MockDraw2d extends Draw2d {
+public class Draw2dWrapper extends Draw2d {
 
-    public MockDraw2d(JPanel drawablePanel) {
+    public Draw2dWrapper(JPanel drawablePanel) {
         super(drawablePanel);
     }
     
-    public void draw(MockTrack mockTrack)
+    public void draw(TrackWrapper mockTrack)
     {
         Track track = mockTrack;        
         this.draw(track);        

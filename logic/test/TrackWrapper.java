@@ -3,9 +3,9 @@ package logic.test;
 import libs.math2.LineSection;
 import logic.Track;
 
-public class MockTrack extends Track {
+public class TrackWrapper extends Track {
 
-    public MockTrack(Track track)
+    public TrackWrapper(Track track)
     {
         super(track.getName());
         this.checkpoints = track.checkpoints.clone();

@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import logic.Board;
 import logic.Vehicle;
 
-public class MockBoard extends Board {
+public class BoardWrapper extends Board {
 
-    public MockTrack mockTrack;
+    public TrackWrapper mockTrack;
     
-    public MockBoard(Board board)
+    public BoardWrapper(Board board)
     {
         this.track = board.track.clone();
         this.vehicles = (ArrayList<Vehicle>) board.vehicles.clone();
-        this.mockTrack = new MockTrack(track);        
+        this.mockTrack = new TrackWrapper(track);        
     }
 
-    public MockBoard(int numberOfVehicles, MockTrack mockTrack) {
+    public BoardWrapper(int numberOfVehicles, TrackWrapper mockTrack) {
 
         init(mockTrack);
         super.initVehicles(numberOfVehicles);
     }
 
-    private void init(MockTrack mockTrack) {
+    private void init(TrackWrapper mockTrack) {
         this.mockTrack = mockTrack;
         this.vehicles = new ArrayList<>();
     }

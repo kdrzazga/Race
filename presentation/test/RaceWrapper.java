@@ -2,12 +2,12 @@ package presentation.test;
 
 import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
 
-public class GameTest {
+public class RaceWrapper {
     public static void main(String args[]) {
-        setNimbusLookAndFeel(MockIntroFrame.class.getName());
+        setNimbusLookAndFeel(IntroFrameWrapper.class.getName());
 
         java.awt.EventQueue.invokeLater(() -> {
-            new MockIntroFrame().setVisible(true);
+            new IntroFrameWrapper().setVisible(true);
         });
     }
 }

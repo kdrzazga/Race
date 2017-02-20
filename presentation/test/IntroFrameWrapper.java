@@ -5,7 +5,7 @@ import logic.BoardBuilder;
 import logic.BoardBuilder.TrackType;
 import presentation.IntroFrame;
 
-public class MockIntroFrame extends IntroFrame {
+public class IntroFrameWrapper extends IntroFrame {
 
     private TrackType weraTrackType;
     private TrackType testRectangularTrackType;
@@ -39,7 +39,7 @@ public class MockIntroFrame extends IntroFrame {
     protected void btnStartActionPerformed(java.awt.event.ActionEvent evt
     ) {
         game.board = createBoardBasedOnSelectedUiItems();
-        gameScreen = new MockGameScreen(this, game);
+        gameScreen = new GameScreenWrapper(this, game);
         startGame(gameScreen);
     }
 }

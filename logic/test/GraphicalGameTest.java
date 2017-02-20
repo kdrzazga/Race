@@ -282,7 +282,7 @@ public class GraphicalGameTest extends JFrame {
         drawStartLine(track);
     }
 
-    private void mockDrawBoard(MockBoard board) {
+    private void mockDrawBoard(BoardWrapper board) {
         clearBoard();
 
         if (cbTrackCenter.isSelected()) {
@@ -368,42 +368,42 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void btnDrawBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawBoardActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.DONUT));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawBoardActionPerformed
 
     private void btnDrawRectTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawRectTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR));
-        mockDrawBoard((MockBoard) board);
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.RECTANGULAR));
+        mockDrawBoard((BoardWrapper) board);
     }//GEN-LAST:event_btnDrawRectTrackActionPerformed
 
     private void btnDrawTestTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawTestTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TEST_RECTANGULAR));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawTestTrackActionPerformed
 
     private void btnDrawSineTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawSineTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.SINE));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawSineTrackActionPerformed
 
     private void btnDrawKidneyTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawKidneyTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.KIDNEY));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.KIDNEY));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnDrawKidneyTrackActionPerformed
 
     private void btnTriangleTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriangleTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TRIANGLE));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.TRIANGLE));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnTriangleTrackActionPerformed
 
     private void btnPentagonTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPentagonTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.PENTAGON));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.PENTAGON));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnPentagonTrackActionPerformed
 
     private void btnWeronikaTrackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWeronikaTrackActionPerformed
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(3, BoardBuilder.TrackType.WERONIKA));
         mockDrawBoard(board);
     }//GEN-LAST:event_btnWeronikaTrackActionPerformed
 
@@ -434,7 +434,7 @@ public class GraphicalGameTest extends JFrame {
 
     private void initVehiceOnWeronikaTrack() {
 
-        board = new MockBoard(BoardBuilder.createBoardWithTrack(1, BoardBuilder.TrackType.WERONIKA));
+        board = new BoardWrapper(BoardBuilder.createBoardWithTrack(1, BoardBuilder.TrackType.WERONIKA));
         mockDrawBoard(board);
         final Vehicle vehicle = board.vehicles.get(0);
         vehicle.v.value = sliderVelocity.getValue();
@@ -485,5 +485,5 @@ public class GraphicalGameTest extends JFrame {
     private javax.swing.JSlider sliderVelocity;
     // End of variables declaration//GEN-END:variables
     private Graphics boardG;
-    private MockBoard board;
+    private BoardWrapper board;
 }
