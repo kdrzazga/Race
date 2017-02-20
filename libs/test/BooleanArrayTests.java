@@ -1,9 +1,9 @@
 package libs.test;
 
 import libs.BooleanArray;
-import libs.Test;
+import libs.UnitTest;
 
-public class BooleanArrayTests extends Test {
+public class BooleanArrayTests extends UnitTest {
 
     public static void main(String[] args) {
         BooleanArrayTests.testAddingBools();

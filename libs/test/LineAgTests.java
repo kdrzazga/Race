@@ -1,10 +1,10 @@
 package libs.test;
 
-import libs.Test;
+import libs.UnitTest;
 import libs.math2.LineAG;
 import libs.math2.PointAG;
 
-public class LineAgTests extends Test {
+public class LineAgTests extends UnitTest {
 
     public static void main(String[] args) {
         testComputePerpendicularLine();

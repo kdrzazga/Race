@@ -2,10 +2,10 @@ package libs.test;
 
 import libs.math2.LineSection;
 import libs.math2.PointAG;
-import libs.Test;
+import libs.UnitTest;
 import libs.math2.Numbers;
 
-public class LineSectionTests extends Test {
+public class LineSectionTests extends UnitTest {
 
     public static void main(String args[]) {
         testComputeIntersection();

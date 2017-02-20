@@ -1,11 +1,11 @@
 package libs.test;
 
-import libs.Test;
+import libs.UnitTest;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 
-public class PolygonAgTests extends Test {
+public class PolygonAgTests extends UnitTest {
 
     public static void main(String[] args) {
         testGetLineSectionCrossedBy();

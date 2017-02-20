@@ -1,6 +1,6 @@
 package libs;
 
-public abstract class Test {
+public abstract class UnitTest {
 
     public static void showTestPassedMessage(String childClassName)
     {
@@ -41,6 +41,6 @@ public abstract class Test {
             
             if (difference > expectedMaxDifference)
                 throw new RuntimeException("Assertion failed in " + methodName 
-            +" act diff=" + difference + " expected difference = " + expectedMaxDifference);
+            + " act diff=" + difference + " expected difference = " + expectedMaxDifference);
         }
 }
