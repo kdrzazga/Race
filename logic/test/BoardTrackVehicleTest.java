@@ -2,7 +2,7 @@ package logic.test;
 
 import java.awt.Polygon;
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
-import libs.Test;
+import libs.UnitTest;
 import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
@@ -13,7 +13,7 @@ import logic.Vehicle;
 import logic.VelocityVector;
 import logic.BoardBuilder;
 
-public class BoardTrackVehicleTest extends Test {
+public class BoardTrackVehicleTest extends UnitTest {
 
     Board board;
     Track rectTrack;
