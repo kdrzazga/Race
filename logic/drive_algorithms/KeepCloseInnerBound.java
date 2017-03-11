@@ -1,5 +1,6 @@
 package logic.drive_algorithms;
 
+import libs.math2.LineSection;
 import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import logic.Track;
@@ -22,27 +23,39 @@ public class KeepCloseInnerBound extends DriveAlgorithm {
     private void computeDesiredRoute() {
         track.innerBound.points.forEach((innerBoundPoint) -> {
             PointAG desiredRoutePoint;
-            final int desiredRouteSize = 15;
+            LineSection lineToCandidatePoint;//should not cross the polygon of inner track
+            final int DistanceBtwnDesiredRouteAndInnerBnd = 15;
 
-            desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y - desiredRouteSize);
-            if (track.isInsideTrack(desiredRoutePoint)) {
-                this.desiredRoute.points.add(desiredRoutePoint);
+            desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y - DistanceBtwnDesiredRouteAndInnerBnd);
+
+            if (desiredRoute.points.isEmpty()) {
+                lineToCandidatePoint = new LineSection(desiredRoutePoint, desiredRoutePoint);
             } else {
-                desiredRoutePoint = new PointAG(innerBoundPoint.x + desiredRouteSize, innerBoundPoint.y);
+                lineToCandidatePoint = new LineSection(desiredRoutePoint, desiredRoute.points.get(desiredRoute.points.size() - 1));
+            }
+
+            LineSection lineCrossingWithLineToCandidatePoint = track.innerBound.getLineSectionCrossedBy(lineToCandidatePoint);
+
+            //if (lineCrossingWithLineToCandidatePoint == null) {
                 if (track.isInsideTrack(desiredRoutePoint)) {
                     this.desiredRoute.points.add(desiredRoutePoint);
                 } else {
-                    desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y + desiredRouteSize);
+                    desiredRoutePoint = new PointAG(innerBoundPoint.x + DistanceBtwnDesiredRouteAndInnerBnd, innerBoundPoint.y);
                     if (track.isInsideTrack(desiredRoutePoint)) {
                         this.desiredRoute.points.add(desiredRoutePoint);
                     } else {
-                        desiredRoutePoint = new PointAG(innerBoundPoint.x - desiredRouteSize, innerBoundPoint.y);
+                        desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y + DistanceBtwnDesiredRouteAndInnerBnd);
                         if (track.isInsideTrack(desiredRoutePoint)) {
                             this.desiredRoute.points.add(desiredRoutePoint);
+                        } else {
+                            desiredRoutePoint = new PointAG(innerBoundPoint.x - DistanceBtwnDesiredRouteAndInnerBnd, innerBoundPoint.y);
+                            if (track.isInsideTrack(desiredRoutePoint)) {
+                                this.desiredRoute.points.add(desiredRoutePoint);
+                            }
                         }
                     }
                 }
-            }
+            //}
         });
 
     }

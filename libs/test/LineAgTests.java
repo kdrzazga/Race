@@ -1,7 +1,10 @@
 package libs.test;
 
+import java.util.ArrayList;
+import java.util.Random;
 import libs.UnitTest;
 import libs.math2.LineAG;
+import libs.math2.Numbers;
 import libs.math2.PointAG;
 
 public class LineAgTests extends UnitTest {
@@ -9,6 +12,7 @@ public class LineAgTests extends UnitTest {
     public static void main(String[] args) {
         testComputePerpendicularLine();
         testComputeX();
+        testFindIntersection();
         showTestPassedMessage("LineAgTests");
     }
 
@@ -50,4 +54,34 @@ public class LineAgTests extends UnitTest {
         }
     }
 
+    public static void testFindIntersection() {
+        PointAG commonPoint, intersectionPoint;
+        float A, B;
+        ArrayList<LineAG> lines;
+        LineAG line, lineToCompare;
+        int lineIndex;
+
+        GIVEN:
+        commonPoint = new PointAG(10.2012f, 20.1891f);
+        lines = new ArrayList<>();
+        lines.add(new LineAG(new PointAG(0, 0), commonPoint));
+        
+        for (float angle = -3.141f; angle < 3.141f; angle += 0.05) {
+            WHEN:
+            A = Numbers.roundToFloat(Math.tan(angle));
+            B = commonPoint.y - A * commonPoint.x;
+            line = new LineAG(A, B);
+
+            Random rand = new Random();
+            lineIndex = rand.nextInt(lines.size());
+            lineToCompare = lines.get(lineIndex);
+
+            intersectionPoint = line.findIntersection(lineToCompare);
+            lines.add(line);
+            
+            THEN:
+            assertion(Math.abs(commonPoint.x - intersectionPoint.x) < 0.0001f, "testFindIntersection");
+            assertion(Math.abs(commonPoint.y - intersectionPoint.y) < 0.0001f, "testFindIntersection");
+        }
+    }
 }
