@@ -1,5 +1,6 @@
 package logic.drive_algorithms;
 
+import libs.math2.PointAG;
 import libs.math2.PolygonAG;
 import logic.Track;
 import logic.Vehicle;
@@ -19,17 +20,41 @@ public class KeepCloseInnerBound extends DriveAlgorithm {
     }
 
     private void computeDesiredRoute() {
-        this.desiredRoute = getTrack().innerBound.clone();
-        this.desiredRoute.scale(1.2f);
+        track.innerBound.points.forEach((innerBoundPoint) -> {
+            PointAG desiredRoutePoint;
+            final int desiredRouteSize = 15;
+
+            desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y - desiredRouteSize);
+            if (track.isInsideTrack(desiredRoutePoint)) {
+                this.desiredRoute.points.add(desiredRoutePoint);
+            } else {
+                desiredRoutePoint = new PointAG(innerBoundPoint.x + desiredRouteSize, innerBoundPoint.y);
+                if (track.isInsideTrack(desiredRoutePoint)) {
+                    this.desiredRoute.points.add(desiredRoutePoint);
+                } else {
+                    desiredRoutePoint = new PointAG(innerBoundPoint.x, innerBoundPoint.y + desiredRouteSize);
+                    if (track.isInsideTrack(desiredRoutePoint)) {
+                        this.desiredRoute.points.add(desiredRoutePoint);
+                    } else {
+                        desiredRoutePoint = new PointAG(innerBoundPoint.x - desiredRouteSize, innerBoundPoint.y);
+                        if (track.isInsideTrack(desiredRoutePoint)) {
+                            this.desiredRoute.points.add(desiredRoutePoint);
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     public PolygonAG getDesiredRoute() {
-        if (this.desiredRoute == null)
+        if (this.desiredRoute == null) {
             this.computeDesiredRoute();
-        
+        }
+
         return desiredRoute;
     }
-    
+
     public void setTrack(Track track) {
         this.track = track;
     }

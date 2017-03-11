@@ -1,6 +1,5 @@
 package logic;
 
-import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
