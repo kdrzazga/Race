@@ -177,7 +177,6 @@ public class GraphicalGameTest extends JFrame {
         cbTrackCentroid.setBackground(new java.awt.Color(0, 0, 0));
         cbTrackCentroid.setForeground(new java.awt.Color(204, 255, 255));
         cbTrackCentroid.setText("Draw centroid");
-        cbTrackCentroid.setActionCommand("Draw centroid");
         cbTrackCentroid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTrackCentroidActionPerformed(evt);

@@ -286,7 +286,6 @@
           <Color blue="ff" green="ff" red="cc" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Draw centroid"/>
-        <Property name="actionCommand" type="java.lang.String" value="Draw centroid"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTrackCentroidActionPerformed"/>
