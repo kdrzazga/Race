@@ -1,4 +1,4 @@
-package libs.math2; 
+package libs.math2;
 
 import java.awt.Point;
 import java.awt.Polygon;
@@ -111,7 +111,7 @@ public class PolygonAG {
 
     public void scale(float scaleFactor) {
         //if (this.isConvex()) {
-            scaleConvexPolygon(scaleFactor);
+        scaleConvexPolygon(scaleFactor);
         /*} else {
             scaleConcavePolygon(scaleFactor);
         }*/
@@ -123,13 +123,13 @@ public class PolygonAG {
         for (int i = 0; i < this.points.size() - 1; i++) {
             PointAG p = this.points.get(i);
             PointAG pPlus1 = this.points.get(i + 1);
-            
+
             double factor = (p.x * pPlus1.y - pPlus1.x * p.y);
             CxSum += (p.x + pPlus1.x) * factor;
             CySum += (p.y + pPlus1.y) * factor;
         }
-        double Cx = CxSum / (6*A);
-        double Cy = CySum / (6*A);
+        double Cx = CxSum / (6 * A);
+        double Cy = CySum / (6 * A);
 
         return new PointAG(Numbers.roundToFloat(Cx), Numbers.roundToFloat(Cy));
     }
@@ -164,6 +164,25 @@ public class PolygonAG {
         this.points = scaledPoints;
     }
 
+    public LineSection findSideClosestToPoint(PointAG point) {
+        double minDistance = Double.MAX_VALUE;
+        int vertexIndex = 0;
+        LineSection side;
+
+        for (int i = 0; i < this.points.size() - 2; i++) {
+            side = new LineSection(points.get(i), points.get(i + 1));
+            PointAG sideCenter = side.computeCenter();
+
+            double distance = sideCenter.distanceToAntherPointAG(point);
+            if (distance < minDistance) {
+                vertexIndex = i;
+                minDistance = distance;
+            }
+        }
+
+        return new LineSection(points.get(vertexIndex), points.get(vertexIndex + 1));
+    }
+
     public boolean isConvex() {
         checkIfPolygonBigEnough();
 
@@ -185,7 +204,7 @@ public class PolygonAG {
         return true;
     }
 
-    private void checkIfPolygonBigEnough()  {
+    private void checkIfPolygonBigEnough() {
         for (int i = 0; i < this.points.size() - 1; i++) {
             LineSection section = new LineSection(this.points.get(i), this.points.get(i + 1));
             if (section.computeLength() < 1) {
@@ -212,7 +231,7 @@ public class PolygonAG {
         }
         return ypoints;
     }
-    
+
     public float computeMinX() {
         return Numbers.getMin(this.getXPoints());
     }
