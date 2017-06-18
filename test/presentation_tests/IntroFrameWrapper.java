@@ -1,8 +1,9 @@
-package presentation.test;
+package presentation_tests;
 
 import logic.Board;
 import logic.BoardBuilder;
 import logic.BoardBuilder.TrackType;
+import presentation.IntroFrame;
 import presentation.IntroFrame;
 
 public class IntroFrameWrapper extends IntroFrame {

@@ -1,4 +1,4 @@
-package presentation.test;
+package presentation_tests;
 
 import static libs.JFrameDialogCommons.setNimbusLookAndFeel;
 

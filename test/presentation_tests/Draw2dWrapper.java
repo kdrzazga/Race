@@ -1,4 +1,4 @@
-package presentation.test;
+package presentation_tests;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -7,6 +7,8 @@ import libs.Colors;
 import logic.Track;
 import logic.test.TrackWrapper;
 import presentation.ColorSettings;
+import presentation.ColorSettings;
+import presentation.Draw2d;
 import presentation.Draw2d;
 
 public class Draw2dWrapper extends Draw2d {
