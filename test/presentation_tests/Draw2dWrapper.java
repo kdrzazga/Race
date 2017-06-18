@@ -5,7 +5,7 @@ import java.awt.Point;
 import javax.swing.JPanel;
 import libs.Colors;
 import logic.Track;
-import logic.test.TrackWrapper;
+import graphical_tests.TrackWrapper;
 import presentation.ColorSettings;
 import presentation.ColorSettings;
 import presentation.Draw2d;

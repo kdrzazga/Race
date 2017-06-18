@@ -1,4 +1,4 @@
-package logic.test;
+package graphical_tests;
 
 import java.awt.Color;
 import java.awt.Graphics;

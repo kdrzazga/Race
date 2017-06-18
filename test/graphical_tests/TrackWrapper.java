@@ -1,4 +1,4 @@
-package logic.test;
+package graphical_tests;
 
 import libs.math2.LineSection;
 import logic.Track;

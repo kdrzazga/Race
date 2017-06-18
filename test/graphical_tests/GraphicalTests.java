@@ -1,4 +1,4 @@
-package libs.test;
+package graphical_tests;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
