@@ -1,10 +1,11 @@
-package libs.test;
+package graphical_tests;
 
 import java.awt.Graphics;
 import java.util.List;
 import libs.ClassFinder;
 import libs.UnitTest;
 import libs.math2.UnitTestFieldsDraw;
+import unit_tests.libs_test.LineSectionTests;
 
 public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
 
@@ -23,7 +24,6 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnDrawAllShapesFromGetters = new javax.swing.JButton();
         drawPanel = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -31,13 +31,6 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-        });
-
-        btnDrawAllShapesFromGetters.setText("Draw All Shapes From Getters");
-        btnDrawAllShapesFromGetters.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDrawAllShapesFromGettersActionPerformed(evt);
             }
         });
 
@@ -51,7 +44,7 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
         );
         drawPanelLayout.setVerticalGroup(
             drawPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 538, Short.MAX_VALUE)
         );
 
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -65,8 +58,7 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDrawAllShapesFromGetters)
-                        .addGap(53, 53, 53)
+                        .addGap(258, 258, 258)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 192, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -77,22 +69,12 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(drawPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDrawAllShapesFromGetters)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDrawAllShapesFromGettersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrawAllShapesFromGettersActionPerformed
-        LineSectionTests tests = new LineSectionTests();
-        UnitTestFieldsDraw draw = new UnitTestFieldsDraw(tests);
-        LineSectionTests.main(new String[]{""});
-        Graphics g = this.drawPanel.getGraphics();
-        draw.drawAllShapesFromGetters(g);
-    }//GEN-LAST:event_btnDrawAllShapesFromGettersActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         String packageName = UnitTestFieldsDrawGraphicalTest.class.getPackage().getName();
@@ -111,7 +93,6 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDrawAllShapesFromGetters;
     private javax.swing.JPanel drawPanel;
     private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables

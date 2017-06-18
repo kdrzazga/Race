@@ -1,16 +1,15 @@
-package libs.test;
+package unit_tests.libs_test;
 
 import libs.BooleanArray;
-import libs.UnitTest;
+import org.testng.annotations.*;
+import static org.testng.Assert.*;
 
-public class BooleanArrayTests extends UnitTest {
+public class BooleanArrayTest {
 
-    public static void main(String[] args) {
-        BooleanArrayTests.testAddingBools();
-        BooleanArrayTests.testSetAllItems();
-        showTestPassedMessage("testAddingBools");
+    public BooleanArrayTest() {
     }
 
+    @Test
     public static void testAddingBools() {
         BooleanArray bools;
         GIVEN:
@@ -28,40 +27,7 @@ public class BooleanArrayTests extends UnitTest {
         }
         THEN:
         {
-            assertion(bools.toString().equals("110101"), "testAddingBools");
+            assertEquals(bools.toString(), "110101");
         }
     }
-
-    public static void testSetAllItems() {
-        BooleanArray bools = new BooleanArray(5);
-        GIVEN:
-        {
-            bools.values[0] = true;
-            bools.values[1] = false;
-            bools.values[2] = false;
-            bools.values[3] = true;
-            bools.values[4] = false;
-        }
-        WHEN:
-        {
-            bools.setAllItems(false);
-        }
-        THEN:
-        {
-            for (Boolean bool : bools.values) {
-                assertion(!bool, "testSetAllItems");
-            }
-        }
-        WHEN:
-        {
-            bools.setAllItems(true);
-        }
-        THEN:
-        {
-            for (Boolean bool : bools.values) {
-                assertion(bool, "testSetAllItems");
-            }
-        }
-    }
-
 }
