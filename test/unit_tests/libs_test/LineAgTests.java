@@ -1,21 +1,18 @@
-package libs.test;
+package unit_tests.libs_test;
 
 import java.util.ArrayList;
 import java.util.Random;
-import libs.UnitTest;
 import libs.math2.LineAG;
 import libs.math2.Numbers;
 import libs.math2.PointAG;
 
-public class LineAgTests extends UnitTest {
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
 
-    public static void main(String[] args) {
-        testComputePerpendicularLine();
-        testComputeX();
-        testFindIntersection();
-        showTestPassedMessage("LineAgTests");
-    }
+public class LineAgTests{
 
+    @Test
     public static void testComputePerpendicularLine() {
         LineAG line, perpLine;
         final String methodName = "testComputePerpendicularLine";
@@ -33,12 +30,13 @@ public class LineAgTests extends UnitTest {
         intersection = perpLine.findIntersection(line);
 
         THEN:
-        assertion(perpLine.A, -1 / line.A, methodName);
-        assertion(perpLine.computeY(x), y, methodName);
-        assertion(intersection.x, expectedIntersection.x, methodName);
-        assertion(intersection.y, expectedIntersection.y, methodName);
+        assertEquals(perpLine.A, -1 / line.A);
+        assertEquals(perpLine.computeY(x), y);
+        assertEquals(intersection.x, expectedIntersection.x);
+        assertEquals(intersection.y, expectedIntersection.y);
     }
 
+    @Test
     public static void testComputeX() {
         LineAG diagonalLine;
         float x = 0, y;
@@ -50,10 +48,11 @@ public class LineAgTests extends UnitTest {
             x = diagonalLine.computeX(y);
 
             THEN:
-            assertion(x, y, "testComputeX");
+            assertEquals(x, y);
         }
     }
 
+    @Test
     public static void testFindIntersection() {
         PointAG commonPoint, intersectionPoint;
         float A, B;
@@ -80,8 +79,8 @@ public class LineAgTests extends UnitTest {
             lines.add(line);
             
             THEN:
-            assertion(Math.abs(commonPoint.x - intersectionPoint.x) < 0.0001f, "testFindIntersection");
-            assertion(Math.abs(commonPoint.y - intersectionPoint.y) < 0.0001f, "testFindIntersection");
+            assertTrue(Math.abs(commonPoint.x - intersectionPoint.x) < 0.0001f, "testFindIntersection");
+            assertTrue(Math.abs(commonPoint.y - intersectionPoint.y) < 0.0001f, "testFindIntersection");
         }
     }
 }

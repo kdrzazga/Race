@@ -1,23 +1,18 @@
-package libs.test;
+package unit_tests.libs_test;
 
 import libs.math2.LineSection;
 import libs.math2.PointAG;
-import libs.UnitTest;
 import libs.math2.Numbers;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
 
-public class LineSectionTests extends UnitTest {
-
-    public static void main(String args[]) {
-        testComputeIntersection();
-        testMoveP1MultiplyingBy();
-        testXBelongsToLineSection();
-        testYBelongsToLineSection();
-        testCreatePararellSection();
-        showTestPassedMessage(LineSectionTests.class.getName());
-    }
-
+public class LineSectionTests{
+ 
     public static LineSection lineSection[] = new LineSection[4];
 
+    @Test
     private static void testMoveP1MultiplyingBy() {
         final String methodName = "testMoveP2MultiplyingBy";
 
@@ -39,21 +34,21 @@ public class LineSectionTests extends UnitTest {
 
         THEN:
         {
-
-            assertion(lineSection[0].p2.x, 20f, methodName);
-            assertion(lineSection[0].p2.y, 20f, methodName);
-            assertion(lineSection[1].p2.x, -10f, methodName);
-            assertion(lineSection[1].p2.y, -10f, methodName);
-            assertion(lineSection[2].p2.x, 0f, methodName);
-            assertion(lineSection[2].p2.y, 80f, methodName);
-            assertion(lineSection[3].p2.x, 10f, methodName);
-            assertion(lineSection[3].p2.y, 27.326f, methodName);
+            assertEquals(lineSection[0].p2.x, 20f, methodName);
+            assertEquals(lineSection[0].p2.y, 20f, methodName);
+            assertEquals(lineSection[1].p2.x, -10f, methodName);
+            assertEquals(lineSection[1].p2.y, -10f, methodName);
+            assertEquals(lineSection[2].p2.x, 0f, methodName);
+            assertEquals(lineSection[2].p2.y, 80f, methodName);
+            assertEquals(lineSection[3].p2.x, 10f, methodName);
+            assertEquals(lineSection[3].p2.y, 27.326f, methodName);
         }
 
     }
     private static LineSection lineSection2, lineSection3, pararellLineSection1, pararellLineSection2;
     private static PointAG intersection1_2, nullIntersection1_3, intersection2_3, nullIntersection1;
 
+    @Test
     public static void testComputeIntersection() {
         final String methodName = "testComputeIntersection";
 
@@ -77,18 +72,19 @@ public class LineSectionTests extends UnitTest {
 
         THEN:
         {
-            assertion(intersection1_2.x, 5f, methodName);
-            assertion(intersection1_2.y, 5f, methodName);
-            assertion(nullIntersection1_3 == null, methodName);//intersection at point (-14, -14)- outside both sections
-            assertion(intersection2_3.x, 6.266667f, methodName);
-            assertion(intersection2_3.y, 3.7333336f, methodName);
-            assertion(nullIntersection1 == null, methodName);//pararell lines - no intersection
+            assertEquals(intersection1_2.x, 5f, methodName);
+            assertEquals(intersection1_2.y, 5f, methodName);
+            assertTrue(nullIntersection1_3 == null, methodName);//intersection at point (-14, -14)- outside both sections
+            assertEquals(intersection2_3.x, 6.266667f, methodName);
+            assertEquals(intersection2_3.y, 3.7333336f, methodName);
+            assertTrue(nullIntersection1 == null, methodName);//pararell lines - no intersection
         }
     }
 
     private static LineSection verticalLineSection;
     private static PointAG p1, p2, p3;
 
+    @Test
     public static void testXBelongsToLineSection() {
         final String methodName = "testXBelongsToLineSection";
 
@@ -101,11 +97,12 @@ public class LineSectionTests extends UnitTest {
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
 
         THEN:
-        assertion(verticalLineSection.xBelongsToLineSection(p1.x), methodName);
-        assertion(verticalLineSection.xBelongsToLineSection(p2.x), methodName);
-        assertion(!verticalLineSection.xBelongsToLineSection(p3.x), methodName);
+        assertTrue(verticalLineSection.xBelongsToLineSection(p1.x), methodName);
+        assertTrue(verticalLineSection.xBelongsToLineSection(p2.x), methodName);
+        assertFalse(verticalLineSection.xBelongsToLineSection(p3.x), methodName);
     }
 
+    @Test
     public static void testYBelongsToLineSection() {
         final String methodName = "testYBelongsToLineSection";
 
@@ -118,14 +115,15 @@ public class LineSectionTests extends UnitTest {
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
 
         THEN:
-        assertion(!verticalLineSection.yBelongsToLineSection(p1.y), methodName);
-        assertion(verticalLineSection.yBelongsToLineSection(p2.y), methodName);
-        assertion(verticalLineSection.yBelongsToLineSection(p3.y), methodName);
+        assertFalse(verticalLineSection.yBelongsToLineSection(p1.y), methodName);
+        assertTrue(verticalLineSection.yBelongsToLineSection(p2.y), methodName);
+        assertTrue(verticalLineSection.yBelongsToLineSection(p3.y), methodName);
     }
 
     private static LineSection lineSection1, lineSectionAbove, lineSectionBelow, sameLineSection;
     private static float ls1Length;
 
+    //@Test
     public static void testCreatePararellSection() {
         GIVEN:
 
