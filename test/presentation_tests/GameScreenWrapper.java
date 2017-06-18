@@ -2,7 +2,6 @@ package presentation_tests;
 
 import logic.Game;
 import presentation.GameScreen;
-import presentation.GameScreen;
 
 public class GameScreenWrapper extends GameScreen {
 

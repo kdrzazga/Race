@@ -236,7 +236,7 @@ public class IntroFrame extends JFrame {
     protected Board createBoardBasedOnSelectedUiItems() {
         int numberOfVehicles = readSelectedNumberOfVehicles();
 
-        int lapsToWin = new Integer(getSelectedButtonText(this.lapRadioButtonsGroup));
+        int lapsToWin = Integer.parseInt(getSelectedButtonText(this.lapRadioButtonsGroup));
 
         this.game.reset(lapsToWin);
         Board board;
@@ -273,7 +273,7 @@ public class IntroFrame extends JFrame {
 
     protected int readSelectedNumberOfVehicles() throws NumberFormatException {
         String vehCount = this.cbPlayers.getSelectedItem().toString();
-        int numberOfVehicles = new Integer(vehCount);
+        int numberOfVehicles = Integer.parseInt(vehCount);
         return numberOfVehicles;
     }
 

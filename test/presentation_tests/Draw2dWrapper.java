@@ -7,8 +7,6 @@ import libs.Colors;
 import logic.Track;
 import graphical_tests.TrackWrapper;
 import presentation.ColorSettings;
-import presentation.ColorSettings;
-import presentation.Draw2d;
 import presentation.Draw2d;
 
 public class Draw2dWrapper extends Draw2d {

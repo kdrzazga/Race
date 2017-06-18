@@ -2,7 +2,7 @@ package logic;
 
 import libs.math2.PointAG;
 
-public class VelocityVector {
+public class VelocityVector implements Cloneable{
 
     public final static int V_MAX = 15;
     public final static int V_MIN = 0;
@@ -36,6 +36,7 @@ public class VelocityVector {
         this.accelerate(-ACCELERATE_UNIT);
     }
 
+    @Override
     public VelocityVector clone() {
         return new VelocityVector(this.value, this.angle, this.position);
     }

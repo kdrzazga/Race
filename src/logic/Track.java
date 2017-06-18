@@ -2,27 +2,25 @@ package logic;
 
 import libs.math2.*;
 
-public class Track {
+public class Track implements Cloneable{
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
 
     public PolygonAG checkpoints[];
 
-    public static final int NUMBER_OF_CHECKPOINTS = 5;
+    public static final int NUMBER_OF_CHECKPOINTS = 3;
     public static final int CHECKPOINT_WITH_START_LINE_INDEX = 0;
     private static final int TRACK_HEIGHT_LIMIT = Numbers.roundToInt(Math.pow(2, 20));//more than a million
 
-    private String name;
     protected LineSection intersectedInnerLine;
     protected LineSection intersectedOuterLine;
     protected LineSection downFromCenterLineSection;
     
-    public Track(String name) {
+    public Track() {
         this.innerBound = new PolygonAG();
         this.outerBound = new PolygonAG();
         this.checkpoints = new PolygonAG[NUMBER_OF_CHECKPOINTS];
-        this.name = name;
     }
 
     public boolean isInsideTrack(PointAG point) {
@@ -35,16 +33,12 @@ public class Track {
 
         int height = Numbers.roundToInt(VelocityVector.V_MAX * 2.1);
 
-        PointAG centralPt1 = new PointAG(innerBoundCenter.x, innerBoundCenter.y - height / 2);
-        PointAG centralPt2 = new PointAG(innerBoundCenter.x, innerBoundCenter.y + height / 2);
-        PointAG topLeftPt1 = new PointAG(this.computeMinX(), this.computeMinY() - height / 2);
-        PointAG topLeftPt2 = new PointAG(this.computeMinX(), this.computeMinY() + height / 2);
-        PointAG topRightPt1 = new PointAG(this.computeMaxX(), this.computeMinY() - height / 2);
-        PointAG topRightPt2 = new PointAG(this.computeMaxX(), this.computeMinY() + height / 2);
-        PointAG bottomRightPt1 = new PointAG(this.computeMaxX(), this.computeMaxY() - height / 2);
-        PointAG bottomRightPt2 = new PointAG(this.computeMaxX(), this.computeMaxY() + height / 2);
-        PointAG bottomLeftPt1 = new PointAG(this.computeMinX(), this.computeMaxY() - height / 2);
-        PointAG bottomLeftPt2 = new PointAG(this.computeMinX(), this.computeMaxY() + height / 2);
+        PointAG centralPt1 = new PointAG(innerBoundCenter.x, (float)(innerBoundCenter.y - height / 2.0));
+        PointAG centralPt2 = new PointAG(innerBoundCenter.x, (float)(innerBoundCenter.y + height / 2.0));
+        PointAG topLeftPt1 = new PointAG(this.computeMinX(), (float)(this.computeMinY() - height / 2.0));
+        PointAG topLeftPt2 = new PointAG(this.computeMinX(), (float)(this.computeMinY() + height / 2.0));
+        PointAG topRightPt1 = new PointAG(this.computeMaxX(), (float)(this.computeMinY() - height / 2.0));
+        PointAG topRightPt2 = new PointAG(this.computeMaxX(), (float)(this.computeMinY() + height / 2.0));
 
         for (int i = CHECKPOINT_WITH_START_LINE_INDEX + 1; i < this.checkpoints.length; i++) {
             this.checkpoints[i] = new PolygonAG();
@@ -65,17 +59,11 @@ public class Track {
         checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x2 + height, y2);
         checkpoints[CHECKPOINT_WITH_START_LINE_INDEX].addPointAG(x1 + height, y1);
 
-        checkpoints[1].points.add(bottomRightPt1);
-        checkpoints[1].points.add(bottomRightPt2);
-
+        checkpoints[1].points.add(topLeftPt1);
+        checkpoints[1].points.add(topLeftPt2);
+        
         checkpoints[2].points.add(topRightPt1);
-        checkpoints[2].points.add(topRightPt2);
-
-        checkpoints[3].points.add(topLeftPt1);
-        checkpoints[3].points.add(topLeftPt2);
-
-        checkpoints[4].points.add(bottomLeftPt1);
-        checkpoints[4].points.add(bottomLeftPt2);
+        checkpoints[2].points.add(topRightPt2);  
     }
 
     public PointAG computeCenter() {
@@ -137,7 +125,7 @@ public class Track {
 
     @Override
     public Track clone() {
-        Track clonedTrack = new Track(this.name);
+        Track clonedTrack = new Track();
         clonedTrack.checkpoints = this.checkpoints.clone();
         clonedTrack.innerBound = this.innerBound.clone();
         clonedTrack.outerBound = this.outerBound.clone();
@@ -159,9 +147,5 @@ public class Track {
 
     public float computeMaxY() {
         return this.outerBound.computeMaxY();
-    }
-
-    public String getName() {
-        return name;
     }
 }

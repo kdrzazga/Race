@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 

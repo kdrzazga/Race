@@ -10,38 +10,38 @@ import org.testng.annotations.Test;
 
 public class LineSectionTests{
  
-    public static LineSection lineSection[] = new LineSection[4];
+    public final static LineSection[] LINE_SECTION = new LineSection[4];
 
     @Test
-    private static void testMoveP1MultiplyingBy() {
+    public static void testMoveP1MultiplyingBy() {
         final String methodName = "testMoveP2MultiplyingBy";
 
         GIVEN:
         {
-            lineSection[0] = new LineSection(0, 0, 10, 10); //length 10*sqrt(2)
-            lineSection[1] = new LineSection(10, 10, 0, 0);
-            lineSection[2] = new LineSection(0, 5, 0, 15);
-            lineSection[3] = new LineSection(10, 20.333f, 10, 41.333f);
+            LINE_SECTION[0] = new LineSection(0, 0, 10, 10); //length 10*sqrt(2)
+            LINE_SECTION[1] = new LineSection(10, 10, 0, 0);
+            LINE_SECTION[2] = new LineSection(0, 5, 0, 15);
+            LINE_SECTION[3] = new LineSection(10, 20.333f, 10, 41.333f);
         }
 
         WHEN:
         {
-            lineSection[0].moveP2MultiplyingBy(2);
-            lineSection[1].moveP2MultiplyingBy(2);
-            lineSection[2].moveP2MultiplyingBy(7.5f);
-            lineSection[3].moveP2MultiplyingBy(0.333f);
+            LINE_SECTION[0].moveP2MultiplyingBy(2);
+            LINE_SECTION[1].moveP2MultiplyingBy(2);
+            LINE_SECTION[2].moveP2MultiplyingBy(7.5f);
+            LINE_SECTION[3].moveP2MultiplyingBy(0.333f);
         }
 
         THEN:
         {
-            assertEquals(lineSection[0].p2.x, 20f, methodName);
-            assertEquals(lineSection[0].p2.y, 20f, methodName);
-            assertEquals(lineSection[1].p2.x, -10f, methodName);
-            assertEquals(lineSection[1].p2.y, -10f, methodName);
-            assertEquals(lineSection[2].p2.x, 0f, methodName);
-            assertEquals(lineSection[2].p2.y, 80f, methodName);
-            assertEquals(lineSection[3].p2.x, 10f, methodName);
-            assertEquals(lineSection[3].p2.y, 27.326f, methodName);
+            assertEquals(LINE_SECTION[0].p2.x, 20f, methodName);
+            assertEquals(LINE_SECTION[0].p2.y, 20f, methodName);
+            assertEquals(LINE_SECTION[1].p2.x, -10f, methodName);
+            assertEquals(LINE_SECTION[1].p2.y, -10f, methodName);
+            assertEquals(LINE_SECTION[2].p2.x, 0f, methodName);
+            assertEquals(LINE_SECTION[2].p2.y, 80f, methodName);
+            assertEquals(LINE_SECTION[3].p2.x, 10f, methodName);
+            assertEquals(LINE_SECTION[3].p2.y, 27.326f, methodName);
         }
 
     }

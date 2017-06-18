@@ -6,7 +6,6 @@ import logic.Track;
 import logic.drive_algorithms.DriveAlgorithm;
 import logic.drive_algorithms.KeepCloseInnerBound;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 

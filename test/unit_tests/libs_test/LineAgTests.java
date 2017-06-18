@@ -39,7 +39,7 @@ public class LineAgTests{
     @Test
     public static void testComputeX() {
         LineAG diagonalLine;
-        float x = 0, y;
+        float x, y;
 
         GIVEN:
         diagonalLine = TestLinesLineSectionsBuilder.getDiagonalLine();
@@ -79,8 +79,8 @@ public class LineAgTests{
             lines.add(line);
             
             THEN:
-            assertTrue(Math.abs(commonPoint.x - intersectionPoint.x) < 0.0001f, "testFindIntersection");
-            assertTrue(Math.abs(commonPoint.y - intersectionPoint.y) < 0.0001f, "testFindIntersection");
+            assertTrue(Math.abs(commonPoint.x - intersectionPoint.x) < 0.001f, "testFindIntersection");
+            assertTrue(Math.abs(commonPoint.y - intersectionPoint.y) < 0.001f, "testFindIntersection");
         }
     }
 }

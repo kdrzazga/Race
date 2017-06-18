@@ -13,7 +13,7 @@ public class Board {
     public ArrayList<Vehicle> vehicles;
 
     public Board() {
-        init(new Track(""));
+        init(new Track());
     }
 
     public Board(int numberOfVehicles, Track track) {
@@ -100,7 +100,7 @@ public class Board {
 
             if (checkpointPolygon.contains(vehicleLocation.x, vehicleLocation.y)) {
                 vehicle.checkpointsVisited.values[i] = true;
-                System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
+                //System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
                 
                 PolygonAG checkpointWithFinishLine = this.track.checkpoints[Track.CHECKPOINT_WITH_START_LINE_INDEX];
 

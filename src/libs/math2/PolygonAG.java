@@ -5,7 +5,7 @@ import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PolygonAG {
+public class PolygonAG implements Cloneable{
     //AG stands for Analitycal Geometry
 
     public ArrayList<PointAG> points;
@@ -103,8 +103,8 @@ public class PolygonAG {
             sumYCoordinates += point.y;
         }
 
-        float centerX = Numbers.roundToFloat(sumXCoordinates / this.points.size());
-        float centerY = Numbers.roundToFloat(sumYCoordinates / this.points.size());
+        float centerX = Numbers.roundToFloat(sumXCoordinates / (float)this.points.size());
+        float centerY = Numbers.roundToFloat(sumYCoordinates / (float)this.points.size());
 
         return new PointAG(centerX, centerY);
     }
@@ -143,10 +143,6 @@ public class PolygonAG {
             factor += (p.x * pPlus1.y - pPlus1.x * p.y);
         }
         return factor / 2;
-    }
-
-    private void scaleConcavePolygon(float scaleFactor) {
-        throw new RuntimeException("Not implemented yet");
     }
 
     private void scaleConvexPolygon(float scaleFactor) {

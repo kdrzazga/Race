@@ -2,7 +2,7 @@ package libs.math2;
 
 import java.awt.Point;
 
-public class LineSection extends LineAG{
+public class LineSection extends LineAG implements Cloneable{
 
     public PointAG p1;
     public PointAG p2;

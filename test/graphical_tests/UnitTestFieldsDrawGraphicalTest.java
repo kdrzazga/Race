@@ -83,7 +83,7 @@ public class UnitTestFieldsDrawGraphicalTest extends javax.swing.JFrame {
 
     private String getPackageName() {
         String fullClassName = UnitTestFieldsDrawGraphicalTest.class.getName();
-        int packageNameEnd = fullClassName.lastIndexOf(".") - 1;
+        int packageNameEnd = fullClassName.lastIndexOf('.') - 1;
         return fullClassName.substring(0, packageNameEnd);
     }
 

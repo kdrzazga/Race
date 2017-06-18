@@ -7,7 +7,7 @@ public class TrackWrapper extends Track {
 
     public TrackWrapper(Track track)
     {
-        super(track.getName());
+        super();
         this.checkpoints = track.checkpoints.clone();
         this.innerBound = track.innerBound.clone();
         this.outerBound = track.outerBound.clone();       

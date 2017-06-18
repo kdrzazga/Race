@@ -2,7 +2,6 @@ package unit_tests.logic_test;
 
 import java.awt.Polygon;
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
-import libs.UnitTest;
 import libs.math2.Numbers;
 import libs.math2.LineSection;
 import libs.math2.PointAG;
@@ -27,7 +26,7 @@ public class BoardTrackVehicleTest{
     public BoardTrackVehicleTest() {
         final BoardBuilder.TrackType track = BoardBuilder.TrackType.RECTANGULAR;
         this.board = new Board();
-        this.rectTrack = new Track(track.toString());
+        this.rectTrack = new Track();
         this.vehicle = new Vehicle(0);
 
         v = new VelocityVector(2, Math.PI / 2, new PointAG(75, 75));
@@ -178,7 +177,7 @@ public class BoardTrackVehicleTest{
             THEN:
             assertTrue(truncatedOuterBnd.contains(innerPoint.x, innerPoint.y),
                     "(At least) one of points of inner bound is "
-                    + " not inside outer bound for track " + track.getName()
+                    + " not inside outer bound for track " 
                     + " invalid point is " + innerPoint);
         });
     }

@@ -4,7 +4,7 @@ import libs.BooleanArray;
 import libs.math2.PointAG;
 import logic.drive_algorithms.DriveAlgorithm;
 
-public class Vehicle {
+public class Vehicle implements Cloneable{
 
     public VelocityVector v;
     public VelocityVector previousV;
@@ -12,8 +12,7 @@ public class Vehicle {
     public int finalPlace;
     public boolean active;
     public DriveAlgorithm driveAlgorithm;
-    public static final int SIZE = 8;
-    private static final int NUMBER_OF_CHECKPOINTS = 5;
+    public static final int SIZE = 8;    
     public BooleanArray checkpointsVisited;
     int id;
 
@@ -39,7 +38,7 @@ public class Vehicle {
     }
 
     private void init(int id, boolean active) {
-        this.checkpointsVisited = new BooleanArray(NUMBER_OF_CHECKPOINTS);
+        this.checkpointsVisited = new BooleanArray(Track.NUMBER_OF_CHECKPOINTS);
         this.checkpointsVisited.setAllItems(false);
         this.laps = 1;
         this.finalPlace = -1;

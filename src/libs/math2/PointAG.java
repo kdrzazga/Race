@@ -2,7 +2,7 @@ package libs.math2;
 
 import java.awt.Point;
 
-public class PointAG {
+public class PointAG implements Cloneable{
 
     public float x;
     public float y;
