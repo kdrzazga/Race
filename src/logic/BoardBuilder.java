@@ -6,6 +6,7 @@ import java.util.Arrays;
 import libs.math2.CircleAG;
 import libs.math2.Numbers;
 import libs.math2.PointAG;
+import libs.math2.PolygonAG;
 import logic.drive_algorithms.DriveAlgorithm;
 import logic.drive_algorithms.HumanDriveNullObject;
 import logic.drive_algorithms.TurnLeftAlgorithm;
@@ -45,14 +46,14 @@ public class BoardBuilder {
     private static final PointAG[] RECT_INNER_BOUND_PTS = {new PointAG(150, 600), new PointAG(450, 600), new PointAG(450, 600), new PointAG(450, 500),
         new PointAG(250, 500), new PointAG(250, 200), new PointAG(425, 200), new PointAG(425, 300), new PointAG(450, 300), new PointAG(450, 100),
         new PointAG(150, 100), new PointAG(150, 150), new PointAG(150, 200), new PointAG(150, 250), new PointAG(150, 300), new PointAG(150, 350),
-         new PointAG(150, 360), new PointAG(150, 370), new PointAG(150, 380), new PointAG(150, 400), new PointAG(150, 450), new PointAG(150, 500), new PointAG(150, 550)};
+        new PointAG(150, 360), new PointAG(150, 370), new PointAG(150, 380), new PointAG(150, 400), new PointAG(150, 450), new PointAG(150, 500), new PointAG(150, 550)};
 
     private static final PointAG[] TEST_RECT_OUTER_BOUND_PTS = {new PointAG(0, 0), new PointAG(30, 0), new PointAG(30, 30), new PointAG(0, 30)};
     private static final PointAG[] TEST_RECT_INNER_BOUND_PTS = {new PointAG(10, 10), new PointAG(20, 10), new PointAG(20, 20), new PointAG(10, 20)};
 
     private static final PointAG[] TRIANGLE_OUTER_BOUND_PTS = {
         new PointAG(140, 88), new PointAG(535, 640),
-         new PointAG(529, 680), new PointAG(500, 700), new PointAG(410, 710), new PointAG(190, 720), new PointAG(145, 705), new PointAG(30, 80), new PointAG(54, 50), new PointAG(84, 53)};
+        new PointAG(529, 680), new PointAG(500, 700), new PointAG(410, 710), new PointAG(190, 720), new PointAG(145, 705), new PointAG(30, 80), new PointAG(54, 50), new PointAG(84, 53)};
 
     private static final PointAG[] PENTAGON_OUTER_BOUND_PTS = {new PointAG(8, 640), new PointAG(20, 120), new PointAG(45, 80), new PointAG(170, 29), new PointAG(230, 17), new PointAG(534, 130),
         new PointAG(544, 166), new PointAG(400, 680), new PointAG(370, 700), new PointAG(250, 680), new PointAG(40, 690)};
@@ -74,9 +75,9 @@ public class BoardBuilder {
     private static final PointAG[] KIDNEY_INNER_BOUND_PTS = {
         new PointAG(250, 175), new PointAG(278, 140), new PointAG(325, 148), new PointAG(348, 180),
         new PointAG(351, 215), new PointAG(355, 218), new PointAG(365, 236),
-        new PointAG(367, 238),  new PointAG(370, 252), new PointAG(387, 308), new PointAG(409, 366), new PointAG(429, 420),
+        new PointAG(367, 238), new PointAG(370, 252), new PointAG(387, 308), new PointAG(409, 366), new PointAG(429, 420),
         new PointAG(437, 463), new PointAG(438, 468), new PointAG(439, 471), new PointAG(440, 475),
-        new PointAG(441, 478), new PointAG(426, 518),  new PointAG(426, 518),  new PointAG(426, 518), 
+        new PointAG(441, 478), new PointAG(426, 518), new PointAG(426, 518), new PointAG(426, 518),
         new PointAG(400, 560), new PointAG(357, 607),
         new PointAG(272, 640), new PointAG(250, 635), new PointAG(204, 617), new PointAG(180, 586),
         new PointAG(189, 545), new PointAG(240, 505), new PointAG(278, 460), new PointAG(280, 440),
@@ -84,6 +85,54 @@ public class BoardBuilder {
     };
     //</editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Point arrays for routes for computer players">
+    private static final PointAG[] DONUT_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(375, 525), new PointAG(450, 450), new PointAG(480, 390),
+        new PointAG(435, 270), new PointAG(300, 190), new PointAG(160, 270),
+        new PointAG(130, 380), new PointAG(200, 510), new PointAG(180, 500)
+    };
+
+    private static final PointAG[] RECT_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(490, 650), new PointAG(490, 450), new PointAG(290, 450),
+        new PointAG(290, 240), new PointAG(375, 260), new PointAG(420, 340),
+        new PointAG(500, 300), new PointAG(493, 80), new PointAG(95, 75),
+        new PointAG(100, 650), new PointAG(260, 650)
+    };
+
+    private static final PointAG[] KINDEY_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(448, 576), new PointAG(490, 433), new PointAG(341, 105),
+        new PointAG(200, 134), new PointAG(245, 425)
+        ,new PointAG(92, 620) , new PointAG(340, 665) ,new PointAG(270, 670)
+    };
+
+    private static final PointAG[] TRIANGLE_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(448, 620), new PointAG(425, 545), new PointAG(176, 205),
+        new PointAG(93, 239), new PointAG(180, 630), new PointAG(265, 665)
+    };
+    
+    private static final PointAG[] PENTAGON_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(363, 630), new PointAG(500, 180), new PointAG(230, 70),
+        new PointAG(70, 130), new PointAG(42, 615), new PointAG(250, 635)
+    };
+    
+    private static final PointAG[] WERONIKA_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(300, 650), new PointAG(250, 600), new PointAG(212, 640),
+        new PointAG(250, 700), new PointAG(285, 610)
+    };
+    
+    private static final PointAG[] TEST_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(25, 25), new PointAG(22, 5), new PointAG(7, 7),
+        new PointAG(5, 25), new PointAG(17, 25)
+    };
+
+    private static final PointAG[] SINE_WAY_FOR_COMP_PLR_PTS = {
+        new PointAG(420, 680), new PointAG(317, 378), new PointAG(421, 152),
+        new PointAG(213, 50), new PointAG(230, 195), new PointAG(125, 366),
+        new PointAG(231, 598), new PointAG(224, 645), new PointAG(160, 770),
+        new PointAG(282, 760)
+    };
+
+    //</editor-fold>
     public static Vehicle createVehicleAtPosition(int id, float x, float y) {
         Vehicle vehicle = new Vehicle(id, 1, new PointAG(x, y));
         vehicle.active = true;
@@ -125,24 +174,25 @@ public class BoardBuilder {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
             case RECTANGULAR:
-                return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS);
+                return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS, RECT_WAY_FOR_COMP_PLR_PTS);
             case KIDNEY:
-                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS);
+                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS, KINDEY_WAY_FOR_COMP_PLR_PTS);
             case TRIANGLE:
-                return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f);
+                return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f, TRIANGLE_WAY_FOR_COMP_PLR_PTS);
             case PENTAGON:
-                return createTrack(PENTAGON_OUTER_BOUND_PTS, 0.7f);
+                return createTrack(PENTAGON_OUTER_BOUND_PTS, 0.7f, PENTAGON_WAY_FOR_COMP_PLR_PTS);
             case WERONIKA:
-                return createTrack(WERONIKA_OUTER_BOUND_PTS, WERONIKA_INNER_BOUND_PTS);
+                return createTrack(WERONIKA_OUTER_BOUND_PTS, WERONIKA_INNER_BOUND_PTS, WERONIKA_WAY_FOR_COMP_PLR_PTS);
             case TEST_RECTANGULAR:
-                return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS);
+                return createTrack(TEST_RECT_OUTER_BOUND_PTS, TEST_RECT_INNER_BOUND_PTS, TEST_WAY_FOR_COMP_PLR_PTS);
             default:
                 //SINE:
                 return create_50_50__450_500_SineTrack();
         }
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor) {
+    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor,
+             PointAG[] routeForCompPlyrPts) {
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
 
@@ -150,15 +200,21 @@ public class BoardBuilder {
         track.innerBound.scale(scaleFactor);
 
         track.computeCheckpoints();
+        track.routeForCompPlyr = new PolygonAG(routeForCompPlyrPts);
+
         return track;
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts) {
+    private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts,
+             PointAG[] routeForCompPlyrPts) {
+
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
         track.innerBound.points.addAll(Arrays.asList(innerBoundPts));
 
         track.computeCheckpoints();
+        track.routeForCompPlyr = new PolygonAG(routeForCompPlyrPts);
+
         return track;
     }
 
@@ -188,6 +244,8 @@ public class BoardBuilder {
         donutTrack.innerBound = innerBound.getPoints();
         donutTrack.outerBound = outerBound.getPoints();
         donutTrack.computeCheckpoints();
+        donutTrack.routeForCompPlyr = new PolygonAG(DONUT_WAY_FOR_COMP_PLR_PTS);
+
         return donutTrack;
     }
 
@@ -235,6 +293,8 @@ public class BoardBuilder {
         sineTrack.outerBound.points.addAll(outerBoundPts);
         sineTrack.innerBound.points.addAll(innerBoundPts);
         sineTrack.computeCheckpoints();
+        sineTrack.routeForCompPlyr = new PolygonAG(SINE_WAY_FOR_COMP_PLR_PTS);
+
         return sineTrack;
     }
 

@@ -10,7 +10,6 @@ public abstract class DriveAlgorithm {
     public boolean algorithmWithDesiredRoute;
 
     protected Track track;
-    protected PolygonAG desiredRoute;
     protected String name;
     
     protected Vehicle vehicle;
@@ -31,10 +30,7 @@ public abstract class DriveAlgorithm {
     public Track getTrack() {
         return this.track;
     }
-    public PolygonAG getDesiredTrack() {
-        return this.desiredRoute;
-    } 
-
+    
     public String getName() {
         return name;
     }

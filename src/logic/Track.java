@@ -6,6 +6,7 @@ public class Track implements Cloneable{
 
     public PolygonAG innerBound;
     public PolygonAG outerBound;
+    public PolygonAG routeForCompPlyr ;
 
     public PolygonAG checkpoints[];
 
@@ -129,7 +130,8 @@ public class Track implements Cloneable{
         clonedTrack.checkpoints = this.checkpoints.clone();
         clonedTrack.innerBound = this.innerBound.clone();
         clonedTrack.outerBound = this.outerBound.clone();
-
+        clonedTrack.routeForCompPlyr = this.routeForCompPlyr.clone();
+        
         return clonedTrack;
     }
 

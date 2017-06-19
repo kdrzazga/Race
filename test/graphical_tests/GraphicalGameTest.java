@@ -12,7 +12,7 @@ import libs.math2.PolygonAG;
 import logic.Board;
 import logic.Track;
 import logic.Vehicle;
-import logic.drive_algorithms.KeepCloseInnerBound;
+import logic.drive_algorithms.FollowRouteForCmpPlr;
 import logic.BoardBuilder;
 import logic.VelocityVector;
 
@@ -351,9 +351,8 @@ public class GraphicalGameTest extends JFrame {
     }
 
     private void drawDesiredRoute(Board board) {
-        KeepCloseInnerBound algorithm = new KeepCloseInnerBound(board.track);
 
-        PolygonAG route = algorithm.getDesiredRoute();
+        PolygonAG route = board.track.routeForCompPlyr;
 
         boardG.setColor(Color.red);
 
