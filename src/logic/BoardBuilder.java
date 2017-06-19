@@ -89,7 +89,7 @@ public class BoardBuilder {
     private static final PointAG[] DONUT_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(375, 525), new PointAG(450, 450), new PointAG(480, 390),
         new PointAG(435, 270), new PointAG(300, 190), new PointAG(160, 270),
-        new PointAG(130, 380), new PointAG(200, 510), new PointAG(180, 500)
+        new PointAG(130, 380), new PointAG(200, 510), new PointAG(307, 540)
     };
 
     private static final PointAG[] RECT_WAY_FOR_COMP_PLR_PTS = {
@@ -101,38 +101,40 @@ public class BoardBuilder {
 
     private static final PointAG[] KINDEY_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(448, 576), new PointAG(490, 433), new PointAG(341, 105),
-        new PointAG(200, 134), new PointAG(245, 425)
-        ,new PointAG(92, 620) , new PointAG(340, 665) ,new PointAG(270, 670)
+        new PointAG(260, 80), new PointAG(200, 134), new PointAG(245, 425),
+        new PointAG(92, 620), new PointAG(170, 665), new PointAG(340, 667)
     };
 
     private static final PointAG[] TRIANGLE_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(448, 620), new PointAG(425, 545), new PointAG(176, 205),
         new PointAG(93, 239), new PointAG(180, 630), new PointAG(265, 665)
     };
-    
+
     private static final PointAG[] PENTAGON_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(363, 630), new PointAG(500, 180), new PointAG(230, 70),
         new PointAG(70, 130), new PointAG(42, 615), new PointAG(250, 635)
     };
-    
+
     private static final PointAG[] WERONIKA_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(300, 650), new PointAG(250, 600), new PointAG(212, 640),
-        new PointAG(250, 700), new PointAG(285, 610)
+        new PointAG(250, 700), new PointAG(265, 680)
     };
-    
+
     private static final PointAG[] TEST_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(25, 25), new PointAG(22, 5), new PointAG(7, 7),
         new PointAG(5, 25), new PointAG(17, 25)
     };
 
     private static final PointAG[] SINE_WAY_FOR_COMP_PLR_PTS = {
-        new PointAG(420, 680), new PointAG(317, 378), new PointAG(421, 152),
-        new PointAG(213, 50), new PointAG(230, 195), new PointAG(125, 366),
-        new PointAG(231, 598), new PointAG(224, 645), new PointAG(160, 770),
+        new PointAG(420, 680), new PointAG(317, 378), new PointAG(323, 333),
+        new PointAG(421, 152), new PointAG(213, 50), new PointAG(234, 127),
+        new PointAG(230, 195), new PointAG(125, 366), new PointAG(231, 598),
+        new PointAG(224, 645), new PointAG(212, 680), new PointAG(160, 800),
         new PointAG(282, 760)
     };
 
     //</editor-fold>
+    
     public static Vehicle createVehicleAtPosition(int id, float x, float y) {
         Vehicle vehicle = new Vehicle(id, 1, new PointAG(x, y));
         vehicle.active = true;
@@ -192,7 +194,7 @@ public class BoardBuilder {
     }
 
     private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor,
-             PointAG[] routeForCompPlyrPts) {
+            PointAG[] routeForCompPlyrPts) {
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
 
@@ -206,7 +208,7 @@ public class BoardBuilder {
     }
 
     private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts,
-             PointAG[] routeForCompPlyrPts) {
+            PointAG[] routeForCompPlyrPts) {
 
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));

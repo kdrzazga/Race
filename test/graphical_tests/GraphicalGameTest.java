@@ -291,7 +291,7 @@ public class GraphicalGameTest extends JFrame {
         if (cbTrackCentroid.isSelected()) {
             drawCentroid(board);
         }
-        
+
         if (cbInnerCenter.isSelected()) {
             drawInnerBoundCenter(board);
         }
@@ -338,6 +338,7 @@ public class GraphicalGameTest extends JFrame {
         boardG.setColor(Color.BLUE);
         boardG.fillRect(innerBoundCenter.x - 2, innerBoundCenter.y - 2, 4, 4);
     }
+
     private void drawCentroid(Board board) {
         Point innerBoundCenter = board.track.innerBound.computeCentroid().convertToPoint();
         boardG.setColor(Color.CYAN);
@@ -354,13 +355,14 @@ public class GraphicalGameTest extends JFrame {
 
         PolygonAG route = board.track.routeForCompPlyr;
 
-        boardG.setColor(Color.red);
-
-        for (int i = 0; i < route.points.size() - 2; i++) {
-            LineSection side = new LineSection(route.points.get(i), route.points.get(i + 1));
-            Point p1 = side.p1.convertToPoint();
-            Point p2 = side.p2.convertToPoint();
+        for (int i = 0; i < route.points.size() - 1; i++) {
+            LineSection routeSide = new LineSection(route.points.get(i), route.points.get(i + 1));
+            Point p1 = routeSide.p1.convertToPoint();
+            Point p2 = routeSide.p2.convertToPoint();
+            boardG.setColor(Color.red);
             boardG.drawLine(p1.x, p1.y, p2.x, p2.y);
+            boardG.setColor(Color.blue);
+            boardG.drawString(Integer.toString(i), p1.x, p1.y);
         }
         boardG.setColor(Color.BLACK);
     }
