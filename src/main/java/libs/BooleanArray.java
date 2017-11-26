@@ -21,7 +21,7 @@ public class BooleanArray {
             }
         }
         return true;
-    }
+     }
     
     public boolean allAreFalse() {
         for (Boolean value : values) {

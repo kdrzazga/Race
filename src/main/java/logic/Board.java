@@ -39,7 +39,7 @@ public class Board {
         this.vehicles.forEach(vehicle -> this.moveVehicle(vehicle.getId()));
     }
 
-    private void moveVehicle(int vehicleId) {
+    public void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         vehicle.previousV = vehicle.v.clone();
         PointAG newPosition = computeNewPosition(vehicle);

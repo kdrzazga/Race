@@ -171,7 +171,7 @@ public class BoardBuilder {
         return vehicles;
     }
 
-    private static Track createTrack(TrackType trackType) {
+    public static Track createTrack(TrackType trackType) {
         switch (trackType) {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
@@ -193,7 +193,7 @@ public class BoardBuilder {
         }
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, float scaleFactor,
+    public static Track createTrack(PointAG[] outerBoundPts, float scaleFactor,
             PointAG[] routeForCompPlyrPts) {
         Track track = new Track();
         track.outerBound.points.addAll(Arrays.asList(outerBoundPts));
@@ -207,7 +207,7 @@ public class BoardBuilder {
         return track;
     }
 
-    private static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts,
+    public static Track createTrack(PointAG[] outerBoundPts, PointAG[] innerBoundPts,
             PointAG[] routeForCompPlyrPts) {
 
         Track track = new Track();
