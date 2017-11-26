@@ -1,24 +1,24 @@
 package logic;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public interface IGraphicalOutput {
 
-    public void draw(Board board);
+    void draw(Board board);
 
-    public void draw(Track track);
+    void draw(Track track);
 
-    public void drawTrackBorder(Track track);
+    void drawTrackBorder(Track track);
 
-    public void drawStartLine(Track track);
+    void drawStartLine(Track track);
 
-    public void draw(Vehicle vehicle);
+    void draw(Vehicle vehicle);
 
-    public void drawAllVehicles(Board board);
+    void drawAllVehicles(Board board);
 
-    public void setPanelToDrawOn(JPanel drawablePanel);
+    void setPanelToDrawOn(JPanel drawablePanel);
 
-    public void clearOutput();
+    void clearOutput();
 
-    public void eraseVehicles(Board track);
+    void eraseVehicles(Board track);
 }

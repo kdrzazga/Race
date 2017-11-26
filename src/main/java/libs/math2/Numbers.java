@@ -61,8 +61,6 @@ public class Numbers {
             throw new IllegalArgumentException();
         }
 
-        BigDecimal scaledValue = decimalValue.setScale(places, RoundingMode.HALF_UP);
-
-        return scaledValue;
+        return decimalValue.setScale(places, RoundingMode.HALF_UP);
     }
 }

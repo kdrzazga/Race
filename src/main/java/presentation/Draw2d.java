@@ -72,9 +72,7 @@ public class Draw2d implements IGraphicalOutput {
 
     @Override
     public void drawAllVehicles(Board board) {
-        board.vehicles.forEach((vehicle) -> {
-            draw(vehicle);
-        });
+        board.vehicles.forEach(this::draw);
     }
 
     @Override
@@ -85,15 +83,15 @@ public class Draw2d implements IGraphicalOutput {
 
     @Override
     public void clearOutput() {
-        Color currentforegroundColor = this.drawablePanel.getForeground();
-        Color backgroundColor = this.drawablePanel.getBackground();
+        Color currentForegrndColor = this.drawablePanel.getForeground();
+        Color backgrndColor = this.drawablePanel.getBackground();
 
-        g.setColor(backgroundColor);
+        g.setColor(backgrndColor);
         int width = this.drawablePanel.getWidth();
         int height = this.drawablePanel.getHeight();
 
         g.fillRect(0, 0, width, height);
-        g.setColor(currentforegroundColor);
+        g.setColor(currentForegrndColor);
     }
 
     @Override
@@ -117,8 +115,8 @@ public class Draw2d implements IGraphicalOutput {
         Point position = vehicleV.position.convertToPoint();
 
         g.setColor(vehicleColor);
-        int centerX = position.x - (int) (Vehicle.SIZE / 2);
-        int centerY = position.y - (int) (Vehicle.SIZE / 2);
+        int centerX = position.x - (Vehicle.SIZE / 2);
+        int centerY = position.y - (Vehicle.SIZE / 2);
 
         g.fillOval(centerX, centerY, Vehicle.SIZE, Vehicle.SIZE);
         float factorX, factorY;

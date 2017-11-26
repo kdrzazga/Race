@@ -31,13 +31,13 @@ public class PointAG implements Cloneable{
                 + (this.y - anotherPoint.y) * (this.y - anotherPoint.y));
     }
 
-    public PointAG createPointByMovingdByVector(LineSection vector) {
+    public PointAG createPointByMovingByVector(LineSection vector) {
         PointAG movedPoint = this.clone();
         movedPoint.moveByVector(vector);
         return movedPoint;
     }
 
-    public PointAG createPointByMovingdByVector(float length, float angle) {
+    public PointAG createPointByMovingByVector(float length, float angle) {
         PointAG movedPoint = this.clone();
         movedPoint.moveByVector(length, angle);
         return movedPoint;

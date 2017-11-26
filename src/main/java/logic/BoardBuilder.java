@@ -37,7 +37,7 @@ public class BoardBuilder {
                     return "Test rectangular";
             }
         }
-    };
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Point arrays for tracks">
     private static final PointAG[] RECT_OUTER_BOUND_PTS = {new PointAG(50, 710), new PointAG(350, 710), new PointAG(550, 710), new PointAG(550, 400), new PointAG(325, 400),
@@ -99,7 +99,7 @@ public class BoardBuilder {
         new PointAG(100, 650), new PointAG(260, 650)
     };
 
-    private static final PointAG[] KINDEY_WAY_FOR_COMP_PLR_PTS = {
+    private static final PointAG[] KIDNEY_WAY_FOR_COMP_PLR_PTS = {
         new PointAG(448, 576), new PointAG(490, 433), new PointAG(341, 105),
         new PointAG(260, 80), new PointAG(200, 134), new PointAG(245, 425),
         new PointAG(92, 620), new PointAG(170, 665), new PointAG(340, 667)
@@ -135,7 +135,7 @@ public class BoardBuilder {
 
     //</editor-fold>
     
-    public static Vehicle createVehicleAtPosition(int id, float x, float y) {
+    private static Vehicle createVehicleAtPosition(int id, float x, float y) {
         Vehicle vehicle = new Vehicle(id, 1, new PointAG(x, y));
         vehicle.active = true;
 
@@ -171,14 +171,14 @@ public class BoardBuilder {
         return vehicles;
     }
 
-    public static Track createTrack(TrackType trackType) {
+    private static Track createTrack(TrackType trackType) {
         switch (trackType) {
             case DONUT:
                 return create_50_50__550_550_DonutTrack();
             case RECTANGULAR:
                 return createTrack(RECT_OUTER_BOUND_PTS, RECT_INNER_BOUND_PTS, RECT_WAY_FOR_COMP_PLR_PTS);
             case KIDNEY:
-                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS, KINDEY_WAY_FOR_COMP_PLR_PTS);
+                return createTrack(KIDNEY_OUTER_BOUND_PTS, KIDNEY_INNER_BOUND_PTS, KIDNEY_WAY_FOR_COMP_PLR_PTS);
             case TRIANGLE:
                 return createTrack(TRIANGLE_OUTER_BOUND_PTS, 0.5f, TRIANGLE_WAY_FOR_COMP_PLR_PTS);
             case PENTAGON:
@@ -232,7 +232,7 @@ public class BoardBuilder {
     /*
     creates a donut track bounded by rectangle(50,50, 550,550)
      */
-    public static Track create_50_50__550_550_DonutTrack() {
+    private static Track create_50_50__550_550_DonutTrack() {
 
         Track donutTrack = new Track();
         PointAG donutCenter = new PointAG(300, 370);
@@ -251,7 +251,7 @@ public class BoardBuilder {
         return donutTrack;
     }
 
-    public static Track create_50_50__450_500_SineTrack() {
+    private static Track create_50_50__450_500_SineTrack() {
         Track sineTrack = new Track();
         ArrayList<PointAG> outerBoundPts = new ArrayList<>();
         ArrayList<PointAG> innerBoundPts = new ArrayList<>();
@@ -285,10 +285,10 @@ public class BoardBuilder {
         final float INNER_OFFSET_HORIZONTAL = 195;
         final float INNER_OFFSET_VERTICAL = 70;
 
-        for (int i = 0; i < outerBoundPts.size(); i++) {
+        for (PointAG outerBoundPt : outerBoundPts) {
 
-            float ptx = Numbers.roundToFloat(outerBoundPts.get(i).x * 0.3 + INNER_OFFSET_HORIZONTAL);
-            float pty = Numbers.roundToFloat(outerBoundPts.get(i).y * 0.8 + INNER_OFFSET_VERTICAL);
+            float ptx = Numbers.roundToFloat(outerBoundPt.x * 0.3 + INNER_OFFSET_HORIZONTAL);
+            float pty = Numbers.roundToFloat(outerBoundPt.y * 0.8 + INNER_OFFSET_VERTICAL);
             innerBoundPts.add(new PointAG(ptx, pty));
         }
 

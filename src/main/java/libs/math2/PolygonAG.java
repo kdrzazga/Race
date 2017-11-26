@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PolygonAG implements Cloneable{
-    //AG stands for Analitycal Geometry
+    //AG stands for Analitical Geometry
 
     public ArrayList<PointAG> points;
 
@@ -80,8 +80,8 @@ public class PolygonAG implements Cloneable{
     public Polygon convertToPolygon() {
         Polygon result = new Polygon();
 
-        for (int i = 0; i < this.points.size(); i++) {
-            Point p = this.points.get(i).convertToPoint();
+        for (PointAG point : this.points) {
+            Point p = point.convertToPoint();
             result.addPoint(p.x, p.y);
         }
 
@@ -93,7 +93,7 @@ public class PolygonAG implements Cloneable{
         /*Polygon polygon = this.convertToPolygon();
 
         if (polygon.xpoints.length != polygon.ypoints.length) {
-            throw new RuntimeException(" Polygon error - number of X coornates differs from number of Ys");
+            throw new RuntimeException(" Polygon error - number of X coordinates differs from number of Ys");
         }*/
         int sumXCoordinates = 0;
         int sumYCoordinates = 0;
@@ -153,7 +153,7 @@ public class PolygonAG implements Cloneable{
         this.points.stream().map((point) -> new LineSection(center, point)).map((ray) -> {
             ray.moveP2MultiplyingBy(scaleFactor);
             return ray;
-        }).forEachOrdered((ray) -> {
+        }).forEachOrdered(ray -> {
             scaledPoints.add(ray.p2);
         });
 

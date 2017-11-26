@@ -69,12 +69,12 @@ public class KeyboardControlsAdapter extends KeyAdapter {
     }
 
     private void assignKeysToPlayers() {
-        for (int i = 0; i < this.player1Keys.length; i++) {
-            this.keyPlayerMap.put(this.player1Keys[i], Player.Player1);
+        for (int player1Key : this.player1Keys) {
+            this.keyPlayerMap.put(player1Key, Player.Player1);
         }
 
-        for (int i = 0; i < this.player2Keys.length; i++) {
-            this.keyPlayerMap.put(this.player2Keys[i], Player.Player2);
+        for (int player2Key : this.player2Keys) {
+            this.keyPlayerMap.put(player2Key, Player.Player2);
         }
     }
 

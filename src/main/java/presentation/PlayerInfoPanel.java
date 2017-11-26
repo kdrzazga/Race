@@ -33,7 +33,7 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
             this.id = id;
 
             lblPlayer = new JLabel(GAP_SMALL + "Player " + (id + 1) + GAP_BIG);
-            //in code players are numbereed starting from 0, on screen Player0 is displayedas Player 1 etc.
+            //in code players are numbered starting from 0, on screen Player0 is displayedas Player 1 etc.
             initLabel(lblPlayer, playerFont);
 
             lblPlayerSpeed = new JLabel(SPEED_TEXT);

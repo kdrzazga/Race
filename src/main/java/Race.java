@@ -12,9 +12,7 @@ public class Race {
     private static void startGame() {
         setNimbusLookAndFeel(IntroFrame.class.getName());
 
-        EventQueue.invokeLater(() -> {
-            new IntroFrame().setVisible(true);
-        });
+        EventQueue.invokeLater(() -> new IntroFrame().setVisible(true));
     }
 
 }

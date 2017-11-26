@@ -158,11 +158,7 @@ public class IntroFrame extends JFrame {
         );
 
         btnStart.setText("Start");
-        btnStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartActionPerformed(evt);
-            }
-        });
+        btnStart.addActionListener(evt -> btnStartActionPerformed(evt));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,8 +269,7 @@ public class IntroFrame extends JFrame {
 
     protected int readSelectedNumberOfVehicles() throws NumberFormatException {
         String vehCount = this.cbPlayers.getSelectedItem().toString();
-        int numberOfVehicles = Integer.parseInt(vehCount);
-        return numberOfVehicles;
+        return Integer.parseInt(vehCount);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

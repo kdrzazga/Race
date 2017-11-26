@@ -21,7 +21,7 @@ public class Board {
         initVehicles(numberOfVehicles);
     }
 
-    protected final void initVehicles(int numberOfVehicles) {
+    private final void initVehicles(int numberOfVehicles) {
         for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
@@ -36,12 +36,10 @@ public class Board {
     }
 
     public void moveAllVehicles() {
-        this.vehicles.forEach((vehicle) -> {
-            this.moveVehicle(vehicle.getId());
-        });
+        this.vehicles.forEach(vehicle -> this.moveVehicle(vehicle.getId()));
     }
 
-    public void moveVehicle(int vehicleId) {
+    private void moveVehicle(int vehicleId) {
         Vehicle vehicle = this.vehicles.get(vehicleId);
         vehicle.previousV = vehicle.v.clone();
         PointAG newPosition = computeNewPosition(vehicle);
@@ -107,7 +105,6 @@ public class Board {
                 boolean vehicleCrossedFinishLine = checkpointWithFinishLine.convertToPolygon().contains(vehicleLocation.x, vehicleLocation.y);
                 
                 if (vehicle.checkpointsVisited.allAreTrue() && vehicleCrossedFinishLine) {
-                    System.out.println("i amin");
                     vehicle.laps++;
                     vehicle.checkpointsVisited.setAllItems(false);
                 }

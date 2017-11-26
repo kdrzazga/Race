@@ -1,29 +1,29 @@
 package libs;
 
-import java.awt.Color;
+import java.awt.*;
 //import static org.lwjgl.opengl.GL11.glColor3f;
 
 public class Colors {
 
-    public static final Color DARK_GREEN = new Color(0, 120, 0);
-    public static final Color VIOLET = new Color(180, 0, 180);
-    public static final Color YELLOW_GREEN = new Color(135, 155, 21);
+    private static final Color DARK_GREEN = new Color(0, 120, 0);
+    private static final Color VIOLET = new Color(180, 0, 180);
+    private static final Color YELLOW_GREEN = new Color(135, 155, 21);
     public static final Color BROWN = new Color(142, 25, 25);
-    public static final Color LIGHT_BROWN = new Color(232, 102, 102);
-    public static final Color LIGHT_BLUE = new Color(115, 115, 255);
-    public static final Color DARK_CYAN = new Color(1, 129, 128);
-    public static final Color DARK_ORANGE = new Color(207, 132, 0);
-    
+    private static final Color LIGHT_BROWN = new Color(232, 102, 102);
+    private static final Color LIGHT_BLUE = new Color(115, 115, 255);
+    private static final Color DARK_CYAN = new Color(1, 129, 128);
+    private static final Color DARK_ORANGE = new Color(207, 132, 0);
+
     public static final Color[] LIGHT_COLORS = {Color.CYAN, Color.WHITE, Color.RED,
-        Color.YELLOW, LIGHT_BLUE, Color.PINK, Color.MAGENTA, LIGHT_BROWN,
-        YELLOW_GREEN, Color.GREEN, BROWN, Color.LIGHT_GRAY, Color.ORANGE};
+            Color.YELLOW, LIGHT_BLUE, Color.PINK, Color.MAGENTA, LIGHT_BROWN,
+            YELLOW_GREEN, Color.GREEN, BROWN, Color.LIGHT_GRAY, Color.ORANGE};
 
     public static final Color[] DARK_COLORS = {Color.BLACK, Color.BLUE, Color.DARK_GRAY, DARK_CYAN,
-        VIOLET, DARK_ORANGE, Color.GRAY, DARK_GREEN};
-    
+            VIOLET, DARK_ORANGE, Color.GRAY, DARK_GREEN};
+
     public static final float[][] OPEN_GL_COLORS = {{0f, 1f, 1f}, {1f, 1f, 1f}, {1f, 0f, 0f},
-    {1f, 1f, 0f}, {45f, 0.45f, 1f}, {0.6f, 0f, 0f}, {1f, 0f, 1f}, {0.91f, 0.4f, 0.4f},
-    {0.53f, 0.608f, 0.824f}, {0f, 1f, 0f}, {0.557f, 0.98f, 0.98f}
+            {1f, 1f, 0f}, {45f, 0.45f, 1f}, {0.6f, 0f, 0f}, {1f, 0f, 1f}, {0.91f, 0.4f, 0.4f},
+            {0.53f, 0.608f, 0.824f}, {0f, 1f, 0f}, {0.557f, 0.98f, 0.98f}
     };
 
     public static Color getLightColor(int index) {
@@ -58,5 +58,5 @@ public class Colors {
             }
         }
     }*/
-   
+
 }
