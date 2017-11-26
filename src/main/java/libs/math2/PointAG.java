@@ -49,7 +49,7 @@ public class PointAG implements Cloneable{
     }
 
     public void moveByVector(LineSection vector) {
-        this.moveByVector(vector.computeLength(), vector.computeInclinationAngle());
+        this.moveByVector(LineSection.computeLength.apply(vector), vector.computeInclinationAngle());
     }
 
     public boolean equals(PointAG point) {

@@ -39,10 +39,6 @@ public class LineSection extends LineAG implements Cloneable{
         return new LineSection(this.p1.clone(), this.p2.clone());
     }
 
-    public double computeLength() {
-        return computeLen.apply(this);
-    }
-
     public PointAG computeCenter() {
         float centerX = (p1.x + p2.x) / 2;
         float centerY = (p1.y + p2.y) / 2;
@@ -75,23 +71,15 @@ public class LineSection extends LineAG implements Cloneable{
         return Math.atan2(xSpan, ySpan);
     }
 
-    public boolean xBelongsToLineSection(float x) {
-        return XbelongsToLineSection.apply(x);
-    }
-
-    private Function<Float, Boolean> XbelongsToLineSection = x
+    public Function<Float, Boolean> xBelongsToLineSection = x
             -> (x >= Math.min(this.p1.x, this.p2.x) && (x <= Math.max(this.p1.x, this.p2.x)));
 
-    public boolean yBelongsToLineSection(float y) {
-        return YbelongsToLineSection.apply(y);
-    }
-
-    private Function<Float, Boolean> YbelongsToLineSection = y
+    public Function<Float, Boolean> yBelongsToLineSection = y
             -> (y >= Math.min(this.p1.y, this.p2.y) && (y <= Math.max(this.p1.y, this.p2.y)));
 
     @Override
     public float computeY(float x) {
-        if (this.xBelongsToLineSection(x))
+        if (xBelongsToLineSection.apply(x))
         {
             return super.computeY(x);
         }
@@ -108,8 +96,8 @@ public class LineSection extends LineAG implements Cloneable{
     private PointAG returnIntersectionIfInLineSection(PointAG intersection) {
         if (intersection != null)
         {
-            if (this.xBelongsToLineSection(intersection.x)
-                    && this.yBelongsToLineSection(intersection.y))
+            if (this.xBelongsToLineSection.apply(intersection.x)
+                    && this.yBelongsToLineSection.apply(intersection.y))
                 return intersection;
             else return null;
         }
@@ -119,7 +107,7 @@ public class LineSection extends LineAG implements Cloneable{
     
     public void moveP2MultiplyingBy(float scalar)
     {
-        double length = this.computeLength();
+        double length = computeLength.apply(this);
         double inclination = this.computeInclinationAngle() + Math.PI;
         
         this.p2 = this.p1.clone();
@@ -137,7 +125,7 @@ public class LineSection extends LineAG implements Cloneable{
         return new LineSection(parSectionP1, parSectionP2);
     }
 
-    private final Function<LineSection, Double> computeLen = section
+    public static final Function<LineSection, Double> computeLength = section
             -> Math.sqrt(Math.pow((section.p1.y - section.p2.y), 2)
             + Math.pow((section.p1.x - section.p2.x), 2));
 

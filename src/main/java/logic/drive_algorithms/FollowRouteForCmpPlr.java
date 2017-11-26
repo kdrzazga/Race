@@ -1,10 +1,12 @@
 package logic.drive_algorithms;
 
 import libs.math2.LineSection;
+import static libs.math2.LineSection.computeLength;
 import libs.math2.PointAG;
 import logic.Track;
 import logic.Vehicle;
 import logic.VelocityVector;
+
 
 public class FollowRouteForCmpPlr extends DriveAlgorithm {
 
@@ -25,7 +27,7 @@ public class FollowRouteForCmpPlr extends DriveAlgorithm {
         LineSection pathToDest = new LineSection(currentPos, destPos);
               
         this.vehicle.v.angle = pathToDest.computeInclinationAngle();        
-        this.vehicle.v.value = (int) Math.min(pathToDest.computeLength(), (double)VelocityVector.V_MAX);
+        this.vehicle.v.value = (int) Math.min(computeLength.apply(pathToDest), (double)VelocityVector.V_MAX);
         
         this.computeNextPointToVisit();
     }

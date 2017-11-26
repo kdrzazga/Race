@@ -201,7 +201,7 @@ public class PolygonAG implements Cloneable{
     private void checkIfPolygonBigEnough() {
         for (int i = 0; i < this.points.size() - 1; i++) {
             LineSection section = new LineSection(this.points.get(i), this.points.get(i + 1));
-            if (section.computeLength() < 1) {
+            if (LineSection.computeLength.apply(section) < 1) {
                 throw new RuntimeException("Polygon too small to check if it's convex"
                         + " with this algorithm, pls google a different algorithm.");
             }
