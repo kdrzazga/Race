@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class LineSectionTests{
  
-    public final static LineSection[] LINE_SECTION = new LineSection[4];
+    private final static LineSection[] LINE_SECTION = new LineSection[4];
 
     @Test
     public static void testMoveP1MultiplyingBy() {

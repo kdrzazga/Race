@@ -7,7 +7,7 @@ public class TestPolygonsBuilder {
 
     public enum PolygonType {
         TRIANGLE, SMALL_TRIANGLE_2, BIG_TRIANGLE, CONVEX_TETRAGON_BIG, CONVEX_TETRAGON_SMALL
-        , CONCAVE_TETRAGON_BIG, BASE_RECTANGLE;
+        , CONCAVE_TETRAGON_BIG, BASE_RECTANGLE
     }
     
     // <editor-fold defaultstate="collapsed" desc="Point arrays for shapes">

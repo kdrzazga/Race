@@ -21,7 +21,7 @@ public class Board {
         initVehicles(numberOfVehicles);
     }
 
-    private final void initVehicles(int numberOfVehicles) {
+    private void initVehicles(int numberOfVehicles) {
         for (int i = 0; i < numberOfVehicles; i++) {
             Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
@@ -35,7 +35,7 @@ public class Board {
         this.vehicles = new ArrayList<>();
     }
 
-    public void moveAllVehicles() {
+    void moveAllVehicles() {
         this.vehicles.forEach(vehicle -> this.moveVehicle(vehicle.getId()));
     }
 
