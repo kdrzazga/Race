@@ -1,6 +1,7 @@
 package libs.math2;
 
 import java.awt.Point;
+import java.util.function.Function;
 
 public class LineSection extends LineAG implements Cloneable{
 
@@ -39,7 +40,7 @@ public class LineSection extends LineAG implements Cloneable{
     }
 
     public double computeLength() {
-        return Math.sqrt(Math.pow((p1.y - p2.y), 2) + Math.pow((p1.x - p2.x), 2));
+        return computeLen.apply(this);
     }
 
     public PointAG computeCenter() {
@@ -75,18 +76,18 @@ public class LineSection extends LineAG implements Cloneable{
     }
 
     public boolean xBelongsToLineSection(float x) {
-        float xMin = Math.min(this.p1.x, this.p2.x);
-        float xMax = Math.max(this.p1.x, this.p2.x);
-
-        return (x >= xMin) && (x <= xMax);
+        return XbelongsToLineSection.apply(x);
     }
+
+    private Function<Float, Boolean> XbelongsToLineSection = x
+            -> (x >= Math.min(this.p1.x, this.p2.x) && (x <= Math.max(this.p1.x, this.p2.x)));
 
     public boolean yBelongsToLineSection(float y) {
-        float yMin = Math.min(this.p1.y, this.p2.y);
-        float yMax = Math.max(this.p1.y, this.p2.y);
-
-        return (y >= yMin) && (y <= yMax);
+        return YbelongsToLineSection.apply(y);
     }
+
+    private Function<Float, Boolean> YbelongsToLineSection = y
+            -> (y >= Math.min(this.p1.y, this.p2.y) && (y <= Math.max(this.p1.y, this.p2.y)));
 
     @Override
     public float computeY(float x) {
@@ -135,7 +136,11 @@ public class LineSection extends LineAG implements Cloneable{
         
         return new LineSection(parSectionP1, parSectionP2);
     }
-    
+
+    private final Function<LineSection, Double> computeLen = section
+            -> Math.sqrt(Math.pow((section.p1.y - section.p2.y), 2)
+            + Math.pow((section.p1.x - section.p2.x), 2));
+
     @Override
     public String toString() {
         return "(" + this.p1.x + ", " + this.p1.y
