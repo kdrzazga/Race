@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="PresentationTests">
+
+    <test name="presentation_test">
+        <classes>
+            <class name="unit_tests.presentation_test.KeyboardInputTest"/>
+        </classes>
+    </test>
+
+</suite>
