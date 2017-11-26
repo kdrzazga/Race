@@ -36,17 +36,7 @@ public class BoardTrackVehicleTest{
         board.track = this.rectTrack;
         board.vehicles.add(vehicle);
     }
-/*
-    public static void main(String[] args) {
-        BoardTrackVehicleTest test = new BoardTrackVehicleTest();
-        
-        test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(10);
 
-        for (int vehiclesCount = 0; vehiclesCount < 10; vehiclesCount++) {
-            test.givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameXCoordinate_1(vehiclesCount);
-        }   
-    }
-*/
     @Test
     public void testStartLine() {
         Track rectTrack;

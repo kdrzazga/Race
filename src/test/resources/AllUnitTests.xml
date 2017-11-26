@@ -3,9 +3,9 @@
 <suite name="AllUnitTests">
 
     <suite-files>
-        <suite-file path="LibsTests.xml" />
-        <suite-file path="LogicTests.xml" />
-        <suite-file path="PresentationTests.xml" />
-    </suite-files>    
-    
+        <suite-file path="LibsTests.xml"/>
+        <suite-file path="LogicTests.xml"/>
+        <suite-file path="PresentationTests.xml"/>
+    </suite-files>
+
 </suite>

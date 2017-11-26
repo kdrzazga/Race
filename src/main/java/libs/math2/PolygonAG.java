@@ -153,9 +153,7 @@ public class PolygonAG implements Cloneable{
         this.points.stream().map((point) -> new LineSection(center, point)).map((ray) -> {
             ray.moveP2MultiplyingBy(scaleFactor);
             return ray;
-        }).forEachOrdered(ray -> {
-            scaledPoints.add(ray.p2);
-        });
+        }).forEachOrdered(ray -> scaledPoints.add(ray.p2));
 
         this.points = scaledPoints;
     }

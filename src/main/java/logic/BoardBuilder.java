@@ -156,14 +156,13 @@ public class BoardBuilder {
         for (int i = 0; i < numberOfVehicles; i++) {
             PointAG vehiclePosition = board.track.computeStartPosition(i, numberOfVehicles);
             DriveAlgorithm driveAlgorithm;
-            boolean active = true;
 
             if (i >= Game.NUMBER_OF_HUMAN_CONTROLLED_VEHICLES) {
                 driveAlgorithm = new TurnLeftAlgorithm(board.track);
             } else {
                 driveAlgorithm = new HumanDriveNullObject();
             }
-            Vehicle vehicle = new Vehicle(i, initialSpeed, vehiclePosition, driveAlgorithm, active);
+            Vehicle vehicle = new Vehicle(i, initialSpeed, vehiclePosition, driveAlgorithm, true);
             driveAlgorithm.setVehicle(vehicle);
             vehicles.add(vehicle);
         }

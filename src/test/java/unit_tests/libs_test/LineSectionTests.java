@@ -45,13 +45,15 @@ public class LineSectionTests{
         }
 
     }
-    private static LineSection lineSection2, lineSection3, pararellLineSection1, pararellLineSection2;
-    private static PointAG intersection1_2, nullIntersection1_3, intersection2_3, nullIntersection1;
 
     @Test
     public static void testComputeIntersection() {
         final String methodName = "testComputeIntersection";
 
+        LineSection lineSection2;
+        LineSection lineSection3;
+        LineSection pararellLineSection1;
+        LineSection pararellLineSection2;
         GIVEN:
         {
             lineSection1 = new LineSection(0, 0, 10, 10);
@@ -62,6 +64,10 @@ public class LineSectionTests{
             pararellLineSection2 = new LineSection(0, 3, 6, 0);
         }
 
+        PointAG intersection1_2;
+        PointAG nullIntersection1_3;
+        PointAG nullIntersection1;
+        PointAG intersection2_3;
         WHEN:
         {
             intersection1_2 = lineSection1.computeIntersection(lineSection2);
@@ -120,7 +126,7 @@ public class LineSectionTests{
         assertTrue(verticalLineSection.yBelongsToLineSection(p3.y), methodName);
     }
 
-    private static LineSection lineSection1, lineSectionAbove, lineSectionBelow, sameLineSection;
+    private static LineSection lineSection1;
     private static float ls1Length;
 
     //@Test
@@ -129,11 +135,12 @@ public class LineSectionTests{
 
         lineSection1 = new LineSection(new PointAG(20, 20), new PointAG(40, 40));
         ls1Length = Numbers.roundToFloat(lineSection1.computeLength());
+        LineSection sameLineSection;
         WHEN:
 
         sameLineSection = lineSection1.createPararellSection(0);
-        lineSectionAbove = lineSection1.createPararellSection(ls1Length + 1);
-        lineSectionBelow = lineSection1.createPararellSection(-ls1Length - 1);
+        LineSection lineSectionAbove = lineSection1.createPararellSection(ls1Length + 1);
+        LineSection lineSectionBelow = lineSection1.createPararellSection(-ls1Length - 1);
         THEN:
 
         ;

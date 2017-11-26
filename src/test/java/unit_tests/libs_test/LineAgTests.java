@@ -15,7 +15,6 @@ public class LineAgTests{
     @Test
     public static void testComputePerpendicularLine() {
         LineAG line, perpLine;
-        final String methodName = "testComputePerpendicularLine";
         final float x = 100;
         final float y = 200;
         final PointAG intersection;

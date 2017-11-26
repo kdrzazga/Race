@@ -54,7 +54,7 @@ public class IntroFrame extends JFrame {
 
         lblGraphics.setText("Graphics");
 
-        cbGraphics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2D", "3D (not implemented)" }));
+        cbGraphics.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2D"}));
 
         lblPlayers.setText("Players");
 
@@ -158,7 +158,7 @@ public class IntroFrame extends JFrame {
         );
 
         btnStart.setText("Start");
-        btnStart.addActionListener(evt -> btnStartActionPerformed(evt));
+        btnStart.addActionListener(this::btnStartActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

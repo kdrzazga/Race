@@ -12,10 +12,7 @@ uses OpenGL
  */
 public class Draw3d implements IGraphicalOutput {
 
-    private final JPanel drawablePanel;
-
     public Draw3d(JPanel drawablePanel) {
-        this.drawablePanel = drawablePanel;
         throw new RuntimeException("3d not implemented yet");
     }
 

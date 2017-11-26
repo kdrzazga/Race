@@ -98,10 +98,7 @@ public class Board {
 
             if (checkpointPolygon.contains(vehicleLocation.x, vehicleLocation.y)) {
                 vehicle.checkpointsVisited.values[i] = true;
-                //System.out.println("Vehicle" + vehicle.id + " is passing chkpt " + i);
-                
                 PolygonAG checkpointWithFinishLine = this.track.checkpoints[Track.CHECKPOINT_WITH_START_LINE_INDEX];
-
                 boolean vehicleCrossedFinishLine = checkpointWithFinishLine.convertToPolygon().contains(vehicleLocation.x, vehicleLocation.y);
                 
                 if (vehicle.checkpointsVisited.allAreTrue() && vehicleCrossedFinishLine) {
