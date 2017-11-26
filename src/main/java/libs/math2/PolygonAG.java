@@ -136,6 +136,7 @@ public class PolygonAG implements Cloneable{
 
     private double computeSignedArea() {
         double factor = 0;
+
         for (int i = 0; i < this.points.size() - 1; i++) {
             PointAG p = this.points.get(i);
             PointAG pPlus1 = this.points.get(i + 1);
@@ -150,7 +151,7 @@ public class PolygonAG implements Cloneable{
 
         ArrayList<PointAG> scaledPoints = new ArrayList<>(this.points.size());
 
-        this.points.stream().map((point) -> new LineSection(center, point)).map((ray) -> {
+        this.points.stream().map(point -> new LineSection(center, point)).map(ray -> {
             ray.moveP2MultiplyingBy(scaleFactor);
             return ray;
         }).forEachOrdered(ray -> scaledPoints.add(ray.p2));
