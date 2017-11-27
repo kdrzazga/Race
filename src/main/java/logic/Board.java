@@ -2,6 +2,7 @@ package logic;
 
 import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.List;
 
 import libs.math2.Numbers;
 import libs.math2.PointAG;
@@ -10,7 +11,7 @@ import libs.math2.PolygonAG;
 public class Board {
 
     public Track track;
-    public ArrayList<Vehicle> vehicles;
+    public List<Vehicle> vehicles;
 
     public Board() {
         init(new Track());

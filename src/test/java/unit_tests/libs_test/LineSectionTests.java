@@ -139,9 +139,9 @@ public class LineSectionTests{
         LineSection sameLineSection;
         WHEN:
 
-        sameLineSection = lineSection1.createPararellSection(0);
-        LineSection lineSectionAbove = lineSection1.createPararellSection(ls1Length + 1);
-        LineSection lineSectionBelow = lineSection1.createPararellSection(-ls1Length - 1);
+        sameLineSection = lineSection1.createPararellSection.apply(0f);
+        LineSection lineSectionAbove = lineSection1.createPararellSection.apply(ls1Length + 1);
+        LineSection lineSectionBelow = lineSection1.createPararellSection.apply(-ls1Length - 1);
         THEN:
 
         ;

@@ -1,6 +1,7 @@
 package unit_tests.libs_test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import libs.math2.LineAG;
 import libs.math2.Numbers;
@@ -55,7 +56,7 @@ public class LineAgTests{
     public static void testFindIntersection() {
         PointAG commonPoint, intersectionPoint;
         float A, B;
-        ArrayList<LineAG> lines;
+        List<LineAG> lines;
         LineAG line, lineToCompare;
         int lineIndex;
 

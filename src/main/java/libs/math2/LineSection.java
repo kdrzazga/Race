@@ -44,7 +44,8 @@ public class LineSection extends LineAG implements Cloneable{
         float centerY = (p1.y + p2.y) / 2;
         return new PointAG(centerX, centerY);
     }
-    
+
+
         /* positive angles:
                 pi rad
                 |
@@ -114,16 +115,15 @@ public class LineSection extends LineAG implements Cloneable{
         this.p2.moveByVector(length * scalar, inclination);
     }
 
-    public LineSection createPararellSection(float distance)
-    {
+    public Function<Float, LineSection> createPararellSection = distance -> {
         LineAG perpLineP1 = this.computePerpendicularLine(this.p1);
         LineAG perpLineP2 = this.computePerpendicularLine(this.p2);
-        
+
         PointAG parSectionP1 = perpLineP1.givenXMovePointAlongLine(this.p1.x, distance);
         PointAG parSectionP2 = perpLineP2.givenXMovePointAlongLine(this.p2.x, distance);
-        
+
         return new LineSection(parSectionP1, parSectionP2);
-    }
+    };
 
     public static final Function<LineSection, Double> computeLength = section
             -> Math.sqrt(Math.pow((section.p1.y - section.p2.y), 2)

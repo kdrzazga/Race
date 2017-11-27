@@ -4,11 +4,12 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class PolygonAG implements Cloneable{
     //AG stands for Analitical Geometry
 
-    public ArrayList<PointAG> points;
+    public List<PointAG> points;
 
     public PolygonAG() {
         this.points = new ArrayList<>();
@@ -117,7 +118,7 @@ public class PolygonAG implements Cloneable{
         }*/
     }
 
-    public PointAG computeCentroid() {
+    private PointAG computeCentroid() {
         double A = this.computeSignedArea();
         double CxSum = 0, CySum = 0;
         for (int i = 0; i < this.points.size() - 1; i++) {
@@ -148,7 +149,7 @@ public class PolygonAG implements Cloneable{
     private void scaleConvexPolygon(float scaleFactor) {
         PointAG center = this.computeCentroid();
 
-        ArrayList<PointAG> scaledPoints = new ArrayList<>(this.points.size());
+        List<PointAG> scaledPoints = new ArrayList<>(this.points.size());
 
         this.points.stream().map((point) -> new LineSection(center, point)).map((ray) -> {
             ray.moveP2MultiplyingBy(scaleFactor);
@@ -208,7 +209,7 @@ public class PolygonAG implements Cloneable{
         }
     }
 
-    public float[] getXPoints() {
+    private float[] getXPoints() {
         float[] xpoints = new float[this.points.size()];
 
         for (int i = 0; i < this.points.size(); i++) {
@@ -217,7 +218,7 @@ public class PolygonAG implements Cloneable{
         return xpoints;
     }
 
-    public float[] getYPoints() {
+    private float[] getYPoints() {
         float[] ypoints = new float[this.points.size()];
 
         for (int i = 0; i < this.points.size(); i++) {
