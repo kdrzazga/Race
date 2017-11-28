@@ -71,10 +71,10 @@ public class LineSectionTests{
         PointAG intersection2_3;
         WHEN:
         {
-            intersection1_2 = lineSection1.computeIntersection(lineSection2);
-            nullIntersection1_3 = lineSection1.computeIntersection(lineSection3);
-            intersection2_3 = lineSection3.computeIntersection(lineSection2);
-            nullIntersection1 = pararellLineSection1.computeIntersection(pararellLineSection2);
+            intersection1_2 = lineSection1.computeIntersection.apply(lineSection2);
+            nullIntersection1_3 = lineSection1.computeIntersection.apply(lineSection3);
+            intersection2_3 = lineSection3.computeIntersection.apply(lineSection2);
+            nullIntersection1 = pararellLineSection1.computeIntersection.apply(pararellLineSection2);
         }
 
         THEN:
@@ -128,10 +128,10 @@ public class LineSectionTests{
     }
 
     private static LineSection lineSection1;
-    private static float ls1Length;
 
     //@Test
     public static void testCreatePararellSection() {
+        float ls1Length;
         GIVEN:
 
         lineSection1 = new LineSection(new PointAG(20, 20), new PointAG(40, 40));

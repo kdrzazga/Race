@@ -63,7 +63,8 @@ public class LineAG {
     }
 
     public PointAG findIntersection(LineAG line) {
-        float x, y;
+        float x;
+        float y;
         if (!this.vertical && !line.vertical) {
             if (this.A == line.A) {
                 return null;

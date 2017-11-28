@@ -31,12 +31,12 @@ public class Numbers {
     }
 
     private static BigDecimal roundUsingBigDecimal(double value, int places) {
-        BigDecimal bd = new BigDecimal(value);
+        BigDecimal bd = BigDecimal.valueOf(value);
         bd = rounding(bd, places);
         return bd;
     }
 
-    public static float getMax(float array[]) {
+    public static float getMax(float[] array) {
         float max = -Float.MAX_VALUE;
         for (Float value : array) {
             if (value > max) {
@@ -46,7 +46,7 @@ public class Numbers {
         return max;
     }
 
-    public static float getMin(float array[]) {
+    public static float getMin(float[] array) {
         float min = Float.MAX_VALUE;
         for (Float value : array) {
             if (value < min) {

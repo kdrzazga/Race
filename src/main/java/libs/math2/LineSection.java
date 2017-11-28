@@ -34,11 +34,6 @@ public class LineSection extends LineAG implements Cloneable{
         p2.moveByVector(length, angle);
     }
 
-    @Override
-    public LineSection clone() {        
-        return new LineSection(this.p1.clone(), this.p2.clone());
-    }
-
     public PointAG computeCenter() {
         float centerX = (p1.x + p2.x) / 2;
         float centerY = (p1.y + p2.y) / 2;
@@ -66,16 +61,17 @@ public class LineSection extends LineAG implements Cloneable{
                 |\ -135 deg
                 180 deg       
      */
+
     public double computeInclinationAngle() {
         double ySpan = this.p1.y - this.p2.y;
         double xSpan = this.p1.x - this.p2.x;
         return Math.atan2(xSpan, ySpan);
     }
 
-    public Function<Float, Boolean> xBelongsToLineSection = x
+    public final Function<Float, Boolean> xBelongsToLineSection = x
             -> (x >= Math.min(this.p1.x, this.p2.x) && (x <= Math.max(this.p1.x, this.p2.x)));
 
-    public Function<Float, Boolean> yBelongsToLineSection = y
+    public final Function<Float, Boolean> yBelongsToLineSection = y
             -> (y >= Math.min(this.p1.y, this.p2.y) && (y <= Math.max(this.p1.y, this.p2.y)));
 
     @Override
@@ -87,12 +83,15 @@ public class LineSection extends LineAG implements Cloneable{
         else
             throw new RuntimeException(x + " doesn't belong to line section");
     }
-    
+
+    public final Function<LineSection, PointAG> computeIntersection = lineSection2
+            -> returnIntersectionIfInLineSection(super.findIntersection(lineSection2));
+    /*
     public PointAG computeIntersection(LineSection lineSection2)
     {
         PointAG intersection = super.findIntersection(lineSection2);        
         return returnIntersectionIfInLineSection(intersection);
-    }
+    }*/
 
     private PointAG returnIntersectionIfInLineSection(PointAG intersection) {
         if (intersection != null)
@@ -115,7 +114,7 @@ public class LineSection extends LineAG implements Cloneable{
         this.p2.moveByVector(length * scalar, inclination);
     }
 
-    public Function<Float, LineSection> createPararellSection = distance -> {
+    public final Function<Float, LineSection> createPararellSection = distance -> {
         LineAG perpLineP1 = this.computePerpendicularLine(this.p1);
         LineAG perpLineP2 = this.computePerpendicularLine(this.p2);
 

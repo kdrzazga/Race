@@ -12,8 +12,8 @@ public class Game extends Thread {
     public static final int NUMBER_OF_HUMAN_CONTROLLED_VEHICLES = 2;
     public static final int GAME_FRAME_MS = 70;
 
-    public int lapsToWin;
-    public Board board;
+    public static int lapsToWin;
+    public static Board board;
 
     private int currentPlace;
     private boolean gameRunning;
@@ -27,18 +27,15 @@ public class Game extends Thread {
 
     public void findWinner() {
         board.vehicles.forEach(vehicle -> {
-                    if (vehicle.active) {
-                        if (vehicle.laps == this.lapsToWin + 1) {//laps counted from 1 not from 0
-                            vehicle.stop();
-                            vehicle.active = false;
+                    if (vehicle.active && vehicle.laps == this.lapsToWin + 1) {//laps counted from 1 not from 0
+                        vehicle.stop();
+                        vehicle.active = false;
 
-                            vehicle.finalPlace = currentPlace;
-                            currentPlace++;
-                        }
+                        vehicle.finalPlace = currentPlace;
+                        currentPlace++;
                     }
                 }
         );
-
     }
 
     private void gameInit2() {
@@ -70,7 +67,7 @@ public class Game extends Thread {
     }
 
     private void analyzeComputerPlayers() {
-        this.board.vehicles.forEach((vehicle) -> {
+        this.board.vehicles.forEach(vehicle -> {
             if (!(vehicle.driveAlgorithm instanceof HumanDriveNullObject)) {
                 vehicle.driveAlgorithm.computeVelocityVector();
             }

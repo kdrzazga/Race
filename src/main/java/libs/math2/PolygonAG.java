@@ -1,12 +1,11 @@
 package libs.math2;
 
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PolygonAG implements Cloneable{
+public class PolygonAG implements Cloneable {
     //AG stands for Analitical Geometry
 
     public List<PointAG> points;
@@ -15,7 +14,7 @@ public class PolygonAG implements Cloneable{
         this.points = new ArrayList<>();
     }
 
-    public PolygonAG(PointAG points[]) {
+    public PolygonAG(PointAG[] points) {
         this.points = new ArrayList<>();
         this.points.addAll(Arrays.asList(points));
     }
@@ -42,7 +41,7 @@ public class PolygonAG implements Cloneable{
         } else {
             for (int i = 0; i < this.points.size() - 2; i++) {
                 LineSection lineSectionToCheck = new LineSection(this.points.get(i), this.points.get(i + 1));
-                PointAG intersection = lineSectionToCheck.computeIntersection(lineSection);
+                PointAG intersection = lineSectionToCheck.computeIntersection.apply(lineSection);
                 if (intersection != null) {
                     return lineSectionToCheck;
                 }
@@ -69,7 +68,7 @@ public class PolygonAG implements Cloneable{
 
             if (minX < section.verticalX && maxX > section.verticalX) {
 
-                PointAG intersection = section.computeIntersection(result);
+                PointAG intersection = section.computeIntersection.apply(result);
                 if (intersection != null) {
                     return result;
                 }
@@ -90,12 +89,6 @@ public class PolygonAG implements Cloneable{
     }
 
     public PointAG computeCenter() {
-
-        /*Polygon polygon = this.convertToPolygon();
-
-        if (polygon.xpoints.length != polygon.ypoints.length) {
-            throw new RuntimeException(" Polygon error - number of X coordinates differs from number of Ys");
-        }*/
         int sumXCoordinates = 0;
         int sumYCoordinates = 0;
 
@@ -104,35 +97,36 @@ public class PolygonAG implements Cloneable{
             sumYCoordinates += point.y;
         }
 
-        float centerX = Numbers.roundToFloat(sumXCoordinates / (float)this.points.size());
-        float centerY = Numbers.roundToFloat(sumYCoordinates / (float)this.points.size());
+        float centerX = Numbers.roundToFloat(sumXCoordinates / (float) this.points.size());
+        float centerY = Numbers.roundToFloat(sumYCoordinates / (float) this.points.size());
 
         return new PointAG(centerX, centerY);
     }
 
     public void scale(float scaleFactor) {
-        //if (this.isConvex()) {
         scaleConvexPolygon(scaleFactor);
-        /*} else {
-            scaleConcavePolygon(scaleFactor);
-        }*/
     }
 
     private PointAG computeCentroid() {
         double A = this.computeSignedArea();
-        double CxSum = 0, CySum = 0;
-        for (int i = 0; i < this.points.size() - 1; i++) {
-            PointAG p = this.points.get(i);
-            PointAG pPlus1 = this.points.get(i + 1);
+        if (A == 0)
+            return this.points.get(0);
+        else {
+            double CxSum = 0;
+            double CySum = 0;
+            for (int i = 0; i < this.points.size() - 1; i++) {
+                PointAG p = this.points.get(i);
+                PointAG pPlus1 = this.points.get(i + 1);
 
-            double factor = (p.x * pPlus1.y - pPlus1.x * p.y);
-            CxSum += (p.x + pPlus1.x) * factor;
-            CySum += (p.y + pPlus1.y) * factor;
+                double factor = (p.x * pPlus1.y - pPlus1.x * p.y);
+                CxSum += (p.x + pPlus1.x) * factor;
+                CySum += (p.y + pPlus1.y) * factor;
+            }
+            double Cx = CxSum / (6 * A);
+            double Cy = CySum / (6 * A);
+
+            return new PointAG(Numbers.roundToFloat(Cx), Numbers.roundToFloat(Cy));
         }
-        double Cx = CxSum / (6 * A);
-        double Cy = CySum / (6 * A);
-
-        return new PointAG(Numbers.roundToFloat(Cx), Numbers.roundToFloat(Cy));
     }
 
     private double computeSignedArea() {
@@ -151,7 +145,7 @@ public class PolygonAG implements Cloneable{
 
         List<PointAG> scaledPoints = new ArrayList<>(this.points.size());
 
-        this.points.stream().map((point) -> new LineSection(center, point)).map((ray) -> {
+        this.points.stream().map(point -> new LineSection(center, point)).map(ray -> {
             ray.moveP2MultiplyingBy(scaleFactor);
             return ray;
         }).forEachOrdered(ray -> scaledPoints.add(ray.p2));

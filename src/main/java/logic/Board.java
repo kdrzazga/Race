@@ -10,8 +10,8 @@ import libs.math2.PolygonAG;
 
 public class Board {
 
-    public Track track;
-    public List<Vehicle> vehicles;
+    public static Track track;
+    public static List<Vehicle> vehicles;
 
     public Board() {
         init(new Track());
@@ -63,7 +63,10 @@ public class Board {
     }
 
     private PointAG computeNewPosition(Vehicle vehicle) {
-        float moveX, moveY, factorX, factorY;
+        float moveX;
+        float moveY;
+        float factorX;
+        float factorY;
 
         factorX = Numbers.roundToFloat(Math.cos(vehicle.v.angle));
         factorY = Numbers.roundToFloat(Math.sin(vehicle.v.angle));
@@ -79,7 +82,7 @@ public class Board {
 
     private void checkVehicleCrashWithOthers(Vehicle thisVehicle) {
 
-        this.vehicles.forEach((otherVehicle) -> {
+        this.vehicles.forEach(otherVehicle -> {
             if (!otherVehicle.equals(thisVehicle)) {
                 PointAG thisVehicleLocation = thisVehicle.v.position;
                 PointAG otherVehicleLocation = otherVehicle.v.position;
@@ -110,13 +113,4 @@ public class Board {
         }
         
     }
-
- /*   @Override
-    public Board clone()
-    {
-        Board clonedBoard = new Board();
-        clonedBoard.track = t
-        return clonedBoard;
-    }*/
-    
 }
