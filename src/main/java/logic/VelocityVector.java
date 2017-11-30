@@ -2,12 +2,12 @@ package logic;
 
 import libs.math2.PointAG;
 
-public class VelocityVector implements Cloneable{
+public class VelocityVector implements Cloneable {
 
-    public final static int V_MAX = 15;
-    public final static int V_MIN = 0;
-    public final static float ROTATION_UNIT = (float) (Math.PI / 10);
-    public final static int ACCELERATE_UNIT = 1;
+    public static final int V_MAX = 15;
+    public static final int V_MIN = 0;
+    public static final float ROTATION_UNIT = (float) (Math.PI / 10);
+    public static final int ACCELERATE_UNIT = 1;
 
     public int value;
     public double angle;

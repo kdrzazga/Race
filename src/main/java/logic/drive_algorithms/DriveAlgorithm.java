@@ -6,7 +6,7 @@ import logic.Vehicle;
 
 public abstract class DriveAlgorithm {
     
-    public boolean algorithmWithDesiredRoute;
+    public static boolean algorithmWithDesiredRoute;
 
     protected Track track;
     protected String name;

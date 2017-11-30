@@ -22,8 +22,8 @@ public class KeyboardControlsAdapter extends KeyAdapter {
 
     private final Board board;
 
-    private final int player1Keys[] = {'W', 'S', 'A', 'D'};
-    private final int player2Keys[] = {KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
+    private static final int[] player1Keys = {'W', 'S', 'A', 'D'};
+    private static final int[] player2Keys = {KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
 
     private final VehicleAction[] vehAction = {VehicleAction.Accelerate, VehicleAction.SlowDown,
         VehicleAction.TurnLeft, VehicleAction.TurnRight};
