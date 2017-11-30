@@ -107,7 +107,7 @@ public class PolygonAG implements Cloneable {
         scaleConvexPolygon(scaleFactor);
     }
 
-    private PointAG computeCentroid() {
+    public PointAG computeCentroid() {
         double A = this.computeSignedArea();
         if (A == 0)
             return this.points.get(0);

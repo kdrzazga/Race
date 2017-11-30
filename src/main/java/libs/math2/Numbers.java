@@ -25,6 +25,7 @@ public class Numbers {
         return bd.floatValue();
     }
 
+
     public static int roundToInt(double value) {
         BigDecimal bd = roundUsingBigDecimal(value, 0);
         return bd.intValue();
