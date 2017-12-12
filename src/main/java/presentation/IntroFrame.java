@@ -1,17 +1,11 @@
 package presentation;
 
-import java.util.Enumeration;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-
-import logic.Board;
-import logic.Game;
-import logic.IGraphicalOutput;
 import logic.BoardBuilder;
 import logic.BoardBuilder.TrackType;
+import logic.Game;
+import logic.IGraphicalOutput;
+
+import javax.swing.*;
 
 public class IntroFrame extends JFrame {
 
@@ -205,80 +199,27 @@ public class IntroFrame extends JFrame {
         this.game = new Game();
     }
     protected void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        game.board = createBoardBasedOnSelectedUiItems();
+        game.board = IntroFrameInitializer.createBoardBasedOnSelectedUiItems(this);
         gameScreen = new GameScreen(this, game);
         startGame(gameScreen);
     }//GEN-LAST:event_btnStartActionPerformed
 
     public void startGame(GameScreen gameScreen) {
 
-        IGraphicalOutput graphicalOutput = createGraphicalOutputBasedOnSelectedGraphics(gameScreen.getPnlBoard());
+        IGraphicalOutput graphicalOutput = IntroFrameInitializer.createGraphicalOutputBasedOnSelectedGraphics(gameScreen.getPnlBoard(), this);
 
         game.setGraphicalOutput(graphicalOutput);
         gameScreen.setVisible(true);
         game.setGameRunning(true);
     }
 
-    private IGraphicalOutput createGraphicalOutputBasedOnSelectedGraphics(JPanel drawablePanel) {
-        String selectedGraphics = (String) this.cbGraphics.getSelectedItem();
-
-        if (selectedGraphics.equals("2D")) {
-            return new Draw2d(drawablePanel);
-        } else {
-            return new Draw3d(drawablePanel);
-        }
-    }
-
-    protected Board createBoardBasedOnSelectedUiItems() {
-        int numberOfVehicles = readSelectedNumberOfVehicles();
-
-        int lapsToWin = Integer.parseInt(getSelectedButtonText(this.lapRadioButtonsGroup));
-
-        this.game.reset(lapsToWin);
-        Board board;
-        String selectedTrack = (String) this.cbTrack.getSelectedItem();
-
-        if (selectedTrack.equals(rectTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.RECTANGULAR);
-        } else if (selectedTrack.equals(circularTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.DONUT);
-        } else if (selectedTrack.equals(kidneyTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.KIDNEY);
-        } else if (selectedTrack.equals(triangleTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.TRIANGLE);
-        } else if (selectedTrack.equals(pentagonTrackType.toString())) {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.PENTAGON);
-        } else// if (selectedTrack.equals(sineTrackType.toString()))
-        {
-            board = BoardBuilder.createBoardWithTrack(numberOfVehicles, BoardBuilder.TrackType.SINE);
-        }
-        return board;
-    }
-
-    private String getSelectedButtonText(ButtonGroup buttonGroup) {
-        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-
-        return "";
-    }
-
-    protected int readSelectedNumberOfVehicles() throws NumberFormatException {
-        String vehCount = this.cbPlayers.getSelectedItem().toString();
-        return Integer.parseInt(vehCount);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbComputerAlgorithm;
-    private javax.swing.JComboBox<String> cbGraphics;
-    private javax.swing.JComboBox<String> cbPlayers;
-    protected javax.swing.JComboBox<String> cbTrack;
-    private javax.swing.ButtonGroup lapRadioButtonsGroup;
+    javax.swing.JComboBox<String> cbGraphics;
+    javax.swing.JComboBox<String> cbPlayers;
+    javax.swing.JComboBox<String> cbTrack;
+    javax.swing.ButtonGroup lapRadioButtonsGroup;
     private javax.swing.JLabel lblComputerAlgorithm1;
     private javax.swing.JLabel lblComputerAlgorithm2;
     private javax.swing.JLabel lblGraphics;
@@ -292,11 +233,11 @@ public class IntroFrame extends JFrame {
     private javax.swing.JRadioButton radio5Laps;
     private javax.swing.JRadioButton radio7Laps;
     // End of variables declaration//GEN-END:variables
-    private final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR;
-    private final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;
-    private final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
-    private final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
-    private final TrackType triangleTrackType = BoardBuilder.TrackType.TRIANGLE;
-    private final TrackType pentagonTrackType = BoardBuilder.TrackType.PENTAGON;
+    final TrackType rectTrackType = BoardBuilder.TrackType.RECTANGULAR;
+    final TrackType circularTrackType = BoardBuilder.TrackType.DONUT;
+    final TrackType kidneyTrackType = BoardBuilder.TrackType.KIDNEY;
+    final TrackType sineTrackType = BoardBuilder.TrackType.SINE;
+    final TrackType triangleTrackType = BoardBuilder.TrackType.TRIANGLE;
+    final TrackType pentagonTrackType = BoardBuilder.TrackType.PENTAGON;
 
 }
