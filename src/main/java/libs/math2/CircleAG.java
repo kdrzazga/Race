@@ -19,11 +19,7 @@ package libs.math2;
                 points.addPointAG(x, y);
             }
         }
-    
-        public int getNumberOfPoints()
-        {
-            return this.numberOfPoints;
-        }
+
 
         public PolygonAG getPoints() {
             return points;

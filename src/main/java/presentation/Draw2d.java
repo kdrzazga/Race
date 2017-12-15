@@ -99,7 +99,7 @@ public class Draw2d implements IGraphicalOutput {
         Color backgroundColor = ColorSettings.TRACK_COLOR;
         g.setColor(backgroundColor);
 
-        board.vehicles.forEach((vehicle) -> {
+        board.vehicles.forEach(vehicle -> {
             VelocityVector previousV = vehicle.previousV;
             float eraseSize = Vehicle.SIZE + VEHICLE_LENGTH;
             int upperLeftCornerX = (int) (previousV.position.x - eraseSize / 2);
@@ -119,12 +119,14 @@ public class Draw2d implements IGraphicalOutput {
         int centerY = position.y - (Vehicle.SIZE / 2);
 
         g.fillOval(centerX, centerY, Vehicle.SIZE, Vehicle.SIZE);
-        float factorX, factorY;
+        float factorX;
+        float factorY;
 
         factorX = Numbers.roundToFloat(Math.cos(vehicleV.angle));
         factorY = Numbers.roundToFloat(Math.sin(vehicleV.angle));
 
-        int deltaX, deltaY;
+        int deltaX;
+        int deltaY;
 
         deltaX = (int) Math.ceil(factorX * VEHICLE_LENGTH);
         deltaY = (int) Math.ceil(factorY * VEHICLE_LENGTH);

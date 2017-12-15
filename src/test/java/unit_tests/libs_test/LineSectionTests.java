@@ -6,6 +6,7 @@ import libs.math2.Numbers;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static libs.math2.LineSection.computeLength;
 import org.testng.annotations.Test;
 
 public class LineSectionTests{
@@ -70,10 +71,10 @@ public class LineSectionTests{
         PointAG intersection2_3;
         WHEN:
         {
-            intersection1_2 = lineSection1.computeIntersection(lineSection2);
-            nullIntersection1_3 = lineSection1.computeIntersection(lineSection3);
-            intersection2_3 = lineSection3.computeIntersection(lineSection2);
-            nullIntersection1 = pararellLineSection1.computeIntersection(pararellLineSection2);
+            intersection1_2 = lineSection1.computeIntersection.apply(lineSection2);
+            nullIntersection1_3 = lineSection1.computeIntersection.apply(lineSection3);
+            intersection2_3 = lineSection3.computeIntersection.apply(lineSection2);
+            nullIntersection1 = pararellLineSection1.computeIntersection.apply(pararellLineSection2);
         }
 
         THEN:
@@ -103,9 +104,9 @@ public class LineSectionTests{
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
 
         THEN:
-        assertTrue(verticalLineSection.xBelongsToLineSection(p1.x), methodName);
-        assertTrue(verticalLineSection.xBelongsToLineSection(p2.x), methodName);
-        assertFalse(verticalLineSection.xBelongsToLineSection(p3.x), methodName);
+        assertTrue(verticalLineSection.xBelongsToLineSection.apply(p1.x), methodName);
+        assertTrue(verticalLineSection.xBelongsToLineSection.apply(p2.x), methodName);
+        assertFalse(verticalLineSection.xBelongsToLineSection.apply(p3.x), methodName);
     }
 
     @Test
@@ -121,26 +122,26 @@ public class LineSectionTests{
         verticalLineSection = new LineSection(10.3f, 33.33f, 10.3f, Numbers.roundToFloat(Math.PI));
 
         THEN:
-        assertFalse(verticalLineSection.yBelongsToLineSection(p1.y), methodName);
-        assertTrue(verticalLineSection.yBelongsToLineSection(p2.y), methodName);
-        assertTrue(verticalLineSection.yBelongsToLineSection(p3.y), methodName);
+        assertFalse(verticalLineSection.yBelongsToLineSection.apply(p1.y), methodName);
+        assertTrue(verticalLineSection.yBelongsToLineSection.apply(p2.y), methodName);
+        assertTrue(verticalLineSection.yBelongsToLineSection.apply(p3.y), methodName);
     }
 
     private static LineSection lineSection1;
-    private static float ls1Length;
 
     //@Test
     public static void testCreatePararellSection() {
+        float ls1Length;
         GIVEN:
 
         lineSection1 = new LineSection(new PointAG(20, 20), new PointAG(40, 40));
-        ls1Length = Numbers.roundToFloat(lineSection1.computeLength());
+        ls1Length = Numbers.roundToFloat(computeLength.apply(lineSection1));
         LineSection sameLineSection;
         WHEN:
 
-        sameLineSection = lineSection1.createPararellSection(0);
-        LineSection lineSectionAbove = lineSection1.createPararellSection(ls1Length + 1);
-        LineSection lineSectionBelow = lineSection1.createPararellSection(-ls1Length - 1);
+        sameLineSection = lineSection1.createPararellSection.apply(0f);
+        LineSection lineSectionAbove = lineSection1.createPararellSection.apply(ls1Length + 1);
+        LineSection lineSectionBelow = lineSection1.createPararellSection.apply(-ls1Length - 1);
         THEN:
 
         ;

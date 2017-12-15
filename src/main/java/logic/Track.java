@@ -8,7 +8,7 @@ public class Track implements Cloneable{
     public PolygonAG outerBound;
     public PolygonAG routeForCompPlyr ;
 
-    public PolygonAG checkpoints[];
+    public PolygonAG[] checkpoints;
 
     public static final int NUMBER_OF_CHECKPOINTS = 3;
     public static final int CHECKPOINT_WITH_START_LINE_INDEX = 0;
@@ -79,11 +79,11 @@ public class Track implements Cloneable{
 
     public LineSection computeVerticalStartLine() {
         findLinesIntersectedByVertStartLine();
-        float X = innerBound.computeCenter().x;
-        float y1 = intersectedInnerLine.computeY(X);
-        float y2 = intersectedOuterLine.computeY(X);
+        float centerX = innerBound.computeCenter().x;
+        float y1 = intersectedInnerLine.computeY(centerX);
+        float y2 = intersectedOuterLine.computeY(centerX);
 
-        return new LineSection(X, y1, X, y2);
+        return new LineSection(centerX, y1, centerX, y2);
     }
 
     /*public LineSection computeStartLine() {
