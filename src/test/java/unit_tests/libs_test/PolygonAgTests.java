@@ -34,13 +34,13 @@ public class PolygonAgTests {
         }
     }
 
-    private static PolygonAG rectangle;
     private static final PointAG[] RECTNGLE_VERTICES = {new PointAG(10, 10), new PointAG(500, 15), new PointAG(490, 900), new PointAG(10, 890)};
     private static LineSection verticalLineSection, crossingSection;
 
     
     @Test
     public static void testGetLineSectionCrossingVerticalSection() {
+        PolygonAG rectangle;
         GIVEN:
         rectangle = new PolygonAG(RECTNGLE_VERTICES);
         verticalLineSection = computeVerticalSectionDownFromCenter(rectangle);

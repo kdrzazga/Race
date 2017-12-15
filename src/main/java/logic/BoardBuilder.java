@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import libs.math2.CircleAG;
 import libs.math2.Numbers;
@@ -149,8 +150,8 @@ public class BoardBuilder {
         return board;
     }
 
-    private static ArrayList<Vehicle> createVehicles(int numberOfVehicles, Board board) {
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private static List<Vehicle> createVehicles(int numberOfVehicles, Board board) {
+        List<Vehicle> vehicles = new ArrayList<>();
         int initialSpeed = VelocityVector.V_MIN;
 
         for (int i = 0; i < numberOfVehicles; i++) {
@@ -252,8 +253,8 @@ public class BoardBuilder {
 
     private static Track create_50_50__450_500_SineTrack() {
         Track sineTrack = new Track();
-        ArrayList<PointAG> outerBoundPts = new ArrayList<>();
-        ArrayList<PointAG> innerBoundPts = new ArrayList<>();
+        List<PointAG> outerBoundPts = new ArrayList<>();
+        List<PointAG> innerBoundPts = new ArrayList<>();
 
         final int WIDTH_FACTOR = 90;
         final double VERTICAL_FACTOR = 2 * Math.PI / 500;

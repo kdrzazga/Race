@@ -1,6 +1,7 @@
 package libs.math2;
 
 import java.awt.Point;
+import java.util.function.Function;
 
 public class LineSection extends LineAG implements Cloneable{
 
@@ -33,21 +34,13 @@ public class LineSection extends LineAG implements Cloneable{
         p2.moveByVector(length, angle);
     }
 
-    @Override
-    public LineSection clone() {        
-        return new LineSection(this.p1.clone(), this.p2.clone());
-    }
-
-    public double computeLength() {
-        return Math.sqrt(Math.pow((p1.y - p2.y), 2) + Math.pow((p1.x - p2.x), 2));
-    }
-
     public PointAG computeCenter() {
         float centerX = (p1.x + p2.x) / 2;
         float centerY = (p1.y + p2.y) / 2;
         return new PointAG(centerX, centerY);
     }
-    
+
+
         /* positive angles:
                 pi rad
                 |
@@ -68,47 +61,43 @@ public class LineSection extends LineAG implements Cloneable{
                 |\ -135 deg
                 180 deg       
      */
+
     public double computeInclinationAngle() {
         double ySpan = this.p1.y - this.p2.y;
         double xSpan = this.p1.x - this.p2.x;
         return Math.atan2(xSpan, ySpan);
     }
 
-    public boolean xBelongsToLineSection(float x) {
-        float xMin = Math.min(this.p1.x, this.p2.x);
-        float xMax = Math.max(this.p1.x, this.p2.x);
+    public final Function<Float, Boolean> xBelongsToLineSection = x
+            -> (x >= Math.min(this.p1.x, this.p2.x) && (x <= Math.max(this.p1.x, this.p2.x)));
 
-        return (x >= xMin) && (x <= xMax);
-    }
-
-    public boolean yBelongsToLineSection(float y) {
-        float yMin = Math.min(this.p1.y, this.p2.y);
-        float yMax = Math.max(this.p1.y, this.p2.y);
-
-        return (y >= yMin) && (y <= yMax);
-    }
+    public final Function<Float, Boolean> yBelongsToLineSection = y
+            -> (y >= Math.min(this.p1.y, this.p2.y) && (y <= Math.max(this.p1.y, this.p2.y)));
 
     @Override
     public float computeY(float x) {
-        if (this.xBelongsToLineSection(x))
+        if (xBelongsToLineSection.apply(x))
         {
             return super.computeY(x);
         }
         else
             throw new RuntimeException(x + " doesn't belong to line section");
     }
-    
+
+    public final Function<LineSection, PointAG> computeIntersection = lineSection2
+            -> returnIntersectionIfInLineSection(super.findIntersection(lineSection2));
+    /*
     public PointAG computeIntersection(LineSection lineSection2)
     {
         PointAG intersection = super.findIntersection(lineSection2);        
         return returnIntersectionIfInLineSection(intersection);
-    }
+    }*/
 
     private PointAG returnIntersectionIfInLineSection(PointAG intersection) {
         if (intersection != null)
         {
-            if (this.xBelongsToLineSection(intersection.x)
-                    && this.yBelongsToLineSection(intersection.y))
+            if (this.xBelongsToLineSection.apply(intersection.x)
+                    && this.yBelongsToLineSection.apply(intersection.y))
                 return intersection;
             else return null;
         }
@@ -118,24 +107,27 @@ public class LineSection extends LineAG implements Cloneable{
     
     public void moveP2MultiplyingBy(float scalar)
     {
-        double length = this.computeLength();
+        double length = computeLength.apply(this);
         double inclination = this.computeInclinationAngle() + Math.PI;
         
         this.p2 = this.p1.clone();
         this.p2.moveByVector(length * scalar, inclination);
     }
 
-    public LineSection createPararellSection(float distance)
-    {
+    public final Function<Float, LineSection> createPararellSection = distance -> {
         LineAG perpLineP1 = this.computePerpendicularLine(this.p1);
         LineAG perpLineP2 = this.computePerpendicularLine(this.p2);
-        
+
         PointAG parSectionP1 = perpLineP1.givenXMovePointAlongLine(this.p1.x, distance);
         PointAG parSectionP2 = perpLineP2.givenXMovePointAlongLine(this.p2.x, distance);
-        
+
         return new LineSection(parSectionP1, parSectionP2);
-    }
-    
+    };
+
+    public static final Function<LineSection, Double> computeLength = section
+            -> Math.sqrt(Math.pow((section.p1.y - section.p2.y), 2)
+            + Math.pow((section.p1.x - section.p2.x), 2));
+
     @Override
     public String toString() {
         return "(" + this.p1.x + ", " + this.p1.y

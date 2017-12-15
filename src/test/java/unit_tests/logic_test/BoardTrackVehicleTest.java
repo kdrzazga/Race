@@ -1,6 +1,8 @@
 package unit_tests.logic_test;
 
 import java.awt.Polygon;
+import java.util.logging.Logger;
+
 import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
 import libs.math2.Numbers;
 import libs.math2.LineSection;
@@ -17,6 +19,8 @@ import static org.testng.Assert.assertTrue;
 import org.testng.annotations.Test;
 
 public class BoardTrackVehicleTest{
+
+    private static final Logger logger = Logger.getLogger(BoardTrackVehicleTest.class.getName());
 
     Board board;
     Track rectTrack;
@@ -69,6 +73,8 @@ public class BoardTrackVehicleTest{
             assertEquals(veh.v.position.x, startLineX, methodName);
             testResultMessage.append(" ").append(veh.v.position).append(" ");
         }
+
+        logger.info(testResultMessage.toString());
     }
    
     public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
@@ -91,6 +97,7 @@ public class BoardTrackVehicleTest{
 
             assertEquals(distanceBetweenVehicle0And1, distanceBetweenNextVehicles, methodName);            
         }
+        logger.info(testResultMessage.toString());
     }
 
     public Vehicle moveVehicleNTimes(Board board, int N, int vehicleId) {

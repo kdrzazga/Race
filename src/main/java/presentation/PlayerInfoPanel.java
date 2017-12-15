@@ -15,19 +15,19 @@ public class PlayerInfoPanel extends JPanel implements IPlayerInfoPanel {
     public class PlayerInfo {
 
         public int id;
-        public JLabel lblPlayer;
-        public JLabel lblPlayerSpeed;
-        public JLabel lblPlayerLap;
+        public final JLabel lblPlayer;
+        public final JLabel lblPlayerSpeed;
+        public final JLabel lblPlayerLap;
         private static final String FONT_NAME = "Lucida Trans Typewriter";
 
         public final Font playerFont = new Font(FONT_NAME, Font.BOLD, 12);
         public final Font defaultFont = new Font(FONT_NAME, Font.PLAIN, 12);
-        public final static int LABELS_PER_PLAYER_COUNT = 4;
+        public static final int LABELS_PER_PLAYER_COUNT = 4;
 
-        private final static String GAP_BIG = "           ";
-        private final static String GAP_SMALL = "    ";
-        public final static String SPEED_TEXT = GAP_SMALL + "Speed: ";
-        public final static String LAP_TEXT = GAP_SMALL + "Lap: ";
+        private static final  String GAP_BIG = "           ";
+        private static final String GAP_SMALL = "    ";
+        public static final String SPEED_TEXT = GAP_SMALL + "Speed: ";
+        public static final String LAP_TEXT = GAP_SMALL + "Lap: ";
 
         public PlayerInfo(int id) {
             this.id = id;

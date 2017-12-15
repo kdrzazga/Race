@@ -35,6 +35,7 @@ public class BooleanArray {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder(this.values.length);
+
         for (Boolean bool : values) {
             if (bool) {
                 result.append('1');
