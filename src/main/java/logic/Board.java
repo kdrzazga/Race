@@ -10,8 +10,8 @@ import libs.math2.PolygonAG;
 
 public class Board {
 
-    public static Track track;
-    public static List<Vehicle> vehicles;
+    public Track track;
+    public List<Vehicle> vehicles;
 
     public Board() {
         init(new Track());
@@ -24,10 +24,10 @@ public class Board {
 
     private void initVehicles(int numberOfVehicles) {
         for (int i = 0; i < numberOfVehicles; i++) {
-            Vehicle veh = new Vehicle(i, 0, this.track.computeStartPosition(i, numberOfVehicles));
+            Vehicle veh = new Vehicle(i, 0, track.computeStartPosition(i, numberOfVehicles));
             veh.active = true;
 
-            this.vehicles.add(veh);
+            vehicles.add(veh);
         }
     }
 
@@ -37,7 +37,7 @@ public class Board {
     }
 
     void moveAllVehicles() {
-        this.vehicles.forEach(vehicle -> this.moveVehicle(vehicle.getId()));
+        vehicles.forEach(vehicle -> this.moveVehicle(vehicle.getId()));
     }
 
     public void moveVehicle(int vehicleId) {
