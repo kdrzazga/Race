@@ -10,5 +10,11 @@ dependencies {
     testCompile("org.testng:testng:$testNgVersion")
 }
 
+test  {
+    useTestNG() {
+        suites 'src/test/resources/AllUnitTests.xml'
+    }
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

@@ -16,6 +16,8 @@ import logic.BoardBuilder;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BoardTrackVehicleTest{
@@ -56,6 +58,9 @@ public class BoardTrackVehicleTest{
 
         THEN:
          assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
+        assertLineSectionsEqualNoMatterPointsOrder();
+
+        Assert.assertTrue(false);
         System.out.println("givenTrack_ShouldStartLineEqualExpected passed");
     }
 

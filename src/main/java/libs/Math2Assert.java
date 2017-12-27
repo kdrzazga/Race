@@ -21,6 +21,7 @@ public class Math2Assert {
 
         if (x1act != x1exp || y1act != y1exp || x2act != x2exp || y2act != y2exp) {
             if (x1act != x2exp || y1act != y2exp || x2act != x1exp || y2act != y1exp) {
+
                 throw new RuntimeException("Assertion failed. Actual = " + actualLineSection
                         + ". Expected = " + expectedLineSection);
             }
