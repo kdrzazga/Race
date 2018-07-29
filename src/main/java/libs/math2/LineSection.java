@@ -1,9 +1,9 @@
 package libs.math2;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.function.Function;
 
-public class LineSection extends LineAG implements Cloneable{
+public class LineSection extends LineAG implements Cloneable {
 
     public PointAG p1;
     public PointAG p2;
@@ -25,10 +25,9 @@ public class LineSection extends LineAG implements Cloneable{
         this.p1 = p1;
         this.p2 = p2;
     }
-    
-    public LineSection(PointAG point, float angle, float length)
-    {
-        super(point, angle);      
+
+    public LineSection(PointAG point, float angle, float length) {
+        super(point, angle);
         this.p1 = point;
         this.p2 = point.clone();
         p2.moveByVector(length, angle);
@@ -48,10 +47,9 @@ public class LineSection extends LineAG implements Cloneable{
                 |\ pi/4 rad
                 2pi rad = 0 rad     
      */
-    
-    public double computePositiveInclinationAngle()
-    {
-        return computeInclinationAngle() +Math.PI;
+
+    public double computePositiveInclinationAngle() {
+        return computeInclinationAngle() + Math.PI;
     }
 
     /* angles:
@@ -76,11 +74,9 @@ public class LineSection extends LineAG implements Cloneable{
 
     @Override
     public float computeY(float x) {
-        if (xBelongsToLineSection.apply(x))
-        {
+        if (xBelongsToLineSection.apply(x)) {
             return super.computeY(x);
-        }
-        else
+        } else
             throw new RuntimeException(x + " doesn't belong to line section");
     }
 
@@ -94,22 +90,19 @@ public class LineSection extends LineAG implements Cloneable{
     }*/
 
     private PointAG returnIntersectionIfInLineSection(PointAG intersection) {
-        if (intersection != null)
-        {
+        if (intersection != null) {
             if (this.xBelongsToLineSection.apply(intersection.x)
                     && this.yBelongsToLineSection.apply(intersection.y))
                 return intersection;
             else return null;
-        }
-        else
+        } else
             return null;
     }
-    
-    public void moveP2MultiplyingBy(float scalar)
-    {
+
+    public void moveP2MultiplyingBy(float scalar) {
         double length = computeLength.apply(this);
         double inclination = this.computeInclinationAngle() + Math.PI;
-        
+
         this.p2 = this.p1.clone();
         this.p2.moveByVector(length * scalar, inclination);
     }
@@ -127,6 +120,12 @@ public class LineSection extends LineAG implements Cloneable{
     public static final Function<LineSection, Double> computeLength = section
             -> Math.sqrt(Math.pow((section.p1.y - section.p2.y), 2)
             + Math.pow((section.p1.x - section.p2.x), 2));
+
+    public static boolean lineSectionsEqualNoMatterPointsOrder(LineSection l1,
+                                                               LineSection l2) {
+        return l1.p1.equals(l2.p1) && l1.p2.equals(l2.p2) ||
+                l1.p1.equals(l2.p2) && l1.p2.equals(l2.p1);
+    }
 
     @Override
     public String toString() {

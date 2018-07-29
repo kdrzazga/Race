@@ -1,24 +1,21 @@
 package unit_tests.logic_test;
 
-import java.awt.Polygon;
-import java.util.logging.Logger;
-
-import static libs.Math2Assert.assertLineSectionsEqualNoMatterPointsOrder;
-import libs.math2.Numbers;
 import libs.math2.LineSection;
+import libs.math2.Numbers;
 import libs.math2.PointAG;
-import logic.Board;
+import logic.*;
 import logic.BoardBuilder.TrackType;
-import logic.Track;
-import logic.Vehicle;
-import logic.VelocityVector;
-import logic.BoardBuilder;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class BoardTrackVehicleTest{
+import java.awt.*;
+import java.util.logging.Logger;
+
+import static libs.math2.LineSection.lineSectionsEqualNoMatterPointsOrder;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+public class BoardTrackVehicleTest {
 
     private static final Logger logger = Logger.getLogger(BoardTrackVehicleTest.class.getName());
 
@@ -55,7 +52,7 @@ public class BoardTrackVehicleTest{
         actualStartLine = rectTrack.computeVerticalStartLine();
 
         THEN:
-         assertLineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1);
+        Assert.assertTrue(lineSectionsEqualNoMatterPointsOrder(actualStartLine, expectedStartLine1));
         System.out.println("givenTrack_ShouldStartLineEqualExpected passed");
     }
 
@@ -76,7 +73,7 @@ public class BoardTrackVehicleTest{
 
         logger.info(testResultMessage.toString());
     }
-   
+
     public void givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther(int numberOfVehicles) {
         String methodName = "givenTestTrack_ShouldAllVehiclesOnStartLineHaveSameDistanceBetweenEachOther";
 
@@ -95,7 +92,7 @@ public class BoardTrackVehicleTest{
             PointAG nextVehiclePosition = testBoard.vehicles.get(i + 1).v.position;
             float distanceBetweenNextVehicles = Numbers.roundToFloat(vehiclePosition.distanceToAntherPointAG(nextVehiclePosition));
 
-            assertEquals(distanceBetweenVehicle0And1, distanceBetweenNextVehicles, methodName);            
+            assertEquals(distanceBetweenVehicle0And1, distanceBetweenNextVehicles, methodName);
         }
         logger.info(testResultMessage.toString());
     }
@@ -106,8 +103,8 @@ public class BoardTrackVehicleTest{
             board.moveVehicle(vehicleId);
             //all the time vehicle should be on the track
             assertTrue(board.track.isInsideTrack(board.getVehiclePosition(vehicleId)),
-                     "moveVehicle31times - design your test in the way the vehicle will be in track all the time "
-                    + " current pos=" + board.vehicles.get(vehicleId).v.position);
+                    "moveVehicle31times - design your test in the way the vehicle will be in track all the time "
+                            + " current pos=" + board.vehicles.get(vehicleId).v.position);
         }
         return board.vehicles.get(vehicleId);
     }
@@ -148,14 +145,14 @@ public class BoardTrackVehicleTest{
     public void testIfInnerBoundsAreInsideOuters() {
         Track trackUnderTest;
         TrackType tracksToTest[] = {
-            TrackType.DONUT,
-            TrackType.KIDNEY,
-            TrackType.PENTAGON,
-            TrackType.RECTANGULAR,
-            TrackType.SINE,
-            TrackType.TEST_RECTANGULAR,
-            TrackType.TRIANGLE,
-            TrackType.WERONIKA
+                TrackType.DONUT,
+                TrackType.KIDNEY,
+                TrackType.PENTAGON,
+                TrackType.RECTANGULAR,
+                TrackType.SINE,
+                TrackType.TEST_RECTANGULAR,
+                TrackType.TRIANGLE,
+                TrackType.WERONIKA
         };
 
         for (TrackType trackType : tracksToTest) {
@@ -166,16 +163,16 @@ public class BoardTrackVehicleTest{
             testIfInnerBoundIsInsideOuter(trackUnderTest);
         }
     }
-    
+
     private void testIfInnerBoundIsInsideOuter(Track track) {
-        track.innerBound.points.forEach((PointAG innerPoint) -> {            
+        track.innerBound.points.forEach((PointAG innerPoint) -> {
             Polygon truncatedOuterBnd = track.outerBound.convertToPolygon();
-            
+
             THEN:
             assertTrue(truncatedOuterBnd.contains(innerPoint.x, innerPoint.y),
                     "(At least) one of points of inner bound is "
-                    + " not inside outer bound for track " 
-                    + " invalid point is " + innerPoint);
+                            + " not inside outer bound for track "
+                            + " invalid point is " + innerPoint);
         });
     }
 
