@@ -4,8 +4,8 @@
     
     <test name="logic_testSuite">
         <classes>
-                <class name = "unit_tests.logic_test.BoardTrackVehicleTest" />            
-                <class name = "unit_tests.logic_test.DriveAlgorithmTests" />            
+                <class name = "org.kd.unit_tests.logic_test.BoardTrackVehicleTest" />
+                <class name = "org.kd.unit_tests.logic_test.DriveAlgorithmTests" />
         </classes>       
             
     </test>

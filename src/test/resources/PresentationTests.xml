@@ -4,7 +4,7 @@
 
     <test name="presentation_test">
         <classes>
-            <class name="unit_tests.presentation_test.KeyboardInputTest"/>
+            <class name="org.kd.unit_tests.presentation_test.KeyboardInputTest"/>
         </classes>
     </test>
 
